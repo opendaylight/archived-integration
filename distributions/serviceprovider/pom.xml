@@ -1,0 +1,241 @@
+<!--                                                                                                                                     
+Adapted from David Erickson's Distribution pom.xml                                                                                       
+see https://git.opendaylight.org/gerrit/#/c/390/                                                                                         
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                                                                                    
+http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.opendaylight.integration</groupId>
+    <artifactId>distributions</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <artifactId>distributions-serviceprovider</artifactId>
+  <packaging>pom</packaging>
+  <name>OpenDaylight Service Provider Edition</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.opendaylight.integration</groupId>
+      <artifactId>distributions-base</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <type>zip</type>
+      <classifier>osgipackage</classifier>
+      <!-- Make sure this isn't included on any classpath-->
+      <scope>provided</scope>
+    </dependency>
+
+        <!--
+    <dependency>
+      <groupId>org.opendaylight.defense4all</groupId>
+      <artifactId>defense4all.core.impl</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.defense4all</groupId>
+      <artifactId>framework.core.impl</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.opendaylight.defense4all</groupId>
+      <artifactId>restservice</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    -->
+
+    <!-- affinity -->
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>affinity</artifactId>
+      <version>0.4.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>affinity.implementation</artifactId>
+      <version>0.4.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>affinity.northbound</artifactId>
+      <version>0.4.0-SNAPSHOT</version>
+    </dependency>
+    <!--
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>model-parent</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    -->
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>analytics</artifactId>
+      <version>0.4.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>analytics.implementation</artifactId>
+      <version>0.4.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>analytics.northbound</artifactId>
+      <version>0.4.0-SNAPSHOT</version>
+    </dependency>
+
+    <!-- bgpcep --> 
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-concepts</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-linkstate</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-parser-api</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-parser-impl</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-rib-api</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-util</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>concepts</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>framework</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-api</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-impl</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>util</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+    </dependency>
+
+    <!-- lispflowmapping -->
+
+    <dependency>
+      <groupId>org.opendaylight.lispflowmapping</groupId>
+      <artifactId>mappingservice.api</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.lispflowmapping</groupId>
+      <artifactId>mappingservice.implementation</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.lispflowmapping</groupId>
+      <artifactId>mappingservice.northbound</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.lispflowmapping</groupId>
+      <artifactId>mappingservice.southbound</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.build.directory}/generated-resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.8</version>
+        <executions>
+          <execution>
+            <id>unpack-shared-resources</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+             <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+             <includeArtifacIds>distributions-base</includeArtifacIds>
+             <includeGroupIds>org.opendaylight.integration</includeGroupIds>
+             <excludeTransitive>true</excludeTransitive>
+             <ignorePermissions>false</ignorePermissions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>distro-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>src/assemble/bin.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

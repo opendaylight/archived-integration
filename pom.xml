@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
+  <groupId>org.opendaylight.integration</groupId>
+  <artifactId>root</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>OpenDaylight Integration Project</name>
+  <packaging>pom</packaging>
+  <url>https://wiki.opendaylight.org/view/CrossProject:Integration_Group</url>
+  <scm>
+    <connection>scm:git:https://git.opendaylight.org/gerrit/p/integration.git</connection>
+  </scm>
+  <properties>
+    <nexusproxy>http://nexus.opendaylight.org/content</nexusproxy>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <modules>
+    <module>distributions/</module>
+  </modules>
+  <repositories>
+    <!-- jsonrpc4j mirror -->
+    <repository>
+      <id>jsonrpc4j-webdav-maven-repo</id>
+      <name>jsonrpc4j maven repository</name>
+      <url>${nexusproxy}/repositories/jsonrpc4j-webdav-maven-repo/</url>
+    </repository>
+    <!-- OpenDayLight Released artifact -->
+    <repository>
+      <id>opendaylight-release</id>
+      <name>opendaylight-release</name>
+      <url>${nexusproxy}/repositories/opendaylight.release/</url>
+    </repository>
+    <!-- OpenDayLight Snapshot artifact -->
+    <repository>
+      <id>opendaylight-snapshot</id>
+      <name>opendaylight-snapshot</name>
+      <url>${nexusproxy}/repositories/opendaylight.snapshot/</url>
+    </repository>
+    <!-- EBR release -->
+    <!-- http://repository.springsource.com/maven/bundles/release -->
+    <repository>
+      <id>ebr-bundles-release</id>
+      <name>ebr-bundles-release</name>
+      <url>${nexusproxy}/repositories/ebr-bundles-release/</url>
+    </repository>
+    <!-- EBR external -->
+    <!-- http://repository.springsource.com/maven/bundles/external -->
+    <repository>
+      <id>ebr-bundles-external</id>
+      <name>ebr-bundles-external</name>
+      <url>${nexusproxy}/repositories/ebr-bundles-external/</url>
+    </repository>
+    <!-- Maven repo1 -->
+    <!-- http://repo1.maven.org/maven2 -->
+    <repository>
+      <id>central</id>
+      <name>central</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+    <!-- Third Packages hosted in local maven because not available in
+         other places -->
+    <repository>
+      <id>thirdparty</id>
+      <name>thirdparty</name>
+      <url>${nexusproxy}/repositories/thirdparty/</url>
+    </repository>
+    <!-- Jboss mirror -->
+    <!-- https://repository.jboss.org/nexus/content/repositories/releases -->
+    <repository>
+      <id>jboss.releases</id>
+      <name>jboss.releases</name>
+      <url>${nexusproxy}/repositories/jboss.releases/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central2</id>
+      <name>central2</name>
+      <url>${nexusproxy}/repositories/central2/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>opendaylight-snapshot</id>
+      <name>central2</name>
+      <url>${nexusproxy}/repositories/opendaylight.snapshot/</url>
+    </pluginRepository>
+  </pluginRepositories>
+</project>
