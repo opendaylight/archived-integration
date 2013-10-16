@@ -66,7 +66,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
          Note: These should pull through all other defense for all modules via dependencies
 
       -->
-    <!--
+
     <dependency>
       <groupId>org.opendaylight.defense4all</groupId>
       <artifactId>defense4all.core.impl</artifactId>
@@ -81,10 +81,10 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     
     <dependency>
       <groupId>org.opendaylight.defense4all</groupId>
-      <artifactId>restservice</artifactId>
+      <artifactId>defense4all.restservice</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    -->
+
 
     <!-- affinity -->
     <dependency>
