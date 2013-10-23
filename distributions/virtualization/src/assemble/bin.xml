@@ -33,6 +33,9 @@
         <exclude>com.sun.jersey:jersey-core</exclude>
         <exclude>com.sun.jersey:jersey-json</exclude>
         <exclude>com.sun.jersey:jersey-server</exclude>
+        <exclude>org.opendaylight.defense4all:defense4all.core.impl</exclude>
+        <exclude>org.opendaylight.defense4all:framework.core.impl</exclude>
+        <exclude>org.opendaylight.defense4all:defense4all.restservice</exclude>
       </excludes>
       <outputFileNameMapping>
         ${artifact.groupId}.${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}

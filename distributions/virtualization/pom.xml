@@ -59,14 +59,6 @@ http://maven.apache.org/maven-v4_0_0.xsd">
 
     <!-- defense4all -->
 
-    <!-- 
-         Note: will not work until groupId is fixed in defense4all project to be 
-         org.opendaylight.defense4all for all artifacts
-
-         Note: These should pull through all other defense for all modules via dependencies
-
-      -->
-
     <dependency>
       <groupId>org.opendaylight.defense4all</groupId>
       <artifactId>defense4all.core.impl</artifactId>
