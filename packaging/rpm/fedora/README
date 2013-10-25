@@ -1,0 +1,25 @@
+The Fedora RPM spec is a work in progress. The current spec can build an
+RPM package for Fedora that still relies on Maven to include the JAVA
+artifacts. The plan is to create a dependencies RPM to package up all the
+artifacts.
+
+1. Get a source tarball:
+$git clone https://git.opendaylight.org/gerrit/p/controller.git
+$cd controller
+$git archive --prefix=opendaylight-controller-0.1.0/ d684dd4 | xz > opendaylight-controller-0.1.0.tar.xz
+
+2. Build rpm:
+$rpmbuild -ba opendaylight-controller.spec
+
+3. install rpm:
+#rpm -ivp opendaylight-controller-0.1.0-0.1.20131007gitd684dd4.fc19.noarch.rpm
+
+4. Start the controller:
+#su - opendaylight -s /bin/sh -c "export ODL_BASEDIR=/var/lib/opendaylight-controller && export ODL_DATADIR=/var/lib/opendaylight-controller && cd /var/lib/opendaylight-controller && /usr/share/opendaylight-controller/run.sh -start"
+*** If you need the console then telnet 127.0.0.1 2400 logs
+
+4. Stop the controller:
+#su - opendaylight -s /bin/sh -c "export ODL_BASEDIR=/var/lib/opendaylight-controller && export ODL_DATADIR=/var/lib/opendaylight-controller && cd /var/lib/opendaylight-controller && /usr/share/opendaylight-controller/run.sh -stop"
+
+4. uninstall rpm:
+#rpm -e opendaylight-controller-0.1.0-0.1.20131007gitd684dd4.fc19.noarch
