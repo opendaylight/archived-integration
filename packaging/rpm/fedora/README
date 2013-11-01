@@ -23,3 +23,52 @@ $rpmbuild -ba opendaylight-controller.spec
 
 4. uninstall rpm:
 #rpm -e opendaylight-controller-0.1.0-0.1.20131007gitd684dd4.fc19.noarch
+
+
+Using yum for testing.
+
+1. Create a local repo:
+yum install createrepo
+yum install vsftpd
+systemctl start vsftpd.service
+
+Add /etc/yum.repos.d/localftp.repo
+[localftp]
+name=Local FTP repo
+baseurl=file://127.0.0.1/pub
+enabled=0
+gpgcheck=0
+metadata_expire=1m
+
+2. Add packages to local repo:
+cp opendaylight-controller.spec /var/ftp/pub
+cp opendaylight-controller-dependencies.spec /var/ftp/pub
+
+3. Update local repo with new packages:
+Change the enabled=0 to enabled=1 in the localftp.repo file.
+createrepo /var/ftp/pub
+yum clean expire-cache
+
+4. Verify the repo is there:
+yum repolist
+
+Yum away...
+
+You could also use a fiel based repo and change the baseurl to:
+file:////var/ftp/pub.
+This failed with a network error for me so I switched to ftp.
+
+
+The file system after install should look like
+
+/etc/opendaylight-controller/config.ini
+/usr/share/java/opendaylight-dependencies/{all the non-opendaylight jars from
+the lib and plugin directories
+/usr/share/opendaylight-controller/run.bat, run.sh, ..
+/usr/share/opendaylight-controller/configuration/...
+/usr/share/opendaylight-controller/lib/*.jar ln's to /usr/share/java/opendaylight-dependencies/*.jar
+/usr/share/opendaylight-controller/plugins/*.jar ln's to /usr/share/java/opendaylight-dependencies/*.jar
+/var/lib/opendaylight-controller
+/var/lib/opendaylight-controller/configuration/ ln's back to /usr/share/opendaylight-controller/configuration
+/var/lib/opendaylight-controller/lib
+/var/lib/opendaylight-controller/plugins

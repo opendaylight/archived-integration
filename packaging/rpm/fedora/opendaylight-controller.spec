@@ -2,7 +2,7 @@ Name: opendaylight-controller
 # todo: Use the ODL snapshot version? Could also be used for the
 # Source property in a proper URL.
 Version: 0.1.0
-Release: 0.1.20131007gitd684dd4%{?dist}
+Release: 0.1.20131101git31c8f18%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -11,7 +11,7 @@ URL: http://www.opendaylight.org
 # todo: Temporary method for generating tarball
 # git clone https://git.opendaylight.org/gerrit/p/controller.git
 # cd controller
-# git archive --prefix=opendaylight-controller-0.1.0/ d684dd4 | xz > opendaylight-controller-0.1.0.tar.xz
+# git archive --prefix=opendaylight-controller-0.1.0/ 31c8f18 | xz > opendaylight-controller-0.1.0.tar.xz
 Source: opendaylight-controller-%{version}.tar.xz
 
 BuildArch: noarch
@@ -23,9 +23,10 @@ Requires: java >= 1:1.7.0
 
 # todo: Need to create proper packages for all the dependencies.
 # Here you should have at least dependencies for the packages containing .jar
-# files that you want to create symlinks to.
-Requires: slf4j
-
+# files that you want to create symlinks to. For now all the jars in a
+# dependencies package.
+#Requires: slf4j
+Requires: opendaylight-controller-dependencies
 
 # This is the directory where all the application resources (scripts,
 # libraries, etc) will be installed: /usr/share/opendaylight
@@ -38,6 +39,8 @@ Requires: slf4j
 # This is the directory where the application stores its configuration:
 # /etc/opendaylight
 %global configuration_dir %{_sysconfdir}/%{name}
+
+%global deps_dir %{_javadir}/opendaylight-controller-dependencies
 
 
 %description
@@ -60,7 +63,8 @@ OpenDaylight SDN Controller
 # specific maven build command, but this is ok for now:
 # todo: eventually move to using mvn-build or mvn-rpmbuild so dependencies are
 # not downloaded.
-MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m"; mvn clean install -DskipTests
+MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -DskipTests
+#MAVEN_OPTS="-XX:PermSize=256m -Xmx1024m  -XX:MaxPermSize=512m" && mvn -DskipTests clean install
 # below is just for testing
 # MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m"; mvn package
 
@@ -87,25 +91,42 @@ ln -s %{resources_dir}/configuration/logback.xml %{buildroot}%{data_dir}/configu
 ln -s %{resources_dir}/configuration/tomcat-server.xml %{buildroot}%{data_dir}/configuration
 
 mv tmp/opendaylight/* %{buildroot}%{resources_dir}
+
 ln -s %{resources_dir}/lib %{buildroot}%{data_dir}
 ln -s %{resources_dir}/plugins %{buildroot}%{data_dir}
+
 
 # Usually one wants to replace the .jar files of the dependencies by symlinks
 # to the ones provided to the system. This assumes the dependencies have been
 # installed as separate packages and listed in the Requires header.
-while read resource_path system_path
+#while read resource_path system_path
+#do
+#    rm -f %%{buildroot}%%{resources_dir}/${resource_path}
+##    ln -s %%{_javadir}/${system_path} %%{buildroot}%%{resources_dir}/${resource_path}
+#    ln -s %%{deps_dir}/%%{system_path} %%{buildroot}%%{resources_dir}/${resource_path}
+#done <<.
+#lib/jersey-core.jar jersey-core.jar
+#.
+cd %{buildroot}%{resources_dir}/lib
+for src in $( ls -I "org.opendaylight.*" );
 do
-    rm -f %{buildroot}%{resources_dir}/${resource_path}
-    ln -s %{_javadir}/${system_path} %{buildroot}%{resources_dir}/${resource_path}
-done <<.
-lib/slf4j-api-1.7.2.jar slf4j/slf4j-api.jar
-.
+    rm -f ${src}
+    tgt=$(echo ${src} | sed -e "s/-[0-9].*/.jar/")
+    ln -s %{deps_dir}/${tgt} ${src}
+done
+
+cd %{buildroot}%{resources_dir}/plugins
+for src in $( ls -I "org.opendaylight.*" );
+do
+    rm -f ${src}
+    tgt=$(echo ${src} | sed -e "s/-[0-9].*/.jar/")
+    ln -s %{deps_dir}/${tgt} ${src}
+done
+
 
 # Fix the permissions as they come with all the permissions (mode 777)
 # from the .zip file:
 chmod -R 755 %{buildroot}%{resources_dir}
-#chmod 755 %%{buildroot}%%{resources_dir}/lib
-#chmod 755 %%{buildroot}%%{resources_dir}/plugins
 
 # Remove the temporary directory:
 rm -rf tmp
@@ -163,13 +184,11 @@ fi
 # todo: add checks to ensure controller is stopped
 #%%preun
 
-%postun
-
-if [ $1 = 0 ]; then
-    rm -rf %{data_dir}
-fi
-
 
 %changelog
+* Fri Nov 01 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git31c8f18
+- Modify to include opendaylight-controller-dependencies.
+- Do not delete the files in var
+
 * Mon Oct 07 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007gitd684dd4
 - Initial Fedora package.
