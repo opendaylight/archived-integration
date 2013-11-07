@@ -2,7 +2,7 @@ Name: opendaylight-controller
 # todo: Use the ODL snapshot version? Could also be used for the
 # Source property in a proper URL.
 Version: 0.1.0
-Release: 0.1.20131101git31c8f18%{?dist}
+Release: 0.1.20131106git2f02ee4%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -11,13 +11,15 @@ URL: http://www.opendaylight.org
 # todo: Temporary method for generating tarball
 # git clone https://git.opendaylight.org/gerrit/p/controller.git
 # cd controller
-# git archive --prefix=opendaylight-controller-0.1.0/ 31c8f18 | xz > opendaylight-controller-0.1.0.tar.xz
-Source: opendaylight-controller-%{version}.tar.xz
+# git archive --prefix=opendaylight-controller-0.1.0/ 2f02ee4 | xz > opendaylight-controller-0.1.0.tar.xz
+Source0: opendaylight-controller-%{version}.tar.xz
+Source1: opendaylight-controller-spec-%{version}.tar.xz
 
 BuildArch: noarch
 
 BuildRequires: java-devel
 BuildRequires: maven
+BuildRequires: systemd
 
 Requires: java >= 1:1.7.0
 
@@ -26,7 +28,13 @@ Requires: java >= 1:1.7.0
 # files that you want to create symlinks to. For now all the jars in a
 # dependencies package.
 #Requires: slf4j
-Requires: opendaylight-controller-dependencies
+
+Requires: %{name}-dependencies
+
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
+
 
 # This is the directory where all the application resources (scripts,
 # libraries, etc) will be installed: /usr/share/opendaylight
@@ -40,6 +48,7 @@ Requires: opendaylight-controller-dependencies
 # /etc/opendaylight
 %global configuration_dir %{_sysconfdir}/%{name}
 
+# This is the directory that has all the JAVA dependencies.
 %global deps_dir %{_javadir}/opendaylight-controller-dependencies
 
 
@@ -51,6 +60,7 @@ OpenDaylight SDN Controller
 
 # Just unpack the source code:
 %setup -q
+%setup -q -D -T -a 1
 
 # In more restrictive distributions we should also here remove from the source
 # package any third party binaries, or replace them with those provided by the
@@ -63,10 +73,13 @@ OpenDaylight SDN Controller
 # specific maven build command, but this is ok for now:
 # todo: eventually move to using mvn-build or mvn-rpmbuild so dependencies are
 # not downloaded.
-MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -DskipTests
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && \
+  mvn -o clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
+#  mvn clean install -Dmaven.test.skip=true
+# -DskipTests
+# below is just for testing -Dmaven.compile.fork=true
+#export MAVEN_OPTS="-XX:+PrintCommandLineFlags -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m -XX:MaxPermSize=256m" && mvn -X clean install -DskipTests -Dmaven.compile.fork=true
 #MAVEN_OPTS="-XX:PermSize=256m -Xmx1024m  -XX:MaxPermSize=512m" && mvn -DskipTests clean install
-# below is just for testing
-# MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m"; mvn package
 
 
 %install
@@ -95,6 +108,8 @@ mv tmp/opendaylight/* %{buildroot}%{resources_dir}
 ln -s %{resources_dir}/lib %{buildroot}%{data_dir}
 ln -s %{resources_dir}/plugins %{buildroot}%{data_dir}
 
+install -m 644 -D %{name}.systemd %{buildroot}%{_unitdir}/%{name}.service
+install -m 644 -D %{name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
 # Usually one wants to replace the .jar files of the dependencies by symlinks
 # to the ones provided to the system. This assumes the dependencies have been
@@ -126,14 +141,14 @@ done
 
 # Fix the permissions as they come with all the permissions (mode 777)
 # from the .zip file:
-chmod -R 755 %{buildroot}%{resources_dir}
+find %{buildroot}%{resources_dir} -type d -exec chmod 755 {} \;
+find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
+find %{buildroot}%{data_dir} -type d -exec chmod 755 {} \;
+find %{buildroot}%{data_dir} -type f -exec chmod 755 {} \;
+chmod 755 %{buildroot}%{resources_dir}/run.sh
 
 # Remove the temporary directory:
 rm -rf tmp
-
-# todo: Create systemd scripts to invoke run.sh. Might need to modify run.sh or
-# create a different script to be used. RHEL will definitely need changes or a
-# new script since it must take inputs such as "start" and "enable".
 
 
 %pre
@@ -160,16 +175,27 @@ if [ "$?" != 0 ]; then
         opendaylight
 fi
 
+# Currently not enabling service on boot.
+#%post
+#%systemd_post %{name}.service
+
+%preun
+%systemd_preun %{name}.service
+
+%postun
+%systemd_postun
+
 
 %files
 
-# Everything inside the resources directory:
 %{resources_dir}
+%{_unitdir}/%{name}.service
 
 # Configuration files should marked as such, so that they aren't overwritten
 # when updating the package:
 %dir %{configuration_dir}
 %config(noreplace) %{configuration_dir}/config.ini
+%config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 
 # The data directory needs to be owned by the user that will run the service,
 # as it will need to write inside:
@@ -181,11 +207,12 @@ fi
 %doc README.OPENDAYLIGHT
 
 
-# todo: add checks to ensure controller is stopped
-#%%preun
-
-
 %changelog
+* Wed Nov 06 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git2f02ee4
+- Add systemd support to install the service.
+- Simplify the file permission modification logic.
+- Modify the mvn command to not build tests.
+
 * Fri Nov 01 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git31c8f18
 - Modify to include opendaylight-controller-dependencies.
 - Do not delete the files in var
