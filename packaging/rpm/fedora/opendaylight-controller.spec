@@ -1,8 +1,6 @@
 Name: opendaylight-controller
-# todo: Use the ODL snapshot version? Could also be used for the
-# Source property in a proper URL.
 Version: 0.1.0
-Release: 0.1.20131106git2f02ee4%{?dist}
+Release: 0.1.20131112git20dcbd1%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -11,9 +9,12 @@ URL: http://www.opendaylight.org
 # todo: Temporary method for generating tarball
 # git clone https://git.opendaylight.org/gerrit/p/controller.git
 # cd controller
-# git archive --prefix=opendaylight-controller-0.1.0/ 2f02ee4 | xz > opendaylight-controller-0.1.0.tar.xz
+# git archive --prefix=opendaylight-controller-0.1.0/ 20dcbd1 | xz > opendaylight-controller-0.1.0.tar.xz
+# git clone https://git.opendaylight.org/gerrit/p/integration.git
+# cd packaging/rpm/fedora
+# git archive 20dcbd1 opendaylight-controller.sysconfig opendaylight-controller.systemd | xz > opendaylight-controller-integration-0.1.0.tar.xz
 Source0: opendaylight-controller-%{version}.tar.xz
-Source1: opendaylight-controller-spec-%{version}.tar.xz
+Source1: opendaylight-controller-integration-%{version}.tar.xz
 
 BuildArch: noarch
 
@@ -58,7 +59,6 @@ OpenDaylight SDN Controller
 
 %prep
 
-# Just unpack the source code:
 %setup -q
 %setup -q -D -T -a 1
 
@@ -73,13 +73,11 @@ OpenDaylight SDN Controller
 # specific maven build command, but this is ok for now:
 # todo: eventually move to using mvn-build or mvn-rpmbuild so dependencies are
 # not downloaded.
+# Don't do the tests since those are already covered by the normal merge and
+# verify process and this build does not need to verify them.
+# maven.compile.fork is used to reduce the build time.
 export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && \
-  mvn -o clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
-#  mvn clean install -Dmaven.test.skip=true
-# -DskipTests
-# below is just for testing -Dmaven.compile.fork=true
-#export MAVEN_OPTS="-XX:+PrintCommandLineFlags -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m -XX:MaxPermSize=256m" && mvn -X clean install -DskipTests -Dmaven.compile.fork=true
-#MAVEN_OPTS="-XX:PermSize=256m -Xmx1024m  -XX:MaxPermSize=512m" && mvn -DskipTests clean install
+  mvn clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
 
 
 %install
@@ -87,7 +85,6 @@ export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && \
 # Extract the contents of the distribution to a temporary directory so that we
 # can take things from there and move them to the correct locations:
 mkdir -p tmp
-#unzip -o -d tmp opendaylight/distribution/opendaylight/target/distribution.opendaylight-%%{version}-SNAPSHOT-osgipackage.zip
 unzip -o -d tmp opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip
 
 # Create the directories:
@@ -114,14 +111,6 @@ install -m 644 -D %{name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 # Usually one wants to replace the .jar files of the dependencies by symlinks
 # to the ones provided to the system. This assumes the dependencies have been
 # installed as separate packages and listed in the Requires header.
-#while read resource_path system_path
-#do
-#    rm -f %%{buildroot}%%{resources_dir}/${resource_path}
-##    ln -s %%{_javadir}/${system_path} %%{buildroot}%%{resources_dir}/${resource_path}
-#    ln -s %%{deps_dir}/%%{system_path} %%{buildroot}%%{resources_dir}/${resource_path}
-#done <<.
-#lib/jersey-core.jar jersey-core.jar
-#.
 cd %{buildroot}%{resources_dir}/lib
 for src in $( ls -I "org.opendaylight.*" );
 do
@@ -208,6 +197,9 @@ fi
 
 
 %changelog
+* Tues Nov 12 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git20dcbd1
+- Modify the source tarball instructions and name.
+
 * Wed Nov 06 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git2f02ee4
 - Add systemd support to install the service.
 - Simplify the file permission modification logic.
