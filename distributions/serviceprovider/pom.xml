@@ -1,10 +1,12 @@
-<!--                                                                                                                                     
-Adapted from David Erickson's Distribution pom.xml                                                                                       
-see https://git.opendaylight.org/gerrit/#/c/390/                                                                                         
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vi: set et smarttab sw=2 tabstop=2: -->
+<!--
+Adapted from David Erickson's Distribution pom.xml
+see https://git.opendaylight.org/gerrit/#/c/390/
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                                                                                    
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -17,6 +19,15 @@ http://maven.apache.org/maven-v4_0_0.xsd">
   <artifactId>distributions-serviceprovider</artifactId>
   <packaging>pom</packaging>
   <name>OpenDaylight Service Provider Edition</name>
+
+  <properties>
+    <bgpcep.bgp.version>0.3.0-SNAPSHOT</bgpcep.bgp.version>
+    <bgpcep.common.version>0.3.0-SNAPSHOT</bgpcep.common.version>
+    <bgpcep.pcep.version>0.3.0-SNAPSHOT</bgpcep.pcep.version>
+    <bgpcep.programming.version>0.3.0-SNAPSHOT</bgpcep.programming.version>
+    <bgpcep.rsvp.version>0.3.0-SNAPSHOT</bgpcep.rsvp.version>
+    <bgpcep.topology.version>0.3.0-SNAPSHOT</bgpcep.topology.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -41,7 +52,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
       <artifactId>framework.core.impl</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.opendaylight.defense4all</groupId>
       <artifactId>restservice</artifactId>
@@ -99,90 +110,253 @@ http://maven.apache.org/maven-v4_0_0.xsd">
       <version>0.4.0-SNAPSHOT</version>
     </dependency>
 
-    <!-- bgpcep --> 
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>bgp-concepts</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>bgp-linkstate</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>bgp-parser-api</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>bgp-parser-impl</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>bgp-rib-api</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>bgp-util</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
+    <!--
+         BGPCEP: common artifacts
+         -->
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>concepts</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <version>${bgpcep.common.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>framework</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <version>${bgpcep.common.version}</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>pcep-api</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>pcep-impl</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>util</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <version>${bgpcep.common.version}</version>
     </dependency>
 
+    <!--
+         BGPCEP: topology artifacts
+         -->
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>topology-api</artifactId>
+      <version>${bgpcep.topology.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>topology-api-config</artifactId>
+      <version>${bgpcep.topology.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>topology-tunnel-api</artifactId>
+      <version>${bgpcep.topology.version}</version>
+    </dependency>
+
+    <!--
+         BGPCEP: BGP artifacts
+         -->
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-concepts</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-linkstate</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-linkstate-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-parser-api</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-parser-impl</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-parser-spi-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>bgp-parser-spi</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-rib-api-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-rib-api</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-rib-impl-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-rib-impl</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-rib-spi</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-rib-spi-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-topology-provider</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-topology-provider-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-update-api-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-util</artifactId>
+      <version>${bgpcep.bgp.version}</version>
     </dependency>
 
+    <!--
+         BGPCEP: Programming artifacts
+         -->
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-api</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-impl</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-impl-config</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-spi</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-spi-config</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-topology-api</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-tunnel-api</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+
+    <!--
+         BGPCEP: Programming artifacts
+         -->
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>rsvp-api</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <version>${bgpcep.rsvp.version}</version>
     </dependency>
 
+    <!--
+         BGPCEP: PCEP artifacts
+         -->
     <dependency>
-       <groupId>org.opendaylight.bgpcep</groupId>
-       <artifactId>pcep-spi</artifactId>
-       <version>0.3.0-SNAPSHOT</version>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-api-config</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-api</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-impl-config</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-impl</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-spi</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-spi-config</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-testtool</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-topology-api</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-topology-provider</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-topology-provider-config</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-topology-spi</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-tunnel-api</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-tunnel-provider</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-tunnel-provider-config</artifactId>
+      <version>${bgpcep.pcep.version}</version>
     </dependency>
 
     <!-- lispflowmapping -->
