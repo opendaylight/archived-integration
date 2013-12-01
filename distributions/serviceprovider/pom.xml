@@ -27,6 +27,8 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <bgpcep.programming.version>0.3.0-SNAPSHOT</bgpcep.programming.version>
     <bgpcep.rsvp.version>0.3.0-SNAPSHOT</bgpcep.rsvp.version>
     <bgpcep.topology.version>0.3.0-SNAPSHOT</bgpcep.topology.version>
+
+    <ietf.topology.version>2013.10.21.0-SNAPSHOT</ietf.topology.version>
   </properties>
 
   <dependencies>
@@ -108,6 +110,35 @@ http://maven.apache.org/maven-v4_0_0.xsd">
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics.northbound</artifactId>
       <version>0.4.0-SNAPSHOT</version>
+    </dependency>
+
+    <!--
+         BGPCEP: required IETF models
+         -->
+    <dependency>
+      <groupId>org.opendaylight.yangtools.model</groupId>
+      <artifactId>ietf-ted</artifactId>
+      <version>${ietf.topology.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.yangtools.model</groupId>
+      <artifactId>ietf-topology</artifactId>
+      <version>${ietf.topology.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.yangtools.model</groupId>
+      <artifactId>ietf-topology-isis</artifactId>
+      <version>${ietf.topology.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.yangtools.model</groupId>
+      <artifactId>ietf-topology-l3-unicast-igp</artifactId>
+      <version>${ietf.topology.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.yangtools.model</groupId>
+      <artifactId>ietf-topology-ospf</artifactId>
+      <version>${ietf.topology.version}</version>
     </dependency>
 
     <!--
