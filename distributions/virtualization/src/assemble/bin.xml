@@ -36,7 +36,20 @@
         <exclude>org.opendaylight.defense4all:defense4all.core.impl</exclude>
         <exclude>org.opendaylight.defense4all:framework.core.impl</exclude>
         <exclude>org.opendaylight.defense4all:defense4all.restservice</exclude>
+        <exclude>org.opendaylight.vtn:distribution.vtn-coordinator</exclude>
       </excludes>
+      <outputFileNameMapping>
+        ${artifact.groupId}.${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}
+      </outputFileNameMapping>
+      <unpack>false</unpack>
+      <scope>runtime</scope>
+      <useTransitiveDependencies>false</useTransitiveDependencies>
+    </dependencySet>
+    <dependencySet>
+      <outputDirectory>opendaylight/externalapps</outputDirectory>
+      <includes>
+        <include>org.opendaylight.vtn:distribution.vtn-coordinator</include>
+      </includes>
       <outputFileNameMapping>
         ${artifact.groupId}.${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}
       </outputFileNameMapping>
