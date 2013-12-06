@@ -72,8 +72,9 @@ function mk_versionsnapsuffix {
 
 # Clone the projects.
 function clone_source {
-    git clone https://git.opendaylight.org/gerrit/p/controller.git $buildroot/controller
-    git clone https://git.opendaylight.org/gerrit/p/integration.git $buildroot/integration
+    # We only care about a shallow clone (no need to grab the entire project)
+    git clone --depth 0 https://git.opendaylight.org/gerrit/p/controller.git $buildroot/controller
+    git clone --depth 0 https://git.opendaylight.org/gerrit/p/integration.git $buildroot/integration
 }
 
 # Copy the projects from snapshots.
@@ -148,6 +149,11 @@ function build_snapshot {
 	echo ":::::"
 
 	resultdir="repo/controller.$pkg_dist_suffix.noarch.snap"
+
+    # Initialize our mock build location (we'll be using --no-clean later)
+    # If we don't do the first init we can't build since the environment
+    # doesn't get setup correctly!
+    eval $mock_cmd -r $dist --init
 
     # Build the rpm using mock.
     # Keep the build because we will need the controller.zip file for later
