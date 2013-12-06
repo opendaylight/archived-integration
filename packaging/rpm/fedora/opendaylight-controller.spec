@@ -1,6 +1,6 @@
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.1.20131112git20dcbd1%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -13,8 +13,8 @@ URL: http://www.opendaylight.org
 # git clone https://git.opendaylight.org/gerrit/p/integration.git
 # cd packaging/rpm/fedora
 # git archive 20dcbd1 opendaylight-controller.sysconfig opendaylight-controller.systemd | xz > opendaylight-controller-integration-0.1.0.tar.xz
-Source0: opendaylight-controller-%{version}.tar.xz
-Source1: opendaylight-controller-integration-%{version}.tar.xz
+Source0: %{name}-%{version}.tar.xz
+Source1: %{name}-integration-%{version}.tar.xz
 
 BuildArch: noarch
 
@@ -76,9 +76,9 @@ OpenDaylight SDN Controller
 # Don't do the tests since those are already covered by the normal merge and
 # verify process and this build does not need to verify them.
 # maven.compile.fork is used to reduce the build time.
-export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && \
-  mvn clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
-
+#export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && \
+#  mvn clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install
 
 %install
 
@@ -174,6 +174,11 @@ fi
 %postun
 %systemd_postun
 
+%clean
+%if "%{noclean}" == "1"
+    exit 0
+%endif
+
 
 %files
 
@@ -197,7 +202,10 @@ fi
 
 
 %changelog
-* Tues Nov 12 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git20dcbd1
+* Fri Nov 22 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+- Updates to support building rpm with jenkins.
+
+* Tue Nov 12 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git20dcbd1
 - Modify the source tarball instructions and name.
 
 * Wed Nov 06 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git2f02ee4
