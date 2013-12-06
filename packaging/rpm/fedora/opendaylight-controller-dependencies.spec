@@ -1,11 +1,11 @@
 Name: opendaylight-controller-dependencies
 Version: 0.1.0
-Release: 0.1.20131101git31c8f18%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight SDN Controller Dependencies
 Group: Applications/Communications
 License: EPL
 URL: http://www.opendaylight.org
-Source: opendaylight-controller-%%{version}.zip
+Source: opendaylight-controller-%{version}.zip
 BuildArch: noarch
 Requires: java >= 1:1.7.0
 
@@ -57,5 +57,8 @@ done
 
 
 %changelog
+* Fri Nov 22 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+- Updates to support building rpm with jenkins.
+
 * Fri Nov 01 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.1.20131007git31c8f18
 - Initial Fedora package.
