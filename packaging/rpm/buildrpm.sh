@@ -158,7 +158,7 @@ function build_snapshot {
     # Build the rpm using mock.
     # Keep the build because we will need the controller.zip file for later
     # when building the controller-dependencies.rpm.
-    eval $mock_cmd -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
+    eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
         -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
         SRPMS/opendaylight-controller-$versionmajor-*.src.rpm
 
@@ -176,7 +176,7 @@ function build_snapshot {
     # Now build the dependencies RPM
 
     # Copy the controller.zip for use in the dependencies.rpm.
-	eval $mock_cmd -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
+	eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
         -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
         --copyout \"builddir/build/BUILD/opendaylight-controller-$versionmajor/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip\" \"$resultdir/opendaylight-controller-$versionmajor.zip\"
 
@@ -200,7 +200,7 @@ function build_snapshot {
 
     resultdir="repo/controller-dependencies.$pkg_dist_suffix.noarch.snap"
 
-    eval $mock_cmd -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
+    eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
         -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
         SRPMS/opendaylight-controller-dependencies-$versionmajor-*.src.rpm
 
