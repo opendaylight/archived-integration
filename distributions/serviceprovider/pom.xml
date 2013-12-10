@@ -416,6 +416,13 @@ http://maven.apache.org/maven-v4_0_0.xsd">
       <version>0.1.0-SNAPSHOT</version>
     </dependency>
 
+    <!--SNMP4SDN-->
+    <dependency>
+      <groupId>org.opendaylight.snmp4sdn</groupId>
+      <artifactId>snmp4sdn</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+
   </dependencies>
   <build>
     <resources>
