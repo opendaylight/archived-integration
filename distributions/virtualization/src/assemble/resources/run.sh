@@ -21,7 +21,7 @@ else
     elif [ "${virt}" == "opendove" ]; then
         ODL_VIRT_FILTER="ovsdb|vtn"
     elif [ "${virt}" == "vtn" ]; then
-        ODL_VIRT_FILTER="opendove|ovsdb"
+        ODL_VIRT_FILTER="affinity|opendove|ovsdb|controller.(arphandler|samples)"
     else
         usage
     fi
