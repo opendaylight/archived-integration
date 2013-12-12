@@ -1,18 +1,25 @@
 #!/bin/bash
 
 function usage {
-    echo "Please select one of the 3 supported Virtualization technology : \"run.sh -virt [ovsdb | opendove | vtn]\""
+    echo "Please select one of the 3 supported Virtualization technology : \"$0 -virt [ovsdb | opendove | vtn]\""
     exit 1
 }
+
+virtIndex=0
 while true ; do
-    case "$1" in
-        -virt) shift; virt="$1"; shift ;;
+    (( i += 1 ))
+    case "${@:$i:1}" in
+        -virt) virtIndex=$i ;;
         "") break ;;
-        *) shift ;;
     esac
 done
 
 # Virtualization edition select
+if [ ${virtIndex} -eq 0 ]; then
+    usage
+fi
+
+virt=${@:$virtIndex+1:1}
 if [ "${virt}" == "" ]; then
     usage
 else
@@ -27,4 +34,4 @@ else
     fi
 fi
 
-./run.base.sh -Dfelix.fileinstall.filter="^(?!org.opendaylight.(${ODL_VIRT_FILTER})).*" "$@"
+./run.base.sh -Dfelix.fileinstall.filter="^(?!org.opendaylight.(${ODL_VIRT_FILTER})).*" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
