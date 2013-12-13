@@ -12,6 +12,7 @@ buildtype="snapshot"
 buildroot=`pwd`
 buildnumber=0
 cleanroot=0
+pushrpms=0
 getsource="buildroot"
 version=""
 release=""
@@ -24,6 +25,18 @@ dist="fedora-19-x86_64"
 pkg_dist_suffix="fc19"
 mock_cmd='/usr/bin/mock'
 
+# Maven is not installed at the system wide level but at the Jenkins level
+# We need to map our Maven call to the Jenkins installed version
+mvn_cmd="$JENKINS_HOME/tools/hudson.tasks.Maven_MavenInstallation/Maven_3.0.4/bin/mvn"
+
+# Define our push repositories here. We do it in code since we can't
+# use a POM file for the RPM pushes (we're doing "one-off" file pushes)
+#
+# Repositories will be of the form baseRepositoryId-$dist{-testing}
+# -testing if it's a snapshot build (not using -snapshot as the name as
+# -testing is the more common testing repo suffix for yum)
+baseURL="http://nexus.opendaylight.org/content/repositories/opendaylight-yum-"
+baseRepositoryId="opendaylight-yum-"
 
 function usage {
     local rc=$1
@@ -52,6 +65,15 @@ function usage {
     echo "  --repourl REPOURL      url of the repo, include http://"
     echo "  --repouser REPOUSER    user for repo"
     echo "  --repopw REPOPW        password for repo"
+    echo
+    echo "Deployment options:"
+    echo "  --pushrpms             push the built rpms to a maven repository"
+    echo "  --mvn_cmd              fully qualified path to where the mvn command"
+    echo "                         (defaults to Jenkins installation of Maven 3.0.4)"
+    echo "  --baseURL              base deployment URL. \$dist will be added to the end of this"
+    echo "                         If this is a snapshot build then -testing be added at the end"
+    echo "  --baseRepositoryId     base repository name. \$dist will be added to the end of this"
+    echo "                         If this is a snapshot build then -testing be added at the end"
     echo
     echo "Help options:"
     echo "  -?, -h, --help  Display this help and exit"
@@ -96,9 +118,56 @@ function mk_archives {
         xz > $buildroot/tmpbuild/opendaylight-controller-$versionmajor.tar.xz
 }
 
-# shague: Fill in with Nexus info.
+# Pushes rpms to the specified Nexus repository
+# This only happens if pushrpms is true
 function push_rpms {
-    echo "$FUNCNAME: Not implemented yet."
+    if [ $pushrpms = 1 ]; then
+        echo "$FUNCNAME: Not implemented yet."
+        allrpms=`find $buildroot/tmpbuild/repo -iname '*.rpm'`
+        echo
+        echo "RPMS found"
+        for i in $allrpms
+        do
+            echo $i
+        done
+
+        echo ":::::"
+        echo "::::: pushing RPMs"
+        echo ":::::"
+        for i in $allrpms
+        do
+            rpmname=`rpm -qp --queryformat="%{name}" $i`
+            rpmversion=`rpm -qp --queryformat="%{version}" $i`
+            distro=`echo $dist | tr - .`
+
+            if [ `echo $i | grep 'src.rpm'` ]; then
+                rpmrelease=`rpm -qp --queryformat="%{release}.src" $i`
+                groupId="srpm"
+            else
+                rpmrelease=`rpm -qp --queryformat="%{release}.%{arch}" $i`
+                groupId="rpm"
+            fi
+
+
+            if [ "$buildtype" == "snapshot" ]; then
+                repositoryId="${baseRepositoryId}${dist}-testing"
+                pushURL="${baseURL}${dist}-testing"
+            else
+                repsotiryId="${baseRepositoryId}${dist}"
+                pushURL="${baseURL}${dist}"
+            fi
+
+            # Note version is the full version+release+{arch|src}
+            # if it is not configured this way on pushes then a download
+            # of the artifact will result in just the name-version.rpm
+            # instead of name-version-release.{arch|src}.rpm
+            $mvn_cmd org.apache.maven.plugins:maven-deploy-plugin:2.8.1:deploy-file \
+                -Dfile=$i -DrepositoryId=$repositoryId \
+                -Durl=$pushURL -DgroupId=$groupId \
+                -Dversion=$rpmversion-$rpmrelease -DartifactId=$rpmname \
+                -Dtype=rpm
+        done
+    fi
 }
 
 function show_vars {
@@ -176,7 +245,7 @@ function build_snapshot {
     # Now build the dependencies RPM
 
     # Copy the controller.zip for use in the dependencies.rpm.
-	eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
+    eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
         -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
         --copyout \"builddir/build/BUILD/opendaylight-controller-$versionmajor/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip\" \"$resultdir/opendaylight-controller-$versionmajor.zip\"
 
@@ -300,6 +369,31 @@ function parse_options {
             shift; repopw="$1"; shift;
             if [ "$repopw" == "" ]; then
                 usage 1 "Missing repo pw.";
+            fi
+            ;;
+
+        --pushrpms)
+            pushrpms=1; shift;
+            ;;
+
+        --mvn_cmd)
+            shift; mvn_cmd="$1"; shift;
+            if [ "$mvn_cmd" == "" ]; then
+                usage 1 "Missing mvn_cmd.";
+            fi
+            ;;
+
+        --baseURL)
+            shift; baseURL="$1"; shift;
+            if [ "$baseURL" == "" ]; then
+                usage 1 "Missing baseURL.";
+            fi
+            ;;
+
+        --baseRepositoryId)
+            shift; baseRepositoryId="$1"; shift;
+            if [ "$baseRepositoryId" == "" ]; then
+                usage 1 "Missing baseRepositoryId.";
             fi
             ;;
 
