@@ -267,6 +267,11 @@ http://maven.apache.org/maven-v4_0_0.xsd">
       <artifactId>bgp-util</artifactId>
       <version>${bgpcep.bgp.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>bgp-controller-config</artifactId>
+      <version>${bgpcep.bgp.version}</version>
+    </dependency>
 
     <!--
          BGPCEP: Programming artifacts
@@ -304,6 +309,11 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>programming-tunnel-api</artifactId>
+      <version>${bgpcep.programming.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>programming-controller-config</artifactId>
       <version>${bgpcep.programming.version}</version>
     </dependency>
 
@@ -389,6 +399,11 @@ http://maven.apache.org/maven-v4_0_0.xsd">
       <artifactId>pcep-tunnel-provider-config</artifactId>
       <version>${bgpcep.pcep.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-controller-config</artifactId>
+      <version>${bgpcep.pcep.version}</version>
+    </dependency>
 
     <!-- lispflowmapping -->
 
@@ -436,23 +451,6 @@ http://maven.apache.org/maven-v4_0_0.xsd">
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>2.6</version>
-        <executions>
-          <execution>
-            <phase>generate-resources</phase>
-            <id>copy-resources</id>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>${basedir}/src/main/resources</directory>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -466,11 +464,32 @@ http://maven.apache.org/maven-v4_0_0.xsd">
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-             <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
-             <includeArtifacIds>distributions-base</includeArtifacIds>
-             <includeGroupIds>org.opendaylight.integration</includeGroupIds>
-             <excludeTransitive>true</excludeTransitive>
-             <ignorePermissions>false</ignorePermissions>
+              <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+              <includeArtifacIds>distributions-base</includeArtifacIds>
+              <includeGroupIds>org.opendaylight.integration</includeGroupIds>
+              <excludeTransitive>true</excludeTransitive>
+              <ignorePermissions>false</ignorePermissions>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>unpack-provided-configs</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <outputDirectory>${project.build.directory}/provided-configs</outputDirectory>
+              <includeArtifactIds>
+                bgp-controller-config,
+                pcep-controller-config,
+                programming-controller-config,
+              </includeArtifactIds>
+              <includeGroupIds>
+                org.opendaylight.bgpcep,
+              </includeGroupIds>
+              <excludeTransitive>true</excludeTransitive>
+              <ignorePermissions>false</ignorePermissions>
             </configuration>
           </execution>
         </executions>
