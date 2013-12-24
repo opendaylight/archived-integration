@@ -1,6 +1,9 @@
+# Spec file only supports RHEL and Fedora now
+%if 0%{?rhel} || 0%{?fedora}
+
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.2.0%{?dist}
+Release: 0.3.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -20,7 +23,11 @@ BuildArch: noarch
 
 BuildRequires: java-devel
 BuildRequires: maven
+%if 0%{?fedora}
 BuildRequires: systemd
+%else
+BuildRequires: sysvinit-tools
+%endif
 
 Requires: java >= 1:1.7.0
 
@@ -32,9 +39,19 @@ Requires: java >= 1:1.7.0
 
 Requires: %{name}-dependencies
 
+%if 0%{?fedora}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
+%else
+# use sysV for rhel
+Requires(post): chkconfig
+Requires(preun): chkconfig
+
+# This is for /sbin/service
+Requires(preun): initscripts
+Requires(postun): initscripts
+%endif
 
 
 # This is the directory where all the application resources (scripts,
@@ -78,7 +95,7 @@ OpenDaylight SDN Controller
 # maven.compile.fork is used to reduce the build time.
 #export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && \
 #  mvn clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
-export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -Dmaven.test.skip=true
 
 %install
 
@@ -105,7 +122,11 @@ mv tmp/opendaylight/* %{buildroot}%{resources_dir}
 ln -s %{resources_dir}/lib %{buildroot}%{data_dir}
 ln -s %{resources_dir}/plugins %{buildroot}%{data_dir}
 
+%if 0%{?fedora}
 install -m 644 -D %{name}.systemd %{buildroot}%{_unitdir}/%{name}.service
+%else
+install -m 644 -D %{name}.sysv %{buildroot}%{_initddir}/%{name}
+%endif
 install -m 644 -D %{name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
 # Usually one wants to replace the .jar files of the dependencies by symlinks
@@ -135,6 +156,9 @@ find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
 find %{buildroot}%{data_dir} -type d -exec chmod 755 {} \;
 find %{buildroot}%{data_dir} -type f -exec chmod 755 {} \;
 chmod 755 %{buildroot}%{resources_dir}/run.sh
+%if 0%{?rhel}
+chmod 755 %{buildroot}%{_initddir}/%{name}
+%endif
 
 # Remove the temporary directory:
 rm -rf tmp
@@ -169,10 +193,23 @@ fi
 #%systemd_post %{name}.service
 
 %preun
+%if 0%{?fedora}
 %systemd_preun %{name}.service
+%else
+if [ $1 -eq 0 ] ; then
+    /sbin/service %{name} stop >/dev/null 2>&1
+    /sbin/chkconfig --del %{name}
+fi
+%endif
 
 %postun
+%if 0%{?fedora}
 %systemd_postun
+%else
+if [ "$1" -ge "1" ] ; then
+    /sbin/service %{name} condrestart >/dev/null 2>&1 || :
+fi
+%endif
 
 %clean
 %if "%{noclean}" == "1"
@@ -183,7 +220,11 @@ fi
 %files
 
 %{resources_dir}
+%if 0%{?fedora}
 %{_unitdir}/%{name}.service
+%else
+%{_initddir}/%{name}
+%endif
 
 # Configuration files should marked as such, so that they aren't overwritten
 # when updating the package:
@@ -200,8 +241,12 @@ fi
 %doc NOTICE
 %doc README.OPENDAYLIGHT
 
+%endif
 
 %changelog
+* Mon Dec 23 2013 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.3.0
+- Updates to support building rpm for both RHEL and fedora.
+
 * Fri Nov 22 2013 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
 - Updates to support building rpm with jenkins.
 
