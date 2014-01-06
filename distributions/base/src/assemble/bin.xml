@@ -43,6 +43,22 @@
     <fileSet>
       <directory>${project.build.directory}/generated-resources</directory>
       <outputDirectory>/</outputDirectory>
+      <excludes>
+          <exclude>opendaylight/run.sh</exclude>
+      </excludes>
     </fileSet>
   </fileSets>
+  <files>
+    <file>
+      <source>${project.build.directory}/generated-resources/opendaylight/run.sh</source>
+      <outputDirectory>/opendaylight/</outputDirectory>
+      <destName>run.internal.sh</destName>
+      <fileMode>0755</fileMode>
+    </file>
+    <file>
+      <source>${basedir}/src/assemble/resources/run.sh</source>
+      <outputDirectory>/opendaylight/</outputDirectory>
+      <fileMode>0755</fileMode>
+    </file>
+  </files>
 </assembly>
