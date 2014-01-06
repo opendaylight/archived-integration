@@ -20,7 +20,7 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-exec="/usr/share/opendaylight-controller/run.sh"
+exec="/usr/share/opendaylight-controller/run.dist.sh"
 prog="opendaylight-controller"
 config="/etc/opendaylight-controller/config.ini"
 
@@ -33,7 +33,7 @@ start() {
     [ -f $config ] || exit 6
     echo -n $"Starting $prog: "
     # if not running, start it up here, usually something like "daemon $exec"
-    $exec -start
+    $exec $ODL_DIST -start
     retval=$?
     echo
     # [ $retval -eq 0 ] && touch $lockfile
@@ -43,7 +43,7 @@ start() {
 stop() {
     echo -n $"Stopping $prog: "
     # stop it here, often "killproc $prog"
-    $exec -stop
+    /usr/share/opendaylight-controller/run.sh" -stop
     retval=$?
     echo
     # [ $retval -eq 0 ] && rm -f $lockfile

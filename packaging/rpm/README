@@ -3,6 +3,31 @@ RPM package for Fedora that still relies on Maven to include the JAVA
 artifacts. The plan is to create a dependencies RPM to package up all the
 artifacts.
 
+Release 0.1.0-0.4.0
+1. Build
+Build all the required packages:
+rpmbuild opendaylight-controller.spec
+rpmbuild opendaylight-ovsdb.spec
+rpmbuild opendaylight-dependencies.spec
+rpmbuild opendaylight-distribution.spec
+
+2. Install
+rpm -Uvh opendaylight-distribution
+* This will install all required packages.
+
+3. Start/Stop
+sudo systemctl start opendaylight-controller.service
+sudo systemctl stop opendaylight-controller.service
+* to get the osgi console: telnet 127.0.0.1 2400
+
+4. Distribution
+Edit the sysconfig file to change the type of distribution:
+sudo vi /etc/sysconfig/opendaylight-controller
+Set ODL_DIST to the desired distribution, i.e.
+ODL_DEST="-virt ovsdb" or ODL_DEST="-virt opendove"
+
+Release <0.1.0-0.4.0
+
 1. Get a source tarball:
 $git clone https://git.opendaylight.org/gerrit/p/controller.git
 $cd controller

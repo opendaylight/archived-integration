@@ -9,7 +9,7 @@ User=opendaylight
 Group=opendaylight
 EnvironmentFile=-/etc/sysconfig/opendaylight-controller
 WorkingDirectory=/var/lib/opendaylight-controller
-ExecStart=-/usr/share/opendaylight-controller/run.sh -start
+ExecStart=-/usr/share/opendaylight-controller/run.dist.sh $ODL_DIST -start
 ExecStop=-/usr/share/opendaylight-controller/run.sh -stop
 
 [Install]
