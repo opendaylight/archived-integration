@@ -34,4 +34,4 @@ else
     fi
 fi
 
-./run.base.sh -Dfelix.fileinstall.filter="^(?!org.opendaylight.(${ODL_VIRT_FILTER})).*" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
+./run.base.sh -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
