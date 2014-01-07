@@ -4,3 +4,6 @@ ODL_DATADIR=/var/lib/opendaylight-controller
 
 # The path to the java jre or jdk:
 #JAVA_HOME=/usr
+
+# The requested distribution:
+ODL_DIST="-virt ovsdb"

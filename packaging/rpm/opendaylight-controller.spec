@@ -3,7 +3,7 @@
 
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.3.0%{?dist}
+Release: 0.4.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -12,10 +12,11 @@ URL: http://www.opendaylight.org
 # todo: Temporary method for generating tarball
 # git clone https://git.opendaylight.org/gerrit/p/controller.git
 # cd controller
-# git archive --prefix=opendaylight-controller-0.1.0/ 20dcbd1 | xz > opendaylight-controller-0.1.0.tar.xz
+# git archive --prefix=opendaylight-controller-0.1.0/ HEAD | xz > opendaylight-controller-0.1.0.tar.xz
 # git clone https://git.opendaylight.org/gerrit/p/integration.git
-# cd packaging/rpm/fedora
-# git archive 20dcbd1 opendaylight-controller.sysconfig opendaylight-controller.systemd | xz > opendaylight-controller-integration-0.1.0.tar.xz
+# cd packaging/rpm
+# git archive HEAD opendaylight-controller.sysconfig opendaylight-controller.systemd \
+#   opendaylight-controller.sysv run.dist.sh | xz > opendaylight-controller-integration-0.1.0.tar.xz
 Source0: %{name}-%{version}.tar.xz
 Source1: %{name}-integration-%{version}.tar.xz
 
@@ -97,6 +98,7 @@ OpenDaylight SDN Controller
 #  mvn clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
 export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -Dmaven.test.skip=true
 
+
 %install
 
 # Extract the contents of the distribution to a temporary directory so that we
@@ -128,6 +130,7 @@ install -m 644 -D %{name}.systemd %{buildroot}%{_unitdir}/%{name}.service
 install -m 644 -D %{name}.sysv %{buildroot}%{_initddir}/%{name}
 %endif
 install -m 644 -D %{name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{name}
+install -m 755 -D run.dist.sh %{buildroot}%{resources_dir}/run.dist.sh
 
 # Usually one wants to replace the .jar files of the dependencies by symlinks
 # to the ones provided to the system. This assumes the dependencies have been
@@ -136,16 +139,18 @@ cd %{buildroot}%{resources_dir}/lib
 for src in $( ls -I "org.opendaylight.*" );
 do
     rm -f ${src}
-    tgt=$(echo ${src} | sed -e "s/-[0-9].*/.jar/")
-    ln -s %{deps_dir}/${tgt} ${src}
+    #tgt=$(echo ${src} | sed -e "s/-[0-9].*/.jar/")
+    #ln -s %{deps_dir}/${tgt} ${src}
+    ln -s %{deps_dir}/${src} ${src}
 done
 
 cd %{buildroot}%{resources_dir}/plugins
 for src in $( ls -I "org.opendaylight.*" );
 do
     rm -f ${src}
-    tgt=$(echo ${src} | sed -e "s/-[0-9].*/.jar/")
-    ln -s %{deps_dir}/${tgt} ${src}
+    #tgt=$(echo ${src} | sed -e "s/-[0-9].*/.jar/")
+    #ln -s %{deps_dir}/${tgt} ${src}
+    ln -s %{deps_dir}/${src} ${src}
 done
 
 
@@ -156,6 +161,7 @@ find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
 find %{buildroot}%{data_dir} -type d -exec chmod 755 {} \;
 find %{buildroot}%{data_dir} -type f -exec chmod 755 {} \;
 chmod 755 %{buildroot}%{resources_dir}/run.sh
+chmod 755 %{buildroot}%{resources_dir}/run.dist.sh
 %if 0%{?rhel}
 chmod 755 %{buildroot}%{_initddir}/%{name}
 %endif
@@ -212,6 +218,7 @@ fi
 %endif
 
 %clean
+# This check is used for mock build so the build files are not deleted.
 %if "%{noclean}" == "1"
     exit 0
 %endif
@@ -244,6 +251,9 @@ fi
 %endif
 
 %changelog
+* Thu Jan 02 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.4.0
+- Updates to include building distributions.
+
 * Mon Dec 23 2013 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.3.0
 - Updates to support building rpm for both RHEL and fedora.
 
