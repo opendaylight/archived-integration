@@ -38,30 +38,6 @@ http://maven.apache.org/maven-v4_0_0.xsd">
       <artifactId>ovsdb.northbound</artifactId>
       <version>0.5.0-SNAPSHOT</version>
     </dependency>
-    
-    <!-- openflowplugin -->
-    <dependency>
-      <groupId>org.opendaylight.openflowplugin</groupId>
-      <artifactId>openflowplugin</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    
-    <!-- openflowjava -->
-    <dependency>
-      <groupId>org.opendaylight.openflowjava</groupId>
-      <artifactId>openflow-protocol-impl</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.openflowjava</groupId>
-      <artifactId>openflow-protocol-api</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.openflowjava</groupId>
-      <artifactId>openflow-protocol-spi</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
   <build>
     <resources>
