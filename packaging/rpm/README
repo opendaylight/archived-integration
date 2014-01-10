@@ -3,7 +3,59 @@ RPM package for Fedora that still relies on Maven to include the JAVA
 artifacts. The plan is to create a dependencies RPM to package up all the
 artifacts.
 
+Release 0.1.0-0.6.0
+--------------------------------------------------------------------------------
+1. Build
+cd ~/git/controller
+git archive --prefix=opendaylight-controller-0.1.0/ HEAD | xz > ../opendaylight-controller-0.1.0.tar.xz
+cd ~/git/integration
+git archive --prefix=opendaylight-integration-0.1.0/ HEAD | xz > ../opendaylight-integration-0.1.0.tar.xz
+cd ~/git/ovsdb
+git archive --prefix=opendaylight-ovsdb-0.1.0/ HEAD | xz > ../opendaylight-ovsdb-0.1.0.tar.xz
+cd ..
+cp opendaylight-controller-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-integration-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-ovsdb-0.1.0.tar.xz ~/rpmbuild/SOURCES
+rpmbuild -bb --noclean opendaylight-controller.spec
+rpmbuild -bb --noclean opendaylight-ovsdb.spec
+cp ~/rpmbuild/BUILD/opendaylight-controller-0.1.0/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip ~/rpmbuild/SOURCES/opendaylight-controller-0.1.0.zip
+cp ~/rpmbuild/BUILD/opendaylight-ovsdb-0.1.0/distribution/opendaylight/target/distribution.ovsdb-1.0.0-SNAPSHOT-osgipackage.zip ~/rpmbuild/SOURCES/opendaylight-ovsdb-0.1.0.zip
+rpmbuild -bb --noclean opendaylight-controller-dependencies.spec
+rpmbuild -bb --noclean opendaylight-distribution.spec
+
+2. Install
+rpm -Uvh ~/rpmbuild/RPMS/noarch/*.rpm
+
+3. Enable
+sudo systemctl enable opendaylight-controller.service
+
+4. Start/stop
+sudo systemctl start opendaylight-controller.service
+sudo systemctl stop opendaylight-controller.service
+* to get the osgi console: telnet 127.0.0.1 2400
+
+5. Distribution
+Edit the sysconfig file to change the type of distribution:
+sudo vi /etc/sysconfig/opendaylight-controller
+Set ODL_DIST to the desired distribution, i.e.
+ODL_DEST="virt-ovsdb"
+
+# Use the following table to select the distribution:
+# Distribution             Value
+# --------------------     -----------
+# base                     base
+# virtualization ovsdb     virt-ovsdb
+# virtualization vtn       virt-vtn
+# virtualization opendove  virt-opendove
+# service provider         sp
+ODL_DIST="virt-ovsdb"
+
+# Any additional options required.
+# I.E. -of13, -debug, or -console
+ODL_OPTS=""
+
 Release 0.1.0-0.4.0
+--------------------------------------------------------------------------------
 1. Build
 Build all the required packages:
 rpmbuild opendaylight-controller.spec

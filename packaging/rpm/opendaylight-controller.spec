@@ -3,7 +3,7 @@
 
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.5.0%{?dist}
+Release: 0.6.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -122,9 +122,12 @@ mv tmp/opendaylight/configuration/config.ini %{buildroot}%{configuration_dir}
 ln -s %{configuration_dir}/config.ini %{buildroot}%{data_dir}/configuration
 mv tmp/opendaylight/configuration/* %{buildroot}%{resources_dir}/configuration
 rmdir tmp/opendaylight/configuration
+ln -s %{resources_dir}/configuration/initial %{buildroot}%{data_dir}/configuration
 ln -s %{resources_dir}/configuration/context.xml %{buildroot}%{data_dir}/configuration
 ln -s %{resources_dir}/configuration/logback.xml %{buildroot}%{data_dir}/configuration
 ln -s %{resources_dir}/configuration/tomcat-server.xml %{buildroot}%{data_dir}/configuration
+ln -s %{resources_dir}/configuration/tomcat-logging.properties %{buildroot}%{data_dir}/configuration
+ln -s %{resources_dir}/configuration/RSA.pk %{buildroot}%{data_dir}/configuration
 
 mv tmp/opendaylight/* %{buildroot}%{resources_dir}
 
@@ -268,6 +271,9 @@ fi
 %endif
 
 %changelog
+* Fri Jan 10 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.6.0
+- Updates to include new configuration files.
+
 * Thu Jan 09 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.5.0
 - Updates for OF1.3 support.
 
