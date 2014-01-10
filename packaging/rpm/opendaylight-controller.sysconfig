@@ -6,4 +6,16 @@ ODL_DATADIR=/var/lib/opendaylight-controller
 #JAVA_HOME=/usr
 
 # The requested distribution:
-ODL_DIST="-virt ovsdb"
+# Use the following table to select the distribution:
+# Distribution             Value
+# --------------------     -----------
+# base                     base
+# virtualization ovsdb     virt-ovsdb
+# virtualization vtn       virt-vtn
+# virtualization opendove  virt-opendove
+# service provider         sp
+ODL_DIST="virt-ovsdb"
+
+# Any additional options required.
+# I.E. -of13, -debug, or -console
+ODL_OPTS=""

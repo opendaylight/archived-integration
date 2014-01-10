@@ -3,14 +3,13 @@
 
 Name: opendaylight-distribution
 Version: 0.1.0
-Release: 0.1.0%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight SDN Controller Distributions
 Group: Applications/Communications
 License: EPL
 URL: http://www.opendaylight.org
 BuildArch: noarch
 
-Requires: java >= 1:1.7.0
 Requires: opendaylight-controller
 Requires: opendaylight-ovsdb
 Requires: opendaylight-controller-dependencies
@@ -23,5 +22,9 @@ OpenDaylight SDN Controller Distributions
 %endif
 
 %changelog
+* Thu Jan 09 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.5.0
+- Updates for OF1.3 support.
+- Remove java Requires.
+
 * Thu Jan 02 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.1.0
 - Initial package.

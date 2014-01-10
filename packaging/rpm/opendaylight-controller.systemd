@@ -9,8 +9,8 @@ User=opendaylight
 Group=opendaylight
 EnvironmentFile=-/etc/sysconfig/opendaylight-controller
 WorkingDirectory=/var/lib/opendaylight-controller
-ExecStart=-/usr/share/opendaylight-controller/run.dist.sh $ODL_DIST -start
-ExecStop=-/usr/share/opendaylight-controller/run.sh -stop
+ExecStart=-/usr/share/opendaylight-controller/run.dist.sh $ODL_DIST $ODL_OPTS -start
+ExecStop=-/usr/share/opendaylight-controller/run.dist.sh -stop
 
 [Install]
 WantedBy=multi-user.target

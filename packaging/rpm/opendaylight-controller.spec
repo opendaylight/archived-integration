@@ -3,7 +3,7 @@
 
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.4.0%{?dist}
+Release: 0.5.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -14,11 +14,11 @@ URL: http://www.opendaylight.org
 # cd controller
 # git archive --prefix=opendaylight-controller-0.1.0/ HEAD | xz > opendaylight-controller-0.1.0.tar.xz
 # git clone https://git.opendaylight.org/gerrit/p/integration.git
-# cd packaging/rpm
-# git archive HEAD opendaylight-controller.sysconfig opendaylight-controller.systemd \
-#   opendaylight-controller.sysv run.dist.sh | xz > opendaylight-controller-integration-0.1.0.tar.xz
+# cd integration
+# git archive --prefix=opendaylight-integration-0.1.0/HEAD | xz > opendaylight-integration-0.1.0.tar.xz
 Source0: %{name}-%{version}.tar.xz
-Source1: %{name}-integration-%{version}.tar.xz
+Source1: opendaylight-integration-%{version}.tar.xz
+Patch0: opendaylight-integration-fix-paths.patch
 
 BuildArch: noarch
 
@@ -70,6 +70,10 @@ Requires(postun): initscripts
 # This is the directory that has all the JAVA dependencies.
 %global deps_dir %{_javadir}/opendaylight-controller-dependencies
 
+# This is the integration buildsubdir and packaging dirs:
+#%global intbuildsubdir %{_builddir}/%{buildsubdir}/opendaylight-integration-%{version}
+%global pkgdir opendaylight-integration-%{version}/packaging/rpm
+
 
 %description
 OpenDaylight SDN Controller
@@ -79,6 +83,9 @@ OpenDaylight SDN Controller
 
 %setup -q
 %setup -q -D -T -a 1
+cd opendaylight-integration-%{version}
+%patch0 -p1
+
 
 # In more restrictive distributions we should also here remove from the source
 # package any third party binaries, or replace them with those provided by the
@@ -125,12 +132,20 @@ ln -s %{resources_dir}/lib %{buildroot}%{data_dir}
 ln -s %{resources_dir}/plugins %{buildroot}%{data_dir}
 
 %if 0%{?fedora}
-install -m 644 -D %{name}.systemd %{buildroot}%{_unitdir}/%{name}.service
+install -m 644 -D %{pkgdir}/%{name}.systemd %{buildroot}%{_unitdir}/%{name}.service
 %else
-install -m 644 -D %{name}.sysv %{buildroot}%{_initddir}/%{name}
+install -m 644 -D %{pkgdir}/%{name}.sysv %{buildroot}%{_initddir}/%{name}
 %endif
-install -m 644 -D %{name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{name}
-install -m 755 -D run.dist.sh %{buildroot}%{resources_dir}/run.dist.sh
+install -m 644 -D %{pkgdir}/%{name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{name}
+
+# Fix all the run.sh files to the right names.
+install -m 755 -D %{buildroot}%{resources_dir}/run.sh %{buildroot}%{resources_dir}/run.internal.sh
+install -m 755 -D opendaylight-integration-%{version}/distributions/base/src/assemble/resources/run.sh \
+    %{buildroot}%{resources_dir}/run.base.sh
+rm %{buildroot}%{resources_dir}/run.sh
+install -m 755 -D opendaylight-integration-%{version}/distributions/virtualization/src/assemble/resources/run.sh \
+    %{buildroot}%{resources_dir}/run.sh
+install -m 755 -D opendaylight-integration-%{version}/packaging/rpm/run.dist.sh %{buildroot}%{resources_dir}/run.dist.sh
 
 # Usually one wants to replace the .jar files of the dependencies by symlinks
 # to the ones provided to the system. This assumes the dependencies have been
@@ -161,6 +176,8 @@ find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
 find %{buildroot}%{data_dir} -type d -exec chmod 755 {} \;
 find %{buildroot}%{data_dir} -type f -exec chmod 755 {} \;
 chmod 755 %{buildroot}%{resources_dir}/run.sh
+chmod 755 %{buildroot}%{resources_dir}/run.base.sh
+chmod 755 %{buildroot}%{resources_dir}/run.internal.sh
 chmod 755 %{buildroot}%{resources_dir}/run.dist.sh
 %if 0%{?rhel}
 chmod 755 %{buildroot}%{_initddir}/%{name}
@@ -251,6 +268,9 @@ fi
 %endif
 
 %changelog
+* Thu Jan 09 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.5.0
+- Updates for OF1.3 support.
+
 * Thu Jan 02 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.4.0
 - Updates to include building distributions.
 

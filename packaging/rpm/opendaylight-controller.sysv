@@ -33,7 +33,7 @@ start() {
     [ -f $config ] || exit 6
     echo -n $"Starting $prog: "
     # if not running, start it up here, usually something like "daemon $exec"
-    $exec $ODL_DIST -start
+    $exec $ODL_DIST $ODL_OPTS -start
     retval=$?
     echo
     # [ $retval -eq 0 ] && touch $lockfile
@@ -43,7 +43,7 @@ start() {
 stop() {
     echo -n $"Stopping $prog: "
     # stop it here, often "killproc $prog"
-    /usr/share/opendaylight-controller/run.sh" -stop
+    $exec -stop
     retval=$?
     echo
     # [ $retval -eq 0 ] && rm -f $lockfile
