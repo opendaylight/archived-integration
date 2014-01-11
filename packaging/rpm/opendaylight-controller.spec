@@ -3,7 +3,7 @@
 
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.6.0%{?dist}
+Release: 0.7.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -39,6 +39,8 @@ Requires: java >= 1:1.7.0
 #Requires: slf4j
 
 Requires: %{name}-dependencies
+Requires: opendaylight-openflowjava
+Requires: opendaylight-openflowplugin
 
 %if 0%{?fedora}
 Requires(post): systemd
@@ -271,6 +273,9 @@ fi
 %endif
 
 %changelog
+* Fri Jan 13 2014 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.7.0
+- Updates to include openflowjava and openflowplugin.
+
 * Fri Jan 10 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.6.0
 - Updates to include new configuration files.
 
