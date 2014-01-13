@@ -16,6 +16,7 @@ cd ..
 cp opendaylight-controller-0.1.0.tar.xz ~/rpmbuild/SOURCES
 cp opendaylight-integration-0.1.0.tar.xz ~/rpmbuild/SOURCES
 cp opendaylight-ovsdb-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp ~/git/integration/packaging/rpm/opendaylight-integration-fix-paths.path ~/rpmbuild/SOURCES
 rpmbuild -bb --noclean opendaylight-controller.spec
 rpmbuild -bb --noclean opendaylight-ovsdb.spec
 cp ~/rpmbuild/BUILD/opendaylight-controller-0.1.0/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip ~/rpmbuild/SOURCES/opendaylight-controller-0.1.0.zip

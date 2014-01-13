@@ -9,21 +9,29 @@
 #set -vx
 
 buildtype="snapshot"
-buildroot=`pwd`
-buildnumber=0
+buildroot=""
+buildtag=""
 cleanroot=0
+cleantmp=0
 pushrpms=0
 getsource="buildroot"
 version=""
 release=""
-versionsnapsuffix=""
-versionmajor=""
 repourl=""
 repouser=""
 repopw=""
 dist="fedora-19-x86_64"
 pkg_dist_suffix="fc19"
 mock_cmd='/usr/bin/mock'
+timesuffix=""
+vers_controller=""
+vers_ovsdb=""
+suff_controller=""
+suff_ovsdb=""
+mockdebug=""
+mockinit=0
+tmpbuild=""
+
 
 # Maven is not installed at the system wide level but at the Jenkins level
 # We need to map our Maven call to the Jenkins installed version
@@ -37,6 +45,26 @@ mvn_cmd="$JENKINS_HOME/tools/hudson.tasks.Maven_MavenInstallation/Maven_3.0.4/bi
 # -testing is the more common testing repo suffix for yum)
 baseURL="http://nexus.opendaylight.org/content/repositories/opendaylight-yum-"
 baseRepositoryId="opendaylight-yum-"
+
+readonly RCSUCCESS=0
+readonly RCERROR=64
+readonly RCPARMSERROR=65
+readonly RCRPMBUILDERROR=66
+readonly RCRMOCKERROR=67
+
+readonly LOGERROR=2
+readonly LOGINFO=5
+readonly LOGVERBOSE=7
+loglevel=$LOGVERBOSE
+
+
+function log {
+    local level=$1; shift;
+
+    if [ $level -le $loglevel ]; then
+        echo "buildrpm: $@"
+    fi
+}
 
 function usage {
     local rc=$1
@@ -52,8 +80,9 @@ function usage {
     echo "Build options:"
     echo "  --buildtype TYPE       build type, either snapshot or release"
     echo "  --buildroot DIRECTORY  build root path"
-    echo "  --buildnumber NUMBER   jenkins build number"
+    echo "  --buildtag             tag the tmpbuild directory, i.e. Jenkins build number"
     echo "  --cleanroot            clean buildroot directory before building"
+    echo "  --cleantmp             clean tmpbuild directory before building"
     echo "  --dist DIST            distribution"
     echo "  --getsource METHOD     method for getting source clone|snapshot|buildroot"
     echo
@@ -75,21 +104,14 @@ function usage {
     echo "  --baseRepositoryId     base repository name. \$dist will be added to the end of this"
     echo "                         If this is a snapshot build then -testing be added at the end"
     echo
+    echo "Mock options:"
+    echo "  --mockinit             Run mock init"
+    echo
     echo "Help options:"
     echo "  -?, -h, --help  Display this help and exit"
     echo "  --debug         Enable bash debugging output"
+    echo "  --mockdebug     Enable mock debugging output"
     exit $rc
-}
-
-# Make a snapshot version tag using the git hash and date
-# shague: Modify to use ODL build numbering"
-function mk_versionsnapsuffix {
-    if [ "$version" = "" ]; then
-        cd $buildroot/controller
-        versionsnapsuffix="snap.$(date +%F_%T | tr -d .:- | tr _ .).git.$(git log -1 --pretty=format:%h)"
-    else
-        versionsnapsuffix="snap.$version"
-    fi
 }
 
 # Clone the projects.
@@ -97,43 +119,68 @@ function clone_source {
     # We only care about a shallow clone (no need to grab the entire project)
     git clone --depth 0 https://git.opendaylight.org/gerrit/p/controller.git $buildroot/controller
     git clone --depth 0 https://git.opendaylight.org/gerrit/p/integration.git $buildroot/integration
+    git clone --depth 0 https://git.opendaylight.org/gerrit/p/ovsdb.git $buildroot/ovsdb
+    #git clone --depth 0 https://git.opendaylight.org/gerrit/p/openflowjava.git $buildroot/openflowjava
+    #git clone --depth 0 https://git.opendaylight.org/gerrit/p/openflowplugin.git $buildroot/openflowplugin
 }
 
 # Copy the projects from snapshots.
 # shague: Fill in with the nexus info.
+# Make mk_snapshot_archives that just sets up the version strings.
 function snapshot_source {
-    echo "$FUNCNAME: Not implemented yet."
+    log $LOGINFO "$FUNCNAME: Not implemented yet."
 }
 
 # xz the source for later use by rpmbuild.
 # shague: need another archive method for snapshot getsource builds since
 # the source did not come from a git repo.
-function mk_archives {
-    cd $buildroot/integration/packaging/rpm/fedora
-    git archive HEAD opendaylight-controller.sysconfig opendaylight-controller.systemd \
-        | xz > $buildroot/tmpbuild/opendaylight-controller-integration-$versionmajor.tar.xz
+function mk_git_archives {
+    local timesuffix="$(date +%F_%T | tr -d .:- | tr _ .)"
+
+    if [ "$version" == "" ]; then
+        cd $buildroot/controller
+        suff_controller="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
+        cd $buildroot/ovsdb
+        suff_ovsdb="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
+    else
+        suff_controller="snap.$version"
+        suff_ovsdb="snap.$version"
+    fi
+
+    cd $buildroot/integration/packaging/rpm
+    vers_controller="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-controller.spec | head -n 1 | awk '{print $1}').$suff_controller"
+    vers_ovsdb="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-ovsdb.spec | head -n 1 | awk '{print $1}').$suff_ovsdb"
 
     cd $buildroot/controller
-    git archive --prefix=opendaylight-controller-$versionmajor/ HEAD | \
-        xz > $buildroot/tmpbuild/opendaylight-controller-$versionmajor.tar.xz
+    git archive --prefix=opendaylight-controller-$vers_controller/ HEAD | \
+        xz > $tmpbuild/opendaylight-controller-$vers_controller.tar.xz
+
+    cd $buildroot/integration
+    git archive --prefix=opendaylight-integration-$vers_controller/ HEAD | \
+        xz > $tmpbuild/opendaylight-integration-$vers_controller.tar.xz
+    cp packaging/rpm/opendaylight-integration-fix-paths.patch $tmpbuild/
+
+    cd $buildroot/ovsdb
+    git archive --prefix=opendaylight-ovsdb-$vers_ovsdb/ HEAD | \
+        xz > $tmpbuild/opendaylight-ovsdb-$vers_ovsdb.tar.xz
 }
 
 # Pushes rpms to the specified Nexus repository
 # This only happens if pushrpms is true
 function push_rpms {
     if [ $pushrpms = 1 ]; then
-        echo "$FUNCNAME: Not implemented yet."
-        allrpms=`find $buildroot/tmpbuild/repo -iname '*.rpm'`
+        log $LOGINFO "$FUNCNAME: Not implemented yet."
+        allrpms=`find $tmpbuild/repo -iname '*.rpm'`
         echo
-        echo "RPMS found"
+        log $LOGINFO "RPMS found"
         for i in $allrpms
         do
-            echo $i
+            log $LOGINFO $i
         done
 
-        echo ":::::"
-        echo "::::: pushing RPMs"
-        echo ":::::"
+        log $LOGINFO ":::::"
+        log $LOGINFO "::::: pushing RPMs"
+        log $LOGINFO ":::::"
         for i in $allrpms
         do
             rpmname=`rpm -qp --queryformat="%{name}" $i`
@@ -153,7 +200,7 @@ function push_rpms {
                 repositoryId="${baseRepositoryId}${dist}-testing"
                 pushURL="${baseURL}${dist}-testing"
             else
-                repsotiryId="${baseRepositoryId}${dist}"
+                repositoryId="${baseRepositoryId}${dist}"
                 pushURL="${baseURL}${dist}"
             fi
 
@@ -179,112 +226,129 @@ release:      $release
 version:      $version
 getsource:    $getsource
 buildroot:    $buildroot
+buildtag:     $buildtag
+tmpbuild:     $tmpbuild
 EOF
+}
+
+# Build a single project.
+function build_project {
+    local project=$1
+    local versionmajor="$2"
+    local versionsnapsuffix="$3"
+
+    log $LOGINFO ":::::"
+	log $LOGINFO "::::: building opendaylight-$project.rpm"
+	log $LOGINFO ":::::"
+
+    cp -f $buildroot/integration/packaging/rpm/opendaylight-$project.spec \
+        $tmpbuild
+
+    cd $tmpbuild
+	sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" opendaylight-$project.spec
+
+    # Build the source RPM for use by mock later.
+	#rm -f SRPMS/*.src.rpm
+	log $LOGINFO "::::: building opendaylight-$project.src.rpm in rpmbuild"
+	rpmbuild -bs --define '%_topdir '"`pwd`" --define '%_sourcedir %{_topdir}' \
+       --define "%dist .$pkg_dist_suffix" opendaylight-$project.spec
+
+    rc=$?
+    if [ $rc != 0 ]; then
+        log $LOGERROR "rpmbuild of $project.src.rpm failed (rc=$rc)."
+        exit $RCRPMBUILDERROR
+    fi
+
+	log $LOGINFO "::::: building opendaylight-$project.rpm in mock"
+
+	resultdir="repo/$project.$pkg_dist_suffix.noarch.snap"
+
+    # Build the rpm using mock.
+    # Keep the build because we will need the distribution zip file for later
+    # when building the controller-dependencies.rpm.
+    eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
+        -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
+        SRPMS/opendaylight-$project-$versionmajor-*.src.rpm
+
+    rc=$?
+    if [ $rc != 0 ]; then
+        log $LOGERROR "mock of $project.rpm failed (rc=$rc)."
+        exit $RCRMOCKERROR
+    fi
+
+    # Copy the distribution zip for use in the dependencies.rpm.
+    case "$project" in
+    controller)
+        log $LOGINFO "::::: Copying $project distribution.zip."
+        eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
+            -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
+            --copyout \"builddir/build/BUILD/opendaylight-$project-$versionmajor/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip\" \"$resultdir/opendaylight-$project-$versionmajor.zip\"
+        rc1=$?
+        ln -sf $resultdir/opendaylight-$project-$versionmajor.zip \
+            $tmpbuild
+        rc2=$?
+        if [ ! -e $tmpbuild/opendaylight-$project-$versionmajor.zip ]; then
+            log $LOGERROR "cannot find $project distribution zip file (rc=$rc1:$rc2)."
+            exit $RCERROR
+        fi
+        ;;
+
+    ovsdb)
+        log $LOGINFO "::::: Copying $project distribution.zip."
+        # Parse pom file to get filename.
+        eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
+            -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
+            --copyout \"builddir/build/BUILD/opendaylight-$project-$versionmajor/distribution/opendaylight/target/distribution.$project-1.0.0-SNAPSHOT-osgipackage.zip\" \"$resultdir/opendaylight-$project-$versionmajor.zip\"
+        rc1=$?
+
+        ln -sf $resultdir/opendaylight-$project-$versionmajor.zip \
+            $tmpbuild/opendaylight-ovsdb-$vers_controller.zip
+        rc2=$?
+        if [ ! -e $tmpbuild/opendaylight-ovsdb-$vers_controller.zip ]; then
+            log $LOGERROR "cannot find $project distribution zip file (rc=$rc1:$rc2)."
+            exit $RCERROR
+        fi
+        ;;
+
+    controller-dependencies|controller-distribution)
+        ;;
+    esac
 }
 
 # Main function that builds the rpm's for snapshot's.
 function build_snapshot {
-    cp -f $buildroot/integration/packaging/rpm/fedora/opendaylight-controller.spec \
-        $buildroot/tmpbuild
-
-    mk_versionsnapsuffix
-
-	cd $buildroot/tmpbuild
-
-    # append snap suffix to version
-	versionmajor="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-controller.spec | head -n 1 | awk '{print $1}').$versionsnapsuffix"
-
-# test code to short circuit the controller build
-#if [ 2 = 1 ]; then
-	sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" opendaylight-controller.spec
-
-	mk_archives
-
-	cd $buildroot/tmpbuild
-	#name="$(rpm -q --queryformat="%{name}\n" --specfile *.spec | head -n 1)"
-
-    # Build the source RPM for use by mock later.
-	#rm -f SRPMS/*.src.rpm
-	rpmbuild -bs --define '%_topdir '"`pwd`" --define '%_sourcedir %{_topdir}' \
-       --define "%dist .$pkg_dist_suffix" opendaylight-controller.spec
-
-    if [ $? != 0 ]; then
-        echo "rpmbuild of controller.src.rpm failed."
-        exit 2
-    fi
-
-	echo ":::::"
-	echo "::::: building opendaylight-controller.rpm in mock"
-	echo ":::::"
-
-	resultdir="repo/controller.$pkg_dist_suffix.noarch.snap"
+	mk_git_archives
 
     # Initialize our mock build location (we'll be using --no-clean later)
     # If we don't do the first init we can't build since the environment
     # doesn't get setup correctly!
-    eval $mock_cmd -r $dist --init
-
-    # Build the rpm using mock.
-    # Keep the build because we will need the controller.zip file for later
-    # when building the controller-dependencies.rpm.
-    eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
-        -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
-        SRPMS/opendaylight-controller-$versionmajor-*.src.rpm
-
-    if [ $? != 0 ]; then
-        echo "mock of controller.src.rpm failed."
-        exit 2
+    if [ mockinit -eq 1 ]; then
+        eval $mock_cmd $mockdebug -r $dist --init
     fi
+# Test code for short-cicuit when Nexus isn't behaving.
+if [ 0 -eq 1 ]; then
+    opendaylight-ovsdb-0.1.0.snap.20140112.161313.git.43aa583
 
-#else
-#    versionmajor=0.1.0.snap.20131203.165045.git.c406e47
-#    versionsnapsuffix=snap.20131203.165045.git.c406e47
-#    resultdir="repo/controller.$pkg_dist_suffix.noarch.snap"
-#fi
+    vers_controller="0.1.0.snap.20140112.161313.git.43aa583"
+    vers_ovsdb="0.1.0.snap.20140112.161313.git.43aa583"
 
-    # Now build the dependencies RPM
+    suff_controller="snap.20140112.161313.git.43aa583"
+    suff_ovsdb="snap.20140112.161313.git.43aa583"
+fi
 
-    # Copy the controller.zip for use in the dependencies.rpm.
-    eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
-        -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
-        --copyout \"builddir/build/BUILD/opendaylight-controller-$versionmajor/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip\" \"$resultdir/opendaylight-controller-$versionmajor.zip\"
-
-    ln -sf $resultdir/opendaylight-controller-$versionmajor.zip \
-        $buildroot/tmpbuild
-
-    cp -f $buildroot/integration/packaging/rpm/fedora/opendaylight-controller-dependencies.spec \
-        $buildroot/tmpbuild
-    sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" opendaylight-controller-dependencies.spec
-    rpmbuild -bs --define '%_topdir '"`pwd`" --define '%_sourcedir %{_topdir}' \
-        --define "%dist .$pkg_dist_suffix" opendaylight-controller-dependencies.spec
-
-    if [ $? != 0 ]; then
-        echo "rpmbuild of controller-dependencies.src.rpm failed."
-        exit 2
-    fi
-
-    echo ":::::"
-    echo "::::: building opendaylight-controller-dependencies.rpm in mock"
-    echo ":::::"
-
-    resultdir="repo/controller-dependencies.$pkg_dist_suffix.noarch.snap"
-
-    eval $mock_cmd -v -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
-        -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
-        SRPMS/opendaylight-controller-dependencies-$versionmajor-*.src.rpm
-
-    if [ $? != 0 ]; then
-        echo "mock of controller-dependencies.src.rpm failed."
-        exit 2
-    fi
+	build_project controller $vers_controller $suff_controller
+	build_project ovsdb $vers_ovsdb $suff_ovsdb
+	build_project controller-dependencies $vers_controller $suff_controller
+	build_project distribution $vers_controller $suff_controller
 
     push_rpms
 }
 
 # Main function that builds the rpm's for release's.
 # shague: should be similar to snapshot but use a different version or tag.
+# spec files should be updated with correct version. If so, do
 function build_release {
-    echo "$FUNCNAME: Not implemented yet."
+    log $LOGINFO "$FUNCNAME: Not implemented yet."
 }
 
 function parse_options {
@@ -294,27 +358,31 @@ function parse_options {
             set -vx; shift;
             ;;
 
+        --mockdebug)
+            mockdebug="-v"; shift;
+            ;;
+
         --buildtype)
             shift; buildtype="$1"; shift;
             if [ "$buildtype" != "snapshot" ] && [ "$buildtype" != "release" ]; then
-                usage 1 "Invalid build type.";
+                usage $RCPARMSERROR "Invalid build type.";
             fi
             ;;
 
         --buildroot)
             shift; buildroot="$1"; shift;
             if [ "$buildroot" == "" ]; then
-                usage 1 "Missing build root.";
+                usage $RCPARMSERROR "Missing build root.";
             fi
             if [ ! -d "$buildroot" ]; then
-                usage 1 "Invalid build root path."
+                usage $RCPARMSERROR "Invalid build root path."
             fi
             ;;
 
-        --buildnumber)
-            shift; buildnumber="$1"; shift;
-            if [ "$buildnumber" == ""  ]; then
-                usage 1 "Missing build number.";
+        --buildtag)
+            shift; buildtag="$1"; shift;
+            if [ "$buildtag" == ""  ]; then
+                usage $RCPARMSERROR "Missing build tag.";
             fi
             ;;
 
@@ -322,53 +390,57 @@ function parse_options {
             cleanroot=1; shift;
             ;;
 
+        --cleantmp)
+            cleantmp=1; shift;
+            ;;
+
         --getsource)
             shift; getsource="$1"; shift;
             if [ "$getsource" != "clone" ] && [ "$getsource" != "snapshot" ] && \
                [ "$getsource" != "buildroot" ]; then
-                usage 1 "Invalid getsource method.";
+                usage $RCPARMSERROR "Invalid getsource method.";
             fi
             ;;
 
         --dist)
             shift; dist="$1"; shift;
             if [ "$dist" == "" ]; then
-                usage 1 "Missing distribution.";
+                $RCPARMSERROR "Missing distribution.";
             fi
             ;;
 
         --release)
             shift; release="$1"; shift;
             if [ "$release" == "" ]; then
-                usage 1 "Missing release.";
+                $RCPARMSERROR "Missing release.";
             fi
             ;;
 
         --version)
             shift; version="$1"; shift;
             if [ "$version" == "" ]; then
-                usage 1 "Missing version.";
+                $RCPARMSERROR "Missing version.";
             fi
             ;;
 
         --repourl)
             shift; repourl="$1"; shift;
             if [ "$repourl" == "" ]; then
-                usage 1 "Missing repo url.";
+                $RCPARMSERROR "Missing repo url.";
             fi
             ;;
 
         --repouser)
             shift; repouser="$1"; shift;
             if [ "$repouser" == "" ]; then
-                usage 1 "Missing repo user.";
+                $RCPARMSERROR "Missing repo user.";
             fi
             ;;
 
         --repopw)
             shift; repopw="$1"; shift;
             if [ "$repopw" == "" ]; then
-                usage 1 "Missing repo pw.";
+                $RCPARMSERROR "Missing repo pw.";
             fi
             ;;
 
@@ -379,32 +451,32 @@ function parse_options {
         --mvn_cmd)
             shift; mvn_cmd="$1"; shift;
             if [ "$mvn_cmd" == "" ]; then
-                usage 1 "Missing mvn_cmd.";
+                $RCPARMSERROR "Missing mvn_cmd.";
             fi
             ;;
 
         --baseURL)
             shift; baseURL="$1"; shift;
             if [ "$baseURL" == "" ]; then
-                usage 1 "Missing baseURL.";
+                $RCPARMSERROR "Missing baseURL.";
             fi
             ;;
 
         --baseRepositoryId)
             shift; baseRepositoryId="$1"; shift;
             if [ "$baseRepositoryId" == "" ]; then
-                usage 1 "Missing baseRepositoryId.";
+                $RCPARMSERROR "Missing baseRepositoryId.";
             fi
             ;;
 
         -? | -h | --help)
-            usage 0
+            usage $RCSUCCESS
             ;;
         "")
             break
             ;;
         *)
-            echo "Ignoring unknown option: $1"; shift;
+            log $LOGINFO "Ignoring unknown option: $1"; shift;
         esac
     done
 }
@@ -415,21 +487,37 @@ function parse_options {
 parse_options "$@"
 
 # Some more error checking...
-if [ $cleanroot = 1 ] && [ $getsource = "buildroot" ]; then
-    echo "Aborting. You probably do not want to clean the directory" \
+if [ -z $buildroot ]; then
+    log $LOGERROR "Mising buildroot"
+    exit $RCPARMSERROR
+fi
+
+if [ $cleanroot -eq 1 ] && [ $getsource = "buildroot" ]; then
+    log $LOGERROR "Aborting. You probably do not want to clean the directory" \
          "containing the source."
-    exit 1
+    exit $RCPARMSERROR
+fi
+
+# Can change tmpbuild to be an index or other tag
+if [ -n "$buildtag" ]; then
+    tmpbuild="$buildroot/bld_$buildtag"
+else
+    tmpbuild="$buildroot/bld"
 fi
 
 show_vars
 
-if [ $cleanroot = 1 ]; then
+if [ $cleanroot -eq 1 ]; then
     rm -rf $buildroot
     mkdir -p $buildroot
 fi
 
+if [ $cleantmp -eq 1 ]; then
+    rm -rf $tmpbuild
+fi
+
 # Setup the temp build directory.
-mkdir -p $buildroot/tmpbuild/repo
+mkdir -p $tmpbuild/repo
 
 # Get the source.
 case "$getsource" in
@@ -439,20 +527,25 @@ clone)
 
 snapshot)
     snapshot_source;
+    exit $RCSUCCESS
     ;;
 
 buildroot)
-    if [ ! -d "controller" ] || [ ! -d "integration" ]; then
-        echo "Problem with controller or integration projects in buildroot."
+    cd $buildroot
+    if [ ! -d "controller" ] || [ ! -d "integration" ] || [ ! -d "ovsdb" ]; then
+        log $LOGERROR "Could not find all required projects in buildroot."
+        log $LOGERROR "Projects include controller, integration and ovsdb."
+        exit $RCPARMSERROR
     fi
     ;;
 esac
 
 if [ "$buildtype" = "snapshot" ]; then
-    echo "Building a snapshot build"
+    log $LOGINFO "Building a snapshot build"
     build_snapshot
 else
+    log $LOGINFO "Release builds are not supported yet."
     build_release
 fi
 
-exit 0
+exit $RCSUCCESS
