@@ -35,6 +35,10 @@ sp)
     /usr/share/opendaylight-controller/run.internal.sh -stop
     ;;
 
+-status)
+    /usr/share/opendaylight-controller/run.internal.sh -status
+    ;;
+
 *)
     echo "Invalid option: $option"
     ;;
