@@ -151,11 +151,6 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     </dependency>
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>framework</artifactId>
-      <version>${bgpcep.common.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>util</artifactId>
       <version>${bgpcep.common.version}</version>
     </dependency>
