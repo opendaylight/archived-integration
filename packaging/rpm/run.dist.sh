@@ -23,7 +23,7 @@ virt-vtn)
 virt-opendove)
     echo "$option not supported yet"
     #bundlefilter="-bundlefilter org.opendaylight.(ovsdb|vtn)"
-    #exec /usr/share/opendaylight-controller/run.sh -virt vtn "$@"
+    #exec /usr/share/opendaylight-controller/run.sh -virt opendove "$@"
     ;;
 
 sp)
