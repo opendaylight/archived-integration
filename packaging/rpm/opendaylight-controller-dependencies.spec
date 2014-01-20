@@ -1,6 +1,6 @@
 Name: opendaylight-controller-dependencies
 Version: 0.1.0
-Release: 0.3.0%{?dist}
+Release: 0.4.0%{?dist}
 Summary: OpenDaylight SDN Controller Dependencies
 Group: Applications/Communications
 License: EPL
@@ -29,7 +29,7 @@ OpenDaylight SDN Controller Dependencies
 
 %prep
 
-%setup -q -c -c -n opendaylight-controller-dependencies-%{version}
+%setup -q -c -n opendaylight-controller-dependencies-%{version}
 %setup -q -T -a 1 -c -n opendaylight-ovsdb-dependencies-%{version}
 
 
@@ -67,6 +67,9 @@ done
 
 
 %changelog
+* Sat Jan 18 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.4.0
+- Minor cleanup to setup option.
+
 * Thu Jan 02 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.3.0
 - Updates to include building distributions.
 

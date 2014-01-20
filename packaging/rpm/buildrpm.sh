@@ -22,8 +22,7 @@ repouser=""
 repopw=""
 dist="fedora-19-x86_64"
 pkg_dist_suffix="fc19"
-mock_cmd='/usr/bin/mock'
-timesuffix=""
+mock_cmd="/usr/bin/mock"
 vers_controller=""
 vers_ovsdb=""
 suff_controller=""
@@ -31,6 +30,8 @@ suff_ovsdb=""
 mockdebug=""
 mockinit=0
 tmpbuild=""
+mockmvn=""
+timesuffix=""
 
 
 # Maven is not installed at the system wide level but at the Jenkins level
@@ -106,6 +107,7 @@ function usage {
     echo
     echo "Mock options:"
     echo "  --mockinit             Run mock init"
+    echo "  --mockmvn              replace the maven command used within mock"
     echo
     echo "Help options:"
     echo "  -?, -h, --help  Display this help and exit"
@@ -114,14 +116,45 @@ function usage {
     exit $rc
 }
 
+readonly PJ_INTEGRATION=0
+readonly PJ_CONTROLLER=1
+readonly PJ_OVSDB=2
+readonly PJ_OPENFLOWJAVA=3
+readonly PJ_OPENFLOWPLUGIN=4
+readonly PJ_DEPENDENCIES=5
+readonly PJ_DISTRIBUTION=6
+
+projects[$PJ_INTEGRATION]="integration"
+projects[$PJ_CONTROLLER]="controller"
+projects[$PJ_OVSDB]="ovsdb"
+projects[$PJ_OPENFLOWJAVA]="openflowjava"
+projects[$PJ_OPENFLOWPLUGIN]="openflowplugin"
+projects[$PJ_DEPENDENCIES]="controller-dependencies"
+projects[$PJ_DISTRIBUTION]="distribution"
+
+versions[$PJ_INTEGRATION]=""
+versions[$PJ_CONTROLLER]=""
+versions[$PJ_OVSDB]=""
+versions[$PJ_OPENFLOWJAVA]=""
+versions[$PJ_OPENFLOWPLUGIN]=""
+versions[$PJ_DEPENDENCIES]=""
+versions[$PJ_DISTRIBUTION]=""
+
+suffix[$PJ_INTEGRATION]=""
+suffix[$PJ_CONTROLLER]=""
+suffix[$PJ_OVSDB]=""
+suffix[$PJ_OPENFLOWJAVA]=""
+suffix[$PJ_OPENFLOWPLUGIN]=""
+suffix[$PJ_DEPENDENCIES]=""
+suffix[$PJ_DISTRIBUTION]=""
+
+
 # Clone the projects.
 function clone_source {
-    # We only care about a shallow clone (no need to grab the entire project)
-    git clone --depth 0 https://git.opendaylight.org/gerrit/p/controller.git $buildroot/controller
-    git clone --depth 0 https://git.opendaylight.org/gerrit/p/integration.git $buildroot/integration
-    git clone --depth 0 https://git.opendaylight.org/gerrit/p/ovsdb.git $buildroot/ovsdb
-    #git clone --depth 0 https://git.opendaylight.org/gerrit/p/openflowjava.git $buildroot/openflowjava
-    #git clone --depth 0 https://git.opendaylight.org/gerrit/p/openflowplugin.git $buildroot/openflowplugin
+    for project in ${projects[*]}; do
+        # We only care about a shallow clone (no need to grab the entire project)
+        git clone --depth 0 https://git.opendaylight.org/gerrit/p/$project.git $buildroot/$project
+    done
 }
 
 # Copy the projects from snapshots.
@@ -131,45 +164,51 @@ function snapshot_source {
     log $LOGINFO "$FUNCNAME: Not implemented yet."
 }
 
-# xz the source for later use by rpmbuild.
+# Archive the projects to creates the SOURCES for rpmbuild:
+# - xz the source for later use by rpmbuild.
+# - get the version and git hashes to produce a versions and suffix for each project.
+# - copy the archives to the SOURCES dir
 # shague: need another archive method for snapshot getsource builds since
 # the source did not come from a git repo.
 function mk_git_archives {
-    local timesuffix="$(date +%F_%T | tr -d .:- | tr _ .)"
+    local timesuffix=$1
 
-    if [ "$version" == "" ]; then
-        cd $buildroot/controller
-        suff_controller="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
-        cd $buildroot/ovsdb
-        suff_ovsdb="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
-    else
-        suff_controller="snap.$version"
-        suff_ovsdb="snap.$version"
-    fi
+    for i in `seq $PJ_INTEGRATION $PJ_OPENFLOWPLUGIN`; do
+        if [ "$version" == "" ]; then
+            cd $buildroot/${projects[$i]}
+            suffix[$i]="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
+        else
+            suffix[$i]="snap.$version"
+        fi
 
-    cd $buildroot/integration/packaging/rpm
-    vers_controller="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-controller.spec | head -n 1 | awk '{print $1}').$suff_controller"
-    vers_ovsdb="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-ovsdb.spec | head -n 1 | awk '{print $1}').$suff_ovsdb"
+        cd $buildroot/integration/packaging/rpm
+        # integration uses the controller.spec because there isn't an integration.spec to query.
+        if [ ${projects[$i]} == ${projects[$PJ_INTEGRATION]} ]; then
+            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$PJ_CONTROLLER]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
+        else
+            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
+        fi
 
-    cd $buildroot/controller
-    git archive --prefix=opendaylight-controller-$vers_controller/ HEAD | \
-        xz > $tmpbuild/opendaylight-controller-$vers_controller.tar.xz
+        cd $buildroot/${projects[$i]}
+        git archive --prefix=opendaylight-${projects[$i]}-${versions[$i]}/ HEAD | \
+            xz > $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz
 
-    cd $buildroot/integration
-    git archive --prefix=opendaylight-integration-$vers_controller/ HEAD | \
-        xz > $tmpbuild/opendaylight-integration-$vers_controller.tar.xz
-    cp packaging/rpm/opendaylight-integration-fix-paths.patch $tmpbuild/
+    done
 
-    cd $buildroot/ovsdb
-    git archive --prefix=opendaylight-ovsdb-$vers_ovsdb/ HEAD | \
-        xz > $tmpbuild/opendaylight-ovsdb-$vers_ovsdb.tar.xz
+    # Use the controller versions becuase these projects don't have a repo.
+    for i in `seq $PJ_DEPENDENCIES $PJ_DISTRIBUTION`; do
+        suffix[$i]=${suffix[$PJ_CONTROLLER]}
+        versions[$i]=${versions[$PJ_CONTROLLER]}
+    done
+
+    # Don't forget any patches.
+    cp $buildroot/integration/packaging/rpm/opendaylight-integration-fix-paths.patch $tmpbuild
 }
 
 # Pushes rpms to the specified Nexus repository
 # This only happens if pushrpms is true
 function push_rpms {
     if [ $pushrpms = 1 ]; then
-        log $LOGINFO "$FUNCNAME: Not implemented yet."
         allrpms=`find $tmpbuild/repo -iname '*.rpm'`
         echo
         log $LOGINFO "RPMS found"
@@ -228,6 +267,9 @@ getsource:    $getsource
 buildroot:    $buildroot
 buildtag:     $buildtag
 tmpbuild:     $tmpbuild
+mockmvn:      $mockmvn
+mockinit:     $mockinit
+time:         $timesuffix
 EOF
 }
 
@@ -238,19 +280,49 @@ function build_project {
     local versionsnapsuffix="$3"
 
     log $LOGINFO ":::::"
-	log $LOGINFO "::::: building opendaylight-$project.rpm"
-	log $LOGINFO ":::::"
+    log $LOGINFO "::::: building opendaylight-$project.rpm"
+    log $LOGINFO ":::::"
 
     cp -f $buildroot/integration/packaging/rpm/opendaylight-$project.spec \
         $tmpbuild
 
     cd $tmpbuild
-	sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" opendaylight-$project.spec
+    # Find lines starting with Version: and replace the rest of the line with the versionsnapsuffix
+    sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" opendaylight-$project.spec
+
+    # Set the write values in the spec files.
+    case "$project" in
+    ${projects[$PJ_CONTROLLER]})
+        # Set the version for the integration source.
+        # Find lines with opendaylight-integration-%{version} and replace %{version} with the version.
+        sed -r -i -e '/opendaylight-integration-\%\{version\}/s/\%\{version\}/'"${versions[$PJ_INTEGRATION]}"'/g' \
+            opendaylight-$project.spec
+        ;;
+
+    ${projects[$PJ_DEPENDENCIES]})
+        # Set the version for ovsdb in the dependencies spec.
+        # Find lines with opendaylight-ovsdb-%{version} and replace %{version} with the version.
+        sed -r -i -e '/opendaylight-ovsdb-\%\{version\}/s/\%\{version\}/'"${versions[$PJ_OVSDB]}"'/g' \
+            opendaylight-$project.spec
+        # Find lines with opendaylight-ovsdb-dependencies-%{version} and replace %{version} with the version.
+        sed -r -i -e '/opendaylight-ovsdb-dependencies-\%\{version\}/s/\%\{version\}/'"${versions[$PJ_OVSDB]}"'/g' \
+            opendaylight-$project.spec
+        ;;
+
+    *)
+        ;;
+    esac
+
+    # Rewrite the mvn command in the rpmbuild if the user requests it.
+    if [ "$mockmvn" != "" ]; then
+        # Find lines starting with export MAVEN_OPTS= and repalce the whole line with $mockmvn
+        sed -r -i -e '/^export MAVEN_OPTS=./c\ '"$mockmvn" opendaylight-$project.spec
+    fi
 
     # Build the source RPM for use by mock later.
-	#rm -f SRPMS/*.src.rpm
-	log $LOGINFO "::::: building opendaylight-$project.src.rpm in rpmbuild"
-	rpmbuild -bs --define '%_topdir '"`pwd`" --define '%_sourcedir %{_topdir}' \
+    #rm -f SRPMS/*.src.rpm
+    log $LOGINFO "::::: building opendaylight-$project.src.rpm in rpmbuild"
+    rpmbuild -bs --define '%_topdir '"`pwd`" --define '%_sourcedir %{_topdir}' \
        --define "%dist .$pkg_dist_suffix" opendaylight-$project.spec
 
     rc=$?
@@ -259,9 +331,9 @@ function build_project {
         exit $RCRPMBUILDERROR
     fi
 
-	log $LOGINFO "::::: building opendaylight-$project.rpm in mock"
+    log $LOGINFO "::::: building opendaylight-$project.rpm in mock"
 
-	resultdir="repo/$project.$pkg_dist_suffix.noarch.snap"
+    resultdir="repo/$project.$pkg_dist_suffix.noarch.snap"
 
     # Build the rpm using mock.
     # Keep the build because we will need the distribution zip file for later
@@ -276,7 +348,8 @@ function build_project {
         exit $RCRMOCKERROR
     fi
 
-    # Copy the distribution zip for use in the dependencies.rpm.
+    # Copy the distribution zip from the controller and ovsdb projects
+    # for use in the dependencies.rpm.
     case "$project" in
     controller)
         log $LOGINFO "::::: Copying $project distribution.zip."
@@ -284,8 +357,7 @@ function build_project {
             -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
             --copyout \"builddir/build/BUILD/opendaylight-$project-$versionmajor/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip\" \"$resultdir/opendaylight-$project-$versionmajor.zip\"
         rc1=$?
-        ln -sf $resultdir/opendaylight-$project-$versionmajor.zip \
-            $tmpbuild
+        ln -sf $resultdir/opendaylight-$project-$versionmajor.zip $tmpbuild
         rc2=$?
         if [ ! -e $tmpbuild/opendaylight-$project-$versionmajor.zip ]; then
             log $LOGERROR "cannot find $project distribution zip file (rc=$rc1:$rc2)."
@@ -295,51 +367,42 @@ function build_project {
 
     ovsdb)
         log $LOGINFO "::::: Copying $project distribution.zip."
-        # Parse pom file to get filename.
+        #todo: Parse pom file to get filename.
         eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
             -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
             --copyout \"builddir/build/BUILD/opendaylight-$project-$versionmajor/distribution/opendaylight/target/distribution.$project-1.0.0-SNAPSHOT-osgipackage.zip\" \"$resultdir/opendaylight-$project-$versionmajor.zip\"
         rc1=$?
-
-        ln -sf $resultdir/opendaylight-$project-$versionmajor.zip \
-            $tmpbuild/opendaylight-ovsdb-$vers_controller.zip
+        ln -sf $resultdir/opendaylight-$project-$versionmajor.zip $tmpbuild
         rc2=$?
-        if [ ! -e $tmpbuild/opendaylight-ovsdb-$vers_controller.zip ]; then
+        if [ ! -e $tmpbuild/opendaylight-ovsdb-$versionmajor.zip ]; then
             log $LOGERROR "cannot find $project distribution zip file (rc=$rc1:$rc2)."
             exit $RCERROR
         fi
         ;;
 
-    controller-dependencies|controller-distribution)
+    *)
         ;;
     esac
 }
 
 # Main function that builds the rpm's for snapshot's.
 function build_snapshot {
-	mk_git_archives
+    mk_git_archives $timesuffix
 
     # Initialize our mock build location (we'll be using --no-clean later)
     # If we don't do the first init we can't build since the environment
     # doesn't get setup correctly!
-    if [ mockinit -eq 1 ]; then
+    if [ $mockinit -eq 1 ]; then
         eval $mock_cmd $mockdebug -r $dist --init
     fi
-# Test code for short-cicuit when Nexus isn't behaving.
-if [ 0 -eq 1 ]; then
-    opendaylight-ovsdb-0.1.0.snap.20140112.161313.git.43aa583
 
-    vers_controller="0.1.0.snap.20140112.161313.git.43aa583"
-    vers_ovsdb="0.1.0.snap.20140112.161313.git.43aa583"
+    for i in `seq $PJ_CONTROLLER $PJ_DISTRIBUTION`; do
+        build_project ${projects[$i]} ${versions[$i]} ${suffix[$i]}
+    done
 
-    suff_controller="snap.20140112.161313.git.43aa583"
-    suff_ovsdb="snap.20140112.161313.git.43aa583"
-fi
-
-	build_project controller $vers_controller $suff_controller
-	build_project ovsdb $vers_ovsdb $suff_ovsdb
-	build_project controller-dependencies $vers_controller $suff_controller
-	build_project distribution $vers_controller $suff_controller
+    log $LOGINFO ":::::"
+    log $LOGINFO "::::: All projects have been built"
+    log $LOGINFO ":::::"
 
     push_rpms
 }
@@ -455,6 +518,13 @@ function parse_options {
             fi
             ;;
 
+        --mockmvn)
+            shift; mockmvn="$1"; shift;
+            if [ "$mockmvn" == "" ]; then
+                $RCPARMSERROR "Missing mockmvn.";
+            fi
+            ;;
+
         --baseURL)
             shift; baseURL="$1"; shift;
             if [ "$baseURL" == "" ]; then
@@ -483,6 +553,9 @@ function parse_options {
 
 
 #################### main ####################
+
+timesuffix="$(date +%F_%T | tr -d .:- | tr _ .)"
+date_start=$(date +%s)
 
 parse_options "$@"
 
@@ -532,11 +605,12 @@ snapshot)
 
 buildroot)
     cd $buildroot
-    if [ ! -d "controller" ] || [ ! -d "integration" ] || [ ! -d "ovsdb" ]; then
-        log $LOGERROR "Could not find all required projects in buildroot."
-        log $LOGERROR "Projects include controller, integration and ovsdb."
-        exit $RCPARMSERROR
-    fi
+    for i in `seq $PJ_INTEGRATION $PJ_OPENFLOWPLUGIN`; do
+        if [ ! -d ${projects[$i]} ]; then
+            log $LOGERROR "Missing ${projects[$i]}"
+            exit $RCPARMSERROR
+        fi
+    done
     ;;
 esac
 
@@ -547,5 +621,9 @@ else
     log $LOGINFO "Release builds are not supported yet."
     build_release
 fi
+
+date_end=$(date +%s)
+diff=$(($date_end - $date_start))
+log $LOGINFO "Build took $(($diff / 3600 % 24)) hours $(($diff / 60 % 60)) minutes and $(($diff % 60)) seconds."
 
 exit $RCSUCCESS
