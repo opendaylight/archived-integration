@@ -34,7 +34,7 @@ fi
 
 # Make sure we suck out our additional args so as to not confuse
 # run.internal.sh
-NEWARGS=`echo $@|sed 's/-of13//'|sed 's/-bundlefilter[ \t]\+[^ \t]\+//'`
+NEWARGS=`echo $@|sed 's/-of13//'|sed 's/-bundlefilter[ ]*[^ ]*//'`
 
 # Build the filter string
 FILTERBEGINING='^(?!'
