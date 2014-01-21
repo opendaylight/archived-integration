@@ -103,21 +103,24 @@ do
     fi
 done
 
-for src in $( ls %{_builddir}/%{buildsubdir}/third-party/openflowj_netty/target/*.jar);
-do
-    if [ "${src}" == "${src/javadoc.jar/}" ]; then
-        tgt=$(basename ${src})
-        mv ${src} %{buildroot}%{resources_dir}/plugins/${tgt}
-    fi
-done
+# Comment out third-party jars since they are not used by anyone.
+# User can uncomment following line if third-party jars are needed in the future.
 
-for src in $( ls %{_builddir}/%{buildsubdir}/third-party/openflow-codec/target/*.jar);
-do
-    if [ "${src}" == "${src/javadoc.jar/}" ]; then
-        tgt=$(basename ${src})
-        mv ${src} %{buildroot}%{resources_dir}/plugins/${tgt}
-    fi
-done
+#for src in $( ls %{_builddir}/%{buildsubdir}/third-party/openflowj_netty/target/*.jar);
+#do
+#    if [ "${src}" == "${src/javadoc.jar/}" ]; then
+#        tgt=$(basename ${src})
+#        mv ${src} %{buildroot}%{resources_dir}/plugins/${tgt}
+#    fi
+#done
+
+#for src in $( ls %{_builddir}/%{buildsubdir}/third-party/openflow-codec/target/*.jar);
+#do
+#    if [ "${src}" == "${src/javadoc.jar/}" ]; then
+#        tgt=$(basename ${src})
+#        mv ${src} %{buildroot}%{resources_dir}/plugins/${tgt}
+#    fi
+#done
 
 # Fix the permissions as they come with all the permissions (mode 777)
 # from the .zip file:
