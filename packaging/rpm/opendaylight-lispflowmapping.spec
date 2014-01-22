@@ -11,7 +11,7 @@ URL: http://www.opendaylight.org
 
 # todo: Temporary method for generating tarball
 # git clone https://git.opendaylight.org/gerrit/p/lispflowmapping.git
-# cd ovsdb
+# cd lispflowmapping
 # git archive --prefix=opendaylight-lispflowmapping-1.0.0/ HEAD | xz > opendaylight-lispflowmapping-1.0.0.tar.xz
 Source0: %{name}-%{version}.tar.xz
 
