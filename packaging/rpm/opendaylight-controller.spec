@@ -3,7 +3,7 @@
 
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.7.0%{?dist}
+Release: 0.8.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -273,6 +273,9 @@ fi
 %endif
 
 %changelog
+* Wed Jan 22 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.8.0
+- Fix changelog day error.
+
 * Fri Jan 13 2014 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.7.0
 - Updates to include openflowjava and openflowplugin.
 
