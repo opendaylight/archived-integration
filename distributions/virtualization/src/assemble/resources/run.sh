@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Use same path for run.base.sh
+RUNSH_DIR=$(dirname $0)
+RUN_BASE_SH=${RUNSH_DIR}/run.base.sh
+
 function usage {
     echo "Please select one of the 3 supported Virtualization technology : \"$0 -virt [ovsdb | opendove | vtn]\""
     exit 1
@@ -34,4 +38,4 @@ else
     fi
 fi
 
-./run.base.sh -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
+$RUN_BASE_SH -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
