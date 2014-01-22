@@ -21,59 +21,33 @@
   <modules>
     <module>distributions/</module>
   </modules>
+
   <repositories>
-    <!-- jsonrpc4j mirror -->
+
+    <!-- OpenDayLight Repo Mirror -->
     <repository>
-      <id>jsonrpc4j-webdav-maven-repo</id>
-      <name>jsonrpc4j maven repository</name>
-      <url>${nexusproxy}/repositories/jsonrpc4j-webdav-maven-repo/</url>
-    </repository>
-    <!-- OpenDayLight Released artifact -->
-    <repository>
-      <id>opendaylight-release</id>
-      <name>opendaylight-release</name>
-      <url>${nexusproxy}/repositories/opendaylight.release/</url>
+      <id>opendaylight-mirror</id>
+      <name>opendaylight-mirror</name>
+      <url>${nexusproxy}/groups/public/</url>
+      <snapshots>
+          <enabled>false</enabled>
+      </snapshots>
+      <releases>
+          <enabled>true</enabled>
+          <updatePolicy>never</updatePolicy>
+      </releases>
     </repository>
     <!-- OpenDayLight Snapshot artifact -->
     <repository>
       <id>opendaylight-snapshot</id>
       <name>opendaylight-snapshot</name>
       <url>${nexusproxy}/repositories/opendaylight.snapshot/</url>
-    </repository>
-    <!-- EBR release -->
-    <!-- http://repository.springsource.com/maven/bundles/release -->
-    <repository>
-      <id>ebr-bundles-release</id>
-      <name>ebr-bundles-release</name>
-      <url>${nexusproxy}/repositories/ebr-bundles-release/</url>
-    </repository>
-    <!-- EBR external -->
-    <!-- http://repository.springsource.com/maven/bundles/external -->
-    <repository>
-      <id>ebr-bundles-external</id>
-      <name>ebr-bundles-external</name>
-      <url>${nexusproxy}/repositories/ebr-bundles-external/</url>
-    </repository>
-    <!-- Maven repo1 -->
-    <!-- http://repo1.maven.org/maven2 -->
-    <repository>
-      <id>central</id>
-      <name>central</name>
-      <url>http://repo1.maven.org/maven2</url>
-    </repository>
-    <!-- Third Packages hosted in local maven because not available in
-         other places -->
-    <repository>
-      <id>thirdparty</id>
-      <name>thirdparty</name>
-      <url>${nexusproxy}/repositories/thirdparty/</url>
-    </repository>
-    <!-- Jboss mirror -->
-    <!-- https://repository.jboss.org/nexus/content/repositories/releases -->
-    <repository>
-      <id>jboss.releases</id>
-      <name>jboss.releases</name>
-      <url>${nexusproxy}/repositories/jboss.releases/</url>
+      <snapshots>
+          <enabled>true</enabled>
+      </snapshots>
+      <releases>
+          <enabled>false</enabled>
+      </releases>
     </repository>
   </repositories>
 
