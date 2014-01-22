@@ -85,6 +85,7 @@ function usage {
     echo "  --cleanroot            clean buildroot directory before building"
     echo "  --cleantmp             clean tmpbuild directory before building"
     echo "  --dist DIST            distribution"
+    echo "  --distsuffix SUFFIX    package distribution suffix"
     echo "  --getsource METHOD     method for getting source clone|snapshot|buildroot"
     echo
     echo "Tag options:"
@@ -260,6 +261,7 @@ function show_vars {
      cat << EOF
 Building controller using:
 distribution: $dist
+suffix:       $pkg_dist_suffix
 buildtype:    $buildtype
 release:      $release
 version:      $version
@@ -469,6 +471,13 @@ function parse_options {
             shift; dist="$1"; shift;
             if [ "$dist" == "" ]; then
                 $RCPARMSERROR "Missing distribution.";
+            fi
+            ;;
+
+        --distsuffix)
+            shift; pkg_dist_suffix="$1"; shift;
+            if [ "$pkg_dist_suffix" == "" ]; then
+                $RCPARMSERROR "Missing package distribution suffix.";
             fi
             ;;
 
