@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Whatever executable basename we happen to be, lets replace it
-# with run.internal.sh
-RUNSH_BASENAME=`basename $0`
-CONTROLLER_RUNSH=`echo $0|sed "s;$RUNSH_BASENAME;run.internal.sh;"`
+# Use same path for run.internal.sh
+RUNSH_DIR=$(dirname $0)
+CONTROLLER_RUNSH=${RUNSH_DIR}/run.internal.sh
 
 OF_FILTER=
 
