@@ -5,7 +5,9 @@ RUNSH_DIR=$(dirname $0)
 RUN_BASE_SH=${RUNSH_DIR}/run.base.sh
 
 function usage {
-    echo "Please select one of the 3 supported Virtualization technology : \"$0 -virt [ovsdb | opendove | vtn]\""
+    echo -e "You must select one of the 3 supported network virtualization technologies:\n\tovsdb | opendove | vtn"
+    echo "Usage: $0 -virt {ovsdb | opendove | vtn} [advanced options]"
+    echo "Advanced options: $($RUN_BASE_SH -help | sed "s;Usage: $RUN_BASE_SH ;;")"
     exit 1
 }
 
