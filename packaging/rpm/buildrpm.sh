@@ -527,6 +527,10 @@ function parse_options {
             fi
             ;;
 
+        --mockinit)
+            mockinit=1; shift;
+            ;;
+
         --mockmvn)
             shift; mockmvn="$1"; shift;
             if [ "$mockmvn" == "" ]; then
