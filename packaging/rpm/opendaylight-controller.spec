@@ -276,7 +276,7 @@ fi
 * Wed Jan 22 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.8.0
 - Fix changelog day error.
 
-* Fri Jan 13 2014 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.7.0
+* Fri Jan 10 2014 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.7.0
 - Updates to include openflowjava and openflowplugin.
 
 * Fri Jan 10 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.6.0
