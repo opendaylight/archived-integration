@@ -19,9 +19,9 @@ while true ; do
     (( i += 1 ))
     case "${@:$i:1}" in
         -of13) OF13=1 ;;
-	-bundlefilter) (( i += 1 )); BUNDLEFILTER="|${@:$i:1}";;
+        -bundlefilter) (( i += 1 )); BUNDLEFILTER="|${@:$i:1}";;
         -help) usage ;;
-	"") break ;;
+        "") break ;;
     esac
 done
 
@@ -41,4 +41,4 @@ FILTERENDING=').*'
 FILTER=${FILTERBEGINING}${OF_FILTER}${BUNDLEFILTER}${FILTERENDING}
 
 # Run the command
-$CONTROLLER_RUNSH -Dfelix.fileinstall.filter="$FILTER" $NEWARGS 
+$CONTROLLER_RUNSH -Dfelix.fileinstall.filter="$FILTER" $NEWARGS

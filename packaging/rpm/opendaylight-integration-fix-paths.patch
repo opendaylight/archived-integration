@@ -1,15 +1,15 @@
 diff -uNr opendaylight-integration-0.1.0/distributions/base/src/assemble/resources/run.sh opendaylight-integration-0.1.0p/distributions/base/src/assemble/resources/run.sh
---- opendaylight-integration-0.1.0/distributions/base/src/assemble/resources/run.sh	2014-01-08 22:12:55.000000000 -0500
-+++ opendaylight-integration-0.1.0p/distributions/base/src/assemble/resources/run.sh	2014-01-09 15:53:26.458683536 -0500
+--- opendaylight-integration-0.1.0/distributions/base/src/assemble/resources/run.sh	2014-01-22 17:37:08.000000000 -0500
++++ opendaylight-integration-0.1.0p/distributions/base/src/assemble/resources/run.sh	2014-01-22 17:40:53.706000212 -0500
 @@ -42,4 +42,4 @@
  FILTER=${FILTERBEGINING}${OF_FILTER}${BUNDLEFILTER}${FILTERENDING}
  
  # Run the command
--$CONTROLLER_RUNSH -Dfelix.fileinstall.filter="$FILTER" $NEWARGS 
-+/usr/share/opendaylight-controller/run.internal.sh -Dfelix.fileinstall.filter="$FILTER" $NEWARGS 
+-$CONTROLLER_RUNSH -Dfelix.fileinstall.filter="$FILTER" $NEWARGS
++/usr/share/opendaylight-controller/run.internal.sh -Dfelix.fileinstall.filter="$FILTER" $NEWARGS
 diff -uNr opendaylight-integration-0.1.0/distributions/virtualization/src/assemble/resources/run.sh opendaylight-integration-0.1.0p/distributions/virtualization/src/assemble/resources/run.sh
---- opendaylight-integration-0.1.0/distributions/virtualization/src/assemble/resources/run.sh	2014-01-08 22:12:55.000000000 -0500
-+++ opendaylight-integration-0.1.0p/distributions/virtualization/src/assemble/resources/run.sh	2014-01-09 15:53:46.410725659 -0500
+--- opendaylight-integration-0.1.0/distributions/virtualization/src/assemble/resources/run.sh	2014-01-22 17:37:08.000000000 -0500
++++ opendaylight-integration-0.1.0p/distributions/virtualization/src/assemble/resources/run.sh	2014-01-22 17:40:31.513958423 -0500
 @@ -34,4 +34,4 @@
      fi
  fi
