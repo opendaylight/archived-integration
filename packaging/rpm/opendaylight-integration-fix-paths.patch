@@ -14,5 +14,5 @@ diff -uNr opendaylight-integration-0.1.0/distributions/virtualization/src/assemb
      fi
  fi
  
--./run.base.sh -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
+-$RUN_BASE_SH -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
 +/usr/share/opendaylight-controller/run.base.sh -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
