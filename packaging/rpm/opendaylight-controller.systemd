@@ -9,6 +9,8 @@ User=opendaylight
 Group=opendaylight
 EnvironmentFile=-/etc/sysconfig/opendaylight-controller
 WorkingDirectory=/var/lib/opendaylight-controller
+LimitNOFILE=30720
+LimitNPROC=20480
 ExecStart=-/usr/share/opendaylight-controller/run.odl.sh $ODL_DIST $ODL_OPTS -start
 ExecStop=-/usr/share/opendaylight-controller/run.odl.sh -stop
 

@@ -3,7 +3,7 @@
 
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.11.0%{?dist}
+Release: 0.12.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -142,6 +142,7 @@ ln -s %{resources_dir}/plugins %{buildroot}%{data_dir}
 install -m 644 -D %{pkgdir}/%{name}.systemd %{buildroot}%{_unitdir}/%{name}.service
 %else
 install -m 644 -D %{pkgdir}/%{name}.sysv %{buildroot}%{_initddir}/%{name}
+install -m 644 -D %{pkgdir}/%{name}.limits %{buildroot}%{_sysconfdir}/security/limits.d/%{name}
 %endif
 install -m 644 -D %{pkgdir}/%{name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
@@ -259,6 +260,7 @@ fi
 %{_unitdir}/%{name}.service
 %else
 %{_initddir}/%{name}
+%{_sysconfdir}/security/limits.d/%{name}
 %endif
 
 # Configuration files should marked as such, so that they aren't overwritten
@@ -279,6 +281,9 @@ fi
 %endif
 
 %changelog
+* Mon Feb 09 2014 Miroslav Miklus <mmiklus@cisco.com> - 0.1.0-0.12.0
+- Updates to include higher resource limits.
+
 * Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.11.0
 - Remove yangtools artifacts.
 
