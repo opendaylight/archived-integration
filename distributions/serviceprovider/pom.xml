@@ -451,7 +451,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <dependency>
       <groupId>org.opendaylight.snmp4sdn</groupId>
       <artifactId>snmp4sdn</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.1</version>
     </dependency>
 
   </dependencies>
