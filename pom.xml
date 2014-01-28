@@ -12,7 +12,10 @@
   <packaging>pom</packaging>
   <url>https://wiki.opendaylight.org/view/CrossProject:Integration_Group</url>
   <scm>
-    <connection>scm:git:https://git.opendaylight.org/gerrit/p/integration.git</connection>
+    <connection>scm:git:ssh://git.opendaylight.org:29418/integration.git</connection>
+    <developerConnection>scm:git:ssh://git.opendaylight.org:29418/integration.git</developerConnection>
+    <url>https://wiki.opendaylight.org/view/CrossProject:Integration_Group</url>
+    <tag>HEAD</tag>
   </scm>
   <properties>
     <nexusproxy>http://nexus.opendaylight.org/content</nexusproxy>
