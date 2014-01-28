@@ -36,7 +36,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>ovsdb.neutron</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>0.5.0</version>
     </dependency>
 
     <!-- vtn -->
@@ -44,34 +44,34 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.implementation</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.neutron</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.northbound</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>distribution.vtn-coordinator</artifactId>
-      <version>5.0.0.0-SNAPSHOT</version>
+      <version>5.0.0.0</version>
       <type>tar.bz2</type>
       <classifier>bin</classifier>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>distribution.vtn-coordinator</artifactId>
-      <version>5.0.0.0-SNAPSHOT</version>
+      <version>5.0.0.0</version>
       <type>txt</type>
       <classifier>README</classifier>
     </dependency>
@@ -81,19 +81,19 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <dependency>
       <groupId>org.opendaylight.defense4all</groupId>
       <artifactId>defense4all.core.impl</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.7</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.defense4all</groupId>
       <artifactId>framework.core.impl</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.7</version>
     </dependency>
     
     <dependency>
       <groupId>org.opendaylight.defense4all</groupId>
       <artifactId>defense4all.restservice</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.7</version>
     </dependency>
 
 
@@ -101,49 +101,49 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity.implementation</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity.northbound</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>flatl2</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>l2agent</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics.implementation</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics.northbound</artifactId>
-      <version>0.4.1-SNAPSHOT</version>
+      <version>0.4.1</version>
     </dependency>
 
     <!-- opendove -->
@@ -151,32 +151,32 @@ http://maven.apache.org/maven-v4_0_0.xsd">
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.implementation</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.rest</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
 
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.rest.northbound</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.rest.southbound</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
+      <version>0.5.1</version>
     </dependency>
 
   </dependencies>
