@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.opendaylight.integration</groupId>
     <artifactId>root</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
   <artifactId>distributions</artifactId>
