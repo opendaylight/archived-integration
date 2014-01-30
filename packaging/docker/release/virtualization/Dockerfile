@@ -1,4 +1,5 @@
 FROM ubuntu:12.04
+MAINTAINER OpenDaylight Project <info@opendaylight.org>
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" >> /etc/apt/sources.list
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install openjdk-7-jre-headless unzip wget
