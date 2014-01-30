@@ -3,35 +3,98 @@
 
 Name: opendaylight-opendove
 Version: 0.1.0
-Release: 0.1.0%{?dist}
-Summary: OpenDaylight Open DOVE
+Release: 0.2.0%{?dist}
+Summary: OpenDaylight Open DOVE Virtualization Platform
 Group: Applications/Communications
 License: EPL
 URL: http://www.opendaylight.org
 
+
+
 # todo: Temporary method for generating tarball
-# git clone https://git.opendaylight.org/gerrit/p/opendove.git
-# cd opendove
-# git archive --prefix=opendaylight-opendove-0.1.0/ HEAD | xz > opendaylight-opendove-0.1.0.tar.xz
+# git clone https://git.opendaylight.org/gerrit/p/ovsdb.git
+# cd ovsdb
+# git archive --prefix=opendaylight-ovsdb-0.1.0/ HEAD | xz > opendaylight-ovsdb-0.1.0.tar.xz
 Source0: %{name}-%{version}.tar.xz
 
-BuildArch: noarch
+BuildArch: x86_64
 
-BuildRequires: java-devel
+BuildRequires: python-devel
+BuildRequires: libjansson-devel
+BuildRequires: libevent2-devel
+BuildRequires: libnl-devel
+BuildRequires: libuuid-devel
+BuildRequires: openssl
+BuildRequires: openssl-devel
 BuildRequires: maven
+BuildRequires: wget
 Requires: java >= 1:1.7.0
 
 # This is the directory where all the application resources (scripts,
 # libraries, etc) will be installed: /usr/share/opendaylight
+# for odmc component
 %global resources_dir %{_datadir}/opendaylight-controller
 
 # This is the directory that has all the JAVA dependencies.
+# for odmc component
 %global deps_dir %{_javadir}/opendaylight-controller-dependencies
 
 
 %description
-OpenDaylight Open DOVE
+DOVE (distributed overlay virtual Ethernet) is a network
+virtualization platform that provides isolated multi-tenant networks
+on any IP network in a virtualized data center. DOVE consists of:
+o  odmc - Open DOVE Management Console (OpenDaylight controller bundle)
+o  odcs - Open DOVE Connectivity Server with clustering
+o  ovs-agent - DOVE vswitch agent (works with Open vSwitch)
+o  odgw - DOVE Gateway user agent (works with DOVE Gateway kernel module)
 
+
+%package odmc
+Summary: Open DOVE Management Console
+Group: Applications/Communications
+Buildarch: noarch
+
+%description odmc 
+The Open DOVE Management Console (DMC) provides a
+REST API for programmatic virtual network management.  The DMC is also
+used to configure the Open DOVE Gateway, the Open DOVE Connectivity
+Server and and the DOVE vswitches.
+
+%package ovs-agent
+Summary: Open DOVE vswitch agent
+Group: Applications/Communications
+
+%description ovs-agent
+User-level agent on each host that interfaces Open DOVE components to
+the DOVE vswithes (based on Open vSwitch).  The DOVE vswitches
+implement virtual networks by encapsulating tenant traffic in overlays
+that span virtualized hosts in the data center, using the VxLAN frame
+format.
+
+
+%package odcs
+Summary: Open DOVE Connectivity Server
+Group: Applications/Communications
+
+%description odcs
+
+The Open DOVE Connectivity Server (DCS) supplies address and policy
+information to individual Open DOVE vswitches.  The DCS also includes
+support for high-availability and scale-out deployments through a
+clustering protocol between replicated DCS instances.
+
+
+%package odgw
+Summary: Open DOVE Gateway
+Group: Applications/Communications
+
+%description odgw
+
+The Open DOVE Gateway is a software-based gateway that allow traffic
+to be exchanged between DOVE virtual networks and legacy IP or
+Ethernet networks.  It operates in external or VLAN mode.  The DOVE
+Gateway requires a kernel module to implement the forwarding path.
 
 %prep
 
@@ -39,6 +102,11 @@ OpenDaylight Open DOVE
 
 
 %build
+
+cd odcs; make; cd ..
+cd odgw; make; cd ..
+cd third-party; ./getdeps.sh; cd ..
+cd ovs-agent; make; cd ..
 
 # This regular maven build will need to be replaced by the distribution
 # specific maven build command, but this is ok for now:
@@ -52,7 +120,12 @@ OpenDaylight Open DOVE
 export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -Dmaven.test.skip=true
 
 
+
 %install
+rm -rf %{buildroot}
+cd odcs; make DESTDIR=%{buildroot} install; cd ..
+cd odgw; make DESTDIR=%{buildroot} install; cd ..
+cd ovs-agent; make DESTDIR=%{buildroot} install; cd ..
 
 # Extract the contents of the distribution to a temporary directory so that we
 # can take things from there and move them to the correct locations:
@@ -118,13 +191,27 @@ find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
 %endif
 
 
-%files
+%files odcs
+
+/opt/opendove/odcs/*
+
+%files odgw
+
+/opt/opendove/odgw/*
+
+%files ovs-agent
+
+/opt/opendove/ovs-agent/*
+
+%files odmc
 
 %{resources_dir}
-
 
 %endif
 
 %changelog
+* Thu Jan 23 2014 Anees Shaikh <aasdevaddr@gmail.com> - 0.1.0-0.2.0
+- Added subpackages for all Open DOVE components
+
 * Tue Jan 07 2014 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.1.0
 - Initial package.
