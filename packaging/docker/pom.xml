@@ -7,7 +7,7 @@
   </prerequisites>
   <groupId>org.opendaylight.integration</groupId>
   <artifactId>docker</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.2-SNAPSHOT</version>
   <name>OpenDaylight Docker Project</name>
   <packaging>pom</packaging>
   <modules>

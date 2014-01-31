@@ -7,7 +7,7 @@
   </prerequisites>
   <groupId>org.opendaylight.integration</groupId>
   <artifactId>docker-serviceprovider</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.2-SNAPSHOT</version>
   <name>OpenDaylight Docker Service Provider Edition Project</name>
   <packaging>pom</packaging>
    <build>
@@ -28,7 +28,7 @@
                 <artifactItem>
                   <groupId>org.opendaylight.integration</groupId>
                   <artifactId>distributions-serviceprovider</artifactId>
-                  <version>0.1.1-SNAPSHOT</version>
+                  <version>${project.version}</version>
                   <type>zip</type>
                   <classifier>osgipackage</classifier>
                   <overWrite>true</overWrite>
