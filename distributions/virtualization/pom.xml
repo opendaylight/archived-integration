@@ -73,27 +73,6 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <classifier>README</classifier>
     </dependency>
 
-    <!-- defense4all -->
-
-    <dependency>
-      <groupId>org.opendaylight.defense4all</groupId>
-      <artifactId>defense4all.core.impl</artifactId>
-      <version>1.0.7</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.defense4all</groupId>
-      <artifactId>framework.core.impl</artifactId>
-      <version>1.0.7</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.opendaylight.defense4all</groupId>
-      <artifactId>defense4all.restservice</artifactId>
-      <version>1.0.7</version>
-    </dependency>
-
-
     <!-- affinity -->
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>

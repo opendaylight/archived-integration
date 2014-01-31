@@ -39,26 +39,6 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <scope>provided</scope>
     </dependency>
 
-        <!--
-    <dependency>
-      <groupId>org.opendaylight.defense4all</groupId>
-      <artifactId>defense4all.core.impl</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.defense4all</groupId>
-      <artifactId>framework.core.impl</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.defense4all</groupId>
-      <artifactId>restservice</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    -->
-
     <!-- affinity -->
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
@@ -411,37 +391,37 @@ see https://git.opendaylight.org/gerrit/#/c/390/
 	<dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.yangmodel</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.api</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
     
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.config</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.implementation</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.northbound</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.southbound</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
     <!--SNMP4SDN-->
