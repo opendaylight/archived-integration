@@ -1,7 +1,22 @@
 FROM ubuntu:12.04
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" >> /etc/apt/sources.list
-RUN apt-get update && apt-get -y upgrade
-RUN apt-get -y install openjdk-7-jre-headless unzip
+MAINTAINER OpenDaylight Project <info@opendaylight.org>
+
+# If the precise main universe repo is not already in the apt source list, then add it
+RUN if [ \! -f "/etc/apt/sources.list" -o `grep "deb http://archive.ubuntu.com/ubuntu precise main universe" /etc/apt/sources.list | wc -l` -eq 0 ]; then echo "deb http://archive.ubuntu.com/ubuntu precise main universe" >> /etc/apt/sources.list; fi
+
+# Remove the cache information. This helps eliminate "hash sum" errors when doing an update
+# which may be caused when mirrors and caches are out of sync.
+RUN rm -fR /var/lib/apt/lists/*
+RUN mkdir /var/lib/apt/lists/partial
+
+# Update the apt information
+RUN apt-get update
+
+# Install OpenJDK 7 in headless mode
+RUN apt-get -y install openjdk-7-jre-headless unzip wget
+RUN apt-get clean
+
+# Download and Install OpenDaylight
 RUN mkdir -p /opt/
 ADD target/dist /opt/
 RUN unzip /opt/*.zip -d /opt
