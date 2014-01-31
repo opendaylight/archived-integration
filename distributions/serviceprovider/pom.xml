@@ -428,7 +428,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.snmp4sdn</groupId>
       <artifactId>snmp4sdn</artifactId>
-      <version>0.1.1</version>
+      <version>0.1.2</version>
     </dependency>
 
   </dependencies>
