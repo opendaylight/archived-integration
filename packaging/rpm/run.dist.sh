@@ -5,8 +5,7 @@ usage() {
 
     echo -e "\tbase: base controller edition, good for simple testing"
     echo -e "\tvirt-ovsdb: virtualization controller edition based on ovsdb"
-    echo -e "\tvirt-vtn: virtualization controller edition based on vtn
-    (not supported yet)"
+    echo -e "\tvirt-vtn: virtualization controller edition based on vtn (not supported yet)"
     echo -e "\tvirt-opendove: virtualization controller edition based on opendove (not supported yet)"
     echo -e "\tsp: service provider controller edition (not supported yet)"
     echo -e "\t-stop: stop the controller"

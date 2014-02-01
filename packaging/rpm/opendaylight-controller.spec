@@ -78,7 +78,8 @@ Requires(postun): initscripts
 
 
 %description
-OpenDaylight SDN Controller
+The OpenDaylight SDN Controller Platform provides the core services
+and abstractions needed for building an SDN controller.
 
 
 %prep

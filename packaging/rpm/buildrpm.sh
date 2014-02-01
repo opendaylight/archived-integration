@@ -32,7 +32,9 @@ mockinit=0
 tmpbuild=""
 mockmvn=""
 timesuffix=""
-
+shortcircuits=0
+shortcircuite=0
+listprojects=0
 
 # Maven is not installed at the system wide level but at the Jenkins level
 # We need to map our Maven call to the Jenkins installed version
@@ -114,9 +116,17 @@ function usage {
     echo "  -?, -h, --help  Display this help and exit"
     echo "  --debug         Enable bash debugging output"
     echo "  --mockdebug     Enable mock debugging output"
+    echo
+    echo "Extras:"
+    echo "  --shortcircuits INDEX  Start build with project index"
+    echo "  --shortcircuite INDEX  End build with project index"
+    echo "  --listprojects         List the projects and indexes"
+    echo "  --timesuffix TIME      Set the time suffix to use for build output"
+
     exit $rc
 }
 
+readonly PJ_FIRST=0
 readonly PJ_INTEGRATION=0
 readonly PJ_CONTROLLER=1
 readonly PJ_OVSDB=2
@@ -124,6 +134,9 @@ readonly PJ_OPENFLOWJAVA=3
 readonly PJ_OPENFLOWPLUGIN=4
 readonly PJ_DEPENDENCIES=5
 readonly PJ_DISTRIBUTION=6
+readonly PJ_OPENDOVE=7
+readonly PJ_LISPFLOWMAPPING=8
+readonly PJ_LAST=8
 
 projects[$PJ_INTEGRATION]="integration"
 projects[$PJ_CONTROLLER]="controller"
@@ -132,6 +145,8 @@ projects[$PJ_OPENFLOWJAVA]="openflowjava"
 projects[$PJ_OPENFLOWPLUGIN]="openflowplugin"
 projects[$PJ_DEPENDENCIES]="controller-dependencies"
 projects[$PJ_DISTRIBUTION]="distribution"
+projects[$PJ_OPENDOVE]="opendove"
+projects[$PJ_LISPFLOWMAPPING]="lispflowmapping"
 
 versions[$PJ_INTEGRATION]=""
 versions[$PJ_CONTROLLER]=""
@@ -140,6 +155,8 @@ versions[$PJ_OPENFLOWJAVA]=""
 versions[$PJ_OPENFLOWPLUGIN]=""
 versions[$PJ_DEPENDENCIES]=""
 versions[$PJ_DISTRIBUTION]=""
+versions[$PJ_OPENDOVE]=""
+versions[$PJ_LISPFLOWMAPPING]=""
 
 suffix[$PJ_INTEGRATION]=""
 suffix[$PJ_CONTROLLER]=""
@@ -148,13 +165,17 @@ suffix[$PJ_OPENFLOWJAVA]=""
 suffix[$PJ_OPENFLOWPLUGIN]=""
 suffix[$PJ_DEPENDENCIES]=""
 suffix[$PJ_DISTRIBUTION]=""
+suffix[$PJ_OPENDOVE]=""
+suffix[$PJ_LISPFLOWMAPPING]=""
 
+gitprojects="$PJ_INTEGRATION $PJ_CONTROLLER $PJ_OVSDB $PJ_OPENFLOWJAVA $PJ_OPENFLOWPLUGIN $PJ_OPENDOVE $PJ_LISPFLOWMAPPING"
 
 # Clone the projects.
 function clone_source {
-    for project in ${projects[*]}; do
+    for i in $gitprojects; do
         # We only care about a shallow clone (no need to grab the entire project)
-        git clone --depth 0 https://git.opendaylight.org/gerrit/p/$project.git $buildroot/$project
+        log $LOGINFO "Cloning ${projects[$i]} to $buildroot/${projects[$i]}"
+        git clone --depth 0 https://git.opendaylight.org/gerrit/p/${projects[$i]}.git $buildroot/${projects[$i]}
     done
 }
 
@@ -174,7 +195,7 @@ function snapshot_source {
 function mk_git_archives {
     local timesuffix=$1
 
-    for i in `seq $PJ_INTEGRATION $PJ_OPENFLOWPLUGIN`; do
+    for i in $gitprojects; do
         if [ "$version" == "" ]; then
             cd $buildroot/${projects[$i]}
             suffix[$i]="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
@@ -190,13 +211,14 @@ function mk_git_archives {
             versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
         fi
 
+        log $LOGINFO "Building archive: $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz"
         cd $buildroot/${projects[$i]}
         git archive --prefix=opendaylight-${projects[$i]}-${versions[$i]}/ HEAD | \
             xz > $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz
 
     done
 
-    # Use the controller versions becuase these projects don't have a repo.
+    # Use the controller versions because these projects don't have a repo.
     for i in `seq $PJ_DEPENDENCIES $PJ_DISTRIBUTION`; do
         suffix[$i]=${suffix[$PJ_CONTROLLER]}
         versions[$i]=${versions[$PJ_CONTROLLER]}
@@ -213,16 +235,14 @@ function push_rpms {
         allrpms=`find $tmpbuild/repo -iname '*.rpm'`
         echo
         log $LOGINFO "RPMS found"
-        for i in $allrpms
-        do
+        for i in $allrpms; do
             log $LOGINFO $i
         done
 
         log $LOGINFO ":::::"
         log $LOGINFO "::::: pushing RPMs"
         log $LOGINFO ":::::"
-        for i in $allrpms
-        do
+        for i in $allrpms; do
             rpmname=`rpm -qp --queryformat="%{name}" $i`
             rpmversion=`rpm -qp --queryformat="%{version}" $i`
             distro=`echo $dist | tr - .`
@@ -277,7 +297,7 @@ EOF
 
 # Build a single project.
 function build_project {
-    local project=$1
+    local project="$1"
     local versionmajor="$2"
     local versionsnapsuffix="$3"
 
@@ -369,10 +389,13 @@ function build_project {
 
     ovsdb)
         log $LOGINFO "::::: Copying $project distribution.zip."
-        #todo: Parse pom file to get filename.
+        # Grab the version from the pom.xml file.
+        # Get the lines between the parent tags, then get the line with the version tag and remove leading space and
+        # the tag itself, then remove the trailing tag to be left with the version.
+        pomversion=`sed -n -e '/<parent>/,/<\/parent>/p' "$buildroot"/ovsdb/pom.xml | sed -n -e '/<version>/s/.*<version>//p' | sed -n -e 's/<\/version>//p'`
         eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
             -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
-            --copyout \"builddir/build/BUILD/opendaylight-$project-$versionmajor/distribution/opendaylight/target/distribution.$project-1.0.0-SNAPSHOT-osgipackage.zip\" \"$resultdir/opendaylight-$project-$versionmajor.zip\"
+            --copyout \"builddir/build/BUILD/opendaylight-$project-$versionmajor/distribution/opendaylight/target/distribution.$project-$pomversion-osgipackage.zip\" \"$resultdir/opendaylight-$project-$versionmajor.zip\"
         rc1=$?
         ln -sf $resultdir/opendaylight-$project-$versionmajor.zip $tmpbuild
         rc2=$?
@@ -398,7 +421,20 @@ function build_snapshot {
         eval $mock_cmd $mockdebug -r $dist --init
     fi
 
-    for i in `seq $PJ_CONTROLLER $PJ_DISTRIBUTION`; do
+    start=$PJ_CONTROLLER
+    end=$PJ_LAST
+
+    if [ $shortcircuits -ne 0 ]; then
+        start=$shortcircuits
+    fi
+
+    if [ $shortcircuite -ne 0 ]; then
+        end=$shortcircuite
+    fi
+
+    echo "start:end = $start:$end"
+
+    for i in `seq $start $end`; do
         build_project ${projects[$i]} ${versions[$i]} ${suffix[$i]}
     done
 
@@ -520,6 +556,13 @@ function parse_options {
             pushrpms=1; shift;
             ;;
 
+        --timesuffix)
+            shift; timesuffix="$1"; shift;
+            if [ "$timesuffix" == ""  ]; then
+                usage $RCPARMSERROR "Missing time suffix.";
+            fi
+            ;;
+
         --mvn_cmd)
             shift; mvn_cmd="$1"; shift;
             if [ "$mvn_cmd" == "" ]; then
@@ -552,6 +595,18 @@ function parse_options {
             fi
             ;;
 
+        --shortcircuits)
+            shift; shortcircuits=$1; shift;
+            ;;
+
+        --shortcircuite)
+            shift; shortcircuite=$1; shift;
+            ;;
+
+        --listprojects)
+            listprojects=1; shift;
+            ;;
+
         -? | -h | --help)
             usage $RCSUCCESS
             ;;
@@ -567,10 +622,19 @@ function parse_options {
 
 #################### main ####################
 
-timesuffix="$(date +%F_%T | tr -d .:- | tr _ .)"
+if [ "$timesuffix" == "" ]; then
+    timesuffix="$(date +%F_%T | tr -d .:- | tr _ .)"
+fi
 date_start=$(date +%s)
 
 parse_options "$@"
+
+if [ $listprojects -eq 1 ]; then
+    for i in `seq $PJ_FIRST $PJ_LAST`; do
+        echo "$i ${projects[$i]}"
+    done
+    exit $RCSUCCESS
+fi
 
 # Some more error checking...
 if [ -z $buildroot ]; then
