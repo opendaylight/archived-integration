@@ -3,7 +3,7 @@
 
 Name: opendaylight-ovsdb
 Version: 0.1.0
-Release: 0.1.0%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight OVSDB
 Group: Applications/Communications
 License: EPL
@@ -59,7 +59,7 @@ export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -Dmaven.
 # todo: Need spec and pom file versions to be consistent so we don't have to
 # hardcode the version here.
 mkdir -p tmp
-unzip -o -d tmp distribution/opendaylight/target/distribution.ovsdb-1.0.0-SNAPSHOT-osgipackage.zip
+unzip -o -d tmp distribution/opendaylight/target/distribution.ovsdb-*-osgipackage.zip
 
 # Create the directories:
 mkdir -p %{buildroot}%{resources_dir}/plugins
@@ -103,5 +103,8 @@ rm -rf tmp
 %endif
 
 %changelog
+* Fri Jan 31 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+- Update the version for the distribution.zip.
+
 * Thu Jan 02 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.1.0
 - Initial package.

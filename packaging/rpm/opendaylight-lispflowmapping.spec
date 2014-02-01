@@ -61,7 +61,7 @@ cd ..
 # todo: Need spec and pom file versions to be consistent so we don't have to
 # hardcode the version here.
 mkdir -p tmp
-unzip -o -d tmp distribution/target/lispflowmapping-distribution-1.0.0-SNAPSHOT-osgipackage.zip
+unzip -o -d tmp distribution/target/lispflowmapping-distribution-*-osgipackage.zip
 
 # Create the directories:
 mkdir -p %{buildroot}%{resources_dir}/plugins

@@ -20,7 +20,7 @@ Source0: %{name}-%{version}.tar.xz
 BuildArch: x86_64
 
 BuildRequires: python-devel
-BuildRequires: libjansson-devel
+BuildRequires: jansson-devel
 BuildRequires: libevent2-devel
 BuildRequires: libnl-devel
 BuildRequires: libuuid-devel

@@ -59,7 +59,7 @@ export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -Dmaven.
 # todo: Need spec and pom file versions to be consistent so we don't have to
 # hardcode the version here.
 mkdir -p tmp
-unzip -o -d tmp distribution/base/target/distributions-openflowplugin-base-0.0.1-SNAPSHOT-osgipackage.zip
+unzip -o -d tmp distribution/base/target/distributions-openflowplugin-base-*-osgipackage.zip
 
 # Create the directories:
 mkdir -p %{buildroot}%{resources_dir}/plugins
