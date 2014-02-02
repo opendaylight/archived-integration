@@ -134,8 +134,8 @@ readonly PJ_OPENFLOWJAVA=3
 readonly PJ_OPENFLOWPLUGIN=4
 readonly PJ_DEPENDENCIES=5
 readonly PJ_OPENDAYLIGHT=6
-readonly PJ_OPENDOVE=7
-readonly PJ_LISPFLOWMAPPING=8
+readonly PJ_OPENDOVE=8
+readonly PJ_LISPFLOWMAPPING=7
 readonly PJ_LAST=8
 
 projects[$PJ_INTEGRATION]="opendaylight-integration"
@@ -450,7 +450,8 @@ function build_snapshot {
     fi
 
     start=$PJ_CONTROLLER
-    end=$PJ_LAST
+    #end=$PJ_LAST
+    end=PJ_LISPFLOWMAPPING
 
     if [ $shortcircuits -ne 0 ]; then
         start=$shortcircuits
