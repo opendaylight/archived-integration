@@ -451,7 +451,7 @@ function build_snapshot {
 
     start=$PJ_CONTROLLER
     #end=$PJ_LAST
-    end=PJ_LISPFLOWMAPPING
+    end=$PJ_LISPFLOWMAPPING
 
     if [ $shortcircuits -ne 0 ]; then
         start=$shortcircuits
