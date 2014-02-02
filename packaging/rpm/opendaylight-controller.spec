@@ -24,13 +24,13 @@ BuildArch: noarch
 
 BuildRequires: java-devel
 BuildRequires: maven
+Requires: java >= 1:1.7.0
 %if 0%{?fedora}
 BuildRequires: systemd
 %else
 BuildRequires: sysvinit-tools
 %endif
 
-Requires: java >= 1:1.7.0
 
 # todo: Need to create proper packages for all the dependencies.
 # Here you should have at least dependencies for the packages containing .jar
@@ -38,9 +38,9 @@ Requires: java >= 1:1.7.0
 # dependencies package.
 #Requires: slf4j
 
-Requires: %{name}-dependencies
-Requires: opendaylight-openflowjava
-Requires: opendaylight-openflowplugin
+#Requires: %{name}-dependencies
+#Requires: opendaylight-openflowjava
+#Requires: opendaylight-openflowplugin
 
 %if 0%{?fedora}
 Requires(post): systemd
@@ -122,6 +122,7 @@ mkdir -p %{buildroot}%{resources_dir}/configuration
 mkdir -p %{buildroot}%{data_dir}/configuration
 
 mv tmp/opendaylight/configuration/config.ini %{buildroot}%{configuration_dir}
+sed -i -e 's/#\ ovsdb.of.version=1.3/ovsdb.of.version=1.3/' %{buildroot}%{configuration_dir}/config.ini
 ln -s %{configuration_dir}/config.ini %{buildroot}%{data_dir}/configuration
 mv tmp/opendaylight/configuration/* %{buildroot}%{resources_dir}/configuration
 rmdir tmp/opendaylight/configuration
@@ -151,7 +152,7 @@ install -m 755 -D opendaylight-integration-%{version}/distributions/base/src/ass
 rm %{buildroot}%{resources_dir}/run.sh
 install -m 755 -D opendaylight-integration-%{version}/distributions/virtualization/src/assemble/resources/run.sh \
     %{buildroot}%{resources_dir}/run.sh
-install -m 755 -D opendaylight-integration-%{version}/packaging/rpm/run.dist.sh %{buildroot}%{resources_dir}/run.dist.sh
+install -m 755 -D opendaylight-integration-%{version}/packaging/rpm/run.odl.sh %{buildroot}%{resources_dir}/run.odl.sh
 
 # Usually one wants to replace the .jar files of the dependencies by symlinks
 # to the ones provided to the system. This assumes the dependencies have been
@@ -184,7 +185,7 @@ find %{buildroot}%{data_dir} -type f -exec chmod 755 {} \;
 chmod 755 %{buildroot}%{resources_dir}/run.sh
 chmod 755 %{buildroot}%{resources_dir}/run.base.sh
 chmod 755 %{buildroot}%{resources_dir}/run.internal.sh
-chmod 755 %{buildroot}%{resources_dir}/run.dist.sh
+chmod 755 %{buildroot}%{resources_dir}/run.odl.sh
 %if 0%{?rhel}
 chmod 755 %{buildroot}%{_initddir}/%{name}
 %endif
@@ -274,6 +275,13 @@ fi
 %endif
 
 %changelog
+* Sat Feb 01 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.4.0
+- Changed package name to opendaylight.
+- Removed openflowjava and openflowplugin Requires.
+
+* Wed Jan 22 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.9.0
+- Updates to support editions.
+
 * Wed Jan 22 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.8.0
 - Fix changelog day error.
 

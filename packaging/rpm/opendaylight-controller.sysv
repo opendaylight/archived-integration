@@ -20,7 +20,7 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-exec="/usr/share/opendaylight-controller/run.dist.sh"
+exec="/usr/share/opendaylight-controller/run.odl.sh"
 prog="opendaylight-controller"
 config="/etc/opendaylight-controller/config.ini"
 
