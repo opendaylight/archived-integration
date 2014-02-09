@@ -3,7 +3,7 @@
 
 Name: opendaylight-openflowplugin
 Version: 0.1.0
-Release: 0.1.0%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight Openflow Plugin
 Group: Applications/Communications
 License: EPL
@@ -30,7 +30,13 @@ Requires: java >= 1:1.7.0
 
 
 %description
-OpenDaylight Openflow Plugin
+The Openflow Protocol Library will be an implementation of Openflow
+Protocol as defined in Openflow Switch Specification v1.3 and later
+versions.
+
+The library is designed to be extensible from third-party bundles in
+order to support vendor extensions and should serve as a basis for
+Openflow Southbound Plugin for Controller.
 
 
 %prep
@@ -67,6 +73,10 @@ mkdir -p %{buildroot}%{resources_dir}/plugins
 # Only install the extra jars needed by openflowplugin
 # opendaylight jars will be moved to the plugins dir and external jars will be
 # symlinked to the opendaylight dependencies directory.
+# rm some test files that are not distributed
+rm tmp/org.opendaylight.openflowplugin.drop-test-*
+rm tmp/org.opendaylight.openflowplugin.test-provider-*
+
 for src in $( ls tmp/opendaylight/plugins/*.jar);
 do
     tgt=$(basename ${src})
@@ -105,5 +115,9 @@ rm -rf tmp
 %endif
 
 %changelog
+* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+- Remove test artifacts.
+- Update description.
+
 * Wed Jan 08 2014 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.1.0
 - Initial package.

@@ -3,7 +3,7 @@
 
 Name: opendaylight-openflowjava
 Version: 0.1.0
-Release: 0.1.0%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight Openflow Java
 Group: Applications/Communications
 License: EPL
@@ -62,14 +62,6 @@ mkdir -p %{buildroot}%{resources_dir}/plugins
 # symlinked to the opendaylight dependencies directory.
 
 for src in $( ls %{_builddir}/%{buildsubdir}/simple-client/target/*.jar);
-do
-    if [ "${src}" == "${src/javadoc.jar/}" ]; then
-        tgt=org.opendaylight.openflowjava.$(basename ${src})
-        mv ${src} %{buildroot}%{resources_dir}/plugins/${tgt}
-    fi
-done
-
-for src in $( ls %{_builddir}/%{buildsubdir}/openflow-protocol-it/target/*.jar);
 do
     if [ "${src}" == "${src/javadoc.jar/}" ]; then
         tgt=org.opendaylight.openflowjava.$(basename ${src})
@@ -145,5 +137,8 @@ find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
 %endif
 
 %changelog
+* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+- Remove test artifacts.
+
 * Tue Jan 07 2014 Hsin-Yi Shen <hshen@redhat.com> - 0.1.0-0.1.0
 - Initial package.

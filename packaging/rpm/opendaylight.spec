@@ -3,7 +3,7 @@
 
 Name: opendaylight
 Version: 0.1.0
-Release: 0.4.0%{?dist}
+Release: 0.5.0%{?dist}
 Summary: OpenDaylight SDN Controller Platform
 Group: Applications/Communications
 License: EPL
@@ -15,6 +15,7 @@ Requires: opendaylight-controller-dependencies
 Requires: opendaylight-openflowjava
 Requires: opendaylight-openflowplugin
 Requires: opendaylight-ovsdb
+Requires: opendaylight-yangtools
 
 %description
 The OpenDaylight SDN Controller Platform provides the core
@@ -30,7 +31,7 @@ Requires: %{name}
 #Requires: opendaylight-affinity
 #Requires: opendaylight-defense4all
 #Requires: opendaylight-opendove
-Requires: opendaylight-opendove-odmc
+#Requires: opendaylight-opendove-odmc
 #Requires: opendaylight-vtn
 
 %description virtualization
@@ -62,6 +63,9 @@ PCEP, and LISP southbound and the Affinity Service and the LISP Service northbou
 %endif
 
 %changelog
+* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.5.0
+- Add yangtools package.
+
 * Sat Feb 01 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.4.0
 - Changed package name to opendaylight.
 - Added edition sub packages.
