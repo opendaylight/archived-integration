@@ -3,7 +3,7 @@
 
 Name: opendaylight-opendove
 Version: 0.1.0
-Release: 0.2.0%{?dist}
+Release: 0.3.0%{?dist}
 Summary: OpenDaylight Open DOVE Virtualization Platform
 Group: Applications/Communications
 License: EPL
@@ -21,7 +21,7 @@ BuildArch: x86_64
 
 BuildRequires: python-devel
 BuildRequires: jansson-devel
-BuildRequires: libevent2-devel
+BuildRequires: libevent-devel
 BuildRequires: libnl-devel
 BuildRequires: libuuid-devel
 BuildRequires: openssl
@@ -210,6 +210,9 @@ find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
 %endif
 
 %changelog
+* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.3.0
+- Change libevent2_devel to libevent_devel for Fedora and RHEL.
+
 * Thu Jan 23 2014 Anees Shaikh <aasdevaddr@gmail.com> - 0.1.0-0.2.0
 - Added subpackages for all Open DOVE components
 

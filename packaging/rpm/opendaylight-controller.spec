@@ -3,7 +3,7 @@
 
 Name: opendaylight-controller
 Version: 0.1.0
-Release: 0.9.0%{?dist}
+Release: 0.11.0%{?dist}
 Summary: OpenDaylight SDN Controller
 Group: Applications/Communications
 License: EPL
@@ -169,7 +169,7 @@ done
 cd %{buildroot}%{resources_dir}/plugins
 # rm the yangtools since they are part of the yangtools.rpm, but keep the yangtools.thirdparty
 mv org.opendaylight.yangtools.thirdparty.* /tmp
-rm org.opendaylight.yangtools.*
+rm -f org.opendaylight.yangtools.*
 mv /tmp/org.opendaylight.yangtools.thirdparty.* .
 for src in $( ls -I "org.opendaylight.*" );
 do
@@ -279,10 +279,10 @@ fi
 %endif
 
 %changelog
-* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.11.0
 - Remove yangtools artifacts.
 
-* Sat Feb 01 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.4.0
+* Sat Feb 01 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.10.0
 - Changed package name to opendaylight.
 - Removed openflowjava and openflowplugin Requires.
 

@@ -96,7 +96,7 @@ while read base artifact; do
     if [ -f "${src}" ]; then
         tgt=$(basename ${src})
         install -m 644 ${src} %{buildroot}%{resources_dir}/plugins/org.opendaylight.yangtools.model.${tgt}
-        rm ${src}
+        rm -f ${src}
     fi
 done <<'.'
 model ietf-topology-isis-*.jar
