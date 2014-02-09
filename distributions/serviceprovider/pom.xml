@@ -66,6 +66,12 @@ see https://git.opendaylight.org/gerrit/#/c/390/
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
+      <artifactId>flatl2.northbound</artifactId>
+      <version>0.4.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.affinity</groupId>
       <artifactId>l2agent</artifactId>
       <version>0.4.1</version>
     </dependency>
