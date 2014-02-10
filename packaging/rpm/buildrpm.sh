@@ -134,19 +134,27 @@ readonly PJ_OPENFLOWJAVA=3
 readonly PJ_OPENFLOWPLUGIN=4
 readonly PJ_DEPENDENCIES=5
 readonly PJ_OPENDAYLIGHT=6
-readonly PJ_OPENDOVE=8
 readonly PJ_LISPFLOWMAPPING=7
-readonly PJ_LAST=8
+readonly PJ_SNMP4SDN=8
+readonly PJ_AFFINITY=9
+readonly PJ_YANGTOOLS=10
+readonly PJ_BGPCEP=11
+readonly PJ_OPENDOVE=12
+readonly PJ_LAST=$PJ_YANGTOOLS
 
-projects[$PJ_INTEGRATION]="opendaylight-integration"
-projects[$PJ_CONTROLLER]="opendaylight-controller"
-projects[$PJ_OVSDB]="opendaylight-ovsdb"
-projects[$PJ_OPENFLOWJAVA]="opendaylight-openflowjava"
-projects[$PJ_OPENFLOWPLUGIN]="opendaylight-openflowplugin"
-projects[$PJ_DEPENDENCIES]="opendaylight-controller-dependencies"
+projects[$PJ_INTEGRATION]="integration"
+projects[$PJ_CONTROLLER]="controller"
+projects[$PJ_OVSDB]="ovsdb"
+projects[$PJ_OPENFLOWJAVA]="openflowjava"
+projects[$PJ_OPENFLOWPLUGIN]="openflowplugin"
+projects[$PJ_DEPENDENCIES]="controller-dependencies"
 projects[$PJ_OPENDAYLIGHT]="opendaylight"
-projects[$PJ_OPENDOVE]="opendaylight-opendove"
-projects[$PJ_LISPFLOWMAPPING]="opendaylight-lispflowmapping"
+projects[$PJ_LISPFLOWMAPPING]="lispflowmapping"
+projects[$PJ_SNMP4SDN]="snmp4sdn"
+projects[$PJ_AFFINITY]="affinity"
+projects[$PJ_YANGTOOLS]="yangtools"
+projects[$PJ_BGPCEP]="bgpcep"
+projects[$PJ_OPENDOVE]="opendove"
 
 versions[$PJ_INTEGRATION]=""
 versions[$PJ_CONTROLLER]=""
@@ -155,8 +163,12 @@ versions[$PJ_OPENFLOWJAVA]=""
 versions[$PJ_OPENFLOWPLUGIN]=""
 versions[$PJ_DEPENDENCIES]=""
 versions[$PJ_OPENDAYLIGHT]=""
-versions[$PJ_OPENDOVE]=""
 versions[$PJ_LISPFLOWMAPPING]=""
+versions[$PJ_SNMP4SDN]=""
+versions[$PJ_AFFINITY]=""
+versions[$PJ_YANGTOOLS]=""
+versions[$PJ_BGPCEP]=""
+versions[$PJ_OPENDOVE]=""
 
 suffix[$PJ_INTEGRATION]=""
 suffix[$PJ_CONTROLLER]=""
@@ -165,18 +177,21 @@ suffix[$PJ_OPENFLOWJAVA]=""
 suffix[$PJ_OPENFLOWPLUGIN]=""
 suffix[$PJ_DEPENDENCIES]=""
 suffix[$PJ_OPENDAYLIGHT]=""
-suffix[$PJ_OPENDOVE]=""
 suffix[$PJ_LISPFLOWMAPPING]=""
+suffix[$PJ_SNMP4SDN]=""
+suffix[$PJ_AFFINITY]=""
+suffix[$PJ_YANGTOOLS]=""
+suffix[$PJ_BGPCEP]=""
+suffix[$PJ_OPENDOVE]=""
 
-gitprojects="$PJ_INTEGRATION $PJ_CONTROLLER $PJ_OVSDB $PJ_OPENFLOWJAVA $PJ_OPENFLOWPLUGIN $PJ_OPENDOVE $PJ_LISPFLOWMAPPING"
+gitprojects="$PJ_INTEGRATION $PJ_CONTROLLER $PJ_OVSDB $PJ_OPENFLOWJAVA $PJ_OPENFLOWPLUGIN $PJ_LISPFLOWMAPPING $PJ_SNMP4SDN $PJ_AFFINITY $PJ_YANGTOOLS $PJ_BGPCEP $PJ_OPENDOVE"
 
 # Clone the projects.
 function clone_source {
     for i in $gitprojects; do
         # We only care about a shallow clone (no need to grab the entire project)
-        project=${projects[$i]:13}
-        log $LOGINFO "Cloning $project to $buildroot/${projects[$i]}"
-        git clone --depth 0 https://git.opendaylight.org/gerrit/p/$project.git $buildroot/${projects[$i]}
+        log $LOGINFO "Cloning ${projects[$i]} to $buildroot/${projects[$i]}"
+        git clone --depth 0 https://git.opendaylight.org/gerrit/p/${projects[$i]}.git $buildroot/${projects[$i]}
     done
 }
 
@@ -219,9 +234,9 @@ function mk_git_archives {
         # Get the version from the spec and append the suffix.
         # integration uses the controller.spec because there isn't an integration.spec to query.
         if [ ${projects[$i]} == ${projects[$PJ_INTEGRATION]} ]; then
-            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile ${projects[$PJ_CONTROLLER]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
+            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$PJ_CONTROLLER]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
         else
-            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile ${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
+            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
         fi
 
         # User really wants to set the version.
@@ -229,10 +244,10 @@ function mk_git_archives {
             versions[$i]=$version
         fi
 
-        log $LOGINFO "Building archive: $tmpbuild/${projects[$i]}-${versions[$i]}.tar.xz"
+        log $LOGINFO "Building archive: $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz"
         cd $buildroot/${projects[$i]}
-        git archive --prefix=${projects[$i]}-${versions[$i]}/ HEAD | \
-            xz > $tmpbuild/${projects[$i]}-${versions[$i]}.tar.xz
+        git archive --prefix=opendaylight-${projects[$i]}-${versions[$i]}/ HEAD | \
+            xz > $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz
 
     done
 
@@ -318,20 +333,27 @@ function build_project {
     local project="$1"
     local versionmajor="$2"
     local versionsnapsuffix="$3"
+    local projectspec=""
+
+    if [ "$project" == "opendaylight" ]; then
+        projectspec="opendaylight"
+    else
+        projectspec="opendaylight-$project"
+    fi
 
     log $LOGINFO ":::::"
-    log $LOGINFO "::::: building $project.rpm"
+    log $LOGINFO "::::: building $projectspec.rpm"
     log $LOGINFO ":::::"
 
-    cp -f $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm/$project.spec $tmpbuild
+    cp -f $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm/$projectspec.spec $tmpbuild
 
     cd $tmpbuild
     if [ "$buildtype" == "release" ] && [ "$version" != "" ]; then
         # Find lines starting with Version: and replace the whole line with the version requested
-        sed -r -i -e '/^Version:./c\Version: '"$versionmajor"  $project.spec
+        sed -r -i -e '/^Version:./c\Version: '"$versionmajor"  $projectspec.spec
     else
         # Find lines starting with Version: and replace the rest of the line with the versionsnapsuffix
-        sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" $project.spec
+        sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" $projectspec.spec
     fi
 
     # Set the write values in the spec files.
@@ -340,17 +362,17 @@ function build_project {
         # Set the version for the integration source.
         # Find lines with opendaylight-integration-%{version} and replace %{version} with the version.
         sed -r -i -e '/opendaylight-integration-\%\{version\}/s/\%\{version\}/'"${versions[$PJ_INTEGRATION]}"'/g' \
-            $project.spec
+            $projectspec.spec
         ;;
 
     ${projects[$PJ_DEPENDENCIES]})
         # Set the version for ovsdb in the dependencies spec.
         # Find lines with opendaylight-ovsdb-%{version} and replace %{version} with the version.
         sed -r -i -e '/opendaylight-ovsdb-\%\{version\}/s/\%\{version\}/'"${versions[$PJ_OVSDB]}"'/g' \
-            $project.spec
+            $projectspec.spec
         # Find lines with opendaylight-ovsdb-dependencies-%{version} and replace %{version} with the version.
         sed -r -i -e '/opendaylight-ovsdb-dependencies-\%\{version\}/s/\%\{version\}/'"${versions[$PJ_OVSDB]}"'/g' \
-            $project.spec
+            $projectspec.spec
         ;;
 
     *)
@@ -360,27 +382,27 @@ function build_project {
     # Rewrite the mvn command in the rpmbuild if the user requests it.
     if [ "$mockmvn" != "" ]; then
         # Find lines starting with export MAVEN_OPTS= and replace the whole line with $mockmvn
-        sed -r -i -e '/^export MAVEN_OPTS=./c\ '"$mockmvn" $project.spec
+        sed -r -i -e '/^export MAVEN_OPTS=./c\ '"$mockmvn" $projectspec.spec
     fi
 
     # Build the source RPM for use by mock later.
     #rm -f SRPMS/*.src.rpm
-    log $LOGINFO "::::: building $project.src.rpm with rpmbuild"
+    log $LOGINFO "::::: building $projectspec.src.rpm with rpmbuild"
     rpmbuild -bs --define '%_topdir '"`pwd`" --define '%_sourcedir %{_topdir}' \
-       --define "%dist .$pkg_dist_suffix" $project.spec
+       --define "%dist .$pkg_dist_suffix" $projectspec.spec
 
     rc=$?
     if [ $rc != 0 ]; then
-        log $LOGERROR "rpmbuild of $project.src.rpm failed (rc=$rc)."
+        log $LOGERROR "rpmbuild of $projectspec.src.rpm failed (rc=$rc)."
         exit $RCRPMBUILDERROR
     fi
 
-    log $LOGINFO "::::: building $project.rpm with mock"
+    log $LOGINFO "::::: building $projectspec.rpm with mock"
 
     if [ "$buildtype" == "release" ]; then
-        resultdir="repo/$project.$pkg_dist_suffix.noarch"
+        resultdir="repo/$projectspec.$pkg_dist_suffix.noarch"
     else
-        resultdir="repo/$project.$pkg_dist_suffix.noarch.snap"
+        resultdir="repo/$projectspec.$pkg_dist_suffix.noarch.snap"
     fi
 
     # Build the rpm using mock.
@@ -388,47 +410,47 @@ function build_project {
     # when building the controller-dependencies.rpm.
     eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
         -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
-        SRPMS/$project-$versionmajor-*.src.rpm
+        SRPMS/$projectspec-$versionmajor-*.src.rpm
 
     rc=$?
     if [ $rc != 0 ]; then
-        log $LOGERROR "mock of $project.rpm failed (rc=$rc)."
+        log $LOGERROR "mock of $projectspec.rpm failed (rc=$rc)."
         exit $RCRMOCKERROR
     fi
 
-    log $LOGINFO "::::: finished building $project.rpm in mock"
+    log $LOGINFO "::::: finished building $projectspec.rpm in mock"
 
     # Copy the distribution zip from the controller and ovsdb projects
     # for use in the dependencies.rpm.
     case "$project" in
     ${projects[$PJ_CONTROLLER]})
-        log $LOGINFO "::::: Copying $project distribution.zip."
+        log $LOGINFO "::::: Copying $projectspec distribution.zip."
         eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
             -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
-            --copyout \"builddir/build/BUILD/$project-$versionmajor/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip\" \"$resultdir/$project-$versionmajor.zip\"
+            --copyout \"builddir/build/BUILD/$projectspec-$versionmajor/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip\" \"$resultdir/$projectspec-$versionmajor.zip\"
         rc1=$?
-        ln -sf $resultdir/$project-$versionmajor.zip $tmpbuild
+        ln -sf $resultdir/$projectspec-$versionmajor.zip $tmpbuild
         rc2=$?
-        if [ ! -e $tmpbuild/$project-$versionmajor.zip ]; then
-            log $LOGERROR "cannot find $project distribution zip file (rc=$rc1:$rc2)."
+        if [ ! -e $tmpbuild/$projectspec-$versionmajor.zip ]; then
+            log $LOGERROR "cannot find $projectspec distribution zip file (rc=$rc1:$rc2)."
             exit $RCERROR
         fi
         ;;
 
     ${projects[$PJ_OVSDB]})
-        log $LOGINFO "::::: Copying $project distribution.zip."
+        log $LOGINFO "::::: Copying $projectspec distribution.zip."
         # Grab the version from the pom.xml file.
         # Get the lines between the parent tags, then get the line with the version tag and remove leading space and
         # the tag itself, then remove the trailing tag to be left with the version.
         pomversion=`sed -n -e '/<parent>/,/<\/parent>/p' "$buildroot/${projects[$PJ_OVSDB]}/pom.xml" | sed -n -e '/<version>/s/.*<version>//p' | sed -n -e 's/<\/version>//p'`
         eval $mock_cmd $mockdebug -r $dist --no-clean --no-cleanup-after --resultdir \"$resultdir\" \
             -D \"dist .$pkg_dist_suffix\" -D \"noclean 1\" \
-            --copyout \"builddir/build/BUILD/$project-$versionmajor/distribution/opendaylight/target/distribution.ovsdb-$pomversion-osgipackage.zip\" \"$resultdir/$project-$versionmajor.zip\"
+            --copyout \"builddir/build/BUILD/$projectspec-$versionmajor/distribution/opendaylight/target/distribution.ovsdb-$pomversion-osgipackage.zip\" \"$resultdir/$projectspec-$versionmajor.zip\"
         rc1=$?
-        ln -sf $resultdir/$project-$versionmajor.zip $tmpbuild
+        ln -sf $resultdir/$projectspec-$versionmajor.zip $tmpbuild
         rc2=$?
-        if [ ! -e $tmpbuild/$project-$versionmajor.zip ]; then
-            log $LOGERROR "cannot find $project distribution zip file (rc=$rc1:$rc2)."
+        if [ ! -e $tmpbuild/$projectspec-$versionmajor.zip ]; then
+            log $LOGERROR "cannot find $projectspec distribution zip file (rc=$rc1:$rc2)."
             exit $RCERROR
         fi
         ;;
@@ -450,8 +472,7 @@ function build_snapshot {
     fi
 
     start=$PJ_CONTROLLER
-    #end=$PJ_LAST
-    end=$PJ_LISPFLOWMAPPING
+    end=$PJ_LAST
 
     if [ $shortcircuits -ne 0 ]; then
         start=$shortcircuits

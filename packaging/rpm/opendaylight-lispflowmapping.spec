@@ -3,7 +3,7 @@
 
 Name: opendaylight-lispflowmapping
 Version: 0.1.0
-Release: 0.1.0%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight LispFlowMapping
 Group: Applications/Communications
 License: EPL
@@ -49,43 +49,28 @@ OpenDaylight LispFlowMapping
 # maven.compile.fork is used to reduce the build time.
 #export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && \
 #  mvn clean install -Dmaven.test.skip=true -DskipIT -Dmaven.compile.fork=true
-cd distribution
 export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -Dmaven.test.skip=true
-cd ..
 
 
 %install
 
-# Extract the contents of the distribution to a temporary directory so that we
-# can take things from there and move them to the correct locations:
-# todo: Need spec and pom file versions to be consistent so we don't have to
-# hardcode the version here.
-mkdir -p tmp
-unzip -o -d tmp distribution/target/lispflowmapping-distribution-*-osgipackage.zip
-
 # Create the directories:
-mkdir -p %{buildroot}%{resources_dir}/plugins
+install -d -m 755 %{buildroot}%{resources_dir}/plugins
 
-# Only install the extra jars needed by lispflowmapping.
-# opendaylight jars will be moved to the plugins dir and external jars will be
-# symlinked to the opendaylight dependencies directory.
-for src in $( ls tmp/opendaylight/plugins/*.jar);
-do
-    tgt=$(basename ${src})
-    if [ ! -f %{_builddir}/%{buildsubdir}/distribution/opendaylight/target/generated-resources/opendaylight/plugins/${tgt} ]; then
-        if [ "${tgt}" != "${tgt/org.opendaylight/}" ]; then
-            mv ${src} %{buildroot}%{resources_dir}/plugins
-        else
-            ln -s %{deps_dir}/${tgt} %{buildroot}%{resources_dir}/plugins/${tgt}
-        fi
+while read artifact; do
+    src=$(find . -name "*${artifact}")
+    if [ -f "${src}" ]; then
+        tgt=$(basename ${src})
+        install -m 644 ${src} %{buildroot}%{resources_dir}/plugins/org.opendaylight.lispflowmapping.${tgt}
     fi
-done
-
-
-# Fix the permissions as they come with all the permissions (mode 777)
-# from the .zip file:
-find %{buildroot}%{resources_dir} -type d -exec chmod 755 {} \;
-find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
+done <<'.'
+mappingservice.api-*.jar
+mappingservice.config-*.jar
+mappingservice.implementation-*.jar
+mappingservice.northbound-*.jar
+mappingservice.southbound-*.jar
+mappingservice.yangmodel-*.jar
+.
 
 # Remove the temporary directory:
 rm -rf tmp
@@ -105,6 +90,8 @@ rm -rf tmp
 %endif
 
 %changelog
+* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+- Include only lispflowmapping jars.
+
 * Wed Jan 22 2014 David Goldberg <david.goldberg@contextream.com> - 0.1.0-0.1.0
 - Initial package.
-

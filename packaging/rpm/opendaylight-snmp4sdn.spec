@@ -56,18 +56,17 @@ export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m" && mvn clean install -Dmaven.
 %install
 
 # Create the directories:
-mkdir -p %{buildroot}%{resources_dir}/plugins
+install -d -m 755 %{buildroot}%{resources_dir}/plugins
 
-# Copy the required jars:
-for src in $( ls snmp4sdn/target/*.jar); do
-    tgt=$(basename ${src})
-    mv ${src} %{buildroot}%{resources_dir}/plugins/org.opendaylight.snmp4sdn.${tgt}
-done
-
-# Fix the permissions as they come with all the permissions (mode 777)
-# from the .zip file:
-find %{buildroot}%{resources_dir} -type d -exec chmod 755 {} \;
-find %{buildroot}%{resources_dir} -type f -exec chmod 644 {} \;
+while read artifact; do
+    src=$(find . -name "*${artifact}")
+    if [ -f "${src}" ]; then
+        tgt=$(basename ${src})
+        install -m 644 ${src} %{buildroot}%{resources_dir}/plugins/org.opendaylight.snmp4sdn.${tgt}
+    fi
+done <<'.'
+snmp4sdn-*.jar
+.
 
 # Remove the temporary directory:
 rm -rf tmp

@@ -74,11 +74,10 @@ mkdir -p %{buildroot}%{resources_dir}/plugins
 # opendaylight jars will be moved to the plugins dir and external jars will be
 # symlinked to the opendaylight dependencies directory.
 # rm some test files that are not distributed
-rm -f tmp/org.opendaylight.openflowplugin.drop-test-*
-rm -f tmp/org.opendaylight.openflowplugin.test-provider-*
+rm -f tmp/opendaylight/plugins/org.opendaylight.openflowplugin.drop-test-*
+rm -f tmp/opendaylight/plugins/org.opendaylight.openflowplugin.test-provider-*
 
-for src in $( ls tmp/opendaylight/plugins/*.jar);
-do
+for src in $( ls tmp/opendaylight/plugins/*.jar); do
     tgt=$(basename ${src})
     if [ ! -f %{_builddir}/%{buildsubdir}/distribution/base/target/generated-resources/opendaylight/plugins/${tgt} ]; then
         if [ "${tgt}" != "${tgt/org.opendaylight/}" ]; then

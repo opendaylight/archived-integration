@@ -72,6 +72,7 @@ analytics-*.jar
 analytics.implementation-*.jar
 analytics.northbound-*.jar
 flatl2-*.jar
+flatl2.northbound-*.jar
 l2agent-*.jar
 .
 

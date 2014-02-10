@@ -3,7 +3,7 @@
 
 Name: opendaylight
 Version: 0.1.0
-Release: 0.5.0%{?dist}
+Release: 0.6.0%{?dist}
 Summary: OpenDaylight SDN Controller Platform
 Group: Applications/Communications
 License: EPL
@@ -28,7 +28,7 @@ purposes.
 Summary: OpenDaylight SDN Controller Platform Virtualization Edition
 Group: Applications/Communications
 Requires: %{name}
-#Requires: opendaylight-affinity
+Requires: opendaylight-affinity
 #Requires: opendaylight-defense4all
 #Requires: opendaylight-opendove
 #Requires: opendaylight-opendove-odmc
@@ -43,11 +43,11 @@ DOVE, and the OpenStack Service.
 Summary: OpenDaylight SDN Controller Platform Virtualization Edition
 Group: Applications/Communications
 Requires: %{name}
-#Requires: opendaylight-affinity
+Requires: opendaylight-affinity
 #Requires: opendaylight-bgpcep
 #Requires: opendaylight-defense4all
 Requires: opendaylight-lispflowmapping
-#Requires: opendaylight-snmp4sdn
+Requires: opendaylight-snmp4sdn
 
 %description serviceprovider
 The Service Provider edition of OpenDaylight is designed for network operator
@@ -63,6 +63,9 @@ PCEP, and LISP southbound and the Affinity Service and the LISP Service northbou
 %endif
 
 %changelog
+* Sun Feb 09 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.6.0
+- Add affinity and snmp4sdn packages.
+
 * Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.5.0
 - Add yangtools package.
 
