@@ -77,55 +77,55 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity.implementation</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity.northbound</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>flatl2</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>flatl2.northbound</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>l2agent</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics.implementation</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics.northbound</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <!-- opendove -->
@@ -133,32 +133,32 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.implementation</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.rest</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
 
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.rest.northbound</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.opendove</groupId>
       <artifactId>odmc.rest.southbound</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2-SNAPSHOT</version>
     </dependency>
 
   </dependencies>

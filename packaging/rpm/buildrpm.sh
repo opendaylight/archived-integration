@@ -17,6 +17,7 @@ pushrpms=0
 getsource="buildroot"
 version=""
 release=""
+releasetag=0
 repourl=""
 repouser=""
 repopw=""
@@ -54,6 +55,7 @@ readonly RCERROR=64
 readonly RCPARMSERROR=65
 readonly RCRPMBUILDERROR=66
 readonly RCRMOCKERROR=67
+readonly RCGITERROR=68
 
 readonly LOGERROR=2
 readonly LOGINFO=5
@@ -91,8 +93,8 @@ function usage {
     echo "  --getsource METHOD     method for getting source clone|snapshot|buildroot"
     echo
     echo "Tag options:"
-    echo "  --release RELEASE      release tag (not used yet)"
-    echo "  --version VERSION      version tag"
+    echo "  --releasetag           use the latest release tagged repos"
+    echo "  --version VERSION      version value to use in build output"
     echo
     echo "Repo sync options:"
     echo "  --repourl REPOURL      url of the repo, include http://"
@@ -202,7 +204,30 @@ function snapshot_source {
     log $LOGINFO "$FUNCNAME: Not implemented yet."
 }
 
-# Archive the projects to creates the SOURCES for rpmbuild:
+# Checkout the latest release-tagged branch.
+function checkout_release_tag {
+    local tag=""
+
+    for i in $gitprojects; do
+        # Leave integration as is. The release version has a bug.
+        if [ "${projects[$i]}" == "${projects[$PJ_INTEGRATION]}" ]; then
+            continue
+        fi
+        cd $buildroot/${projects[$i]}
+        # Find the last release tag for the project.
+        # We assume that the first git log matching "[maven-release-plugin] prepare release"
+        # is where the tag was created.
+        tag=$(git log | grep -m 1 "\[maven-release-plugin\] prepare release" | awk '{print $4}')
+        if [ "$tag" != "" ]; then
+            git checkout --quiet "$tag"
+        else
+            log $LOGERROR "${projects[i]} is missing release tag"
+            exit $RCGITERROR
+        fi
+    done
+}
+
+}# Archive the projects to creates the SOURCES for rpmbuild:
 # - xz the source for later use by rpmbuild.
 # - get the version and git hashes to produce a versions and suffix for each project.
 # - copy the archives to the SOURCES dir
@@ -574,6 +599,10 @@ function parse_options {
             fi
             ;;
 
+        --releasetag)
+            releasetag=1; shift;
+            ;;
+
         --version)
             shift; version="$1"; shift;
             if [ "$version" == "" ]; then
@@ -723,6 +752,9 @@ mkdir -p $tmpbuild/repo
 case "$getsource" in
 clone)
     clone_source;
+    if [ $releasetag -eq 1 ]; then
+        checkout_release_tag
+    fi
     ;;
 
 snapshot)
@@ -740,6 +772,11 @@ buildroot)
             exit $RCPARMSERROR
         fi
     done
+
+    if [ $releasetag -eq 1 ]; then
+        checkout_release_tag
+    fi
+
     ;;
 esac
 
@@ -747,8 +784,6 @@ if [ "$buildtype" = "snapshot" ]; then
     log $LOGINFO "Building a snapshot build"
     build_snapshot
 else
-    #log $LOGINFO "Release builds are not supported yet."
-    #build_release
     log $LOGINFO "Building a release build"
     build_snapshot
 fi

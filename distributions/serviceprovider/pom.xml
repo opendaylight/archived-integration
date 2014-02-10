@@ -18,14 +18,14 @@ see https://git.opendaylight.org/gerrit/#/c/390/
   <name>OpenDaylight Service Provider Edition</name>
 
   <properties>
-    <bgpcep.bgp.version>0.3.0</bgpcep.bgp.version>
-    <bgpcep.common.version>0.3.0</bgpcep.common.version>
-    <bgpcep.pcep.version>0.3.0</bgpcep.pcep.version>
-    <bgpcep.programming.version>0.3.0</bgpcep.programming.version>
-    <bgpcep.rsvp.version>0.3.0</bgpcep.rsvp.version>
-    <bgpcep.topology.version>0.3.0</bgpcep.topology.version>
+    <bgpcep.bgp.version>0.3.1-SNAPSHOT</bgpcep.bgp.version>
+    <bgpcep.common.version>0.3.1-SNAPSHOT</bgpcep.common.version>
+    <bgpcep.pcep.version>0.3.1-SNAPSHOT</bgpcep.pcep.version>
+    <bgpcep.programming.version>0.3.1-SNAPSHOT</bgpcep.programming.version>
+    <bgpcep.rsvp.version>0.3.1-SNAPSHOT</bgpcep.rsvp.version>
+    <bgpcep.topology.version>0.3.1-SNAPSHOT</bgpcep.topology.version>
 
-    <ietf.topology.version>2013.10.21.1</ietf.topology.version>
+    <ietf.topology.version>2013.10.21.2-SNAPSHOT</ietf.topology.version>
   </properties>
 
   <dependencies>
@@ -43,55 +43,55 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity.implementation</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity.northbound</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>flatl2</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>flatl2.northbound</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>l2agent</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics.implementation</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>analytics.northbound</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2-SNAPSHOT</version>
     </dependency>
 
 
@@ -397,37 +397,37 @@ see https://git.opendaylight.org/gerrit/#/c/390/
 	<dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.yangmodel</artifactId>
-      <version>1.0.1</version>
+      <version>1.1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.api</artifactId>
-      <version>1.0.1</version>
+      <version>1.1.0-SNAPSHOT</version>
     </dependency>
     
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.config</artifactId>
-      <version>1.0.1</version>
+      <version>1.1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.implementation</artifactId>
-      <version>1.0.1</version>
+      <version>1.1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.northbound</artifactId>
-      <version>1.0.1</version>
+      <version>1.1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.southbound</artifactId>
-      <version>1.0.1</version>
+      <version>1.1.0-SNAPSHOT</version>
     </dependency>
 
     <!--SNMP4SDN-->
