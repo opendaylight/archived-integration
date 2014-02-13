@@ -30,7 +30,6 @@ Group: Applications/Communications
 Requires: %{name}
 Requires: opendaylight-affinity
 #Requires: opendaylight-defense4all
-#Requires: opendaylight-opendove
 #Requires: opendaylight-opendove-odmc
 #Requires: opendaylight-vtn
 
@@ -44,7 +43,7 @@ Summary: OpenDaylight SDN Controller Platform Virtualization Edition
 Group: Applications/Communications
 Requires: %{name}
 Requires: opendaylight-affinity
-#Requires: opendaylight-bgpcep
+Requires: opendaylight-bgpcep
 #Requires: opendaylight-defense4all
 Requires: opendaylight-lispflowmapping
 Requires: opendaylight-snmp4sdn
