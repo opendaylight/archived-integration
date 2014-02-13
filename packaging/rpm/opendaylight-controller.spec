@@ -281,7 +281,7 @@ fi
 %endif
 
 %changelog
-* Mon Feb 09 2014 Miroslav Miklus <mmiklus@cisco.com> - 0.1.0-0.12.0
+* Mon Feb 10 2014 Miroslav Miklus <mmiklus@cisco.com> - 0.1.0-0.12.0
 - Updates to include higher resource limits.
 
 * Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.11.0

@@ -16,8 +16,10 @@ cleantmp=0
 pushrpms=0
 getsource="buildroot"
 version=""
-release=""
+edversion=""
+specrelease="1"
 releasetag=0
+versiontype="spec"
 repourl=""
 repouser=""
 repopw=""
@@ -83,18 +85,21 @@ function usage {
     echo "Usage: `basename $0` [OPTION...]"
     echo
     echo "Build options:"
-    echo "  --buildtype TYPE       build type, either snapshot or release"
+    echo "  --buildtype TYPE       build type, either snapshot or release, default snapshot"
     echo "  --buildroot DIRECTORY  build root path"
     echo "  --buildtag             tag the tmpbuild directory, i.e. Jenkins build number"
     echo "  --cleanroot            clean buildroot directory before building"
     echo "  --cleantmp             clean tmpbuild directory before building"
-    echo "  --dist DIST            distribution"
-    echo "  --distsuffix SUFFIX    package distribution suffix"
-    echo "  --getsource METHOD     method for getting source clone|snapshot|buildroot"
+    echo "  --dist DIST            distribution, default fedora-19-x86_64"
+    echo "  --distsuffix SUFFIX    package distribution suffix, default f19"
+    echo "  --getsource METHOD     method for getting source clone|snapshot|buildroot, default buildroot"
     echo
     echo "Tag options:"
     echo "  --releasetag           use the latest release tagged repos"
-    echo "  --version VERSION      version value to use in build output"
+    echo "  --specrelease          version used for spec Release:, default 1"
+    echo "  --versiontype TYPE     where to find version, user|pom|spec, default spec"
+    echo "  --version VERSION      version value to use in build output. Required for --version type user option."
+    echo "  --edversion VERSION    version value to use in build output for edition rpms."
     echo
     echo "Repo sync options:"
     echo "  --repourl REPOURL      url of the repo, include http://"
@@ -142,7 +147,7 @@ readonly PJ_AFFINITY=9
 readonly PJ_YANGTOOLS=10
 readonly PJ_BGPCEP=11
 readonly PJ_OPENDOVE=12
-readonly PJ_LAST=$PJ_YANGTOOLS
+readonly PJ_LAST=$PJ_BGPCEP
 
 projects[$PJ_INTEGRATION]="integration"
 projects[$PJ_CONTROLLER]="controller"
@@ -209,7 +214,8 @@ function checkout_release_tag {
     local tag=""
 
     for i in $gitprojects; do
-        # Leave integration as is. The release version has a bug.
+        # Leave integration as is. The release version has a bug. Assume the latest in the
+        # repo is good.
         if [ "${projects[$i]}" == "${projects[$PJ_INTEGRATION]}" ]; then
             continue
         fi
@@ -227,7 +233,68 @@ function checkout_release_tag {
     done
 }
 
-}# Archive the projects to creates the SOURCES for rpmbuild:
+function set_versions {
+    local timesuffix=$1
+    local versiontype=$2
+    local version=$3
+    local buildtype=$4
+
+    for i in $gitprojects; do
+        case "$versiontype" in
+        "user")
+            # User set the version.
+            versions[$i]=$version
+            ;;
+
+        "spec")
+            # rpm query the spec file to get the Version.
+            cd $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm
+            if [ ${projects[$i]} == ${projects[$PJ_INTEGRATION]} ]; then
+                # use opendaylight spec since there is no integration spec
+                versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight.spec | head -n 1 | awk '{print $1}')"
+            else
+                versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}')"
+            fi
+            ;;
+
+        "pom")
+            # Find the first version tag in the pom.xml file - this should be the correct version.
+            # Then strip the version tags and end up with the version string.
+            versions[$i]=$(grep -m 1 "<version>" $buildroot/${projects[$i]}/pom.xml | sed -n -e '/<version>/s/.*<version>//p' | sed -n -e 's/<\/version>//p')
+            ;;
+        esac
+
+        if [ "$buildtype" == "snapshot" ]; then
+            cd $buildroot/${projects[$i]}
+            suffix[$i]="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
+            versions[$i]="${versions[$i]}.${suffix[$i]}"
+        else
+            suffix[$i]=""
+        fi
+
+        # Remove any -'s from the version. rpmbuild does not like them.
+        version=${versions[$i]}
+        versions[$i]=${version//-/.}
+    done
+
+    # Next two projects do not have a repo so set them to something.
+
+    # Dependencies follows the controller.
+    suffix[$PJ_DEPENDENCIES]=${suffix[$PJ_CONTROLLER]}
+    versions[$PJ_DEPENDENCIES]=${versions[$PJ_CONTROLLER]}
+
+    # Opendaylight follows integration since they are the editions, unless the
+    # user wants to set the value explicitly.
+    if [ "$edversion" == "" ]; then
+        suffix[$PJ_OPENDAYLIGHT]=${suffix[$PJ_INTEGRATION]}
+        versions[$PJ_OPENDAYLIGHT]=${versions[$PJ_INTEGRATION]}
+    else
+        suffix[$PJ_OPENDAYLIGHT]=""
+        versions[$PJ_OPENDAYLIGHT]=$edversion
+    fi
+}
+
+# Archive the projects to create the SOURCES for rpmbuild:
 # - xz the source for later use by rpmbuild.
 # - get the version and git hashes to produce a versions and suffix for each project.
 # - copy the archives to the SOURCES dir
@@ -237,9 +304,28 @@ function checkout_release_tag {
 # versionsnapsuffix=snap.20140201.191633.git.7c5788d
 
 function mk_git_archives {
-    local timesuffix=$1
+#    local timesuffix=$1
 
     for i in $gitprojects; do
+if [ 1 -eq 0 ]; then
+        case "$versiontype" in
+        "user")
+            versions[$i]=$version
+            ;;
+        "snap")
+            cd $buildroot/${projects[$i]}
+            suffix[$i]="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
+            ;;
+        "spec")
+            cd $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm
+            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
+            ;;
+
+        "pom")
+            versions[$i]=$(grep -m 1 "<version>" $buildroot/${projects[$i]}/pom.xml | sed -n -e '/<version>/s/.*<version>//p' | sed -n -e 's/<\/version>//p')
+            ;;
+        esac
+
         if [ "$version" == "" ]; then
             if [ "$buildtype" == "snapshot" ]; then
                 cd $buildroot/${projects[$i]}
@@ -264,11 +350,16 @@ function mk_git_archives {
             versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
         fi
 
-        # User really wants to set the version.
-        if [ "$buildtype" == "release" ] && [ "$version" != "" ]; then
-            versions[$i]=$version
+        if [ "$buildtype" == "release" ]; then
+            if [ "$version" != "" ]; then
+                # User really wants to set the version.
+                versions[$i]=$version
+            else
+                # User wants the pom version
+                versions[$i]=$(grep -m 1 "<version>" $buildroot/${projects[$i]}/pom.xml | sed -n -e '/<version>/s/.*<version>//p' | sed -n -e 's/<\/version>//p')
+            fi
         fi
-
+fi
         log $LOGINFO "Building archive: $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz"
         cd $buildroot/${projects[$i]}
         git archive --prefix=opendaylight-${projects[$i]}-${versions[$i]}/ HEAD | \
@@ -276,11 +367,11 @@ function mk_git_archives {
 
     done
 
-    # Use the controller versions because these projects don't have a repo.
-    for i in `seq $PJ_DEPENDENCIES $PJ_OPENDAYLIGHT`; do
-        suffix[$i]=${suffix[$PJ_CONTROLLER]}
-        versions[$i]=${versions[$PJ_CONTROLLER]}
-    done
+    # Use the integration versions because the following projects don't have a repo.
+#    for i in `seq $PJ_DEPENDENCIES $PJ_OPENDAYLIGHT`; do
+#        suffix[$i]=${suffix[$PJ_INTEGRATION]}
+#        versions[$i]=${versions[$PJ_INTEGRATION]}
+#    done
 
     # Don't forget any patches.
     cp $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm/opendaylight-integration-fix-paths.patch $tmpbuild
@@ -338,18 +429,23 @@ function push_rpms {
 function show_vars {
      cat << EOF
 Building controller using:
-distribution: $dist
-suffix:       $pkg_dist_suffix
-buildtype:    $buildtype
-release:      $release
-version:      $version
-getsource:    $getsource
-buildroot:    $buildroot
-buildtag:     $buildtag
-tmpbuild:     $tmpbuild
-mockmvn:      $mockmvn
-mockinit:     $mockinit
-time:         $timesuffix
+distribution:   $dist
+suffix:         $pkg_dist_suffix
+buildtype:      $buildtype
+versiontype:    $versiontype
+version:        $version
+edversion:      $edversion
+specrelease:    $specrelease
+releasetag:     $releasetag
+getsource:      $getsource
+buildroot:      $buildroot
+buildtag:       $buildtag
+tmpbuild:       $tmpbuild
+mockmvn:        $mockmvn
+mockinit:       $mockinit
+shortcircuits:  $shortcircuits
+shortcircuite:  $shortcircuite
+time:           $timesuffix
 EOF
 }
 
@@ -373,13 +469,20 @@ function build_project {
     cp -f $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm/$projectspec.spec $tmpbuild
 
     cd $tmpbuild
-    if [ "$buildtype" == "release" ] && [ "$version" != "" ]; then
-        # Find lines starting with Version: and replace the whole line with the version requested
-        sed -r -i -e '/^Version:./c\Version: '"$versionmajor"  $projectspec.spec
-    else
-        # Find lines starting with Version: and replace the rest of the line with the versionsnapsuffix
-        sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" $projectspec.spec
+    # Rewrite the Version and Release values in the spec files.
+    sed -r -i -e '/^Version:./c\Version: '"$versionmajor"  $projectspec.spec
+    if [ "$buildtype" == "release" ]; then
+        if [ "$specrelease" != "" ]; then
+            sed -r -i -e '/^Release:./c\Release: '"$specrelease%{?dist}" $projectspec.spec
+        fi
     fi
+#    if [ "$buildtype" == "release" ] && [ "$version" != "" ]; then
+#        # Find lines starting with Version: and replace the whole line with the version requested
+#        sed -r -i -e '/^Version:./c\Version: '"$versionmajor"  $projectspec.spec
+#    else
+#        # Find lines starting with Version: and replace the rest of the line with the versionsnapsuffix
+#        sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" $projectspec.spec
+#    fi
 
     # Set the write values in the spec files.
     case "$project" in
@@ -392,6 +495,8 @@ function build_project {
 
     ${projects[$PJ_DEPENDENCIES]})
         # Set the version for ovsdb in the dependencies spec.
+        # Don't worry about opendaylight-controller version since the dependencies
+        # version is the same as the controller version.
         # Find lines with opendaylight-ovsdb-%{version} and replace %{version} with the version.
         sed -r -i -e '/opendaylight-ovsdb-\%\{version\}/s/\%\{version\}/'"${versions[$PJ_OVSDB]}"'/g' \
             $projectspec.spec
@@ -487,7 +592,8 @@ function build_project {
 
 # Main function that builds the rpm's for snapshot's.
 function build_snapshot {
-    mk_git_archives $timesuffix
+    set_versions "$timesuffix" "$versiontype" "$version" "$buildtype"
+    mk_git_archives "$timesuffix"
 
     # Initialize our mock build location (we'll be using --no-clean later)
     # If we don't do the first init we can't build since the environment
@@ -510,7 +616,7 @@ function build_snapshot {
     echo "start:end = $start:$end"
 
     for i in `seq $start $end`; do
-        build_project ${projects[$i]} ${versions[$i]} ${suffix[$i]}
+        build_project "${projects[$i]}" "${versions[$i]}" "${suffix[$i]}"
     done
 
     log $LOGINFO ":::::"
@@ -592,10 +698,17 @@ function parse_options {
             fi
             ;;
 
-        --release)
-            shift; release="$1"; shift;
-            if [ "$release" == "" ]; then
-                $RCPARMSERROR "Missing release.";
+        --versiontype)
+            shift; versiontype="$1"; shift;
+            if [ "$versiontype" != "user" ] && [ "$versiontype" != "pom" ] && [ "$versiontype" != "spec" ]; then
+                usage $RCPARMSERROR "Invalid version type.";
+            fi
+            ;;
+
+        --specrelease)
+            shift; specrelease="$1"; shift;
+            if [ "$specrelease" == "" ]; then
+                $RCPARMSERROR "Missing specrelease.";
             fi
             ;;
 
@@ -607,6 +720,13 @@ function parse_options {
             shift; version="$1"; shift;
             if [ "$version" == "" ]; then
                 $RCPARMSERROR "Missing version.";
+            fi
+            ;;
+
+        --edversion)
+            shift; edversion="$1"; shift;
+            if [ "$edversion" == "" ]; then
+                $RCPARMSERROR "Missing edversion.";
             fi
             ;;
 
@@ -727,6 +847,10 @@ if [ $cleanroot -eq 1 ] && [ $getsource = "buildroot" ]; then
     exit $RCPARMSERROR
 fi
 
+if [ "$versiontype" != "user" ] && [ "$version" == "" ]; then
+    log $LOGERROR "version type user requires a version"
+fi
+
 # Can change tmpbuild to be an index or other tag
 if [ -n "$buildtag" ]; then
     tmpbuild="$buildroot/bld_$buildtag"
@@ -767,7 +891,7 @@ buildroot)
 
     # Check if all the projects dirs are really there.
     for i in $gitprojects; do
-        if [ ! -d ${projects[$i]}; then
+        if [ ! -d ${projects[$i]} ]; then
             log $LOGERROR "Missing ${projects[$i]}"
             exit $RCPARMSERROR
         fi
@@ -780,7 +904,7 @@ buildroot)
     ;;
 esac
 
-if [ "$buildtype" = "snapshot" ]; then
+if [ "$buildtype" == "snapshot" ]; then
     log $LOGINFO "Building a snapshot build"
     build_snapshot
 else

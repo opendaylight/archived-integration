@@ -13,11 +13,7 @@ URL: http://www.opendaylight.org
 # git clone https://git.opendaylight.org/gerrit/p/bgpcep.git
 # cd bgpcep
 # git archive --prefix=opendaylight-bgpcep-0.1.0/ HEAD | xz > opendaylight-bgpcep-0.1.0.tar.xz
-# git clone https://git.opendaylight.org/gerrit/p/yangtools.git
-# cd bgpcep
-# git archive --prefix=opendaylight-yangtools-0.1.0/ HEAD | xz > opendaylight-yangtools-0.1.0.tar.xz
 Source0: %{name}-%{version}.tar.xz
-Source1: %{name}-yangtools.tar.xz
 
 BuildArch: noarch
 
@@ -44,7 +40,6 @@ the underlying network.
 %prep
 
 %setup -q
-%setup -q -D -T -a 1
 
 
 %build
