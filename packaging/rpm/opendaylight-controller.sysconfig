@@ -15,8 +15,8 @@ ODL_DATADIR=/var/lib/opendaylight-controller
 # virtualization opendove  virt-opendove
 # virtualization affinity  virt-affinity
 # service provider         sp
-ODL_DIST="virt-ovsdb"
+ODL_DIST="base"
 
 # Any additional options required.
 # I.E. -of13, -debug, or -console
-ODL_OPTS="-of13"
+ODL_OPTS=""
