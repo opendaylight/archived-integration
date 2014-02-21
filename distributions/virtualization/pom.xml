@@ -41,34 +41,34 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.implementation</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.neutron</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.northbound</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>distribution.vtn-coordinator</artifactId>
-      <version>5.0.0.0</version>
+      <version>5.0.0.1-SNAPSHOT</version>
       <type>tar.bz2</type>
       <classifier>bin</classifier>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>distribution.vtn-coordinator</artifactId>
-      <version>5.0.0.0</version>
+      <version>5.0.0.1-SNAPSHOT</version>
       <type>txt</type>
       <classifier>README</classifier>
     </dependency>
