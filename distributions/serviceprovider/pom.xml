@@ -24,6 +24,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <bgpcep.programming.version>0.3.1-SNAPSHOT</bgpcep.programming.version>
     <bgpcep.rsvp.version>0.3.1-SNAPSHOT</bgpcep.rsvp.version>
     <bgpcep.topology.version>0.3.1-SNAPSHOT</bgpcep.topology.version>
+    <lispflowmapping.version>1.1.6-SNAPSHOT</lispflowmapping.version>
 
     <ietf.topology.version>2013.10.21.2-SNAPSHOT</ietf.topology.version>
   </properties>
@@ -397,37 +398,43 @@ see https://git.opendaylight.org/gerrit/#/c/390/
 	<dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.yangmodel</artifactId>
-      <version>1.1.5-SNAPSHOT</version>
+      <version>${lispflowmapping.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.api</artifactId>
-      <version>1.1.5-SNAPSHOT</version>
+      <version>${lispflowmapping.version}</version>
     </dependency>
     
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.config</artifactId>
-      <version>1.1.5-SNAPSHOT</version>
+      <version>${lispflowmapping.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.implementation</artifactId>
-      <version>1.1.5-SNAPSHOT</version>
+      <version>${lispflowmapping.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.opendaylight.lispflowmapping</groupId>
+      <artifactId>mappingservice.clusterdao</artifactId>
+      <version>${lispflowmapping.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.northbound</artifactId>
-      <version>1.1.5-SNAPSHOT</version>
+      <version>${lispflowmapping.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>mappingservice.southbound</artifactId>
-      <version>1.1.5-SNAPSHOT</version>
+      <version>${lispflowmapping.version}</version>
     </dependency>
 
     <!--SNMP4SDN-->
