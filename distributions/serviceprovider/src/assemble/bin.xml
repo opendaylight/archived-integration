@@ -19,7 +19,7 @@
       <directory>${project.build.directory}/provided-configs</directory>
       <outputDirectory>/opendaylight/configuration</outputDirectory>
       <excludes>
-        <exclude>META-INF</exclude>
+        <exclude>**/META-INF/**</exclude>
       </excludes>
     </fileSet>
   </fileSets>
