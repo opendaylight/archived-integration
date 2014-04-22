@@ -25,10 +25,16 @@ while true ; do
     esac
 done
 
+# clean available optional configurations (links)
+find configuration/initial -type l -exec rm {} \;
+
 # OF Filter selection
 OF_FILTER="org.opendaylight.(openflowplugin|openflowjava)"
-if [ $OF13 -ne 0 ]; then
+if (( $OF13 != 0 )); then
     OF_FILTER="org.opendaylight.controller.(thirdparty.org.openflow|protocol_plugins.openflow)"
+    while read ofConfig; do
+        ln -s ../initial.available/$(basename ${ofConfig}) configuration/initial/
+    done < <(find configuration/initial.available -name '*openflowplugin.xml')
 fi
 
 # Make sure we suck out our additional args so as to not confuse
