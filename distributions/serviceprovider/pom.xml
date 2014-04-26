@@ -237,11 +237,6 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     </dependency>
     <dependency>
       <groupId>org.opendaylight.bgpcep</groupId>
-      <artifactId>bgp-update-api-config</artifactId>
-      <version>${bgpcep.bgp.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
       <artifactId>bgp-util</artifactId>
       <version>${bgpcep.bgp.version}</version>
     </dependency>
