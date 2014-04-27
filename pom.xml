@@ -6,7 +6,7 @@
   </prerequisites>
   <groupId>org.opendaylight.integration</groupId>
   <artifactId>root</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.1-1-SNAPSHOT</version>
   <name>OpenDaylight Integration Project</name>
   <packaging>pom</packaging>
   <url>https://wiki.opendaylight.org/view/CrossProject:Integration_Group</url>
