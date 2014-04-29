@@ -135,6 +135,45 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     </dependency>
 
     <!--
+         BGPCEP: TCP-MD5 artifacts
+         -->
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-api</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-api-cfg</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-jni</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-jni-cfg</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-netty</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-netty-cfg</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-nio</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
+
+    <!--
          BGPCEP: topology artifacts
          -->
     <dependency>
