@@ -172,6 +172,11 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <artifactId>tcpmd5-nio</artifactId>
       <version>${bgpcep.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>tcpmd5-controller-config</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
 
     <!--
          BGPCEP: topology artifacts
