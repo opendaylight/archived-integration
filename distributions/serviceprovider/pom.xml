@@ -19,7 +19,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
 
   <properties>
     <bgpcep.version>0.3.1-SNAPSHOT</bgpcep.version>
-    <lispflowmapping.version>1.1.6</lispflowmapping.version>
+    <lispflowmapping.version>1.1.8</lispflowmapping.version>
 
     <ietf.topology.version>2013.10.21.2-SNAPSHOT</ietf.topology.version>
   </properties>
