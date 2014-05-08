@@ -15,6 +15,7 @@ PWD = 'admin'
 AUTH = [u'admin',u'admin']
 HEADERS={'Content-Type': 'application/json'}
 HEADERS_XML={'Content-Type': 'application/xml'}
+HEADERS_ACCEPT={'Accept': 'application/xml'}
 ODL_CONTROLLER_SESSION=None
 TOPO_TREE_LEVEL=2
 
