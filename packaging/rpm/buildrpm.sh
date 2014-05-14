@@ -15,6 +15,8 @@ cleanroot=0
 cleantmp=0
 pushrpms=0
 getsource="buildroot"
+branch=""
+depth=0
 version=""
 edversion=""
 specrelease="1"
@@ -86,7 +88,7 @@ function usage {
     echo
     echo "Build options:"
     echo "  --buildtype TYPE       build type, either snapshot or release, default snapshot"
-    echo "  --buildroot DIRECTORY  build root path"
+    echo "  --buildroot DIRECTORY  build root path. The path must exist."
     echo "  --buildtag             tag the tmpbuild directory, i.e. Jenkins build number"
     echo "  --cleanroot            clean buildroot directory before building"
     echo "  --cleantmp             clean tmpbuild directory before building"
@@ -98,8 +100,9 @@ function usage {
     echo "  --releasetag           use the latest release tagged repos"
     echo "  --specrelease          version used for spec Release:, default 1"
     echo "  --versiontype TYPE     where to find version, user|pom|spec, default spec"
-    echo "  --version VERSION      version value to use in build output. Required for --version type user option."
-    echo "  --edversion VERSION    version value to use in build output for edition rpms."
+    echo "  --version VERSION      version value to use in build output. Required for --version_type user option."
+    echo "  --edversion VERSION    version value to use in build output for edition rpms"
+    echo "  --branch BRANCH        branch to use for source"
     echo
     echo "Repo sync options:"
     echo "  --repourl REPOURL      url of the repo, include http://"
@@ -147,7 +150,8 @@ readonly PJ_AFFINITY=9
 readonly PJ_YANGTOOLS=10
 readonly PJ_BGPCEP=11
 readonly PJ_OPENDOVE=12
-readonly PJ_LAST=$PJ_BGPCEP
+#readonly PJ_LAST=$PJ_BGPCEP
+readonly PJ_LAST=$PJ_OPENDOVE
 
 projects[$PJ_INTEGRATION]="integration"
 projects[$PJ_CONTROLLER]="controller"
@@ -195,10 +199,16 @@ gitprojects="$PJ_INTEGRATION $PJ_CONTROLLER $PJ_OVSDB $PJ_OPENFLOWJAVA $PJ_OPENF
 
 # Clone the projects.
 function clone_source {
+    local depth=$1
     for i in $gitprojects; do
-        # We only care about a shallow clone (no need to grab the entire project)
-        log $LOGINFO "Cloning ${projects[$i]} to $buildroot/${projects[$i]}"
-        git clone --depth 0 https://git.opendaylight.org/gerrit/p/${projects[$i]}.git $buildroot/${projects[$i]}
+        if [ depth -eq 0 ]; then
+            # We only care about a shallow clone (no need to grab the entire project)
+            log $LOGINFO "Shallow cloning ${projects[$i]} to $buildroot/${projects[$i]}"
+            git clone --depth 0 https://git.opendaylight.org/gerrit/p/${projects[$i]}.git $buildroot/${projects[$i]}
+        else
+            log $LOGINFO "Full cloning ${projects[$i]} to $buildroot/${projects[$i]}"
+            git clone https://git.opendaylight.org/gerrit/p/${projects[$i]}.git $buildroot/${projects[$i]}
+        fi
     done
 }
 
@@ -210,6 +220,7 @@ function snapshot_source {
 }
 
 # Checkout the latest release-tagged branch.
+# TODO: does this work for branches or for multiple releases?
 function checkout_release_tag {
     local tag=""
 
@@ -230,6 +241,16 @@ function checkout_release_tag {
             log $LOGERROR "${projects[i]} is missing release tag"
             exit $RCGITERROR
         fi
+    done
+}
+
+# Checkout the requested branch.
+function checkout_branch {
+    local branch=$1
+
+    for i in $gitprojects; do
+        cd $buildroot/${projects[$i]}
+        git checkout $branch
     done
 }
 
@@ -277,7 +298,8 @@ function set_versions {
         versions[$i]=${version//-/.}
     done
 
-    # Next two projects do not have a repo so set them to something.
+    # The dependencies and opendaylight projects do not have a repo so set them to the
+    # controller and integration versions.
 
     # Dependencies follows the controller.
     suffix[$PJ_DEPENDENCIES]=${suffix[$PJ_CONTROLLER]}
@@ -307,71 +329,11 @@ function mk_git_archives {
 #    local timesuffix=$1
 
     for i in $gitprojects; do
-if [ 1 -eq 0 ]; then
-        case "$versiontype" in
-        "user")
-            versions[$i]=$version
-            ;;
-        "snap")
-            cd $buildroot/${projects[$i]}
-            suffix[$i]="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
-            ;;
-        "spec")
-            cd $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm
-            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
-            ;;
-
-        "pom")
-            versions[$i]=$(grep -m 1 "<version>" $buildroot/${projects[$i]}/pom.xml | sed -n -e '/<version>/s/.*<version>//p' | sed -n -e 's/<\/version>//p')
-            ;;
-        esac
-
-        if [ "$version" == "" ]; then
-            if [ "$buildtype" == "snapshot" ]; then
-                cd $buildroot/${projects[$i]}
-                suffix[$i]="snap.$timesuffix.git.$(git log -1 --pretty=format:%h)"
-            else
-                suffix[$i]=""
-            fi
-        else
-            if [ "$buildtype" == "snapshot" ]; then
-                suffix[$i]="snap.$version"
-            else
-                suffix[$i]=""
-            fi
-        fi
-
-        cd $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm
-        # Get the version from the spec and append the suffix.
-        # integration uses the controller.spec because there isn't an integration.spec to query.
-        if [ ${projects[$i]} == ${projects[$PJ_INTEGRATION]} ]; then
-            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$PJ_CONTROLLER]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
-        else
-            versions[$i]="$( rpm -q --queryformat="%{version}\n" --specfile opendaylight-${projects[$i]}.spec | head -n 1 | awk '{print $1}').${suffix[$i]}"
-        fi
-
-        if [ "$buildtype" == "release" ]; then
-            if [ "$version" != "" ]; then
-                # User really wants to set the version.
-                versions[$i]=$version
-            else
-                # User wants the pom version
-                versions[$i]=$(grep -m 1 "<version>" $buildroot/${projects[$i]}/pom.xml | sed -n -e '/<version>/s/.*<version>//p' | sed -n -e 's/<\/version>//p')
-            fi
-        fi
-fi
         log $LOGINFO "Building archive: $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz"
         cd $buildroot/${projects[$i]}
         git archive --prefix=opendaylight-${projects[$i]}-${versions[$i]}/ HEAD | \
             xz > $tmpbuild/opendaylight-${projects[$i]}-${versions[$i]}.tar.xz
-
     done
-
-    # Use the integration versions because the following projects don't have a repo.
-#    for i in `seq $PJ_DEPENDENCIES $PJ_OPENDAYLIGHT`; do
-#        suffix[$i]=${suffix[$PJ_INTEGRATION]}
-#        versions[$i]=${versions[$PJ_INTEGRATION]}
-#    done
 
     # Don't forget any patches.
     cp $buildroot/${projects[$PJ_INTEGRATION]}/packaging/rpm/opendaylight-integration-fix-paths.patch $tmpbuild
@@ -435,6 +397,7 @@ buildtype:      $buildtype
 versiontype:    $versiontype
 version:        $version
 edversion:      $edversion
+branch:         $branch
 specrelease:    $specrelease
 releasetag:     $releasetag
 getsource:      $getsource
@@ -484,7 +447,7 @@ function build_project {
 #        sed -r -i -e '/^Version:/s/\s*$/'".$versionsnapsuffix/" $projectspec.spec
 #    fi
 
-    # Set the write values in the spec files.
+    # Set the right values in the spec files.
     case "$project" in
     ${projects[$PJ_CONTROLLER]})
         # Set the version for the integration source.
@@ -687,14 +650,14 @@ function parse_options {
         --dist)
             shift; dist="$1"; shift;
             if [ "$dist" == "" ]; then
-                $RCPARMSERROR "Missing distribution.";
+                usage $RCPARMSERROR "Missing distribution.";
             fi
             ;;
 
         --distsuffix)
             shift; pkg_dist_suffix="$1"; shift;
             if [ "$pkg_dist_suffix" == "" ]; then
-                $RCPARMSERROR "Missing package distribution suffix.";
+                usage $RCPARMSERROR "Missing package distribution suffix.";
             fi
             ;;
 
@@ -708,7 +671,7 @@ function parse_options {
         --specrelease)
             shift; specrelease="$1"; shift;
             if [ "$specrelease" == "" ]; then
-                $RCPARMSERROR "Missing specrelease.";
+                usage $RCPARMSERROR "Missing specrelease.";
             fi
             ;;
 
@@ -719,35 +682,43 @@ function parse_options {
         --version)
             shift; version="$1"; shift;
             if [ "$version" == "" ]; then
-                $RCPARMSERROR "Missing version.";
+                usage $RCPARMSERROR "Missing version.";
             fi
             ;;
 
         --edversion)
             shift; edversion="$1"; shift;
             if [ "$edversion" == "" ]; then
-                $RCPARMSERROR "Missing edversion.";
+                usage $RCPARMSERROR "Missing edversion.";
             fi
+            ;;
+
+        --branch)
+            shift; branch="$1"; shift;
+            if [ "$branch" == "" ]; then
+                usage $RCPARMSERROR "Missing branch.";
+            fi
+            depth=1
             ;;
 
         --repourl)
             shift; repourl="$1"; shift;
             if [ "$repourl" == "" ]; then
-                $RCPARMSERROR "Missing repo url.";
+                usage $RCPARMSERROR "Missing repo url.";
             fi
             ;;
 
         --repouser)
             shift; repouser="$1"; shift;
             if [ "$repouser" == "" ]; then
-                $RCPARMSERROR "Missing repo user.";
+                usage $RCPARMSERROR "Missing repo user.";
             fi
             ;;
 
         --repopw)
             shift; repopw="$1"; shift;
             if [ "$repopw" == "" ]; then
-                $RCPARMSERROR "Missing repo pw.";
+                usage $RCPARMSERROR "Missing repo pw.";
             fi
             ;;
 
@@ -765,7 +736,7 @@ function parse_options {
         --mvn_cmd)
             shift; mvn_cmd="$1"; shift;
             if [ "$mvn_cmd" == "" ]; then
-                $RCPARMSERROR "Missing mvn_cmd.";
+                usage $RCPARMSERROR "Missing mvn_cmd.";
             fi
             ;;
 
@@ -776,21 +747,21 @@ function parse_options {
         --mockmvn)
             shift; mockmvn="$1"; shift;
             if [ "$mockmvn" == "" ]; then
-                $RCPARMSERROR "Missing mockmvn.";
+                usage $RCPARMSERROR "Missing mockmvn.";
             fi
             ;;
 
         --baseURL)
             shift; baseURL="$1"; shift;
             if [ "$baseURL" == "" ]; then
-                $RCPARMSERROR "Missing baseURL.";
+                usage $RCPARMSERROR "Missing baseURL.";
             fi
             ;;
 
         --baseRepositoryId)
             shift; baseRepositoryId="$1"; shift;
             if [ "$baseRepositoryId" == "" ]; then
-                $RCPARMSERROR "Missing baseRepositoryId.";
+                usage $RCPARMSERROR "Missing baseRepositoryId.";
             fi
             ;;
 
@@ -875,7 +846,12 @@ mkdir -p $tmpbuild/repo
 # Get the source.
 case "$getsource" in
 clone)
-    clone_source;
+    clone_source "$depth";
+
+    if [ -n "$branch" ]; then
+        checkout_branch $branch
+    fi
+
     if [ $releasetag -eq 1 ]; then
         checkout_release_tag
     fi
@@ -897,13 +873,17 @@ buildroot)
         fi
     done
 
+    if [ -n "$branch" ]; then
+        checkout_branch $branch
+    fi
+
     if [ $releasetag -eq 1 ]; then
         checkout_release_tag
     fi
 
     ;;
 esac
-
+#exit $RCSUCCESS
 if [ "$buildtype" == "snapshot" ]; then
     log $LOGINFO "Building a snapshot build"
     build_snapshot

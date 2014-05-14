@@ -3,7 +3,7 @@
 
 Name: opendaylight-bgpcep
 Version: 0.1.0
-Release: 0.1.0%{?dist}
+Release: 0.2.0%{?dist}
 Summary: OpenDaylight bgpcep
 Group: Applications/Communications
 License: EPL
@@ -113,10 +113,33 @@ programming-spi-config-*.jar
 programming-topology-api-*.jar
 programming-tunnel-api-*.jar
 rsvp-api-*.jar
+tcpmd5-api-*.jar
+tcpmd5-api-cfg-*.jar
+tcpmd5-jni-*.jar
+tcpmd5-jni-cfg-*.jar
+tcpmd5-netty-*.jar
+tcpmd5-netty-cfg-*.jar
+tcpmd5-nio-*.jar
 topology-api-*.jar
 topology-api-config-*.jar
 topology-tunnel-api-*.jar
 util-*.jar
+.
+
+install -d -m 755 %{buildroot}%{resources_dir}/configuration/initial
+
+while read config; do
+    src=$(find . -not -path "*/src/*" -name "${config}")
+    if [ -f "${src}" ]; then
+        tgt=$(basename ${src})
+        install -m 644 ${src} %{buildroot}%{resources_dir}/configuration/initial/${tgt}
+    fi
+done <<'.'
+30-programming.xml
+31-bgp.xml
+32-pcep.xml
+39-pcep-provider.xml
+41-bgp-example.xml
 .
 
 # Remove the temporary directory:
@@ -137,5 +160,8 @@ rm -rf tmp
 %endif
 
 %changelog
+* Tue May 13 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
+- Add additional artifacts and xml files.
+
 * Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.1.0
 - Initial package.
