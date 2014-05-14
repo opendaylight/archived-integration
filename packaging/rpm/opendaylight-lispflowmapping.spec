@@ -3,7 +3,7 @@
 
 Name: opendaylight-lispflowmapping
 Version: 0.1.0
-Release: 0.2.0%{?dist}
+Release: 0.3.0%{?dist}
 Summary: OpenDaylight LispFlowMapping
 Group: Applications/Communications
 License: EPL
@@ -65,6 +65,7 @@ while read artifact; do
     fi
 done <<'.'
 mappingservice.api-*.jar
+mappingservice.clusterdao-*.jar
 mappingservice.config-*.jar
 mappingservice.implementation-*.jar
 mappingservice.northbound-*.jar
@@ -90,6 +91,9 @@ rm -rf tmp
 %endif
 
 %changelog
+* Tue May 13 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.3.0
+- Add additional jars.
+
 * Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
 - Include only lispflowmapping jars.
 

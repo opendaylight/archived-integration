@@ -3,7 +3,7 @@
 
 Name: opendaylight
 Version: 0.1.0
-Release: 0.6.0%{?dist}
+Release: 0.7.0%{?dist}
 Summary: OpenDaylight SDN Controller Platform
 Group: Applications/Communications
 License: EPL
@@ -30,7 +30,7 @@ Group: Applications/Communications
 Requires: %{name}
 Requires: opendaylight-affinity
 #Requires: opendaylight-defense4all
-#Requires: opendaylight-opendove-odmc
+Requires: opendaylight-opendove-odmc
 #Requires: opendaylight-vtn
 
 %description virtualization
@@ -62,6 +62,9 @@ PCEP, and LISP southbound and the Affinity Service and the LISP Service northbou
 %endif
 
 %changelog
+* Tue May 13 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.7.0
+- Include opendaylight-opendove-odmc to virtualization edition.
+
 * Sun Feb 09 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.6.0
 - Add affinity and snmp4sdn packages.
 
