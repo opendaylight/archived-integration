@@ -19,7 +19,7 @@ shift
 case "$option" in
 base)
     filter="affinity|bgpcep|lispflowmapping|opendove|ovsdb.ovsdb.neutron|snmp4sdn|vtn|\
-yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-l3-2013|\
+yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
     bundlefilter="-bundlefilter org.opendaylight.(${filter})"
@@ -29,7 +29,7 @@ ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 virt-ovsdb)
     filter="opendove|vtn|\
 bgpcep|lispflowmapping|snmp4sdn|\
-yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-l3-2013|\
+yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
     bundlefilter="-bundlefilter org.opendaylight.(${filter})"
@@ -40,7 +40,7 @@ virt-opendove)
     echo "$option not supported yet"
     filter="ovsdb|vtn|\
 bgpcep|lispflowmapping|snmp4sdn|\
-yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-l3-2013|\
+yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
     bundlefilter="-bundlefilter org.opendaylight.(${filter})"
@@ -51,7 +51,7 @@ virt-vtn)
     echo "$option not supported yet"
     filter="affinity|opendove|ovsdb|controller.(arphandler|samples)|\
 bgpcep|lispflowmapping|snmp4sdn|\
-yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-l3-2013|\
+yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
     bundlefilter="-bundlefilter org.opendaylight.(${filter})"
@@ -62,7 +62,7 @@ virt-affinity)
     echo "$option not supported yet"
     filter="vtn|opendove|ovsdb|controller.samples|\
 bgpcep|lispflowmapping|snmp4sdn|\
-yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-l3-2013|\
+yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
     bundlefilter="-bundlefilter org.opendaylight.(${filter})"
