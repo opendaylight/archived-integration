@@ -524,6 +524,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
                 bgp-controller-config,
                 pcep-controller-config,
                 programming-controller-config,
+                tcpmd5-controller-config,
               </includeArtifactIds>
               <includeGroupIds>
                 org.opendaylight.bgpcep,
