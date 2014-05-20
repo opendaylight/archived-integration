@@ -18,7 +18,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>distribution.opendaylight</artifactId>
-      <version>0.1.1</version>
+      <version>0.1.1-1-SNAPSHOT</version>
       <type>zip</type>
       <classifier>osgipackage</classifier>
       <!-- Make sure this isn't included on any classpath-->
@@ -28,41 +28,42 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>ovsdb</artifactId>
-      <version>0.5.0</version>
+      <version>0.5.0-1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>ovsdb.northbound</artifactId>
-      <version>0.5.0</version>
+      <version>0.5.0-1-SNAPSHOT</version>
     </dependency>
     
     <!-- openflowplugin -->
     <dependency>
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>openflowplugin</artifactId>
-      <version>0.0.2</version>
+      <version>0.0.2-1-SNAPSHOT</version>
     </dependency>
+    <!-- No stable artifact
     <dependency>
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>openflowplugin-controller-config</artifactId>
       <version>0.0.3-SNAPSHOT</version>
     </dependency>
-    
+    -->
     <!-- openflowjava -->
     <dependency>
       <groupId>org.opendaylight.openflowjava</groupId>
       <artifactId>openflow-protocol-impl</artifactId>
-      <version>0.4</version>
+      <version>0.4-1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.openflowjava</groupId>
       <artifactId>openflow-protocol-api</artifactId>
-      <version>0.4</version>
+      <version>0.4-1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.openflowjava</groupId>
       <artifactId>openflow-protocol-spi</artifactId>
-      <version>0.4</version>
+      <version>0.4-1-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
