@@ -46,7 +46,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>openflowplugin-controller-config</artifactId>
-      <version>0.0.3-SNAPSHOT</version>
+      <version>0.0.2-1-SNAPSHOT</version>
     </dependency>
     -->
     <!-- openflowjava -->
