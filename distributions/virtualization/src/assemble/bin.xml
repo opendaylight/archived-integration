@@ -14,6 +14,10 @@
       <outputDirectory>/</outputDirectory>
       <excludes>
           <exclude>opendaylight/run.sh</exclude>
+          <exclude>opendaylight/configuration/initial/03-toaster-sample.xml</exclude>
+          <exclude>opendaylight/plugins/org.opendaylight.controller.samples.sample-toaster-1.1-SNAPSHOT.jar</exclude>
+          <exclude>opendaylight/plugins/org.opendaylight.controller.samples.sample-toaster-provider-1.1-SNAPSHOT.jar</exclude>
+          <exclude>opendaylight/plugins/org.opendaylight.controller.samples.sample-toaster-consumer-1.1-SNAPSHOT.jar</exclude>
       </excludes>
     </fileSet>
   </fileSets>
