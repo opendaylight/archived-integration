@@ -36,7 +36,7 @@ function usage {
     exit 1
 }
 
-OF13=0
+OF13=1
 BUNDLEFILTER=
 while true ; do
     (( i += 1 ))
