@@ -352,11 +352,6 @@
         </dependency>
         <dependency>
             <groupId>org.opendaylight.controller</groupId>
-            <artifactId>config-persister-directory-adapter</artifactId>
-            <version>${controller.config.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opendaylight.controller</groupId>
             <artifactId>config-persister-directory-xml-adapter</artifactId>
             <version>${controller.config.version}</version>
         </dependency>
