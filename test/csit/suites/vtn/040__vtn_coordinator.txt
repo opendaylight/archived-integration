@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation     Test suite for VTN Coordinator
-Suite Setup       Create Session    session    http://${CONTROLLER}:8081  headers=${VTNC_HEADERS}
+Suite Setup       Create Session    session    http://${VTNC}:${VTNCPORT}  headers=${VTNC_HEADERS}
 Suite Teardown    Delete All Sessions
 Library           SSHLibrary
 Library           Collections
