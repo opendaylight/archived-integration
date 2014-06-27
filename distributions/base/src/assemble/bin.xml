@@ -45,6 +45,8 @@
       <outputDirectory>/</outputDirectory>
       <excludes>
           <exclude>opendaylight/run.sh</exclude>
+          <exclude>opendaylight/plugins/org.opendaylight.controller.protocol_plugins.openflow-*.jar</exclude>
+          <exclude>opendaylight/plugins/org.opendaylight.controller.thirdparty.org.openflow.openflowj-*.jar</exclude>
       </excludes>
     </fileSet>
     <fileSet>
