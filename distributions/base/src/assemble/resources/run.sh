@@ -55,7 +55,7 @@ find ${RUNSH_DIR}/configuration/initial -type l -exec rm {} \;
 #   Option to run the OpenDaylight controller with the OpenFlow plugin (1.3).
 ##
 # OF Filter selection
-OF_FILTER="org.opendaylight.(openflowplugin|openflowjava)"
+OF_FILTER="org.opendaylight.(openflowplugin|openflowjava|controller.sal-compatibility)"
 if (( $OF13 != 0 )); then
     OF_FILTER="org.opendaylight.controller.(thirdparty.org.openflow|protocol_plugins.openflow)"
     while read ofConfig; do
