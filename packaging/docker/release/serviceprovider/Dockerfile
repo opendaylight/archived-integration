@@ -18,7 +18,7 @@ RUN apt-get clean
 
 # Download and Install OpenDaylight
 RUN mkdir -p /opt/
-RUN wget -q -O /opt/distribution.zip "https://nexus.opendaylight.org/service/local/artifact/maven/content?r=opendaylight.release&g=org.opendaylight.integration&a=distributions-serviceprovider&v=0.1.1&c=osgipackage&p=zip"
+RUN wget -q -O /opt/distribution.zip "https://nexus.opendaylight.org/service/local/artifact/maven/content?r=staging&g=org.opendaylight.integration&a=distributions-serviceprovider&v=0.1.1-1&c=osgipackage&p=zip"
 RUN unzip /opt/*.zip -d /opt
 RUN rm -rf /opt/*.zip
 # Ports 
@@ -36,3 +36,4 @@ RUN rm -rf /opt/*.zip
 EXPOSE 1088 1830 2400 4342 5666 6633 7800 8000 8080 8383 12001
 WORKDIR /opt/opendaylight
 ENTRYPOINT ["/opt/opendaylight/run.sh"]
+CMD []
