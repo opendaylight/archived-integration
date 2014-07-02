@@ -48,7 +48,7 @@ while true ; do
 done
 
 # clean available optional configurations (links)
-find configuration/initial -type l -exec rm {} \;
+find ${RUNSH_DIR}/configuration/initial -type l -exec rm {} \;
 
 ##of13
 #of13             [-of13]
@@ -59,8 +59,8 @@ OF_FILTER="org.opendaylight.(openflowplugin|openflowjava|controller.sal-compatib
 if (( $OF13 != 0 )); then
     OF_FILTER="org.opendaylight.controller.(thirdparty.org.openflow|protocol_plugins.openflow)"
     while read ofConfig; do
-        ln -s ../initial.available/$(basename ${ofConfig}) configuration/initial/
-    done < <(find configuration/initial.available -name '*openflowplugin.xml')
+        ln -s ../initial.available/$(basename ${ofConfig}) ${RUNSH_DIR}/configuration/initial/
+    done < <(find ${RUNSH_DIR}/configuration/initial.available -name '*openflowplugin.xml')
 fi
 
 # Make sure we suck out our additional args so as to not confuse
