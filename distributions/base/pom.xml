@@ -64,6 +64,11 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <artifactId>openflow-protocol-spi</artifactId>
       <version>0.5-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.openflowjava</groupId>
+      <artifactId>util</artifactId>
+      <version>0.5-SNAPSHOT</version>
+    </dependency>
 
     <!-- legacy openflow plugin -->
     <dependency>
