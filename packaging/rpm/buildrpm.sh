@@ -201,7 +201,7 @@ gitprojects="$PJ_INTEGRATION $PJ_CONTROLLER $PJ_OVSDB $PJ_OPENFLOWJAVA $PJ_OPENF
 function clone_source {
     local depth=$1
     for i in $gitprojects; do
-        if [ depth -eq 0 ]; then
+        if [ $depth -eq 0 ]; then
             # We only care about a shallow clone (no need to grab the entire project)
             log $LOGINFO "Shallow cloning ${projects[$i]} to $buildroot/${projects[$i]}"
             git clone --depth 0 https://git.opendaylight.org/gerrit/p/${projects[$i]}.git $buildroot/${projects[$i]}
