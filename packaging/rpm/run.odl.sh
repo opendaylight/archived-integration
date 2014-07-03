@@ -18,7 +18,9 @@ shift
 
 case "$option" in
 base)
-    filter="affinity|bgpcep|lispflowmapping|opendove|ovsdb.ovsdb.neutron|snmp4sdn|vtn|\
+    filter="affinity|\
+opendove|ovsdb.ovsdb.neutron|vtn|\
+bgpcep|lispflowmapping|snmp4sdn|\
 yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
@@ -27,7 +29,8 @@ ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
     ;;
 
 virt-ovsdb)
-    filter="opendove|vtn|\
+    filter="\
+opendove|vtn|\
 bgpcep|lispflowmapping|snmp4sdn|\
 yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
@@ -38,7 +41,8 @@ ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
 virt-opendove)
     echo "$option not supported yet"
-    filter="ovsdb|vtn|\
+    filter="\
+ovsdb|vtn|\
 bgpcep|lispflowmapping|snmp4sdn|\
 yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
@@ -49,7 +53,8 @@ ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
 virt-vtn)
     echo "$option not supported yet"
-    filter="affinity|opendove|ovsdb|controller.(arphandler|samples)|\
+    filter="affinity|controller.(arphandler|samples)|\
+opendove|ovsdb|\
 bgpcep|lispflowmapping|snmp4sdn|\
 yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
@@ -60,7 +65,8 @@ ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"
 
 virt-affinity)
     echo "$option not supported yet"
-    filter="vtn|opendove|ovsdb|controller.samples|\
+    filter="controller.samples|\
+vtn|opendove|\
 bgpcep|lispflowmapping|snmp4sdn|\
 yangtools.model.(ietf-ted-2013|ietf-topology-isis-2013|ietf-topology-2013|\
 ietf-topology-l3-unicast-igp-2013|ietf-topology-ospf-2013)"

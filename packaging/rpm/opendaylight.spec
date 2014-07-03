@@ -30,7 +30,7 @@ Group: Applications/Communications
 Requires: %{name}
 Requires: opendaylight-affinity
 #Requires: opendaylight-defense4all
-Requires: opendaylight-opendove-odmc
+#Requires: opendaylight-opendove-odmc
 #Requires: opendaylight-vtn
 
 %description virtualization

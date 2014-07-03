@@ -32,9 +32,11 @@ function usage {
     echo "  --gitdir DIR       git root directory where projects are cloned"
     echo "  --rpmbuilddir DIR  rpmbuild root directory where rpms are built"
     echo "  --version VERSION  version tag to use for archives"
+    echo "  --branch BRANCH    branch to use for source"
     echo
     echo "Help options:"
     echo "  -?, -h, --h, --help  Display this help and exit"
+    echo "  --debug              Enable bash debugging output"
     echo
 
     exit $rc
@@ -45,6 +47,14 @@ function parse_options {
         case "$1" in
         --archive)
             shift; archive=1;
+            ;;
+
+        --branch)
+            shift; branch="$1"; shift;
+            if [ "$branch" == "" ]; then
+                usage 1 "Missing branch.";
+            fi
+            #depth=1
             ;;
 
         --cloneremote)
@@ -83,6 +93,9 @@ function parse_options {
             fi
             ;;
 
+        --debug)
+            set -vx; shift;
+            ;;
         -? | -h | --h | --help)
             usage 0
             ;;
@@ -107,6 +120,7 @@ function archive_projects () {
     local gitdir=$1
     local rpmbuilddir=$2
     local version=$3
+    local branch=$4
 
     check_dir "$gitdir"
     check_dir "$rpmbuilddir"
@@ -117,6 +131,9 @@ function archive_projects () {
     for project in ${projects[*]}; do
         cd $gitdir/$project
         zipfile=../zips/opendaylight-$project-$version.tar.xz
+        if [ "$branch" != "" ]; then
+            checkout_branch $branch
+        fi
         echo "Archiving $project to $zipfile"
         git archive --prefix=opendaylight-$project-$version/ HEAD | xz > $zipfile
         src=$gitdir/zips/opendaylight-$project-$version.tar.xz
@@ -132,6 +149,9 @@ function clone_remote () {
     cd $outdir
 
     for project in ${projects[*]}; do
+        if [ "$branch" != "" ]; then
+            checkout_branch $branch
+        fi
         echo "Cloning $project to $outdir/$project"
         git clone https://git.opendaylight.org/gerrit/p/$project.git
     done
@@ -152,6 +172,13 @@ function clone_local () {
     done
 }
 
+# Checkout the requested branch.
+function checkout_branch {
+    local branch=$1
+
+    git checkout -q $branch
+}
+
 function main () {
     parse_options "$@"
 
@@ -164,7 +191,7 @@ function main () {
     fi
 
     if [ $archive -eq 1 ]; then
-        archive_projects "$gitdir" "$rpmbuilddir" "$version"
+        archive_projects "$gitdir" "$rpmbuilddir" "$version" "$branch"
     fi
 
     if [ $cloneremote -eq 1 ]; then
@@ -172,7 +199,7 @@ function main () {
     fi
 
     if [ $clonelocal -eq 1 ]; then
-        clone_local $gitdir $outdir
+        clone_local $gitdir $outdir "$branch"
     fi
 }
 

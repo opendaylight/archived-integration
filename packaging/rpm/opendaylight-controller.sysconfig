@@ -5,7 +5,8 @@ ODL_DATADIR=/var/lib/opendaylight-controller
 # The path to the java jre or jdk:
 #JAVA_HOME=/usr
 
-# The requested distribution:
+# The requested distribution. Only virt-ovsdb is supported for the
+# virtualization distributions.
 # Use the following table to select the distribution:
 # Distribution             Value
 # --------------------     -----------

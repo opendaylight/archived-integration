@@ -150,8 +150,8 @@ readonly PJ_AFFINITY=9
 readonly PJ_YANGTOOLS=10
 readonly PJ_BGPCEP=11
 readonly PJ_OPENDOVE=12
-#readonly PJ_LAST=$PJ_BGPCEP
-readonly PJ_LAST=$PJ_OPENDOVE
+readonly PJ_LAST=$PJ_BGPCEP
+#readonly PJ_LAST=$PJ_OPENDOVE
 
 projects[$PJ_INTEGRATION]="integration"
 projects[$PJ_CONTROLLER]="controller"

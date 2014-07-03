@@ -61,20 +61,6 @@ function parse_options {
     done
 }
 
-function array_contains () {
-    local array="$1[@]"
-    local seeking=$2
-    local in=1
-    for element in "${!array}"; do
-        if [ $element = $seeking ]; then
-            in=0
-            break
-        fi
-    done
-    return $in
-}
-
-
 function compare_integration () {
     local gitdir=$1
 
@@ -328,10 +314,19 @@ function check_specs () {
 function main () {
     parse_options "$@"
 
-    if [ ! -d "$dir" ]; then
+    if [ ! -d "$gitdir" ]; then
         usage 1 "Invalid path."
     fi
 
+    if [ "${options/integration}" != "$options" ]; then
+        compare_integration "$gitdir"
+    fi
+    if [ "${options/pom}" != "$options" ]; then
+        check_poms "$gitdir"
+    fi
+    if [ "${options/spec}" != "$options" ]; then
+        check_specs "$gitdir"
+    fi
 }
 
 main "$@"
