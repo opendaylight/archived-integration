@@ -21,6 +21,7 @@ function usage {
         echo
         echo '    Added option for integration:'
         echo '    of13             [-of13]'
+        echo '    of10             [-of10]'
         echo
         echo '    Visit wiki for more information :'
         echo
@@ -40,6 +41,7 @@ BUNDLEFILTER=
 while true ; do
     (( i += 1 ))
     case "${@:$i:1}" in
+        -of10) OF13=0 ; (( i += 1 ));;
         -of13) OF13=1 ; (( i += 1 ));;
         -bundlefilter) (( i += 1 )); BUNDLEFILTER="|${@:$i:1}";;
         -help) (( i += 1 )); helparg=${@:$i:1}; usage ;;
@@ -65,7 +67,7 @@ fi
 
 # Make sure we suck out our additional args so as to not confuse
 # run.internal.sh
-NEWARGS=`echo $@|sed 's/-of13//'|sed 's/-bundlefilter[ ]*[^ ]*//'`
+NEWARGS=`echo $@|sed 's/-of13//'|sed 's/-of10//'|sed 's/-bundlefilter[ ]*[^ ]*//'`
 
 # Build the filter string
 FILTERBEGINING='^(?!'
