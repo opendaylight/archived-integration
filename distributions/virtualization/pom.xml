@@ -7,7 +7,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
   <parent>
     <groupId>org.opendaylight.integration</groupId>
     <artifactId>distributions</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
 
@@ -22,7 +22,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.integration</groupId>
       <artifactId>distributions-base</artifactId>
-      <version>0.1.2-SNAPSHOT</version>
+      <version>0.2.0-SNAPSHOT</version>
       <type>zip</type>
       <classifier>osgipackage</classifier>
       <!-- Make sure this isn't included on any classpath-->
