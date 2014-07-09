@@ -1,9 +1,9 @@
 *** Settings ***
-Documentation     Test suite for Inventory Performance 
+Documentation     Test suite for Inventory Performance
 Suite Setup       Start Suite
 Suite Teardown    Stop Suite
 Library     SSHLibrary
-Library     ../../../libraries/Common.py
+Library       ../../../libraries/Common.py
 Variables     ../../../variables/Variables.py
 
 *** Variables ***
@@ -15,20 +15,20 @@ Start Suite
     Log    Start mininet
     ${TOPO_TREE_DEPTH}    Convert To Integer    ${TOPO_TREE_DEPTH}
     ${TOPO_TREE_FANOUT}    Convert To Integer    ${TOPO_TREE_FANOUT}
-    ${numnodes}    Num Of Nodes    ${TOPO_TREE_DEPTH}    ${TOPO_TREE_FANOUT}
-    Open Connection   ${MININET}     prompt=>
-    Login With Public Key    ${MININET_USER}   ${USER_HOME}/.ssh/id_rsa   any 
+    ${numnodes}     Num Of Nodes    ${TOPO_TREE_DEPTH}  ${TOPO_TREE_FANOUT}
+    Open Connection    ${MININET}     prompt=>
+    Login With Public Key    ${MININET_USER}    ${USER_HOME}/.ssh/id_rsa   any 
     Write    sudo ovs-vsctl set-manager ptcp:6644
     Write    sudo mn -c
     Sleep    2
     Write    ${start}
-    Sleep    ${numnodes*2+15}
+    Sleep    ${numnodes*2+10}
     Read
 Stop Suite
     Log    Stop mininet
     ${TOPO_TREE_DEPTH}    Convert To Integer    ${TOPO_TREE_DEPTH}
     ${TOPO_TREE_FANOUT}    Convert To Integer    ${TOPO_TREE_FANOUT}
-    ${numnodes}    Num Of Nodes    ${TOPO_TREE_DEPTH}    ${TOPO_TREE_FANOUT}
+    ${numnodes}     Num Of Nodes    ${TOPO_TREE_DEPTH}  ${TOPO_TREE_FANOUT}
     Read
     Write    exit 
     Sleep    ${numnodes*2}
