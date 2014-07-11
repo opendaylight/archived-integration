@@ -25,7 +25,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <bgpcep.rsvp.version>0.3.0-1-SNAPSHOT</bgpcep.rsvp.version>
     <bgpcep.topology.version>0.3.0-1-SNAPSHOT</bgpcep.topology.version>
 
-    <ietf.topology.version>2013.10.21.1</ietf.topology.version>
+    <ietf.topology.version>2013.10.21.1-1-SNAPSHOT</ietf.topology.version>
   </properties>
 
   <dependencies>
