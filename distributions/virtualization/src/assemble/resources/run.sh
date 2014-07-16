@@ -30,11 +30,11 @@ if [ "${virt}" == "" ]; then
     usage
 else
     if [ "${virt}" == "ovsdb" ]; then
-        ODL_VIRT_FILTER="opendove|vtn"
+        ODL_VIRT_FILTER="opendove|vtn|affinity"
     elif [ "${virt}" == "opendove" ]; then
         ODL_VIRT_FILTER="ovsdb|vtn"
     elif [ "${virt}" == "vtn" ]; then
-        ODL_VIRT_FILTER="affinity|opendove|ovsdb.ovsdb.neutron|controller.(arphandler|samples)"
+        ODL_VIRT_FILTER="affinity|opendove|ovsdb.neutron|controller.(arphandler|samples)"
     elif [ "${virt}" == "affinity" ]; then
         ODL_VIRT_FILTER="vtn|opendove|controller.samples"
     else

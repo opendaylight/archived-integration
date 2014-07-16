@@ -32,8 +32,8 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <!-- ovsdb --> 
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
-      <artifactId>ovsdb.neutron</artifactId>
-      <version>0.5.1-SNAPSHOT</version>
+      <artifactId>neutron</artifactId>
+      <version>0.7.0-SNAPSHOT</version>
     </dependency>
 
     <!-- vtn -->
