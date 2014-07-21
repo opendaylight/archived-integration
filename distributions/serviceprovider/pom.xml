@@ -20,6 +20,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
   <properties>
     <bgpcep.version>0.3.1-SNAPSHOT</bgpcep.version>
     <lispflowmapping.version>1.1.10</lispflowmapping.version>
+    <tcpmd5.version>1.0.0-SNAPSHOT</tcpmd5.version>
 
     <ietf.topology.version>2013.10.21.2-SNAPSHOT</ietf.topology.version>
   </properties>
@@ -138,29 +139,29 @@ see https://git.opendaylight.org/gerrit/#/c/390/
          BGPCEP: TCP-MD5 artifacts
          -->
     <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
+      <groupId>org.opendaylight.tcpmd5</groupId>
       <artifactId>tcpmd5-api</artifactId>
-      <version>${bgpcep.version}</version>
+      <version>${tcpmd5.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
+      <groupId>org.opendaylight.tcpmd5</groupId>
       <artifactId>tcpmd5-jni</artifactId>
-      <version>${bgpcep.version}</version>
+      <version>${tcpmd5.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
+      <groupId>org.opendaylight.tcpmd5</groupId>
       <artifactId>tcpmd5-netty</artifactId>
-      <version>${bgpcep.version}</version>
+      <version>${tcpmd5.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
+      <groupId>org.opendaylight.tcpmd5</groupId>
       <artifactId>tcpmd5-nio</artifactId>
-      <version>${bgpcep.version}</version>
+      <version>${tcpmd5.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.bgpcep</groupId>
+      <groupId>org.opendaylight.tcpmd5</groupId>
       <artifactId>tcpmd5-controller-config</artifactId>
-      <version>${bgpcep.version}</version>
+      <version>${tcpmd5.version}</version>
     </dependency>
 
     <!--
