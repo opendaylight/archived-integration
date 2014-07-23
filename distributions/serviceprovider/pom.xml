@@ -36,7 +36,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <scope>provided</scope>
     </dependency>
 
-    <!-- affinity -->
+<!-- commenting Affinity 
     <dependency>
       <groupId>org.opendaylight.affinity</groupId>
       <artifactId>affinity</artifactId>
@@ -90,7 +90,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <artifactId>analytics.northbound</artifactId>
       <version>0.4.2-SNAPSHOT</version>
     </dependency>
-
+-->
 
     <!--
          BGPCEP: required IETF models
