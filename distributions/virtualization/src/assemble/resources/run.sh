@@ -6,7 +6,7 @@ RUN_BASE_SH=${RUNSH_DIR}/run.base.sh
 
 function usage {
     echo -e "You must select one of the 3 supported network virtualization technologies:\n\tovsdb | opendove | vtn"
-    echo "Usage: $0 -virt {ovsdb | opendove | vtn | affinity} [advanced options]"
+    echo "Usage: $0 -virt {ovsdb | opendove | vtn} [advanced options]"
     echo "Advanced options: $($RUN_BASE_SH -help | sed "s;Usage: $RUN_BASE_SH ;;")"
     exit 1
 }
@@ -30,13 +30,11 @@ if [ "${virt}" == "" ]; then
     usage
 else
     if [ "${virt}" == "ovsdb" ]; then
-        ODL_VIRT_FILTER="opendove|vtn|affinity"
+        ODL_VIRT_FILTER="opendove|vtn"
     elif [ "${virt}" == "opendove" ]; then
         ODL_VIRT_FILTER="ovsdb|vtn"
     elif [ "${virt}" == "vtn" ]; then
-        ODL_VIRT_FILTER="affinity|opendove|ovsdb.neutron|controller.(arphandler|samples)"
-    elif [ "${virt}" == "affinity" ]; then
-        ODL_VIRT_FILTER="vtn|opendove|controller.samples"
+        ODL_VIRT_FILTER="opendove|ovsdb.neutron|controller.(arphandler|samples)"
     else
         usage
     fi
