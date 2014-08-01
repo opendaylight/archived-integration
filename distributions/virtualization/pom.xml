@@ -73,61 +73,6 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <classifier>README</classifier>
     </dependency>
 
-    <!-- affinity -->
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>affinity</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>affinity.implementation</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>affinity.northbound</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>flatl2</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>flatl2.northbound</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>l2agent</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>analytics</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>analytics.implementation</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.affinity</groupId>
-      <artifactId>analytics.northbound</artifactId>
-      <version>0.4.2-SNAPSHOT</version>
-    </dependency>
-
     <!-- opendove -->
 
     <dependency>
