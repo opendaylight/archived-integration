@@ -34,7 +34,7 @@ else
     elif [ "${virt}" == "opendove" ]; then
         ODL_VIRT_FILTER="ovsdb|vtn"
     elif [ "${virt}" == "vtn" ]; then
-        ODL_VIRT_FILTER="opendove|ovsdb.neutron|controller.(arphandler|samples)"
+        ODL_VIRT_FILTER="opendove|ovsdb.openstack|controller.(arphandler|samples)"
     else
         usage
     fi
