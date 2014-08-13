@@ -50,6 +50,16 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <artifactId>schema.hardwarevtep</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.ovsdb</groupId>
+      <artifactId>of-extension.nx-ofjava</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.ovsdb</groupId>
+      <artifactId>of-extension.nx-sal</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
     
     <!-- openflowplugin -->
     <dependency>
@@ -72,7 +82,27 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <artifactId>openflowplugin-controller-config</artifactId>
       <version>0.0.3-SNAPSHOT</version>
     </dependency>
-    
+    <dependency>
+      <groupId>org.opendaylight.openflowplugin</groupId>
+      <artifactId>openflowjava-extension-nicira-api</artifactId>
+      <version>0.0.3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.openflowplugin</groupId>
+      <artifactId>openflowjava-extension-nicira</artifactId>
+      <version>0.0.3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.openflowplugin</groupId>
+      <artifactId>openflowplugin-extension-api</artifactId>
+      <version>0.0.3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.openflowplugin</groupId>
+      <artifactId>openflowplugin-extension-nicira</artifactId>
+      <version>0.0.3-SNAPSHOT</version>
+    </dependency>
+
     <!-- openflowjava -->
     <dependency>
       <groupId>org.opendaylight.openflowjava</groupId>
@@ -145,8 +175,11 @@ see https://git.opendaylight.org/gerrit/#/c/390/
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-             <outputDirectory>${project.build.directory}/provided-configs</outputDirectory>
-             <includeArtifactIds>openflowplugin-controller-config</includeArtifactIds>
+             <outputDirectory>${project.build.directory}/generated-resources/opendaylight/configuration</outputDirectory>
+             <includeArtifactIds>
+               openflowplugin-controller-config, openflowjava-extension-nicira, openflowjava-extension-nicira-api,
+               openflowplugin-extension-nicira, of-extension.nx-ofjava, of-extension.nx-sal
+             </includeArtifactIds>
              <includes>**\/*.xml</includes>
              <excludeTransitive>true</excludeTransitive>
              <ignorePermissions>false</ignorePermissions>
