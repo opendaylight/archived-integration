@@ -5,6 +5,7 @@ RUNSH_DIR=$(dirname $0)
 CONTROLLER_RUNSH=${RUNSH_DIR}/run.internal.sh
 
 OF_FILTER=
+OF_PLUGIN_RUNTIME=
 helparg=
 # Added help for of13 before help from controller (this help common for intagration and controller)
 function usage {
@@ -57,8 +58,10 @@ find ${RUNSH_DIR}/configuration/initial -type l -exec rm {} \;
 #   Option to run the OpenDaylight controller with the OpenFlow plugin (1.3).
 ##
 # OF Filter selection
-OF_FILTER="org.opendaylight.(openflowplugin|openflowjava|controller.sal-compatibility)"
+OF_FILTER="org.opendaylight.(openflowplugin|openflowjava|controller.sal-compatibility|ovsdb.of-extension)"
+OF_PLUGIN_RUNTIME="1.0"
 if (( $OF13 != 0 )); then
+    OF_PLUGIN_RUNTIME="1.3"
     OF_FILTER="org.opendaylight.controller.(thirdparty.org.openflow|protocol_plugins.openflow)"
     while read ofConfig; do
         ln -s ../initial.available/$(basename ${ofConfig}) ${RUNSH_DIR}/configuration/initial/
@@ -75,4 +78,4 @@ FILTERENDING=').*'
 FILTER=${FILTERBEGINING}${OF_FILTER}${BUNDLEFILTER}${FILTERENDING}
 
 # Run the command
-$CONTROLLER_RUNSH -Dfelix.fileinstall.filter="$FILTER" $NEWARGS
+$CONTROLLER_RUNSH -Dfelix.fileinstall.filter="$FILTER" -Dovsdb.of.version="$OF_PLUGIN_RUNTIME" $NEWARGS
