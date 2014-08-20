@@ -18,6 +18,7 @@
     <module>virtualization/</module>
     <module>serviceprovider/</module>
     <module>extra/toaster</module>
+    <module>extra/karaf</module>
   </modules>
   <profiles>
     <profile>

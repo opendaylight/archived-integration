@@ -19,9 +19,17 @@
   <properties>
     <nexusproxy>http://nexus.opendaylight.org/content</nexusproxy>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <feature.mdsal.version>1.1-SNAPSHOT</feature.mdsal.version>
+    <feature.flow.version>1.1-SNAPSHOT</feature.flow.version>
+    <feature.yangtools.version>0.6.2-SNAPSHOT</feature.yangtools.version>
+    <karaf.branding.version>1.0.0-SNAPSHOT</karaf.branding.version>
+    <karaf.version>3.0.1</karaf.version>
+    <maven.surefire.version>2.16</maven.surefire.version>
+    <checkstyle.version>2.12</checkstyle.version>
   </properties>
   <modules>
     <module>distributions/</module>
+    <module>features/</module>
   </modules>
 
   <repositories>
@@ -82,4 +90,75 @@
       <url>./</url>
     </site>
   </distributionManagement>
+  <dependencyManagement>
+      <dependencies>
+        <!-- Karaf basic pieces -->
+        <dependency>
+          <!-- scope is compile so all features (there is only one) are installed
+            into startup.properties and the feature repo itself is not installed -->
+          <groupId>org.apache.karaf.features</groupId>
+          <artifactId>framework</artifactId>
+          <version>${karaf.version}</version>
+          <type>kar</type>
+        </dependency>
+        <!-- scope is runtime so the feature repo is listed in the features
+          service config file, and features may be installed using the
+          karaf-maven-plugin configuration -->
+        <dependency>
+          <groupId>org.apache.karaf.features</groupId>
+          <artifactId>standard</artifactId>
+          <version>${karaf.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+
+        <!-- Karaf Branding -->
+        <dependency>
+          <groupId>org.opendaylight.controller</groupId>
+          <artifactId>karaf.branding</artifactId>
+          <version>${karaf.branding.version}</version>
+        </dependency>
+
+        <!-- Integration features -->
+        <dependency>
+          <groupId>org.opendaylight.integration</groupId>
+          <artifactId>features-integration</artifactId>
+          <version>${project.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+        <!-- MD-SAL Related Features -->
+        <dependency>
+          <groupId>org.opendaylight.controller</groupId>
+          <artifactId>features-mdsal</artifactId>
+          <version>${feature.mdsal.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+        <dependency>
+          <groupId>org.opendaylight.controller</groupId>
+          <artifactId>features-flow</artifactId>
+          <version>${feature.flow.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+        <!-- test to validate features.xml -->
+        <dependency>
+          <groupId>org.opendaylight.yangtools</groupId>
+          <artifactId>features-test</artifactId>
+          <version>${feature.yangtools.version}</version>
+        </dependency>
+      </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>{$maven.surefire.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
