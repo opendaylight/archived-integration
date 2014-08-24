@@ -10,6 +10,7 @@
 <features name="odl-integration-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+
     <!--
         Concept:
             This file is a registry of features defined in the projects.
@@ -49,6 +50,7 @@
 
     <repository>mvn:org.opendaylight.controller/features-mdsal/${feature.mdsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.0.3-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.1.0-SNAPSHOT/xml/features</repository>
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
         <feature version='1.1-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
@@ -56,9 +58,14 @@
     </feature>
 
     <!-- 
-    	<feature name='odl-integration-compatible-with-l2switch' version='${project.version}'>
-        	<feature version='1.1-SNAPSHOT'>odl-integration-compatible-with-all</feature>
-			... whatever other features are only compatible with l2switch
-    	</feature>
+        * Reason why l2switch has compatibility issues with others:
+            l2switch simply provides a simple l2switch among all ports
+            this is great for seeing basic functionality like pingall,
+            but doesn't interact well with other flow programming apps
+            at this time
     -->
+	<feature name='odl-integration-compatible-with-l2switch' version='${project.version}'>
+    	<feature version='${project.version}'>odl-integration-compatible-with-all</feature>
+		<feature version='0.1.0-SNAPSHOT'>odl-l2switch-switch</feature>
+	</feature>
 </features>
