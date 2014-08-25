@@ -26,7 +26,7 @@
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>features-mdsal</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>${feature.mdsal.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -34,6 +34,13 @@
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>features-openflowplugin</artifactId>
       <version>0.0.3-SNAPSHOT</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.l2switch</groupId>
+      <artifactId>features-l2switch</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
