@@ -59,22 +59,23 @@
     <repository>mvn:org.opendaylight.aaa/features-aaa/0.1.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
-
+    <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgp.version}/xml/features</repository>
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
         <feature version='1.1-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
-        <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
         <feature version='0.0.3-SNAPSHOT'>odl-openflowplugin-flow-services</feature>
+        <feature version='0.5-SNAPSHOT'>odl-openflowjava-protocol</feature>
+        <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
         <feature version='0.0.3-SNAPSHOT'>odl-openflow-nxm-extensions</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-aaa-all</feature>
-        <feature version='0.5-SNAPSHOT'>odl-openflowjava-protocol</feature>
+        <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
     </feature>
 
-    <!-- 
+    <!--
         * Reason why l2switch has compatibility issues with others:
             l2switch simply provides a simple l2switch among all ports
             this is great for seeing basic functionality like pingall,

@@ -28,6 +28,7 @@
     <feature.ovsdb.openstack.version>1.0.0-SNAPSHOT</feature.ovsdb.openstack.version>
     <feature.lispflowmapping.version>1.1.11-SNAPSHOT</feature.lispflowmapping.version>
     <feature.vtn-manager.version>0.2.0-SNAPSHOT</feature.vtn-manager.version>
+    <feature.bgp.version>0.3.1-SNAPSHOT</feature.bgp.version>
     <karaf.branding.version>1.0.0-SNAPSHOT</karaf.branding.version>
     <karaf.version>3.0.1</karaf.version>
     <maven.surefire.version>2.16</maven.surefire.version>
@@ -168,6 +169,14 @@
           <groupId>org.opendaylight.vtn</groupId>
           <artifactId>features-vtn-manager</artifactId>
           <version>${feature.vtn-manager.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+
+        <dependency>
+          <groupId>org.opendaylight.bgpcep</groupId>
+          <artifactId>features-bgp</artifactId>
+          <version>${feature.bgp.version}</version>
           <classifier>features</classifier>
           <type>xml</type>
         </dependency>
