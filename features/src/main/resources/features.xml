@@ -67,6 +67,7 @@
         <feature version='0.0.3-SNAPSHOT'>odl-openflow-nxm-extensions</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-aaa-all</feature>
+        <feature version='0.5-SNAPSHOT'>odl-openflowjava-protocol</feature>
     </feature>
 
     <!-- 
