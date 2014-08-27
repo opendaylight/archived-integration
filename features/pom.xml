@@ -56,6 +56,13 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-adsal-compatibility</artifactId>
+      <version>1.4.2-SNAPSHOT</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
     <!-- test to validate features.xml -->
     <dependency>
       <groupId>org.opendaylight.yangtools</groupId>
