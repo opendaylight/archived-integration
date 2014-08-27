@@ -84,6 +84,13 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.lispflowmapping</groupId>
+      <artifactId>features-lispflowmapping</artifactId>
+      <version>${feature.lispflowmapping.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
     <!-- test to validate features.xml -->
     <dependency>
       <groupId>org.opendaylight.yangtools</groupId>

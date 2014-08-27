@@ -57,6 +57,7 @@
     <repository>mvn:org.opendaylight.controller/features-adsal-compatibility/1.4.2-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.aaa/features-aaa/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
         <feature version='1.1-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
@@ -68,6 +69,7 @@
         <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-aaa-all</feature>
         <feature version='0.5-SNAPSHOT'>odl-openflowjava-protocol</feature>
+        <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
     </feature>
 
     <!-- 
