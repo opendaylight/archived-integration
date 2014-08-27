@@ -53,12 +53,14 @@
     <repository>mvn:org.opendaylight.controller/features-nsf/${feature.nsf.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-adsal-compatibility/1.4.2-SNAPSHOT/xml/features</repository>
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
         <feature version='1.1-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
         <feature version='0.0.3-SNAPSHOT'>odl-openflowplugin-flow-services</feature>
+        <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
     </feature>
 
     <!-- 
