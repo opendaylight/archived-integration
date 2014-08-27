@@ -24,6 +24,7 @@
     <feature.yangtools.version>0.6.2-SNAPSHOT</feature.yangtools.version>
     <feature.adsal.version>0.8.1-SNAPSHOT</feature.adsal.version>
     <feature.nsf.version>0.4.2-SNAPSHOT</feature.nsf.version>
+    <feature.ovsdb.version>1.0.0-SNAPSHOT</feature.ovsdb.version>
     <karaf.branding.version>1.0.0-SNAPSHOT</karaf.branding.version>
     <karaf.version>3.0.1</karaf.version>
     <maven.surefire.version>2.16</maven.surefire.version>
@@ -156,6 +157,15 @@
           <groupId>org.opendaylight.controller</groupId>
           <artifactId>features-nsf</artifactId>
           <version>${feature.nsf.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+
+        <!-- OVSDB Related Features -->
+        <dependency>
+          <groupId>org.opendaylight.ovsdb</groupId>
+          <artifactId>features-ovsdb</artifactId>
+          <version>${feature.ovsdb.version}</version>
           <classifier>features</classifier>
           <type>xml</type>
         </dependency>
