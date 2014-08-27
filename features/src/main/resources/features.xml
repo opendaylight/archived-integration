@@ -58,6 +58,8 @@
     <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.aaa/features-aaa/0.1.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
+
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
         <feature version='1.1-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
@@ -92,4 +94,12 @@
             <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
 	    <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
 	</feature>
+
+    <!-- Since VTN Manager is not compatible with other flow programming apps,
+         and not compatible with other openstack apps,
+         it is appropriate to create compatible feature for VTN Manager. -->
+    <feature name='odl-integration-compatible-with-vtn-manager' version='${project.version}'>
+        <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
+        <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
+    </feature>
 </features>
