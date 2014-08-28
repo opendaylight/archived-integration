@@ -78,4 +78,13 @@
     	<feature version='${project.version}'>odl-integration-compatible-with-all</feature>
 		<feature version='0.1.0-SNAPSHOT'>odl-l2switch-switch</feature>
 	</feature>
+
+    <!--
+          Since ODL supports a few Incompatible Openstack integration such as ovs-openstack and vtn-openstack,
+          it is appropriate to create compatible feature for each of the incompatible openstack approaches.
+    -->
+	<feature name='odl-integration-compatible-with-ovs-openstack' description="OpenDaylight :: OVS :: OpenStack Network Virtualization" version='${project.version}'>
+            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
+	    <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
+	</feature>
 </features>
