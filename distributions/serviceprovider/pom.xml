@@ -287,6 +287,11 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <artifactId>pcep-controller-config</artifactId>
       <version>${bgpcep.version}</version>
     </dependency>
+      <dependency>
+      <groupId>org.opendaylight.bgpcep</groupId>
+      <artifactId>pcep-segment-routing</artifactId>
+      <version>${bgpcep.version}</version>
+    </dependency>
 
     <!-- lispflowmapping -->
 	<dependency>
