@@ -91,6 +91,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.ttp</groupId>
+      <artifactId>features-ttp</artifactId>
+      <version>${feature.ttp.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.lispflowmapping</groupId>
       <artifactId>features-lispflowmapping</artifactId>
       <version>${feature.lispflowmapping.version}</version>
