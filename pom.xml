@@ -27,6 +27,7 @@
     <feature.nsf.version>0.4.2-SNAPSHOT</feature.nsf.version>
     <feature.ovsdb.version>1.0.0-SNAPSHOT</feature.ovsdb.version>
     <feature.ovsdb.openstack.version>1.0.0-SNAPSHOT</feature.ovsdb.openstack.version>
+    <feature.groupbasedpolicy.version>0.1.0-SNAPSHOT</feature.groupbasedpolicy.version>
     <feature.lispflowmapping.version>1.1.11-SNAPSHOT</feature.lispflowmapping.version>
     <feature.snbi.version>1.0.0-SNAPSHOT</feature.snbi.version>
     <feature.ttp.version>0.0.1-SNAPSHOT</feature.ttp.version>
@@ -175,6 +176,16 @@
           <classifier>features</classifier>
           <type>xml</type>
         </dependency>
+
+        <!-- GBP Features -->
+        <dependency>
+          <groupId>org.opendaylight.groupbasedpolicy</groupId>
+          <artifactId>features-groupbasedpolicy</artifactId>
+          <version>${feature.groupbasedpolicy.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+
 
         <dependency>
           <groupId>org.opendaylight.bgpcep</groupId>
