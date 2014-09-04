@@ -60,6 +60,7 @@
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.snbi/features-snbi/${feature.snbi.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgp.version}/xml/features</repository>
@@ -77,6 +78,7 @@
         <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
         <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
+        <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
     </feature>
 
     <!--

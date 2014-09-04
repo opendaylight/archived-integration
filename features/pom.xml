@@ -110,6 +110,14 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.snbi</groupId>
+      <artifactId>features-snbi</artifactId>
+      <version>${feature.snbi.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+
     <!-- test to validate features.xml -->
     <dependency>
       <groupId>org.opendaylight.yangtools</groupId>
