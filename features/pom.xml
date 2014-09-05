@@ -134,6 +134,14 @@
     </dependency>
 
     <dependency>
+      <groupId>org.opendaylight.ovsdb</groupId>
+      <artifactId>features-ovs-sfc</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+
+    <dependency>
       <groupId>org.opendaylight.snbi</groupId>
       <artifactId>features-snbi</artifactId>
       <version>${feature.snbi.version}</version>

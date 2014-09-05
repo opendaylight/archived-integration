@@ -63,6 +63,7 @@
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/0.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.snbi/features-snbi/${feature.snbi.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
@@ -122,4 +123,9 @@
         <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
     </feature>
+
+        <feature name='odl-integration-compatible-with-ovs-sfc' description="OpenDaylight :: OVS :: Service Function Chaining" version='${project.version}'>
+            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
+            <feature version='0.0.1-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
+        </feature>
 </features>
