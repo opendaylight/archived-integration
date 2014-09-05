@@ -120,9 +120,19 @@
     <dependency>
       <groupId>org.opendaylight.groupbasedpolicy</groupId>
       <artifactId>features-groupbasedpolicy</artifactId>
+      <version>${feature.groupbasedpolicy.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.sfc</groupId>
+      <artifactId>features-sfc</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+
     <dependency>
       <groupId>org.opendaylight.snbi</groupId>
       <artifactId>features-snbi</artifactId>
