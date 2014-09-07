@@ -63,11 +63,13 @@
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.0.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/0.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.snbi/features-snbi/${feature.snbi.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
+
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
         <feature version='1.1-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
@@ -85,6 +87,7 @@
         <feature version='0.0.1-SNAPSHOT'>odl-sfc-all</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
+        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
     </feature>
 
     <!--

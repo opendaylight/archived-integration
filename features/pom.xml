@@ -149,6 +149,14 @@
       <type>xml</type>
     </dependency>
 
+    <dependency>
+       <groupId>org.opendaylight.packetcable</groupId>
+       <artifactId>features-packetcable</artifactId>
+       <version>${feature.packetcable.version}</version>
+       <classifier>features</classifier>
+       <type>xml</type>
+    </dependency>
+
     <!-- test to validate features.xml -->
     <dependency>
       <groupId>org.opendaylight.yangtools</groupId>
