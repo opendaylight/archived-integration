@@ -39,8 +39,13 @@
     <karaf.version>3.0.1</karaf.version>
     <maven.surefire.version>2.16</maven.surefire.version>
     <checkstyle.version>2.12</checkstyle.version>
+    <checkstyle.version>2.12</checkstyle.version>
+    <clustering.it.test.version>1.1-SNAPSHOT</clustering.it.test.version>
+    <config.configfile.directory>etc/opendaylight/karaf</config.configfile.directory>
+    <yangtools.version>0.6.2-SNAPSHOT</yangtools.version>
   </properties>
   <modules>
+    <module>test/tools/odl-mdsal-clustering-tests/clustering-test-app/</module>
     <module>distributions/</module>
     <module>features/</module>
   </modules>
