@@ -134,13 +134,4 @@
             <feature version='0.0.1-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
         </feature>
 
-    <feature name='odl-clustering-test-app' version='${project.version}'>
-        <feature version='${feature.mdsal.version}'>odl-mdsal-clustering</feature>
-        <feature version='${feature.mdsal.version}'>odl-restconf</feature>
-        <feature version='${yangtools.version}'>odl-yangtools-models</feature>
-        <bundle>mvn:org.opendaylight.controller/clustering-it-model/${clustering.it.test.version}</bundle>
-        <bundle>mvn:org.opendaylight.controller/clustering-it-provider/${clustering.it.test.version}</bundle>
-        <configfile finalname="${config.configfile.directory}/20-clustering-test-app.xml">mvn:org.opendaylight.controller/clustering-it-config/${clustering.it.test.version}/xml/config</configfile>
-    </feature>
-
 </features>

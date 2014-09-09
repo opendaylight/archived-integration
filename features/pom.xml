@@ -164,22 +164,6 @@
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
-    <!-- clustering test application -->
-    <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>clustering-it-config</artifactId>
-      <version>${clustering.it.test.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>clustering-it-model</artifactId>
-      <version>${clustering.it.test.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>clustering-it-provider</artifactId>
-      <version>${clustering.it.test.version}</version>
-    </dependency>
 
     <!-- test to validate features.xml -->
     <dependency>
