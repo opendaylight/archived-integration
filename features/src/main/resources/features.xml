@@ -68,6 +68,7 @@
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/0.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.snbi/features-snbi/${feature.snbi.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.snmp4sdn/features-snmp4sdn/0.1.3-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
 
@@ -90,6 +91,7 @@
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
+        <feature version='0.1.3-SNAPSHOT'>odl-snmp4sdn-all</feature>
     </feature>
 
     <!--
