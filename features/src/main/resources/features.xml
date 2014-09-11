@@ -72,27 +72,37 @@
     <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
 
+    <!-- Please use alphabetical order to add a compbatible with all feature -->
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
+        <feature version='0.1.0-SNAPSHOT'>odl-aaa-all</feature>
+        <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
+        <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
+        <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
+        <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
+        <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
         <feature version='1.1-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
-        <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
-        <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
-        <feature version='0.0.3-SNAPSHOT'>odl-openflowplugin-flow-services</feature>
-        <feature version='0.5-SNAPSHOT'>odl-openflowjava-protocol</feature>
-        <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
         <feature version='0.0.3-SNAPSHOT'>odl-openflow-nxm-extensions</feature>
-        <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
-        <feature version='0.1.0-SNAPSHOT'>odl-aaa-all</feature>
-        <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
-        <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
-        <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
+        <feature version='0.5-SNAPSHOT'>odl-openflowjava-protocol</feature>
+        <feature version='0.0.3-SNAPSHOT'>odl-openflowplugin-flow-services</feature>
+        <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
+        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
+        <feature version='1.1-SNAPSHOT'>odl-restconf</feature>
         <feature version='0.0.1-SNAPSHOT'>odl-sfc-all</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
-        <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
-        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
+        <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
         <feature version='0.1.3-SNAPSHOT'>odl-snmp4sdn-all</feature>
     </feature>
+
+    <!-- Please use aphabetical order for non-compatible features -->
+    <!-- Since Group Based Policy is not compatible with other flow programming apps,
+         and not compatible with other openstack apps,
+         it is appropriate to create compatible feature for Group Based Policy. -->
+        <feature name='odl-integration-compatible-with-groupbasedpolicy' version='${project.version}'>
+            <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
+            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
+        </feature>
 
     <!--
         * Reason why l2switch has compatibility issues with others:
@@ -115,12 +125,10 @@
             <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
         </feature>
 
-    <!-- Since Group Based Policy is not compatible with other flow programming apps,
-         and not compatible with other openstack apps,
-         it is appropriate to create compatible feature for Group Based Policy. -->
-        <feature name='odl-integration-compatible-with-groupbasedpolicy' version='${project.version}'>
+    <!-- TODO (add description here for SFC) -->
+        <feature name='odl-integration-compatible-with-ovs-sfc' description="OpenDaylight :: OVS :: Service Function Chaining" version='${project.version}'>
             <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-            <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
+            <feature version='0.0.1-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
         </feature>
 
     <!-- Since VTN Manager is not compatible with other flow programming apps,
@@ -130,10 +138,5 @@
         <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
     </feature>
-
-        <feature name='odl-integration-compatible-with-ovs-sfc' description="OpenDaylight :: OVS :: Service Function Chaining" version='${project.version}'>
-            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-            <feature version='0.0.1-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
-        </feature>
 
 </features>
