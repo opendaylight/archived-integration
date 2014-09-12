@@ -35,7 +35,7 @@
     <feature.vtn-manager.version>0.2.0-SNAPSHOT</feature.vtn-manager.version>
     <feature.bgp.version>0.3.1-SNAPSHOT</feature.bgp.version>
     <feature.packetcable.version>1.1-SNAPSHOT</feature.packetcable.version>
-    <feature.plugin2oc.version>0.1</feature.plugin2oc.version>
+    <feature.plugin2oc.version>0.1-SNAPSHOT</feature.plugin2oc.version>
     <karaf.branding.version>1.0.0-SNAPSHOT</karaf.branding.version>
     <karaf.version>3.0.1</karaf.version>
     <maven.surefire.version>2.16</maven.surefire.version>
@@ -220,7 +220,7 @@
         <dependency>
           <groupId>org.opendaylight.plugin2oc</groupId>
           <artifactId>features-plugin2oc</artifactId>
-          <version>0.1</version>
+          <version>0.1-SNAPSHOT</version>
           <classifier>features</classifier>
           <type>xml</type>
         </dependency>

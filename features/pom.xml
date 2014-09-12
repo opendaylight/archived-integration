@@ -100,7 +100,7 @@
     <dependency>
        <groupId>org.opendaylight.plugin2oc</groupId>
        <artifactId>features-plugin2oc</artifactId>
-       <version>0.1</version>
+       <version>0.1-SNAPSHOT</version>
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
