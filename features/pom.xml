@@ -158,6 +158,14 @@
     </dependency>
 
     <dependency>
+          <groupId>org.opendaylight.sfc</groupId>
+          <artifactId>features-sfcofl2</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+    </dependency>
+
+    <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>features-ovs-sfc</artifactId>
       <version>0.0.1-SNAPSHOT</version>
