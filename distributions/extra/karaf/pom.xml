@@ -25,6 +25,16 @@
       <artifactId>framework</artifactId>
       <version>${karaf.version}</version>
       <type>kar</type>
+      <exclusions>
+        <exclusion>
+          <groupId>org.osgi</groupId>
+          <artifactId>org.osgi.core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.sshd</groupId>
+          <artifactId>sshd-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!-- scope is runtime so the feature repo is listed in the features
       service config file, and features may be installed using the
@@ -70,6 +80,20 @@
       <version>6.0.0.0-SNAPSHOT</version>
       <type>tar.bz2</type>
       <classifier>bin</classifier>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -78,6 +102,20 @@
       <version>6.0.0.0-SNAPSHOT</version>
       <type>txt</type>
       <classifier>README</classifier>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 
@@ -165,6 +203,29 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <!-- here the phase you need -->
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/assembly</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/assembly</directory>
+                </resource>
+              </resources>
+              <overwrite>true</overwrite>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.karaf.tooling</groupId>
         <artifactId>karaf-maven-plugin</artifactId>
         <version>${karaf.version}</version>
@@ -177,6 +238,28 @@
           <!-- no installedFeatures -->
         </configuration>
         <executions>
+          <execution>
+            <id>populate-system</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>features-add-to-repository</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
+              </descriptors>
+              <features>
+                <feature>standard</feature>
+                <feature>config</feature>
+                <feature>package</feature>
+                <feature>kar</feature>
+                <feature>ssh</feature>
+                <feature>management</feature>
+                <feature>war</feature>
+              </features>
+              <repository>target/assembly/system</repository>
+            </configuration>
+          </execution>
           <execution>
             <id>process-resources</id>
             <goals>
