@@ -51,6 +51,7 @@
     
     <!-- Please add new repository in an alphabetical order -->
     <repository>mvn:org.opendaylight.aaa/features-aaa/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-authz/0.1.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-adsal/${feature.adsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-adsal-compatibility/1.4.2-SNAPSHOT/xml/features</repository>
@@ -67,6 +68,7 @@
     <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.plugin2oc/features-plugin2oc/0.1-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-restconf/${feature.mdsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.4.2-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/0.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfclisp/0.0.1-SNAPSHOT/xml/features</repository>
@@ -79,6 +81,7 @@
     <!-- Please use alphabetical order to add a compbatible with all feature -->
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
         <feature version='0.1.0-SNAPSHOT'>odl-aaa-all</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-aaa-authz</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
         <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
