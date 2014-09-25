@@ -36,6 +36,7 @@
     <feature.bgp.version>0.3.1-SNAPSHOT</feature.bgp.version>
     <feature.packetcable.version>1.1-SNAPSHOT</feature.packetcable.version>
     <feature.plugin2oc.version>0.1-SNAPSHOT</feature.plugin2oc.version>
+    <feature.tcpmd5.version>1.0.0-SNAPSHOT</feature.tcpmd5.version>
     <karaf.branding.version>1.0.0-SNAPSHOT</karaf.branding.version>
     <karaf.version>3.0.1</karaf.version>
     <maven.surefire.version>2.16</maven.surefire.version>
@@ -198,6 +199,14 @@
           <classifier>features</classifier>
           <type>xml</type>
        </dependency>
+
+        <dependency>
+          <groupId>org.opendaylight.tcpmd5</groupId>
+          <artifactId>features-tcpmd5</artifactId>
+          <version>${feature.tcpmd5.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
 
         <dependency>
           <groupId>org.opendaylight.bgpcep</groupId>
