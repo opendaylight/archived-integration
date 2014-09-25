@@ -393,6 +393,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
               </includeArtifactIds>
               <includeGroupIds>
                 org.opendaylight.bgpcep,
+                org.opendaylight.tcpmd5,
               </includeGroupIds>
               <excludeTransitive>true</excludeTransitive>
               <ignorePermissions>false</ignorePermissions>
