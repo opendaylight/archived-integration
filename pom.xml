@@ -6,7 +6,7 @@
   </prerequisites>
   <groupId>org.opendaylight.integration</groupId>
   <artifactId>root</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0-Helium</version>
   <name>OpenDaylight Integration Project</name>
   <packaging>pom</packaging>
   <url>https://wiki.opendaylight.org/view/CrossProject:Integration_Group</url>
@@ -19,25 +19,25 @@
   <properties>
     <nexusproxy>http://nexus.opendaylight.org/content</nexusproxy>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <feature.dlux.version>0.1.0-SNAPSHOT</feature.dlux.version>
-    <feature.mdsal.version>1.1-SNAPSHOT</feature.mdsal.version>
-    <feature.flow.version>1.1-SNAPSHOT</feature.flow.version>
-    <feature.yangtools.version>0.6.2-SNAPSHOT</feature.yangtools.version>
-    <feature.adsal.version>0.8.1-SNAPSHOT</feature.adsal.version>
-    <feature.nsf.version>0.4.2-SNAPSHOT</feature.nsf.version>
-    <feature.ovsdb.version>1.0.0-SNAPSHOT</feature.ovsdb.version>
-    <feature.ovsdb.openstack.version>1.0.0-SNAPSHOT</feature.ovsdb.openstack.version>
-    <feature.groupbasedpolicy.version>0.1.0-SNAPSHOT</feature.groupbasedpolicy.version>
-    <feature.lispflowmapping.version>1.1.11-SNAPSHOT</feature.lispflowmapping.version>
-    <feature.sfc.version>0.0.1-SNAPSHOT</feature.sfc.version>
-    <feature.snbi.version>1.0.0-SNAPSHOT</feature.snbi.version>
-    <feature.ttp.version>0.0.1-SNAPSHOT</feature.ttp.version>
-    <feature.vtn-manager.version>0.2.0-SNAPSHOT</feature.vtn-manager.version>
-    <feature.bgp.version>0.3.1-SNAPSHOT</feature.bgp.version>
-    <feature.packetcable.version>1.1-SNAPSHOT</feature.packetcable.version>
-    <feature.plugin2oc.version>0.1-SNAPSHOT</feature.plugin2oc.version>
-    <feature.tcpmd5.version>1.0.0-SNAPSHOT</feature.tcpmd5.version>
-    <karaf.branding.version>1.0.0-SNAPSHOT</karaf.branding.version>
+    <feature.dlux.version>0.1.0-Helium</feature.dlux.version>
+    <feature.mdsal.version>1.1-Helium</feature.mdsal.version>
+    <feature.flow.version>1.1-Helium</feature.flow.version>
+    <feature.yangtools.version>0.6.2-Helium</feature.yangtools.version>
+    <feature.adsal.version>0.8.1-Helium</feature.adsal.version>
+    <feature.nsf.version>0.4.2-Helium</feature.nsf.version>
+    <feature.ovsdb.version>1.0.0-Helium</feature.ovsdb.version>
+    <feature.ovsdb.openstack.version>1.0.0-Helium</feature.ovsdb.openstack.version>
+    <feature.groupbasedpolicy.version>0.1.0-Helium</feature.groupbasedpolicy.version>
+    <feature.lispflowmapping.version>1.1.11-Helium</feature.lispflowmapping.version>
+    <feature.sfc.version>0.0.1-Helium</feature.sfc.version>
+    <feature.snbi.version>1.0.0-Helium</feature.snbi.version>
+    <feature.ttp.version>0.0.1-Helium</feature.ttp.version>
+    <feature.vtn-manager.version>0.2.0-Helium</feature.vtn-manager.version>
+    <feature.bgp.version>0.3.1-Helium</feature.bgp.version>
+    <feature.packetcable.version>1.1-Helium</feature.packetcable.version>
+    <feature.plugin2oc.version>0.1-Helium</feature.plugin2oc.version>
+    <feature.tcpmd5.version>1.0.0-Helium</feature.tcpmd5.version>
+    <karaf.branding.version>1.0.0-Helium</karaf.branding.version>
     <karaf.version>3.0.1</karaf.version>
     <maven.surefire.version>2.16</maven.surefire.version>
     <checkstyle.version>2.12</checkstyle.version>
@@ -229,7 +229,7 @@
         <dependency>
           <groupId>org.opendaylight.plugin2oc</groupId>
           <artifactId>features-plugin2oc</artifactId>
-          <version>0.1-SNAPSHOT</version>
+          <version>0.1-Helium</version>
           <classifier>features</classifier>
           <type>xml</type>
         </dependency>

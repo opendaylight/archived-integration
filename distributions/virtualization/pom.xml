@@ -7,7 +7,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
   <parent>
     <groupId>org.opendaylight.integration</groupId>
     <artifactId>distributions</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0-Helium</version>
     <relativePath>../</relativePath>
   </parent>
 
@@ -22,7 +22,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.integration</groupId>
       <artifactId>distributions-base</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <version>0.2.0-Helium</version>
       <type>zip</type>
       <classifier>osgipackage</classifier>
       <!-- Make sure this isn't included on any classpath-->
@@ -33,12 +33,12 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>openstack.net-virt</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0-Helium</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>openstack.net-virt-providers</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0-Helium</version>
     </dependency>
 
     <!-- vtn -->
@@ -46,69 +46,36 @@ see https://git.opendaylight.org/gerrit/#/c/390/
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <version>0.2.0-Helium</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.implementation</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <version>0.2.0-Helium</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.neutron</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <version>0.2.0-Helium</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>manager.northbound</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <version>0.2.0-Helium</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>distribution.vtn-coordinator</artifactId>
-      <version>6.0.0.0-SNAPSHOT</version>
+      <version>6.0.0.0-Helium</version>
       <type>tar.bz2</type>
       <classifier>bin</classifier>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.vtn</groupId>
       <artifactId>distribution.vtn-coordinator</artifactId>
-      <version>6.0.0.0-SNAPSHOT</version>
+      <version>6.0.0.0-Helium</version>
       <type>txt</type>
       <classifier>README</classifier>
-    </dependency>
-
-    <!-- opendove -->
-
-    <dependency>
-      <groupId>org.opendaylight.opendove</groupId>
-      <artifactId>odmc</artifactId>
-      <version>0.5.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.opendove</groupId>
-      <artifactId>odmc.implementation</artifactId>
-      <version>0.5.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.opendove</groupId>
-      <artifactId>odmc.rest</artifactId>
-      <version>0.5.2-SNAPSHOT</version>
-    </dependency>
-
-
-    <dependency>
-      <groupId>org.opendaylight.opendove</groupId>
-      <artifactId>odmc.rest.northbound</artifactId>
-      <version>0.5.2-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.opendove</groupId>
-      <artifactId>odmc.rest.southbound</artifactId>
-      <version>0.5.2-SNAPSHOT</version>
     </dependency>
 
   </dependencies>
