@@ -78,6 +78,39 @@ see https://git.opendaylight.org/gerrit/#/c/390/
       <classifier>README</classifier>
     </dependency>
 
+    <!-- opendove -->
+
+    <dependency>
+      <groupId>org.opendaylight.opendove</groupId>
+      <artifactId>odmc</artifactId>
+      <version>0.5.2-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.opendove</groupId>
+      <artifactId>odmc.implementation</artifactId>
+      <version>0.5.2-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.opendove</groupId>
+      <artifactId>odmc.rest</artifactId>
+      <version>0.5.2-SNAPSHOT</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.opendaylight.opendove</groupId>
+      <artifactId>odmc.rest.northbound</artifactId>
+      <version>0.5.2-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opendaylight.opendove</groupId>
+      <artifactId>odmc.rest.southbound</artifactId>
+      <version>0.5.2-SNAPSHOT</version>
+    </dependency>
+
   </dependencies>
   <build>
     <resources>
