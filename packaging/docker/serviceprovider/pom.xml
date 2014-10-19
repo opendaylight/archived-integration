@@ -7,7 +7,7 @@
   </prerequisites>
   <groupId>org.opendaylight.integration</groupId>
   <artifactId>docker-serviceprovider</artifactId>
-  <version>0.2.0-Helium</version>
+  <version>0.2.1-SNAPSHOT</version>
   <name>OpenDaylight Docker Service Provider Edition Project</name>
   <packaging>pom</packaging>
    <build>
