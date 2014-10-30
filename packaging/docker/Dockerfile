@@ -1,18 +1,19 @@
 # Base the image on Debian 7
-# Picked Debian because it's small
+# Picked Debian because it's small (85MB)
 # https://registry.hub.docker.com/_/debian/
 FROM debian:7
 MAINTAINER OpenDaylight Project <info@opendaylight.org>
 
-# Install required software
+# Install required software (170MB)
 RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget
 
 # Download and install ODL
 WORKDIR /opt
-RUN wget -q "http://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.0-Helium/distribution-karaf-0.2.0-Helium.tar.gz"
 RUN mkdir opendaylight
-RUN tar -xf distribution-karaf-0.2.0-Helium.tar.gz -C opendaylight --strip-components=1
-RUN rm -rf distribution-karaf-0.2.0-Helium.tar.gz
+# Doing all of these in one step reduces the resulting image size by 229MB
+RUN wget -q "http://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.0-Helium/distribution-karaf-0.2.0-Helium.tar.gz" && \
+    tar -xf distribution-karaf-0.2.0-Helium.tar.gz -C opendaylight --strip-components=1 && \
+    rm -rf distribution-karaf-0.2.0-Helium.tar.gz
 
 # TODO: Verify that these are all of the ODL Helium ports and no extra
 # Ports
