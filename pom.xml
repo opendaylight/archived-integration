@@ -45,6 +45,7 @@
   <modules>
     <module>distributions/</module>
     <module>features/</module>
+    <module>feature-selector</module>
   </modules>
 
   <repositories>
@@ -257,7 +258,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>{$maven.surefire.version}</version>
+          <version>${maven.surefire.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

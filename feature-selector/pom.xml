@@ -1,15 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.opendaylight.release</groupId>
+  <parent>
+      <groupId>org.opendaylight.integration</groupId>
+      <artifactId>root</artifactId>
+      <version>0.2.1-SNAPSHOT</version>
+      <relativePath>../</relativePath>
+  </parent>
   <artifactId>feature-selector</artifactId>
   <packaging>war</packaging>
-  <version>0.1.0-SNAPSHOT</version>
-  <name>feature-selector Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <name>feature-selector Webapp</name>
   <properties>
       <spring.version>3.1.3.RELEASE</spring.version>
       <jackson.version>1.9.10</jackson.version>
+      <jstl.version>1.1.2</jstl.version>
+      <servlet.version>2.5</servlet.version>
   </properties>
   <build>
     <finalName>feature-selector</finalName>
@@ -53,18 +58,18 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
 
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
-            <version>1.1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${servlet.version}</version>
         </dependency>
     </dependencies>
 </project>
