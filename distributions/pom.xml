@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.opendaylight.integration</groupId>
     <artifactId>root</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>0.2.1-Helium-SR1</version>
     <relativePath>../</relativePath>
   </parent>
   <artifactId>distributions</artifactId>
