@@ -81,7 +81,7 @@
 
     <!-- Please use alphabetical order to add a compbatible with all feature -->
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
-        <feature version='0.2.0-SNAPSHOT'>odl-aaa-all</feature>
+        <!-- <feature version='0.2.0-SNAPSHOT'>odl-aaa-all</feature> -->
         <feature version='0.2.0-SNAPSHOT'>odl-aaa-authz</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
