@@ -4,7 +4,7 @@
   <parent>
       <groupId>org.opendaylight.integration</groupId>
       <artifactId>root</artifactId>
-      <version>0.2.1-Helium-SR1</version>
+      <version>0.2.1-Helium-SR1.1</version>
       <relativePath>../</relativePath>
   </parent>
   <artifactId>feature-selector</artifactId>

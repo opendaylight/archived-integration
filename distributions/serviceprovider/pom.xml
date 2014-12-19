@@ -9,7 +9,7 @@ see https://git.opendaylight.org/gerrit/#/c/390/
   <parent>
     <groupId>org.opendaylight.integration</groupId>
     <artifactId>distributions</artifactId>
-    <version>0.2.1-Helium-SR1</version>
+    <version>0.2.1-Helium-SR1.1</version>
     <relativePath>../</relativePath>
   </parent>
 
@@ -18,18 +18,18 @@ see https://git.opendaylight.org/gerrit/#/c/390/
   <name>OpenDaylight Service Provider Edition</name>
 
   <properties>
-    <bgpcep.version>0.3.2-Helium-SR1</bgpcep.version>
+    <bgpcep.version>0.3.2-Helium-SR1.1</bgpcep.version>
     <lispflowmapping.version>1.1.10</lispflowmapping.version>
-    <tcpmd5.version>1.0.1-Helium-SR1</tcpmd5.version>
+    <tcpmd5.version>1.0.1-Helium-SR1.1</tcpmd5.version>
 
-    <ietf.topology.version>2013.10.21.2.1-Helium-SR1</ietf.topology.version>
+    <ietf.topology.version>2013.10.21.2.1-Helium-SR1.1</ietf.topology.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.opendaylight.integration</groupId>
       <artifactId>distributions-base</artifactId>
-      <version>0.2.1-Helium-SR1</version>
+      <version>0.2.1-Helium-SR1.1</version>
       <type>zip</type>
       <classifier>osgipackage</classifier>
       <!-- Make sure this isn't included on any classpath-->
