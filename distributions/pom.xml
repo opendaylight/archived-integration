@@ -14,7 +14,7 @@
   <name>OpenDaylight Distributions</name>
   <packaging>pom</packaging>
   <modules>
-    <module>extra/karaf</module>
+    <module>karaf</module>
   </modules>
   <profiles>
     <profile>
