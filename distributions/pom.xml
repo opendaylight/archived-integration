@@ -15,6 +15,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>karaf</module>
+    <module>test</module>
   </modules>
   <profiles>
     <profile>
