@@ -7,7 +7,7 @@
   <groupId>org.opendaylight.integration</groupId>
   <artifactId>root</artifactId>
   <version>0.2.2-SNAPSHOT</version>
-  <name>OpenDaylight Integration Project</name>
+  <name>integration</name> <!-- Used by Sonar to set project name -->
   <packaging>pom</packaging>
   <url>https://wiki.opendaylight.org/view/CrossProject:Integration_Group</url>
   <scm>
