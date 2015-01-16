@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vi: set et smarttab sw=4 tabstop=4: -->
+<!--
+ Copyright (c) 2014 Cisco Systems, Inc. and others.  All rights reserved.
+
+ This program and the accompanying materials are made available under the
+ terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ and is available at http://www.eclipse.org/legal/epl-v10.html
+-->
+<features name="odl-integration-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+
+    <!--
+        Concept:
+            This file is a registry of feature repos defined in the projects.
+
+            The intent is to provide a single usable index that will pull in all available features in ODL.
+
+            No features should be defined here, only <repositories> should be listed.
+
+        Directions:
+            1) Make sure your feature file is running the tests and passing them in master:
+                https://wiki.opendaylight.org/view/Karaf:Hands_On_Guide#Existing_Feature_Files
+            2) Add your <repository> below
+            3) Go to the ../pom.xml and
+                a)  Add a dependendy for your feature
+                b)  DO NOT ADD ANYTHING TO THE BOOTFEATURES.
+    -->
+
+
+    <!-- Please add new repository in an alphabetical order -->
+    <repository>mvn:org.opendaylight.aaa/features-aaa/0.2.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-aaa-authz/0.2.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-aaa-api/0.2.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgp.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-adsal/${feature.adsal.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-adsal-compatibility/1.5.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-mdsal/${feature.mdsal.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-netconf-connector/${feature.mdsal.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-nsf/${feature.nsf.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.dlux/features-dlux/${feature.dlux.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.groupbasedpolicy/features-groupbasedpolicy/${feature.groupbasedpolicy.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.2.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.plugin2oc/features-plugin2oc/0.2.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-restconf/${feature.mdsal.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.5.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfc/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfclisp/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfcofl2/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.snbi/features-snbi/${feature.snbi.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.snmp4sdn/features-snmp4sdn/0.2.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.tcpmd5/features-tcpmd5/${feature.tcpmd5.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
+</features>

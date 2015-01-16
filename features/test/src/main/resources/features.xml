@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vi: set et smarttab sw=4 tabstop=4: -->
+<!--
+ Copyright (c) 2014 Cisco Systems, Inc. and others.  All rights reserved.
+
+ This program and the accompanying materials are made available under the
+ terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ and is available at http://www.eclipse.org/legal/epl-v10.html
+-->
+<features name="odl-integration-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+
+    <!--
+        Concept:
+            This file is a registry of features defined in the projects for use in integration testing.
+
+            The intent is to capture high level (not low level features).  This means a project
+            may have features that are not listed here.  That is fine.  Only the stuff you think
+            end users would want to install should be indexed here.
+
+            There are two kinds of features defined here:
+
+            odl-integration-compatible-with-all - to list high level features that don't have compatibility
+                issues
+
+            odl-integration-all - to list all features available in OpenDaylighthigh level features
+                that have compatibility issues with some other features.  This feature includes
+                odl-integration-compatible-with-all
+
+        Directions:
+            1) Make sure your feature file is running the tests and passing them in master:
+                https://wiki.opendaylight.org/view/Karaf:Hands_On_Guide#Existing_Feature_Files
+            2) Add your <repository> to integration/features/index/src/main/resources/features.xml
+            3) If and ONLY if your top level feature is compatible with everything, add it to
+                odl-integration-compatible-with-all
+            4) If and ONLY if your top level feature is incompatible with other things, add it to
+                odl-integration-all
+            5) Go to the ../pom.xml and
+                a)  Add a dependendy for your feature
+                b)  DO NOT ADD ANYTHING TO THE BOOTFEATURES.
+
+            Important note: None of the features defined in this file will be in the integration/karaf build by default
+                            because that is what we ship, and test features should not by default ship.
+                            Please be aware that the features pulled in via features-integration-repo from the projects
+                            *will* be.  Its only these aggregating test features that will be missing.
+                            If you need to have these test features defined in this file (for example if you are doing
+                            integration testing) then:
+                            cd integration/distributions/karaf
+                            perl -i -pe "s/features-integration-index/features-integration-test/" target/assembly/etc/org.apache.karaf.features.cfg
+                            and they will be present and availble
+    -->
+    <!-- The features-integration-index should be the one and only repository in this file.
+        If you think another repository is needed, please add it to integration/features/index/src/main/resource/features.xml
+    -->
+    <repository>mvn:org.opendaylight.integration/features-integration-index/${project.version}/xml/features</repository>
+
+    <!-- Please use alphabetical order to add a compatible with all features -->
+    <feature name='odl-integration-compatible-with-all' version='${project.version}'>
+        <feature version='0.2.0-SNAPSHOT'>odl-aaa-api</feature>
+        <feature version='0.2.0-SNAPSHOT'>odl-aaa-authn</feature>
+        <feature version='0.2.0-SNAPSHOT'>odl-aaa-authz</feature>
+        <feature version='0.2.0-SNAPSHOT'>odl-aaa-sssd-plugin</feature>
+        <feature version='0.2.0-SNAPSHOT'>odl-aaa-netconf-plugin</feature>
+        <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
+        <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
+        <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
+        <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
+        <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
+        <feature version='1.2.0-SNAPSHOT'>odl-mdsal-broker</feature>
+        <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
+        <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-openflow-nxm-extensions</feature>
+        <feature version='0.6.0-SNAPSHOT'>odl-openflowjava-protocol</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-openflowplugin-flow-services</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-openflowplugin-flow-services-rest</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-openflowplugin-flow-services-ui</feature>
+        <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
+        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
+        <feature version="1.5.0-SNAPSHOT">odl-sdninterfaceapp-all</feature>
+        <feature version='1.2.0-SNAPSHOT'>odl-restconf</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-sfc-all</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-sfclisp</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-sfcofl2</feature>
+        <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
+        <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
+        <feature version='0.2.0-SNAPSHOT'>odl-snmp4sdn-all</feature>
+        <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
+    </feature>
+
+    <!-- Please use aphabetical order for non-compatible features -->
+    <feature name='odl-integration-all' version='${project.version}'>
+         <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
+         <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
+         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch</feature>
+         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-rest</feature>
+         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-ui</feature>
+         <feature version='0.2.0-SNAPSHOT'>odl-plugin2oc</feature>
+         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
+        <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
+    </feature>
+
+</features>
