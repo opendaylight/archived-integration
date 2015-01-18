@@ -4,11 +4,19 @@ The `Dockerfile` in this directory can be used to construct a Docker image for t
 ### OpenDaylight on DockerHub
 A pre-built OpenDaylight Helium image is available on DockerHub. You can find it with `docker search opendaylight`:
 
-TODO: Show example once ODL Helium image is on DockerHub
+```
+bash-3.2$ docker search opendaylight
+opendaylight/base-edition  [OK]
+```
 
-You can then pull it to your local system with `docker pull opendaylight/helium`:
+You can then pull it to your local system with `docker pull opendaylight/base-edition`:
 
-TODO: Show example once ODL Helium image is on DockerHub
+```
+bash-3.2$ docker pull opendaylight/base-edition
+Pulling repository opendaylight/base-edition
+bdb00218444a: Download complete 
+Status: Downloaded newer image for opendaylight/base-edition:latest
+```
 
 ### Using the Image
 To run commands against Dockerized OpenDaylight, use `docker run`. `WORKDIR` is set to the root of ODL's install directory, `/opt/opendaylight`. Commands passed to `docker run` should be relative to that path.
