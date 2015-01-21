@@ -70,11 +70,11 @@
         <feature version='1.2.0-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
         <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
-        <feature version='0.1.0-SNAPSHOT'>odl-openflow-nxm-extensions</feature>
         <feature version='0.6.0-SNAPSHOT'>odl-openflowjava-protocol</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-openflowplugin-flow-services</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-openflowplugin-flow-services-rest</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-openflowplugin-flow-services-ui</feature>
+        <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-nxm-extensions</feature>
         <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version="1.5.0-SNAPSHOT">odl-sdninterfaceapp-all</feature>
