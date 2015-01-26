@@ -46,6 +46,13 @@
     </dependency>
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-neutron</artifactId>
+      <version>${feature.neutron.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
       <artifactId>features-adsal</artifactId>
       <classifier>features</classifier>
       <type>xml</type>
