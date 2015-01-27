@@ -1,86 +1,76 @@
-# Spec file only supports RHEL and Fedora now
-%if 0%{?rhel} || 0%{?fedora}
+# jar_repack step takes a long time and doesn't seem to be necessary, so skip
+%define __jar_repack 0
 
-Name: opendaylight
-Version: 0.1.0
-Release: 0.7.0%{?dist}
-Summary: OpenDaylight SDN Controller Platform
-Group: Applications/Communications
-License: EPL
-URL: http://www.opendaylight.org
-BuildArch: noarch
+# Update this commit if systemd unit file is updated
+%global commit 520321a932a15392a67f45bae52e879c703a2c85
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
 
-Requires: opendaylight-controller
-Requires: opendaylight-controller-dependencies
-Requires: opendaylight-openflowjava
-Requires: opendaylight-openflowplugin
-Requires: opendaylight-ovsdb
-Requires: opendaylight-yangtools
+Name:       opendaylight
+Version:    0.2.1
+Release:    5%{?dist}
+Summary:    OpenDaylight SDN Controller
+
+Group:      Applications/Communications
+License:    EPL-1.0
+URL:        http://www.opendaylight.org
+BuildArch:  noarch
+Source0:    https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1.1/distribution-karaf-0.2.1-Helium-SR1.1.tar.gz
+Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/b080cdc/opendaylight-systemd-%{shortcommit}.tar.gz
+Buildroot:  /tmp
+
+# Required for ODL at run time
+Requires:   java >= 1:1.7.0
+# Required for creating odl group
+Requires(pre): shadow-utils
+# Required for configuring systemd
+BuildRequires: systemd
+
+%pre
+# Create `odl` user/group
+# Short circuits if the user/group already exists
+getent passwd odl > /dev/null || useradd odl -M
+getent group odl > /dev/null || groupadd odl
 
 %description
-The OpenDaylight SDN Controller Platform provides the core
-services and abstractions needed for building an SDN controller.
+OpenDaylight Helium SR1.1 (0.2.1)
 
-The Base edition of OpenDaylight is designed for testing and experimental
-purposes.
+%prep
+# Extract Source0 (ODL archive)
+%autosetup -n distribution-karaf-0.2.1-Helium-SR1.1
+# Extract Source1 (systemd config)
+%autosetup -T -D -b 1 -n opendaylight-systemd-%{commit}
 
-%package virtualization
-Summary: OpenDaylight SDN Controller Platform Virtualization Edition
-Group: Applications/Communications
-Requires: %{name}
-Requires: opendaylight-affinity
-#Requires: opendaylight-defense4all
-Requires: opendaylight-opendove-odmc
-#Requires: opendaylight-vtn
+%install
+# Create directory in build root for ODL
+mkdir -p $RPM_BUILD_ROOT/opt/%name-%version
+# Move ODL from archive to its dir in build root
+cp -r ../distribution-karaf-0.2.1-Helium-SR1.1/* $RPM_BUILD_ROOT/opt/%name-%version
+# Create directory in build root for systemd .service file
+mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
+# Move ODL's systemd .service file to correct dir in build root
+cp ../../BUILD/opendaylight-systemd-%{commit}/opendaylight.service $RPM_BUILD_ROOT/%{_unitdir}
 
-%description virtualization
-The Virtualization edition of OpenDaylight is geared towards data centers.
-It includes the OVSDB protocol southbound and the Affinity Service, VTN,
-DOVE, and the OpenStack Service.
-
-%package serviceprovider
-Summary: OpenDaylight SDN Controller Platform Virtualization Edition
-Group: Applications/Communications
-Requires: %{name}
-Requires: opendaylight-affinity
-Requires: opendaylight-bgpcep
-#Requires: opendaylight-defense4all
-Requires: opendaylight-lispflowmapping
-Requires: opendaylight-snmp4sdn
-
-%description serviceprovider
-The Service Provider edition of OpenDaylight is designed for network operator
-use. It does not include OVSDB, VTN or DOVE, but does include SNMP, BGP-LS,
-PCEP, and LISP southbound and the Affinity Service and the LISP Service northbound.
+%postun
+# When the RPM is removed, the subdirs containing new files wouldn't normally
+#   be deleted. Manually clean them up.
+#   Warning: This does assume there's no data there that should be persevered
+rm -rf $RPM_BUILD_ROOT/opt/%name-%version
 
 %files
+# ODL uses systemd to run as user:group odl:odl
+%attr(0775,odl,odl) /opt/%name-%version/
+# Configure systemd
+%attr(0644,-,-) %{_unitdir}/%name.service
 
-%files virtualization
-
-%files serviceprovider
-
-%endif
 
 %changelog
-* Tue May 13 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.7.0
-- Include opendaylight-opendove-odmc to virtualization edition.
-
-* Sun Feb 09 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.6.0
-- Add affinity and snmp4sdn packages.
-
-* Sat Feb 08 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.5.0
-- Add yangtools package.
-
-* Sat Feb 01 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.4.0
-- Changed package name to opendaylight.
-- Added edition sub packages.
-
-* Sat Jan 18 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.3.0
-- Removed controller-dependencies from Requires because controller already pulls it in.
-
-* Thu Jan 09 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.2.0
-- Updates for OF1.3 support.
-- Remove java Requires.
-
-* Thu Jan 02 2014 Sam Hague <shague@redhat.com> - 0.1.0-0.1.0
-- Initial package.
+* Tue Jan 13 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-5
+- Set ODL ownership to odl:odl vs root:odl
+* Mon Jan 12 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-4
+- Added systemd config as a source
+* Sat Jan 10 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-3
+- Completely clean up ODL after uninstall
+* Fri Jan 9 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-2
+- Added systemd configuration
+* Tue Dec 16 2014 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-1
+- Initial Karaf-based RPM
