@@ -234,6 +234,14 @@
       <type>xml</type>
     </dependency>
 
+    <dependency>
+      <groupId>org.opendaylight.topoprocessing</groupId>
+      <artifactId>features-topoprocessing</artifactId>
+      <version>${feature.topoprocessing.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+
 
     <!-- test to validate features.xml -->
     <dependency>
