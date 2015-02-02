@@ -1,6 +1,6 @@
 Everything required for building the Karaf OpenDaylight RPM.
 
-Note that the currently supported version is Helium SR1.1.
+Note that the currently supported version is Helium SR2.
 
 ## Building the RPM
 
