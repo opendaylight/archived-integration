@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget
 WORKDIR /opt
 RUN mkdir opendaylight
 # Doing all of these in one step reduces the resulting image size by 229MB
-RUN wget -q "http://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1/distribution-karaf-0.2.1-Helium-SR1.tar.gz" && \
-    tar -xf distribution-karaf-0.2.1-Helium-SR1.tar.gz -C opendaylight --strip-components=1 && \
-    rm -rf distribution-karaf-0.2.1-Helium-SR1.tar.gz
+RUN wget -q "http://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.2-Helium-SR2/distribution-karaf-0.2.2-Helium-SR2.tar.gz" && \
+    tar -xf distribution-karaf-0.2.2-Helium-SR2.tar.gz -C opendaylight --strip-components=1 && \
+    rm -rf distribution-karaf-0.2.2-Helium-SR2.tar.gz
 
 # TODO: Verify that these are all of the ODL Helium ports and no extra
 # Ports
