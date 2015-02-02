@@ -2,11 +2,12 @@
 
 # Common paths used in this script
 # NB: Name will need to be updated for both ODL and RMP version bumps
-rpm_name="opendaylight-0.2.1-5.fc20.noarch.rpm"
+rpm_name="opendaylight-0.2.2-1.fc20.noarch.rpm"
 rpm_out_path="$HOME/rpmbuild/RPMS/noarch/$rpm_name"
-src_name="distribution-karaf-0.2.1-Helium-SR1.1.tar.gz"
-src_cache_path="$HOME/$src_name"
-sysd_commit=520321a
+src_name="distribution-karaf-0.2.2-Helium-SR2.tar.gz"
+src_cache_path0="$HOME/$src_name"
+src_cache_path1="/vagrant/$src_name"
+sysd_commit=f984005
 
 # Install required software, add user to mock group for rpmbuild
 sudo yum install -y @development-tools fedora-packager
@@ -16,12 +17,15 @@ sudo usermod -a -G mock $USER
 rpmdev-setuptree
 
 # Put ODL source archive location required by rpmbuild
-if [ -f  $src_cache_path ]; then
-    echo "Using cached version of ODL at $src_cache_path"
-    cp $src_cache_path $HOME/rpmbuild/SOURCES/$src_name
+if [ -f  $src_cache_path0 ]; then
+    echo "Using cached version of ODL at $src_cache_path0"
+    cp $src_cache_path0 $HOME/rpmbuild/SOURCES/$src_name
+elif [ -f  $src_cache_path1 ]; then
+    echo "Using cached version of ODL at $src_cache_path1"
+    cp $src_cache_path1 $HOME/rpmbuild/SOURCES/$src_name
 else
     echo "No cached ODL found, downloading from Nexus..."
-    curl -o $HOME/rpmbuild/SOURCES/$src_name https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1.1/$src_name
+    curl -o $HOME/rpmbuild/SOURCES/$src_name https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.2-Helium-SR2/$src_name
 fi
 
 # Put systemd unit file archive in rpmbuild's SOURCES dir
