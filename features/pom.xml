@@ -13,7 +13,7 @@
    <parent>
       <groupId>org.opendaylight.integration</groupId>
       <artifactId>root</artifactId>
-      <version>0.2.2-SNAPSHOT</version>
+      <version>0.2.2-Helium-SR2</version>
       <relativePath>../</relativePath>
    </parent>
    <artifactId>features-integration</artifactId>
@@ -71,7 +71,7 @@
     <dependency>
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>features-openflowplugin</artifactId>
-      <version>0.0.5-SNAPSHOT</version>
+      <version>0.0.5-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -85,21 +85,21 @@
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>features-openflow-nxm</artifactId>
-      <version>0.0.5-SNAPSHOT</version>
+      <version>0.0.5-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.l2switch</groupId>
       <artifactId>features-l2switch</artifactId>
-      <version>0.1.2-SNAPSHOT</version>
+      <version>0.1.2-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>features-adsal-compatibility</artifactId>
-      <version>1.4.4-SNAPSHOT</version>
+      <version>1.4.4-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -107,7 +107,7 @@
     <dependency>
        <groupId>org.opendaylight.plugin2oc</groupId>
        <artifactId>features-plugin2oc</artifactId>
-       <version>0.1.2-SNAPSHOT</version>
+       <version>0.1.2-Helium-SR2</version>
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
@@ -116,14 +116,14 @@
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
       <artifactId>features-aaa</artifactId>
-      <version>0.1.2-SNAPSHOT</version>
+      <version>0.1.2-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
       <artifactId>features-authz</artifactId>
-      <version>0.1.2-SNAPSHOT</version>
+      <version>0.1.2-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -158,7 +158,7 @@
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfc</artifactId>
-      <version>0.0.3-SNAPSHOT</version>
+      <version>0.0.3-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -166,7 +166,7 @@
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfclisp</artifactId>
-      <version>0.0.3-SNAPSHOT</version>
+      <version>0.0.3-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -174,7 +174,7 @@
     <dependency>
           <groupId>org.opendaylight.sfc</groupId>
           <artifactId>features-sfcofl2</artifactId>
-          <version>0.0.3-SNAPSHOT</version>
+          <version>0.0.3-Helium-SR2</version>
           <classifier>features</classifier>
           <type>xml</type>
     </dependency>
@@ -182,7 +182,7 @@
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>features-ovs-sfc</artifactId>
-      <version>0.0.3-SNAPSHOT</version>
+      <version>0.0.3-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -207,7 +207,7 @@
     <dependency>
       <groupId>org.opendaylight.snmp4sdn</groupId>
       <artifactId>features-snmp4sdn</artifactId>
-      <version>0.1.5-SNAPSHOT</version>
+      <version>0.1.5-Helium-SR2</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -215,7 +215,7 @@
     <dependency>
       <groupId>org.opendaylight.sdninterfaceapp</groupId> 
       <artifactId>features-sdninterfaceapp</artifactId> 
-      <version>1.4.4-SNAPSHOT</version> 
+      <version>1.4.4-Helium-SR2</version> 
       <classifier>features</classifier> 
       <type>xml</type> 
     </dependency>
@@ -225,13 +225,13 @@
     <dependency>
       <groupId>org.opendaylight.yangtools</groupId>
       <artifactId>features-test</artifactId>
-      <version>0.6.4-SNAPSHOT</version>
+      <version>0.6.4-Helium-SR2</version>
     </dependency>
     <!-- dependency for opendaylight-karaf-empty for use by testing -->
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>opendaylight-karaf-empty</artifactId>
-      <version>1.4.4-SNAPSHOT</version>
+      <version>1.4.4-Helium-SR2</version>
       <type>zip</type>
     </dependency>
    </dependencies>
@@ -304,7 +304,7 @@
               <systemPropertyVariables>
                 <karaf.distro.groupId>org.opendaylight.controller</karaf.distro.groupId>
                 <karaf.distro.artifactId>opendaylight-karaf-empty</karaf.distro.artifactId>
-                <karaf.distro.version>1.4.4-SNAPSHOT</karaf.distro.version>
+                <karaf.distro.version>1.4.4-Helium-SR2</karaf.distro.version>
               </systemPropertyVariables>
               <dependenciesToScan>
                <dependency>org.opendaylight.yangtools:features-test</dependency>
