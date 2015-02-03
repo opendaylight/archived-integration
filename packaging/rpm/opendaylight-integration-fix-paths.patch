@@ -1,0 +1,18 @@
+diff -uNr opendaylight-integration-0.1.0/distributions/base/src/assemble/resources/run.sh opendaylight-integration-0.1.0p/distributions/base/src/assemble/resources/run.sh
+--- opendaylight-integration-0.1.0/distributions/base/src/assemble/resources/run.sh	2014-01-22 17:37:08.000000000 -0500
++++ opendaylight-integration-0.1.0p/distributions/base/src/assemble/resources/run.sh	2014-01-22 17:40:53.706000212 -0500
+@@ -42,4 +42,4 @@
+ FILTER=${FILTERBEGINING}${OF_FILTER}${BUNDLEFILTER}${FILTERENDING}
+ 
+ # Run the command
+-$CONTROLLER_RUNSH -Dfelix.fileinstall.filter="$FILTER" $NEWARGS
++/usr/share/opendaylight-controller/run.internal.sh -Dfelix.fileinstall.filter="$FILTER" $NEWARGS
+diff -uNr opendaylight-integration-0.1.0/distributions/virtualization/src/assemble/resources/run.sh opendaylight-integration-0.1.0p/distributions/virtualization/src/assemble/resources/run.sh
+--- opendaylight-integration-0.1.0/distributions/virtualization/src/assemble/resources/run.sh	2014-01-22 17:37:08.000000000 -0500
++++ opendaylight-integration-0.1.0p/distributions/virtualization/src/assemble/resources/run.sh	2014-01-22 17:40:31.513958423 -0500
+@@ -34,4 +34,4 @@
+     fi
+ fi
+ 
+-$RUN_BASE_SH -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"
++/usr/share/opendaylight-controller/run.base.sh -bundlefilter "org.opendaylight.(${ODL_VIRT_FILTER})" "${@:1:$virtIndex-1}" "${@:virtIndex+2}"

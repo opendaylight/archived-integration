@@ -1,0 +1,213 @@
+The Fedora RPM spec is a work in progress. The current spec can build an
+RPM package for Fedora that still relies on Maven to include the JAVA
+artifacts. The plan is to create a dependencies RPM to package up all the
+artifacts.
+
+Release 0.1.0-0.7.0
+--------------------------------------------------------------------------------
+1. Build
+cd ~/git/controller
+git archive --prefix=opendaylight-controller-0.1.0/ HEAD | xz > ../opendaylight-controller-0.1.0.tar.xz
+cd ~/git/integration
+git archive --prefix=opendaylight-integration-0.1.0/ HEAD | xz > ../opendaylight-integration-0.1.0.tar.xz
+cd ~/git/ovsdb
+git archive --prefix=opendaylight-ovsdb-0.1.0/ HEAD | xz > ../opendaylight-ovsdb-0.1.0.tar.xz
+cd ~/git/openflowjava
+git archive --prefix=opendaylight-openflowjava-0.1.0/ HEAD | xz > ../opendaylight-openflowjava-0.1.0.tar.xz
+cd ~/git/openflowplugin
+git archive --prefix=opendaylight-openflowplugin-0.1.0/ HEAD | xz > ../opendaylight-openflowplugin-0.1.0.tar.xz
+cd ..
+cp opendaylight-controller-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-integration-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-ovsdb-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-openflowjava-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-openflowplugin-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp intergration/packaging/rpm/opendaylight-integration-fix-paths.patch ~/rpmbuild/SOURCES/
+rpmbuild -bb --noclean opendaylight-controller.spec
+rpmbuild -bb --noclean opendaylight-ovsdb.spec
+rpmbuild -bb --noclean opendaylight-openflowjava.spec
+rpmbuild -bb --noclean opendaylight-openflowplugin.spec
+cp ~/rpmbuild/BUILD/opendaylight-controller-0.1.0/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip ~/rpmbuild/SOURCES/opendaylight-controller-0.1.0.zip
+cp ~/rpmbuild/BUILD/opendaylight-ovsdb-0.1.0/distribution/opendaylight/target/distribution.ovsdb-1.0.0-SNAPSHOT-osgipackage.zip ~/rpmbuild/SOURCES/opendaylight-ovsdb-0.1.0.zip
+rpmbuild -bb --noclean opendaylight-controller-dependencies.spec
+rpmbuild -bb --noclean opendaylight-distribution.spec
+
+2. Install
+rpm -Uvh ~/rpmbuild/RPMS/noarch/*.rpm
+
+3. Enable
+sudo systemctl enable opendaylight-controller.service
+
+4. Start/stop
+sudo systemctl start opendaylight-controller.service
+sudo systemctl stop opendaylight-controller.service
+* to get the osgi console: telnet 127.0.0.1 2400
+
+5. Distribution
+Edit the sysconfig file to change the type of distribution:
+sudo vi /etc/sysconfig/opendaylight-controller
+Set ODL_DIST to the desired distribution, i.e.
+ODL_DIST="virt-ovsdb"
+
+# Use the following table to select the distribution:
+# Distribution             Value
+# --------------------     -----------
+# base                     base
+# virtualization ovsdb     virt-ovsdb
+# virtualization vtn       virt-vtn
+# virtualization opendove  virt-opendove
+# service provider         sp
+ODL_DIST="virt-ovsdb"
+
+# Any additional options required.
+# I.E. -of13, -debug, or -console
+ODL_OPTS=""
+
+Release 0.1.0-0.6.0
+--------------------------------------------------------------------------------
+1. Build
+cd ~/git/controller
+git archive --prefix=opendaylight-controller-0.1.0/ HEAD | xz > ../opendaylight-controller-0.1.0.tar.xz
+cd ~/git/integration
+git archive --prefix=opendaylight-integration-0.1.0/ HEAD | xz > ../opendaylight-integration-0.1.0.tar.xz
+cd ~/git/ovsdb
+git archive --prefix=opendaylight-ovsdb-0.1.0/ HEAD | xz > ../opendaylight-ovsdb-0.1.0.tar.xz
+cd ..
+cp opendaylight-controller-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-integration-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp opendaylight-ovsdb-0.1.0.tar.xz ~/rpmbuild/SOURCES
+cp ~/git/integration/packaging/rpm/opendaylight-integration-fix-paths.path ~/rpmbuild/SOURCES
+rpmbuild -bb --noclean opendaylight-controller.spec
+rpmbuild -bb --noclean opendaylight-ovsdb.spec
+cp ~/rpmbuild/BUILD/opendaylight-controller-0.1.0/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage.zip ~/rpmbuild/SOURCES/opendaylight-controller-0.1.0.zip
+cp ~/rpmbuild/BUILD/opendaylight-ovsdb-0.1.0/distribution/opendaylight/target/distribution.ovsdb-1.0.0-SNAPSHOT-osgipackage.zip ~/rpmbuild/SOURCES/opendaylight-ovsdb-0.1.0.zip
+rpmbuild -bb --noclean opendaylight-controller-dependencies.spec
+rpmbuild -bb --noclean opendaylight-distribution.spec
+
+2. Install
+rpm -Uvh ~/rpmbuild/RPMS/noarch/*.rpm
+
+3. Enable
+sudo systemctl enable opendaylight-controller.service
+
+4. Start/stop
+sudo systemctl start opendaylight-controller.service
+sudo systemctl stop opendaylight-controller.service
+* to get the osgi console: telnet 127.0.0.1 2400
+
+5. Distribution
+Edit the sysconfig file to change the type of distribution:
+sudo vi /etc/sysconfig/opendaylight-controller
+Set ODL_DIST to the desired distribution, i.e.
+ODL_DIST="virt-ovsdb"
+
+# Use the following table to select the distribution:
+# Distribution             Value
+# --------------------     -----------
+# base                     base
+# virtualization ovsdb     virt-ovsdb
+# virtualization vtn       virt-vtn
+# virtualization opendove  virt-opendove
+# service provider         sp
+ODL_DIST="virt-ovsdb"
+
+# Any additional options required.
+# I.E. -of13, -debug, or -console
+ODL_OPTS=""
+
+Release 0.1.0-0.4.0
+--------------------------------------------------------------------------------
+1. Build
+Build all the required packages:
+rpmbuild opendaylight-controller.spec
+rpmbuild opendaylight-ovsdb.spec
+rpmbuild opendaylight-dependencies.spec
+rpmbuild opendaylight-distribution.spec
+
+2. Install
+rpm -Uvh opendaylight-distribution
+* This will install all required packages.
+
+3. Start/Stop
+sudo systemctl start opendaylight-controller.service
+sudo systemctl stop opendaylight-controller.service
+* to get the osgi console: telnet 127.0.0.1 2400
+
+4. Distribution
+Edit the sysconfig file to change the type of distribution:
+sudo vi /etc/sysconfig/opendaylight-controller
+Set ODL_DIST to the desired distribution, i.e.
+ODL_DIST="-virt ovsdb" or ODL_DIST="-virt opendove"
+
+Release <0.1.0-0.4.0
+
+1. Get a source tarball:
+$git clone https://git.opendaylight.org/gerrit/p/controller.git
+$cd controller
+$git archive --prefix=opendaylight-controller-0.1.0/ d684dd4 | xz > opendaylight-controller-0.1.0.tar.xz
+
+2. Build rpm:
+$rpmbuild -ba opendaylight-controller.spec
+
+3. install rpm:
+#rpm -ivp opendaylight-controller-0.1.0-0.1.20131007gitd684dd4.fc19.noarch.rpm
+
+4. Start the controller:
+#su - opendaylight -s /bin/sh -c "export ODL_BASEDIR=/var/lib/opendaylight-controller && export ODL_DATADIR=/var/lib/opendaylight-controller && cd /var/lib/opendaylight-controller && /usr/share/opendaylight-controller/run.sh -start"
+*** If you need the console then telnet 127.0.0.1 2400 logs
+
+4. Stop the controller:
+#su - opendaylight -s /bin/sh -c "export ODL_BASEDIR=/var/lib/opendaylight-controller && export ODL_DATADIR=/var/lib/opendaylight-controller && cd /var/lib/opendaylight-controller && /usr/share/opendaylight-controller/run.sh -stop"
+
+4. uninstall rpm:
+#rpm -e opendaylight-controller-0.1.0-0.1.20131007gitd684dd4.fc19.noarch
+
+
+Using yum for testing.
+
+1. Create a local repo:
+yum install createrepo
+yum install vsftpd
+systemctl start vsftpd.service
+
+Add /etc/yum.repos.d/localftp.repo
+[localftp]
+name=Local FTP repo
+baseurl=file://127.0.0.1/pub
+enabled=0
+gpgcheck=0
+metadata_expire=1m
+
+2. Add packages to local repo:
+cp opendaylight-controller.spec /var/ftp/pub
+cp opendaylight-controller-dependencies.spec /var/ftp/pub
+
+3. Update local repo with new packages:
+Change the enabled=0 to enabled=1 in the localftp.repo file.
+createrepo /var/ftp/pub
+yum clean expire-cache
+
+4. Verify the repo is there:
+yum repolist
+
+Yum away...
+
+You could also use a fiel based repo and change the baseurl to:
+file:////var/ftp/pub.
+This failed with a network error for me so I switched to ftp.
+
+
+The file system after install should look like
+
+/etc/opendaylight-controller/config.ini
+/usr/share/java/opendaylight-dependencies/{all the non-opendaylight jars from
+the lib and plugin directories
+/usr/share/opendaylight-controller/run.bat, run.sh, ..
+/usr/share/opendaylight-controller/configuration/...
+/usr/share/opendaylight-controller/lib/*.jar ln's to /usr/share/java/opendaylight-dependencies/*.jar
+/usr/share/opendaylight-controller/plugins/*.jar ln's to /usr/share/java/opendaylight-dependencies/*.jar
+/var/lib/opendaylight-controller
+/var/lib/opendaylight-controller/configuration/ ln's back to /usr/share/opendaylight-controller/configuration
+/var/lib/opendaylight-controller/lib
+/var/lib/opendaylight-controller/plugins
+

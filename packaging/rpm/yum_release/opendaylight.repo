@@ -1,0 +1,17 @@
+[opendaylight-release]
+name=opendaylight-release
+baseurl=https://nexus.opendaylight.org/content/repositories/opendaylight-yum-MOCKENV
+enabled=1
+gpgcheck=0
+metadata_expire=10m
+autorefresh=1
+type=rpm-md
+
+[opendaylight-testing]
+name=opendaylight-testing
+baseurl=https://nexus.opendaylight.org/content/repositories/opendaylight-yum-MOCKENV-testing
+enabled=0
+gpgcheck=0
+metadata_expire=10m
+autorefresh=1
+type=rpm-md
