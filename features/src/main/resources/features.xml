@@ -110,56 +110,15 @@
     </feature>
 
     <!-- Please use aphabetical order for non-compatible features -->
-    <!-- Since Group Based Policy is not compatible with other flow programming apps,
-         and not compatible with other openstack apps,
-         it is appropriate to create compatible feature for Group Based Policy. -->
-        <feature name='odl-integration-compatible-with-groupbasedpolicy' version='${project.version}'>
-            <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
-            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-        </feature>
-
-    <!--
-        * Reason why l2switch has compatibility issues with others:
-            l2switch simply provides a simple l2switch among all ports
-            this is great for seeing basic functionality like pingall,
-            but doesn't interact well with other flow programming apps
-            at this time
-    -->
-        <feature name='odl-integration-compatible-with-l2switch' version='${project.version}'>
-            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-            <feature version='0.1.3-SNAPSHOT'>odl-l2switch-switch</feature>
-            <feature version='0.1.3-SNAPSHOT'>odl-l2switch-switch-rest</feature>
-            <feature version='0.1.3-SNAPSHOT'>odl-l2switch-switch-ui</feature>
-        </feature>
-
-    <!--  plugin2oc Policy is not compatible with other flow programming apps,
-          it is appropriate to create compatible feature for plugin2oc.
-    -->
-        <feature name='odl-integration-compatible-with-plugin2oc' description="OpenDaylight :: plugin2oc :: SouthBound Plugin to the OpenContrail Platform" version='0.1.3-SNAPSHOT'>
-            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-            <feature version='0.1.3-SNAPSHOT'>odl-plugin2oc</feature>
-        </feature>
-
-    <!--
-          Since ODL supports a few Incompatible Openstack integration such as ovs-openstack and vtn-openstack,
-          it is appropriate to create compatible feature for each of the incompatible openstack approaches.
-    -->
-        <feature name='odl-integration-compatible-with-ovs-openstack' description="OpenDaylight :: OVS :: OpenStack Network Virtualization" version='${project.version}'>
-            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-            <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
-        </feature>
-
-    <!-- TODO (add description here for SFC) -->
-        <feature name='odl-integration-compatible-with-ovs-sfc' description="OpenDaylight :: OVS :: Service Function Chaining" version='${project.version}'>
-            <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-            <feature version='0.0.4-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
-        </feature>
-
-    <!-- Since VTN Manager is not compatible with other flow programming apps,
-         and not compatible with other openstack apps,
-         it is appropriate to create compatible feature for VTN Manager. -->
-    <feature name='odl-integration-compatible-with-vtn-manager' version='${project.version}'>
+    <feature name='odl-integration-all' version='${project.version}'>
+        <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
         <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
+        <feature version='0.1.3-SNAPSHOT'>odl-l2switch-switch</feature>
+        <feature version='0.1.3-SNAPSHOT'>odl-l2switch-switch-rest</feature>
+        <feature version='0.1.3-SNAPSHOT'>odl-l2switch-switch-ui</feature>
+        <feature version='0.1.3-SNAPSHOT'>odl-plugin2oc</feature>
+        <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
+        <feature version='0.0.4-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
     </feature>
 
