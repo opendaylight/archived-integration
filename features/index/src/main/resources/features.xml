@@ -33,7 +33,9 @@
     <repository>mvn:org.opendaylight.aaa/features-aaa/0.2.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.aaa/features-aaa-authz/0.2.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.aaa/features-aaa-api/0.2.0-SNAPSHOT/xml/features</repository>
-    <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgp.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgpcep.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.bgpcep/features-extras/${feature.bgpcep.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.bgpcep/features-pcep/${feature.bgpcep.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-adsal/${feature.adsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-adsal-compatibility/1.5.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-mdsal/${feature.mdsal.version}/xml/features</repository>
@@ -49,7 +51,9 @@
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.1.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
+<!--
     <repository>mvn:org.opendaylight.plugin2oc/features-plugin2oc/0.2.0-SNAPSHOT/xml/features</repository>
+-->
     <repository>mvn:org.opendaylight.controller/features-restconf/${feature.mdsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.5.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/0.1.0-SNAPSHOT/xml/features</repository>

@@ -38,7 +38,7 @@
     <feature.snbi.version>1.1.0-SNAPSHOT</feature.snbi.version>
     <feature.ttp.version>0.1.0-SNAPSHOT</feature.ttp.version>
     <feature.vtn-manager.version>0.3.0-SNAPSHOT</feature.vtn-manager.version>
-    <feature.bgp.version>0.4.0-SNAPSHOT</feature.bgp.version>
+    <feature.bgpcep.version>0.4.0-SNAPSHOT</feature.bgpcep.version>
     <feature.packetcable.version>1.2.0-SNAPSHOT</feature.packetcable.version>
     <feature.plugin2oc.version>0.2.0-SNAPSHOT</feature.plugin2oc.version>
     <feature.tcpmd5.version>1.1.0-SNAPSHOT</feature.tcpmd5.version>
@@ -218,7 +218,21 @@
         <dependency>
           <groupId>org.opendaylight.bgpcep</groupId>
           <artifactId>features-bgp</artifactId>
-          <version>${feature.bgp.version}</version>
+          <version>${feature.bgpcep.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+        <dependency>
+          <groupId>org.opendaylight.bgpcep</groupId>
+          <artifactId>features-extras</artifactId>
+          <version>${feature.bgpcep.version}</version>
+          <classifier>features</classifier>
+          <type>xml</type>
+        </dependency>
+        <dependency>
+          <groupId>org.opendaylight.bgpcep</groupId>
+          <artifactId>features-pcep</artifactId>
+          <version>${feature.bgpcep.version}</version>
           <classifier>features</classifier>
           <type>xml</type>
         </dependency>
