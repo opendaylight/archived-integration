@@ -43,4 +43,5 @@ RUN wget -q "http://nexus.opendaylight.org/content/groups/public/org/opendayligh
 EXPOSE 162 179 1088 1790 1830 2400 2550 2551 2552 4189 4342 5005 5666 6633 6640 6653 7800 8000 8080 8101 8181 8383 12001
 
 WORKDIR /opt/opendaylight
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/jre
 CMD ["./bin/karaf", "server"]
