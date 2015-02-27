@@ -73,6 +73,21 @@
        <groupId>org.opendaylight.bgpcep</groupId>
        <artifactId>features-bgp</artifactId>
        <classifier>features</classifier>
+       <version>${feature.bgpcep.version}</version>
+       <type>xml</type>
+    </dependency>
+    <dependency>
+       <groupId>org.opendaylight.bgpcep</groupId>
+       <artifactId>features-extras</artifactId>
+       <classifier>features</classifier>
+       <version>${feature.bgpcep.version}</version>
+       <type>xml</type>
+    </dependency>
+    <dependency>
+       <groupId>org.opendaylight.bgpcep</groupId>
+       <artifactId>features-pcep</artifactId>
+       <classifier>features</classifier>
+       <version>${feature.bgpcep.version}</version>
        <type>xml</type>
     </dependency>
     <dependency>

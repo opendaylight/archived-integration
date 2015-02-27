@@ -64,7 +64,8 @@
         <feature version='0.2.0-SNAPSHOT'>odl-aaa-netconf-plugin</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
-        <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
+        <feature version='${feature.bgpcep.version}'>odl-bgpcep-bgp-all</feature>
+        <feature version='${feature.bgpcep.version}'>odl-bgpcep-pcep-all</feature>
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
         <feature version='1.2.0-SNAPSHOT'>odl-mdsal-broker</feature>
@@ -98,7 +99,9 @@
          <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch</feature>
          <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-rest</feature>
          <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-ui</feature>
+<!--
          <feature version='0.2.0-SNAPSHOT'>odl-plugin2oc</feature>
+-->
          <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
