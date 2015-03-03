@@ -53,12 +53,6 @@
     </dependency>
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
-      <artifactId>features-adsal</artifactId>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.controller</groupId>
       <artifactId>features-nsf</artifactId>
       <classifier>features</classifier>
       <type>xml</type>
@@ -100,6 +94,13 @@
     <dependency>
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>features-openflowplugin-extension</artifactId>
+      <version>${feature.openflowplugin.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.openflowplugin.legacy</groupId>
+      <artifactId>features-legacy</artifactId>
       <version>${feature.openflowplugin.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
