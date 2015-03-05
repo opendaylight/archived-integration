@@ -45,7 +45,7 @@
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
+      <groupId>org.opendaylight.neutron</groupId>
       <artifactId>features-neutron</artifactId>
       <version>${feature.neutron.version}</version>
       <classifier>features</classifier>
@@ -258,6 +258,13 @@
       <type>xml</type>
     </dependency>
 
+    <dependency>
+      <groupId>org.opendaylight.snmp</groupId>
+      <artifactId>features-snmp</artifactId>
+      <version>${snmp.plugin.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
 
     <!-- test to validate features.xml -->
     <dependency>

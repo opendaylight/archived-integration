@@ -68,8 +68,7 @@
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
         <feature version='1.2.0-SNAPSHOT'>odl-mdsal-broker</feature>
-        <feature version='${feature.neutron.version}'>odl-neutron-northbound</feature>
-        <feature version='${feature.neutron.version}'>odl-neutron-implementation</feature>
+        <feature version='${feature.neutron.version}'>odl-neutron-service</feature>
         <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
         <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
         <feature version='0.6.0-SNAPSHOT'>odl-openflowjava-protocol</feature>
@@ -86,10 +85,12 @@
         <feature version='0.1.0-SNAPSHOT'>odl-sfclisp</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfcofl2</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
-        <feature version='${feature.topoprocessing.version}'>odl-topoprocessing-all</feature>
+        <feature version='${feature.topoprocessing.version}'>odl-topoprocessing-framework</feature>
+        <feature version='${feature.topoprocessing.version}'>odl-topoprocessing-mlmt</feature>
         <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-snmp4sdn-all</feature>
         <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
+        <feature version='${snmp.plugin.version}'>odl-snmp-plugin</feature>
     </feature>
 
     <!-- Please use aphabetical order for non-compatible features -->
