@@ -263,13 +263,6 @@
            <classifier>features</classifier>
           <type>xml</type>
         </dependency>
-
-        <!-- test to validate features.xml -->
-        <dependency>
-          <groupId>org.opendaylight.yangtools</groupId>
-          <artifactId>features-test</artifactId>
-          <version>${feature.yangtools.version}</version>
-        </dependency>
       </dependencies>
   </dependencyManagement>
   <build>
