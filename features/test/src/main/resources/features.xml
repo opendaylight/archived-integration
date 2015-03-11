@@ -90,6 +90,9 @@
         <feature version='0.2.0-SNAPSHOT'>odl-snmp4sdn-all</feature>
         <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
         <feature version='${snmp.plugin.version}'>odl-snmp-plugin</feature>
+        <feature version='${didm.version}'>odl-didm-identification-api</feature>
+        <feature version='${didm.version}'>odl-didm-identification</feature>
+        <feature version='${didm.version}'>odl-didm-drivers-api</feature>
     </feature>
 
     <!-- Please use aphabetical order for non-compatible features -->
