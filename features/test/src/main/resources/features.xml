@@ -90,6 +90,7 @@
         <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-snmp4sdn-all</feature>
         <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
+        <feature version='${snmp.plugin.version}'>odl-snmp-plugin</feature>
     </feature>
 
     <!-- Please use aphabetical order for non-compatible features -->
