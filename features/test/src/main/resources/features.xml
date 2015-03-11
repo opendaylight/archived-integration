@@ -85,7 +85,8 @@
         <feature version='0.1.0-SNAPSHOT'>odl-sfclisp</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfcofl2</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
-        <feature version='${feature.topoprocessing.version}'>odl-topoprocessing-all</feature>
+        <feature version='${feature.topoprocessing.version}'>odl-topoprocessing-framework</feature>
+        <feature version='${feature.topoprocessing.version}'>odl-topoprocessing-mlmt</feature>
         <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-snmp4sdn-all</feature>
         <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
