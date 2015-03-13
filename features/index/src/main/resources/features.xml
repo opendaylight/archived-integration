@@ -64,6 +64,7 @@
     <repository>mvn:org.opendaylight.tcpmd5/features-tcpmd5/${feature.tcpmd5.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.topoprocessing/features-topoprocessing/${feature.topoprocessing.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.usc/usc-features/${feature.usc.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.snmp/features-snmp/${snmp.plugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.didm/didm-features/${didm.version}/xml/features</repository>
