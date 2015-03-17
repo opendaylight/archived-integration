@@ -94,6 +94,7 @@
         <feature version='${didm.version}'>odl-didm-identification-api</feature>
         <feature version='${didm.version}'>odl-didm-identification</feature>
         <feature version='${didm.version}'>odl-didm-drivers-api</feature>
+        <feature version='${feature.vpnservice.version}'>odl-vpnservice-core</feature>
     </feature>
 
     <!-- Please use aphabetical order for non-compatible features -->

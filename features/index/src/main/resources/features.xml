@@ -68,4 +68,5 @@
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.snmp/features-snmp/${snmp.plugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.didm/didm-features/${didm.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.vpnservice/vpnservice-features/${feature.vpnservice.version}/xml/features</repository>
 </features>

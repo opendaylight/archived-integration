@@ -282,6 +282,14 @@
       <type>xml</type>
     </dependency>
 
+    <dependency>
+      <groupId>org.opendaylight.vpnservice</groupId>
+      <artifactId>vpnservice-features</artifactId>
+      <version>${feature.vpnservice.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+
     <!-- test to validate features.xml -->
     <dependency>
       <groupId>org.opendaylight.odlparent</groupId>
