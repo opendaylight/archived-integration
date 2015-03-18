@@ -81,7 +81,8 @@
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version="1.5.0-SNAPSHOT">odl-sdninterfaceapp-all</feature>
         <feature version='1.2.0-SNAPSHOT'>odl-restconf</feature>
-        <feature version='0.1.0-SNAPSHOT'>odl-sfc-all</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-sfc-core</feature>
+        <feature version='0.1.0-SNAPSHOT'>odl-sfc-test-consumer</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfclisp</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfcofl2</feature>
         <feature version='${feature.topoprocessing.version}'>odl-topoprocessing-framework</feature>
