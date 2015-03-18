@@ -89,7 +89,9 @@
         <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-snmp4sdn-all</feature>
         <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
-        <feature version='${feature.usc.version}'>odl-usc-all</feature>
+        <feature version='${feature.usc.version}'>odl-usc-channel</feature>
+        <feature version='${feature.usc.version}'>odl-usc-channel-rest</feature>
+        <feature version='${feature.usc.version}'>odl-usc-channel-ui</feature>
         <feature version='${snmp.plugin.version}'>odl-snmp-plugin</feature>
         <feature version='${didm.version}'>odl-didm-identification-api</feature>
         <feature version='${didm.version}'>odl-didm-identification</feature>
