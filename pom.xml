@@ -51,6 +51,7 @@
     <snmp.plugin.version>1.0-SNAPSHOT</snmp.plugin.version>
     <didm.version>0.1.0-SNAPSHOT</didm.version>
     <feature.vpnservice.version>1.0-SNAPSHOT</feature.vpnservice.version>
+    <feature.lacp.version>1.0.0-SNAPSHOT</feature.lacp.version>
   </properties>
   <modules>
     <module>distributions/</module>
