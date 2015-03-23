@@ -2,12 +2,12 @@
 
 # Common paths used in this script
 # NB: Name will need to be updated for both ODL and RMP version bumps
-version=4
-rpm_name="opendaylight-0.2.2-$version.noarch.rpm"
-rpm_out_path="$HOME/rpmbuild/RPMS/noarch/opendaylight-0.2.2-$version.fc20.noarch.rpm"
-srpm_name="opendaylight-0.2.2-$version.src.rpm"
-srpm_out_path="$HOME/rpmbuild/SRPMS/opendaylight-0.2.2-$version.fc20.src.rpm"
-src_name="distribution-karaf-0.2.2-Helium-SR2.tar.gz"
+version=1
+rpm_name="opendaylight-0.2.3-$version.noarch.rpm"
+rpm_out_path="$HOME/rpmbuild/RPMS/noarch/opendaylight-0.2.3-$version.fc20.noarch.rpm"
+srpm_name="opendaylight-0.2.3-$version.src.rpm"
+srpm_out_path="$HOME/rpmbuild/SRPMS/opendaylight-0.2.3-$version.fc20.src.rpm"
+src_name="distribution-karaf-0.2.3-Helium-SR3.tar.gz"
 src_cache_path0="$HOME/$src_name"
 src_cache_path1="/vagrant/$src_name"
 sysd_commit=4a87227
@@ -28,7 +28,7 @@ elif [ -f  $src_cache_path1 ]; then
     cp $src_cache_path1 $HOME/rpmbuild/SOURCES/$src_name
 else
     echo "No cached ODL found, downloading from Nexus..."
-    curl -o $HOME/rpmbuild/SOURCES/$src_name https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.2-Helium-SR2/$src_name
+    curl -o $HOME/rpmbuild/SOURCES/$src_name https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.3-Helium-SR3/$src_name
 fi
 
 # Put systemd unit file archive in rpmbuild's SOURCES dir
