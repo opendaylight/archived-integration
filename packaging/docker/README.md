@@ -1,5 +1,5 @@
 ### OpenDaylight Docker Images
-The `Dockerfile` in this directory can be used to construct a Docker image for the OpenDaylight SDN controller. The current OpenDaylight version is [Helium](http://www.opendaylight.org/software/downloads/helium). Note that Helium uses Karaf to install features, and that the Docker image doesn't install any features by default. You'll need to choose which features to install based on your use-case.
+The `Dockerfile` in this directory can be used to construct a Docker image for the OpenDaylight SDN controller. The current OpenDaylight version is [Helium SR3](http://www.opendaylight.org/software/downloads/helium-sr3). Note that Helium uses Karaf to install features, and that the Docker image doesn't install any features by default. You'll need to choose which features to install based on your use-case.
 
 ### OpenDaylight on DockerHub
 A pre-built OpenDaylight Helium image is available on DockerHub. You can find it with `docker search opendaylight`:
