@@ -230,7 +230,7 @@
       <type>xml</type>
     </dependency>
 
-
+<!--
     <dependency>
        <groupId>org.opendaylight.packetcable</groupId>
        <artifactId>features-packetcable</artifactId>
@@ -238,7 +238,7 @@
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
-
+-->
     <dependency>
       <groupId>org.opendaylight.snmp4sdn</groupId>
       <artifactId>features-snmp4sdn</artifactId>
