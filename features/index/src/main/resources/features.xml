@@ -53,7 +53,9 @@
     <repository>mvn:org.opendaylight.openflowplugin.legacy/features-legacy/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.1.0-SNAPSHOT/xml/features</repository>
+<!--
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
+-->
 <!--
     <repository>mvn:org.opendaylight.plugin2oc/features-plugin2oc/0.2.0-SNAPSHOT/xml/features</repository>
 -->

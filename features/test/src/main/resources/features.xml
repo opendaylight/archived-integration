@@ -82,7 +82,9 @@
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-flow-services-ui</feature>
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-nxm-extensions</feature>
         <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
+<!--
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
+-->
         <feature version='1.2.0-SNAPSHOT'>odl-restconf</feature>
         <feature version="1.5.0-SNAPSHOT">odl-sdninterfaceapp-all</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfc-core</feature>
