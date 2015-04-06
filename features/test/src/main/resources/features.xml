@@ -65,6 +65,7 @@
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-bgp-all</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-pcep-all</feature>
+        <feature version='${feature.capwap.version}'>odl-capwap-ac-rest</feature>
         <feature version='${didm.version}'>odl-didm-identification-api</feature>
         <feature version='${didm.version}'>odl-didm-identification</feature>
         <feature version='${didm.version}'>odl-didm-drivers-api</feature>

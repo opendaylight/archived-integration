@@ -273,6 +273,14 @@
     </dependency>
 
     <dependency>
+      <groupId>org.opendaylight.capwap</groupId>
+      <artifactId>capwap-features</artifactId>
+      <version>${feature.capwap.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+
+    <dependency>
       <groupId>org.opendaylight.snmp</groupId>
       <artifactId>features-snmp</artifactId>
       <version>${snmp.plugin.version}</version>

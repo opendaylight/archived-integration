@@ -38,6 +38,7 @@
     <feature.snbi.version>1.1.0-SNAPSHOT</feature.snbi.version>
     <feature.ttp.version>0.1.0-SNAPSHOT</feature.ttp.version>
     <feature.usc.version>1.0-SNAPSHOT</feature.usc.version>
+    <feature.capwap.version>0.1.0-SNAPSHOT</feature.capwap.version>
     <feature.vtn-manager.version>0.3.0-SNAPSHOT</feature.vtn-manager.version>
     <feature.bgpcep.version>0.4.0-SNAPSHOT</feature.bgpcep.version>
 <!--
