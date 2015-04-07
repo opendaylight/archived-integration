@@ -126,7 +126,7 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-    <!-- plugin2oc -->
+<!--
     <dependency>
        <groupId>org.opendaylight.plugin2oc</groupId>
        <artifactId>features-plugin2oc</artifactId>
@@ -134,7 +134,7 @@
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
-
+-->
     <!-- AAA -->
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
@@ -199,6 +199,7 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
+<!--
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfclisp</artifactId>
@@ -206,6 +207,7 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
+-->
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfcofl2</artifactId>
@@ -229,7 +231,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-
 <!--
     <dependency>
        <groupId>org.opendaylight.packetcable</groupId>
