@@ -90,9 +90,7 @@
         <feature version="1.5.0-SNAPSHOT">odl-sdninterfaceapp-all</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfc-core</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfc-test-consumer</feature>
-<!--
         <feature version='0.1.0-SNAPSHOT'>odl-sfclisp</feature>
--->
         <feature version='0.1.0-SNAPSHOT'>odl-sfcofl2</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfc-ui</feature>
         <feature version='0.1.0-SNAPSHOT'>odl-sfc-sb-rest</feature>
