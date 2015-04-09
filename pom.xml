@@ -165,13 +165,6 @@
           <classifier>features</classifier>
           <type>xml</type>
         </dependency>
-        <dependency>
-          <groupId>org.opendaylight.controller</groupId>
-          <artifactId>features-flow</artifactId>
-          <version>${feature.flow.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
         <!-- AD-SAL Related Features -->
         <dependency>
           <groupId>org.opendaylight.controller</groupId>
