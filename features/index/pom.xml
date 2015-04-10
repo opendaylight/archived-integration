@@ -135,7 +135,6 @@
        <type>xml</type>
     </dependency>
 -->
-    <!-- AAA -->
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
       <artifactId>features-aaa-api</artifactId>
