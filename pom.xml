@@ -41,9 +41,7 @@
     <feature.capwap.version>0.1.0-SNAPSHOT</feature.capwap.version>
     <feature.vtn-manager.version>0.3.0-SNAPSHOT</feature.vtn-manager.version>
     <feature.bgpcep.version>0.4.0-SNAPSHOT</feature.bgpcep.version>
-<!--
     <feature.packetcable.version>1.2.0-SNAPSHOT</feature.packetcable.version>
--->
     <feature.plugin2oc.version>0.2.0-SNAPSHOT</feature.plugin2oc.version>
     <feature.tcpmd5.version>1.1.0-SNAPSHOT</feature.tcpmd5.version>
     <feature.topoprocessing.version>0.0.1-SNAPSHOT</feature.topoprocessing.version>
@@ -61,9 +59,7 @@
     <module>features/</module>
     <module>feature-selector</module>
   </modules>
-
   <repositories>
-
     <!-- OpenDayLight Repo Mirror -->
     <repository>
       <id>opendaylight-mirror</id>
@@ -90,7 +86,6 @@
       </releases>
     </repository>
   </repositories>
-
   <pluginRepositories>
     <pluginRepository>
       <id>central2</id>
@@ -103,7 +98,6 @@
       <url>${nexusproxy}/repositories/opendaylight.snapshot/</url>
     </pluginRepository>
   </pluginRepositories>
-
   <distributionManagement>
     <!-- OpenDayLight Released artifact -->
     <repository>
@@ -120,153 +114,6 @@
       <url>./</url>
     </site>
   </distributionManagement>
-  <dependencyManagement>
-      <dependencies>
-        <!-- Karaf basic pieces -->
-        <dependency>
-          <!-- scope is compile so all features (there is only one) are installed
-            into startup.properties and the feature repo itself is not installed -->
-          <groupId>org.apache.karaf.features</groupId>
-          <artifactId>framework</artifactId>
-          <version>${karaf.version}</version>
-          <type>kar</type>
-        </dependency>
-        <!-- scope is runtime so the feature repo is listed in the features
-          service config file, and features may be installed using the
-          karaf-maven-plugin configuration -->
-        <dependency>
-          <groupId>org.apache.karaf.features</groupId>
-          <artifactId>standard</artifactId>
-          <version>${karaf.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-
-        <!-- Karaf Branding -->
-        <dependency>
-          <groupId>org.opendaylight.controller</groupId>
-          <artifactId>karaf.branding</artifactId>
-          <version>${karaf.branding.version}</version>
-        </dependency>
-
-        <!-- Integration features -->
-        <dependency>
-          <groupId>org.opendaylight.integration</groupId>
-          <artifactId>features-integration</artifactId>
-          <version>${project.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-        <!-- MD-SAL Related Features -->
-        <dependency>
-          <groupId>org.opendaylight.controller</groupId>
-          <artifactId>features-mdsal</artifactId>
-          <version>${feature.mdsal.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-        <!-- AD-SAL Related Features -->
-        <dependency>
-          <groupId>org.opendaylight.controller</groupId>
-          <artifactId>features-adsal</artifactId>
-          <version>${feature.adsal.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-        <dependency>
-          <groupId>org.opendaylight.controller</groupId>
-          <artifactId>features-nsf</artifactId>
-          <version>${feature.nsf.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-        <!-- VTN Features -->
-        <dependency>
-          <groupId>org.opendaylight.vtn</groupId>
-          <artifactId>features-vtn-manager</artifactId>
-          <version>${feature.vtn-manager.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-
-
-        <!-- GBP Features -->
-        <dependency>
-          <groupId>org.opendaylight.groupbasedpolicy</groupId>
-          <artifactId>features-groupbasedpolicy</artifactId>
-          <version>${feature.groupbasedpolicy.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-
-        <!-- SFC features -->
-       <dependency>
-          <groupId>org.opendaylight.sfc</groupId>
-          <artifactId>features-sfc</artifactId>
-          <version>${feature.sfc.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-       </dependency>
-
-        <dependency>
-          <groupId>org.opendaylight.tcpmd5</groupId>
-          <artifactId>features-tcpmd5</artifactId>
-          <version>${feature.tcpmd5.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-
-        <dependency>
-          <groupId>org.opendaylight.bgpcep</groupId>
-          <artifactId>features-bgp</artifactId>
-          <version>${feature.bgpcep.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-        <dependency>
-          <groupId>org.opendaylight.bgpcep</groupId>
-          <artifactId>features-extras</artifactId>
-          <version>${feature.bgpcep.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-        <dependency>
-          <groupId>org.opendaylight.bgpcep</groupId>
-          <artifactId>features-pcep</artifactId>
-          <version>${feature.bgpcep.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-
-        <!-- OVSDB Related Features -->
-        <dependency>
-          <groupId>org.opendaylight.ovsdb</groupId>
-          <artifactId>features-ovsdb</artifactId>
-          <version>${feature.ovsdb.version}</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-
-        <!-- Plugin2oc Related Features -->
-        <dependency>
-          <groupId>org.opendaylight.plugin2oc</groupId>
-          <artifactId>features-plugin2oc</artifactId>
-          <version>0.2.0-SNAPSHOT</version>
-          <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-
-        <!-- packetcable Related Features
-        <dependency>
-           <groupId>org.opendaylight.packetcable</groupId>
-           <artifactId>features-packetcable</artifactId>
-           <version>${feature.packetcable.version}</version>
-           <classifier>features</classifier>
-          <type>xml</type>
-        </dependency>
-         -->
-      </dependencies>
-  </dependencyManagement>
   <build>
     <pluginManagement>
       <plugins>
@@ -277,7 +124,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

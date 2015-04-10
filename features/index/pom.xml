@@ -24,42 +24,23 @@
    <dependencies>
     <!-- dependencies on feature repos -->
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>features-mdsal</artifactId>
-      <version>${feature.mdsal.version}</version>
+      <groupId>org.opendaylight.aaa</groupId>
+      <artifactId>features-aaa-api</artifactId>
+      <version>0.2.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>features-netconf-connector</artifactId>
-      <version>${feature.mdsal.version}</version>
+      <groupId>org.opendaylight.aaa</groupId>
+      <artifactId>features-aaa</artifactId>
+      <version>0.2.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>features-restconf</artifactId>
-      <version>${feature.mdsal.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.neutron</groupId>
-      <artifactId>features-neutron</artifactId>
-      <version>${feature.neutron.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>features-nsf</artifactId>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.ovsdb</groupId>
-      <artifactId>features-ovsdb</artifactId>
+      <groupId>org.opendaylight.aaa</groupId>
+      <artifactId>features-aaa-authz</artifactId>
+      <version>0.2.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -85,6 +66,97 @@
        <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.capwap</groupId>
+      <artifactId>capwap-features</artifactId>
+      <version>${feature.capwap.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-adsal</artifactId>
+      <version>${feature.adsal.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-mdsal</artifactId>
+      <version>${feature.mdsal.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-netconf-connector</artifactId>
+      <version>${feature.mdsal.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-nsf</artifactId>
+      <version>${feature.nsf.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-restconf</artifactId>
+      <version>${feature.mdsal.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.didm</groupId>
+      <artifactId>didm-features</artifactId>
+      <version>${didm.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.dlux</groupId>
+      <artifactId>features-dlux</artifactId>
+      <version>${feature.dlux.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.groupbasedpolicy</groupId>
+      <artifactId>features-groupbasedpolicy</artifactId>
+      <version>${feature.groupbasedpolicy.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.l2switch</groupId>
+      <artifactId>features-l2switch</artifactId>
+      <version>0.2.0-SNAPSHOT</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.lacp</groupId>
+      <artifactId>features-lacp</artifactId>
+      <version>${feature.lacp.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.lispflowmapping</groupId>
+      <artifactId>features-lispflowmapping</artifactId>
+      <version>${feature.lispflowmapping.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.neutron</groupId>
+      <artifactId>features-neutron</artifactId>
+      <version>${feature.neutron.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>features-openflowplugin</artifactId>
       <version>${feature.openflowplugin.version}</version>
@@ -106,26 +178,28 @@
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.dlux</groupId>
-      <artifactId>features-dlux</artifactId>
-      <version>${feature.dlux.version}</version>
+      <groupId>org.opendaylight.ovsdb</groupId>
+      <artifactId>features-ovsdb</artifactId>
+      <version>${feature.ovsdb.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.l2switch</groupId>
-      <artifactId>features-l2switch</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <groupId>org.opendaylight.ovsdb</groupId>
+      <artifactId>features-ovs-sfc</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
+<!--
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>features-adsal-compatibility</artifactId>
-      <version>1.5.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
+       <groupId>org.opendaylight.packetcable</groupId>
+       <artifactId>features-packetcable</artifactId>
+       <version>${feature.packetcable.version}</version>
+       <classifier>features</classifier>
+       <type>xml</type>
     </dependency>
+-->
 <!--
     <dependency>
        <groupId>org.opendaylight.plugin2oc</groupId>
@@ -136,54 +210,12 @@
     </dependency>
 -->
     <dependency>
-      <groupId>org.opendaylight.aaa</groupId>
-      <artifactId>features-aaa-api</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <groupId>org.opendaylight.sdninterfaceapp</groupId>
+      <artifactId>features-sdninterfaceapp</artifactId>
+      <version>1.5.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-    <dependency>
-      <groupId>org.opendaylight.aaa</groupId>
-      <artifactId>features-aaa</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.aaa</groupId>
-      <artifactId>features-aaa-authz</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.ttp</groupId>
-      <artifactId>features-ttp</artifactId>
-      <version>${feature.ttp.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.lispflowmapping</groupId>
-      <artifactId>features-lispflowmapping</artifactId>
-      <version>${feature.lispflowmapping.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.vtn</groupId>
-      <artifactId>features-vtn-manager</artifactId>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.groupbasedpolicy</groupId>
-      <artifactId>features-groupbasedpolicy</artifactId>
-      <version>${feature.groupbasedpolicy.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfc</artifactId>
@@ -214,15 +246,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.ovsdb</groupId>
-      <artifactId>features-ovs-sfc</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
     <dependency>
       <groupId>org.opendaylight.snbi</groupId>
       <artifactId>features-snbi</artifactId>
@@ -230,55 +253,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-<!--
-    <dependency>
-       <groupId>org.opendaylight.packetcable</groupId>
-       <artifactId>features-packetcable</artifactId>
-       <version>${feature.packetcable.version}</version>
-       <classifier>features</classifier>
-       <type>xml</type>
-    </dependency>
--->
-    <dependency>
-      <groupId>org.opendaylight.snmp4sdn</groupId>
-      <artifactId>features-snmp4sdn</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.sdninterfaceapp</groupId>
-      <artifactId>features-sdninterfaceapp</artifactId>
-      <version>1.5.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.topoprocessing</groupId>
-      <artifactId>features-topoprocessing</artifactId>
-      <version>${feature.topoprocessing.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.usc</groupId>
-      <artifactId>usc-features</artifactId>
-      <version>${feature.usc.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
-    <dependency>
-      <groupId>org.opendaylight.capwap</groupId>
-      <artifactId>capwap-features</artifactId>
-      <version>${feature.capwap.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
     <dependency>
       <groupId>org.opendaylight.snmp</groupId>
       <artifactId>features-snmp</artifactId>
@@ -286,15 +260,48 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-
     <dependency>
-      <groupId>org.opendaylight.didm</groupId>
-      <artifactId>didm-features</artifactId>
-      <version>${didm.version}</version>
+      <groupId>org.opendaylight.snmp4sdn</groupId>
+      <artifactId>features-snmp4sdn</artifactId>
+      <version>0.2.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-
+    <dependency>
+      <groupId>org.opendaylight.tcpmd5</groupId>
+      <artifactId>features-tcpmd5</artifactId>
+      <version>${feature.tcpmd5.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.topoprocessing</groupId>
+      <artifactId>features-topoprocessing</artifactId>
+      <version>${feature.topoprocessing.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.ttp</groupId>
+      <artifactId>features-ttp</artifactId>
+      <version>${feature.ttp.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.usc</groupId>
+      <artifactId>usc-features</artifactId>
+      <version>${feature.usc.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.vtn</groupId>
+      <artifactId>features-vtn-manager</artifactId>
+      <version>${feature.vtn-manager.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
     <dependency>
       <groupId>org.opendaylight.vpnservice</groupId>
       <artifactId>vpnservice-features</artifactId>
@@ -302,14 +309,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-    <dependency>
-      <groupId>org.opendaylight.lacp</groupId>
-      <artifactId>features-lacp</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-
     <!-- test to validate features.xml -->
     <dependency>
       <groupId>org.opendaylight.odlparent</groupId>
