@@ -129,6 +129,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.iotdm</groupId>
+      <artifactId>onem2m-features</artifactId>
+      <version>${feature.iotdm.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.l2switch</groupId>
       <artifactId>features-l2switch</artifactId>
       <version>0.2.0-SNAPSHOT</version>

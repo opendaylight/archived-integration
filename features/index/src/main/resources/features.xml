@@ -45,6 +45,7 @@
     <repository>mvn:org.opendaylight.didm/didm-features/${didm.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.dlux/features-dlux/${feature.dlux.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.groupbasedpolicy/features-groupbasedpolicy/${feature.groupbasedpolicy.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.iotdm/onem2m-features/${feature.iotdm.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.2.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.lacp/features-lacp/${feature.lacp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
