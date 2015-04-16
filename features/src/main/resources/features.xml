@@ -67,7 +67,6 @@
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.0.5-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.plugin2oc/features-plugin2oc/0.1.4-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-restconf/${feature.mdsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.4.6-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/0.0.5-SNAPSHOT/xml/features</repository>
@@ -116,7 +115,6 @@
         <feature version='0.1.4-SNAPSHOT'>odl-l2switch-switch</feature>
         <feature version='0.1.4-SNAPSHOT'>odl-l2switch-switch-rest</feature>
         <feature version='0.1.4-SNAPSHOT'>odl-l2switch-switch-ui</feature>
-        <feature version='0.1.4-SNAPSHOT'>odl-plugin2oc</feature>
         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
         <feature version='0.0.5-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
