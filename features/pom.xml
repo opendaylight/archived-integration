@@ -103,15 +103,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-    <!-- plugin2oc -->
-    <dependency>
-       <groupId>org.opendaylight.plugin2oc</groupId>
-       <artifactId>features-plugin2oc</artifactId>
-       <version>0.1.4-SNAPSHOT</version>
-       <classifier>features</classifier>
-       <type>xml</type>
-    </dependency>
-
     <!-- AAA -->
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
