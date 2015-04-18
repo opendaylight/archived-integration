@@ -122,6 +122,7 @@
         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
         <!--<feature version='0.1.0-SNAPSHOT'>odl-ovsdb-ovssfc</feature>-->
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
+        <feature version='${feature.tsdr.version}'>odl-tsdr-all</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
     </feature>
 
