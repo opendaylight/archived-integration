@@ -191,13 +191,13 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-    <dependency>
-      <groupId>org.opendaylight.ovsdb</groupId>
-      <artifactId>features-ovs-sfc</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.opendaylight.ovsdb</groupId>-->
+      <!--<artifactId>features-ovs-sfc</artifactId>-->
+      <!--<version>0.1.0-SNAPSHOT</version>-->
+      <!--<classifier>features</classifier>-->
+      <!--<type>xml</type>-->
+    <!--</dependency>-->
 <!--
     <dependency>
        <groupId>org.opendaylight.packetcable</groupId>
@@ -250,6 +250,20 @@
       <version>0.1.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
+    </dependency>
+    <dependency>
+       <groupId>org.opendaylight.sfc</groupId>
+       <artifactId>features-sfc-ovs</artifactId>
+       <version>0.1.0-SNAPSHOT</version>
+       <classifier>features</classifier>
+       <type>xml</type>
+    </dependency>
+    <dependency>
+       <groupId>org.opendaylight.sfc</groupId>
+       <artifactId>features-sfc-netconf</artifactId>
+       <version>0.1.0-SNAPSHOT</version>
+       <classifier>features</classifier>
+       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.snbi</groupId>
