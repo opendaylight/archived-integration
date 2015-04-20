@@ -54,7 +54,7 @@
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin-extension/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.openflowplugin.legacy/features-legacy/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.1.0-SNAPSHOT/xml/features</repository>
+    <!--<repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.1.0-SNAPSHOT/xml/features</repository>-->
 <!--
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
 -->
@@ -62,10 +62,12 @@
     <repository>mvn:org.opendaylight.plugin2oc/features-plugin2oc/0.2.0-SNAPSHOT/xml/features</repository>
 -->
     <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.5.0-SNAPSHOT/xml/features</repository>
-    <repository>mvn:org.opendaylight.sfc/features-sfc/0.1.0-SNAPSHOT/xml/features</repository>
-    <repository>mvn:org.opendaylight.sfc/features-sfc-sb-rest/0.1.0-SNAPSHOT/xml/features</repository>
-    <repository>mvn:org.opendaylight.sfc/features-sfclisp/0.1.0-SNAPSHOT/xml/features</repository>
-    <repository>mvn:org.opendaylight.sfc/features-sfcofl2/0.1.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfc/${feature.sfc.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfc-netconf/${feature.sfc.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfc-ovs/${feature.sfc.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfc-sb-rest/${feature.sfc.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfclisp/${feature.sfc.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfcofl2/${feature.sfc.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.snbi/features-snbi/${feature.snbi.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.snmp/features-snmp/${snmp.plugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.snmp4sdn/features-snmp4sdn/0.2.0-SNAPSHOT/xml/features</repository>
