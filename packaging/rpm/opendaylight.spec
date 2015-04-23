@@ -7,7 +7,7 @@
 
 Name:       opendaylight
 Version:    0.2.3
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
@@ -19,7 +19,7 @@ Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/%{shortco
 Buildroot:  /tmp
 
 # Required for ODL at run time
-Requires:   java >= 1:1.7.0
+Requires:   java = 1:1.7.0
 # Required for creating odl group
 Requires(pre): shadow-utils
 # Required for configuring systemd
@@ -65,6 +65,8 @@ rm -rf $RPM_BUILD_ROOT/opt/%name
 
 
 %changelog
+* Thu Apr 16 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.3-2
+- Force Java version 1.7
 * Mon Mar 23 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.3-1
 - Upgrade from Helium SR2 to Helium SR3
 * Sun Mar 15 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-4

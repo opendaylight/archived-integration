@@ -20,19 +20,19 @@ build.sh  connect.sh  install.sh  opendaylight.spec  README.md  Vagrantfile
 
 ## Building the RPM
 
-The `build.sh` script is a helper for building the RPM. 
+The `build.sh` script is a helper for building the RPM.
 
 ```
 SRPM built!
-Location: /home/vagrant/rpmbuild/SRPMS/opendaylight-0.2.3-1.fc20.src.rpm
+Location: /home/vagrant/rpmbuild/SRPMS/opendaylight-0.2.3-2.fc20.src.rpm
 Assuming you want to move RPM off Vagrant box
 Also renaming RPM, not actually tagged as for FC20 target OS
-cp /home/vagrant/rpmbuild/SRPMS/opendaylight-0.2.3-1.fc20.src.rpm /vagrant/opendaylight-0.2.3-1.src.rpm
+cp /home/vagrant/rpmbuild/SRPMS/opendaylight-0.2.3-2.fc20.src.rpm /vagrant/opendaylight-0.2.3-2.src.rpm
 RPM built!
-Location: /home/vagrant/rpmbuild/RPMS/noarch/opendaylight-0.2.3-1.fc20.noarch.rpm
+Location: /home/vagrant/rpmbuild/RPMS/noarch/opendaylight-0.2.3-2.fc20.noarch.rpm
 Assuming you want to move RPM off Vagrant box
 Also renaming RPM, not actually tagged as for FC20 target OS
-cp /home/vagrant/rpmbuild/RPMS/noarch/opendaylight-0.2.3-1.fc20.noarch.rpm /vagrant/opendaylight-0.2.3-1.noarch.rpm
+cp /home/vagrant/rpmbuild/RPMS/noarch/opendaylight-0.2.3-2.fc20.noarch.rpm /vagrant/opendaylight-0.2.3-2.noarch.rpm
 ```
 
 ## Working with the ODL RPM
@@ -45,7 +45,7 @@ The `install.sh` script is a helper for doing the install.
 
 ```
 [vagrant@localhost vagrant]$ ./install.sh
-Installing ODL from ./opendaylight-0.2.3-1.noarch.rpm
+Installing ODL from ./opendaylight-0.2.3-2.noarch.rpm
 ```
 
 Here's a manual walk-through of the install and the resulting system changes.
@@ -58,7 +58,7 @@ Here's a manual walk-through of the install and the resulting system changes.
 # If you want to test the install in the provided build env, install Java
 [vagrant@localhost vagrant]$ sudo yum install -y java
 # Install the ODL RPM
-[vagrant@localhost vagrant]$ sudo rpm -i opendaylight-0.2.3-1.noarch.rpm
+[vagrant@localhost vagrant]$ sudo rpm -i opendaylight-0.2.3-2.noarch.rpm
 # Note that ODL is now installed in /opt
 [vagrant@localhost vagrant]$ ls /opt/
 opendaylight
