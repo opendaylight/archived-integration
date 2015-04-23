@@ -13,7 +13,7 @@ RUN mkdir opendaylight
 # Doing all of these in one step reduces the resulting image size by 229MB
 RUN wget -q "https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.3-Helium-SR3/distribution-karaf-0.2.3-Helium-SR3.tar.gz" && \
     tar -xf distribution-karaf-0.2.3-Helium-SR3.tar.gz -C opendaylight --strip-components=1 && \
-    rm -rf distribution-karaf-0.2.3-Helium-SR3.tar.gz
+    rm distribution-karaf-0.2.3-Helium-SR3.tar.gz
 
 # TODO: Verify that these are all of the ODL Helium ports and no extra
 # Ports
