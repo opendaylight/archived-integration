@@ -301,6 +301,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.tsdr</groupId>
+      <artifactId>features-tsdr</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.ttp</groupId>
       <artifactId>features-ttp</artifactId>
       <version>${feature.ttp.version}</version>
