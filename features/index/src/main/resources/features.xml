@@ -51,6 +51,7 @@
     <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.neutron/features-neutron/${feature.neutron.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/${feature.openflowplugin.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin-li/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin-extension/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.openflowplugin.legacy/features-legacy/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
