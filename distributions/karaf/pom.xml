@@ -69,6 +69,12 @@
       <classifier>features</classifier>
       <type>xml</type>
       <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.opendaylight.controller</groupId>
+          <artifactId>opendaylight-karaf-empty</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- integration test feature -->
@@ -79,6 +85,12 @@
       <classifier>features</classifier>
       <type>xml</type>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.opendaylight.controller</groupId>
+          <artifactId>opendaylight-karaf-empty</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- External application -->
