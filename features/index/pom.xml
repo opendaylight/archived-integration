@@ -164,6 +164,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.nic</groupId>
+      <artifactId>features-nic</artifactId>
+      <version>${feature.nic.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.openflowplugin</groupId>
       <artifactId>features-openflowplugin</artifactId>
       <version>${feature.openflowplugin.version}</version>

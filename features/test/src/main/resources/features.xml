@@ -115,6 +115,7 @@
         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-rest</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-ui</feature>
+        <feature version='${feature.nic.version}'>odl-nic-core</feature>
 <!--
         <feature version='0.2.0-SNAPSHOT'>odl-plugin2oc</feature>
 -->
