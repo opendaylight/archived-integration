@@ -47,7 +47,7 @@
     <feature.tsdr.version>1.0-SNAPSHOT</feature.tsdr.version>
     <feature.ttp.version>0.1.0-SNAPSHOT</feature.ttp.version>
     <feature.usc.version>1.0-SNAPSHOT</feature.usc.version>
-    <feature.vpnservice.version>1.0-SNAPSHOT</feature.vpnservice.version>
+    <feature.vpnservice.version>0.1.0-SNAPSHOT</feature.vpnservice.version>
     <feature.vtn-manager.version>0.3.0-SNAPSHOT</feature.vtn-manager.version>
     <feature.yangtools.version>0.7.0-SNAPSHOT</feature.yangtools.version>
     <karaf.branding.version>1.1.0-SNAPSHOT</karaf.branding.version>
