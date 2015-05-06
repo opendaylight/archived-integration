@@ -25,6 +25,7 @@
     <feature.adsal.version>0.9.0-SNAPSHOT</feature.adsal.version>
     <feature.bgpcep.version>0.4.0-SNAPSHOT</feature.bgpcep.version>
     <feature.capwap.version>0.1.0-SNAPSHOT</feature.capwap.version>
+    <feature.coretutorials.version>1.0.0-SNAPSHOT</feature.coretutorials.version>
     <feature.dlux.version>0.2.0-SNAPSHOT</feature.dlux.version>
     <feature.flow.version>1.2.0-SNAPSHOT</feature.flow.version>
     <feature.groupbasedpolicy.version>0.2.0-SNAPSHOT</feature.groupbasedpolicy.version>

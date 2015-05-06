@@ -42,6 +42,7 @@
     <repository>mvn:org.opendaylight.controller/features-netconf-connector/${feature.mdsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-nsf/${feature.nsf.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-restconf/${feature.mdsal.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.coretutorials/dsbenchmark-features/${feature.coretutorials.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.didm/didm-features/${didm.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.dlux/features-dlux/${feature.dlux.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.groupbasedpolicy/features-groupbasedpolicy/${feature.groupbasedpolicy.version}/xml/features</repository>

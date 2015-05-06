@@ -108,6 +108,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.coretutorials</groupId>
+      <artifactId>dsbenchmark-features</artifactId>
+      <version>${feature.coretutorials.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.didm</groupId>
       <artifactId>didm-features</artifactId>
       <version>${didm.version}</version>

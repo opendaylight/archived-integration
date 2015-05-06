@@ -70,6 +70,7 @@
         <feature version='${didm.version}'>odl-didm-identification</feature>
         <feature version='${didm.version}'>odl-didm-drivers-api</feature>
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
+        <feature version='${feature.coretutorials.version}'>odl-dsbenchmark-impl</feature>
         <feature version='${feature.iotdm.version}'>odl-iotdm-onem2m</feature>
         <feature version='${feature.lacp.version}'>odl-lacp-ui</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
