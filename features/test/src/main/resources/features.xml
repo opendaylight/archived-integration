@@ -63,6 +63,7 @@
         <feature version='0.2.0-SNAPSHOT'>odl-aaa-netconf-plugin</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-aaa-sssd-plugin</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
+        <feature version='${feature.alto.version}'>odl-alto-integration-test</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-bgp-all</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-pcep-all</feature>
         <feature version='${feature.capwap.version}'>odl-capwap-ac-rest</feature>

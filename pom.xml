@@ -23,6 +23,7 @@
     <!-- Keep this list sorted alphabetically please -->
     <didm.version>0.1.0-SNAPSHOT</didm.version>
     <feature.adsal.version>0.9.0-SNAPSHOT</feature.adsal.version>
+    <feature.alto.version>0.1.0-SNAPSHOT</feature.alto.version>
     <feature.bgpcep.version>0.4.0-SNAPSHOT</feature.bgpcep.version>
     <feature.capwap.version>0.1.0-SNAPSHOT</feature.capwap.version>
     <feature.coretutorials.version>1.0.0-SNAPSHOT</feature.coretutorials.version>

@@ -33,6 +33,7 @@
     <repository>mvn:org.opendaylight.aaa/features-aaa/0.2.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.aaa/features-aaa-authz/0.2.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.aaa/features-aaa-api/0.2.0-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.alto/features-alto/${feature.alto.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgpcep.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-extras/${feature.bgpcep.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-pcep/${feature.bgpcep.version}/xml/features</repository>

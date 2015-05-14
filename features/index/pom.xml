@@ -45,6 +45,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.alto</groupId>
+      <artifactId>features-alto</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
        <groupId>org.opendaylight.bgpcep</groupId>
        <artifactId>features-bgp</artifactId>
        <classifier>features</classifier>
