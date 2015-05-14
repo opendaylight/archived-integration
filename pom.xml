@@ -51,6 +51,7 @@
     <feature.vpnservice.version>0.1.0-SNAPSHOT</feature.vpnservice.version>
     <feature.vtn-manager.version>0.3.0-SNAPSHOT</feature.vtn-manager.version>
     <feature.yangtools.version>0.7.0-SNAPSHOT</feature.yangtools.version>
+    <junit.version>4.8.1</junit.version>
     <karaf.branding.version>1.1.0-SNAPSHOT</karaf.branding.version>
     <nexusproxy>http://nexus.opendaylight.org/content</nexusproxy>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
