@@ -73,7 +73,6 @@
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
         <feature version='${feature.coretutorials.version}'>odl-dsbenchmark-impl</feature>
         <feature version='${feature.iotdm.version}'>odl-iotdm-onem2m</feature>
-        <feature version='${feature.lacp.version}'>odl-lacp-ui</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
         <feature version='1.2.0-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
@@ -118,6 +117,7 @@
         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-rest</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch-ui</feature>
+        <feature version='${feature.lacp.version}'>odl-lacp-ui</feature>
         <feature version='${feature.nic.version}'>odl-nic-core</feature>
 <!--
         <feature version='0.2.0-SNAPSHOT'>odl-plugin2oc</feature>
