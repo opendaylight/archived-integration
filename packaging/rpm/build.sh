@@ -8,8 +8,7 @@ rpm_out_path="$HOME/rpmbuild/RPMS/noarch/opendaylight-0.2.3-$version.fc20.noarch
 srpm_name="opendaylight-0.2.3-$version.src.rpm"
 srpm_out_path="$HOME/rpmbuild/SRPMS/opendaylight-0.2.3-$version.fc20.src.rpm"
 src_name="distribution-karaf-0.2.3-Helium-SR3.tar.gz"
-src_cache_path0="$HOME/$src_name"
-src_cache_path1="/vagrant/$src_name"
+src_cache_path="/vagrant/$src_name"
 sysd_commit=4a87227
 
 # Install required software, add user to mock group for rpmbuild
@@ -19,17 +18,16 @@ sudo usermod -a -G mock $USER
 # Configure rpmbuild dir
 rpmdev-setuptree
 
-# Put ODL source archive location required by rpmbuild
-if [ -f  $src_cache_path0 ]; then
-    echo "Using cached version of ODL at $src_cache_path0"
-    cp $src_cache_path0 $HOME/rpmbuild/SOURCES/$src_name
-elif [ -f  $src_cache_path1 ]; then
-    echo "Using cached version of ODL at $src_cache_path1"
-    cp $src_cache_path1 $HOME/rpmbuild/SOURCES/$src_name
-else
+# Download ODL release tarball if it's not cached locally already
+if [ ! -f  $src_cache_path ]; then
     echo "No cached ODL found, downloading from Nexus..."
-    curl -o $HOME/rpmbuild/SOURCES/$src_name https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.3-Helium-SR3/$src_name
+    curl -o $src_cache_path https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.3-Helium-SR3/$src_name
+else
+    echo "Using cached version of ODL at $src_cache_path"
 fi
+
+# Put ODL release tarball in the location required by rpmbuild
+cp $src_cache_path $HOME/rpmbuild/SOURCES/$src_name
 
 # Put systemd unit file archive in rpmbuild's SOURCES dir
 # Need `-L` to follow redirects
