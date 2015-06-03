@@ -219,14 +219,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>org.opendaylight.ovsdb</groupId>-->
-      <!--<artifactId>features-ovs-sfc</artifactId>-->
-      <!--<version>0.1.0-SNAPSHOT</version>-->
-      <!--<classifier>features</classifier>-->
-      <!--<type>xml</type>-->
-    <!--</dependency>-->
-<!--
     <dependency>
        <groupId>org.opendaylight.packetcable</groupId>
        <artifactId>features-packetcable</artifactId>
@@ -234,16 +226,6 @@
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
--->
-<!--
-    <dependency>
-       <groupId>org.opendaylight.plugin2oc</groupId>
-       <artifactId>features-plugin2oc</artifactId>
-       <version>0.2.0-SNAPSHOT</version>
-       <classifier>features</classifier>
-       <type>xml</type>
-    </dependency>
--->
     <dependency>
       <groupId>org.opendaylight.sdninterfaceapp</groupId>
       <artifactId>features-sdninterfaceapp</artifactId>
@@ -304,13 +286,6 @@
       <groupId>org.opendaylight.snmp</groupId>
       <artifactId>features-snmp</artifactId>
       <version>${snmp.plugin.version}</version>
-      <classifier>features</classifier>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.snmp4sdn</groupId>
-      <artifactId>features-snmp4sdn</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
