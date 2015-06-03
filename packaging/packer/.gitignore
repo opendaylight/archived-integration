@@ -1,0 +1,6 @@
+# Vim tmp files
+.*sw?
+
+# Packer output dirs
+output-virtualbox-iso/
+packer_cache/
