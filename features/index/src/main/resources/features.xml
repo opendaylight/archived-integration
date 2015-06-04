@@ -58,6 +58,8 @@
     <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin-extension/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.openflowplugin.legacy/features-legacy/${feature.openflowplugin.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
+    <repository>mvn:org.opendaylight.packetcable/features-packetcable-policy/${feature.packetcable.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.5.0-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/${feature.sfc.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc-netconf/${feature.sfc.version}/xml/features</repository>
