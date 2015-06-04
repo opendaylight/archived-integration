@@ -227,11 +227,18 @@
        <type>xml</type>
     </dependency>
     <dependency>
-       <groupId>org.opendaylight.packetcable</groupId>
-       <artifactId>features-packetcable-policy</artifactId>
-       <version>${feature.packetcable.version}</version>
-       <classifier>features</classifier>
-       <type>xml</type>
+      <groupId>org.opendaylight.packetcable</groupId>
+      <artifactId>features-packetcable-policy</artifactId>
+      <version>${feature.packetcable.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.reservation</groupId>
+      <artifactId>features-reservation</artifactId>
+      <version>${feature.reservation.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.sdninterfaceapp</groupId>
