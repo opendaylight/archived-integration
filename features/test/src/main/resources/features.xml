@@ -91,6 +91,7 @@
         <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-policy-server-all</feature>
+        <feature version='${feature.reservation.version}'>odl-reservation-models</feature>
         <feature version='1.3.0-SNAPSHOT'>odl-restconf</feature>
         <feature version="1.6.0-SNAPSHOT">odl-sdninterfaceapp-all</feature>
         <feature version='${feature.sfc.version}'>odl-sfc-core</feature>
