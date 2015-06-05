@@ -13,13 +13,41 @@
         ],
       "iso_checksum": "7cf1ac8da13f54d6be41e3ccf228dc5bb35792f515642755ff4780d5714d4278",
       "iso_checksum_type": "sha256",
+      "headless": "false",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+      "shutdown_command": "sudo shutdown -P now",
       "http_directory": ".",
       "boot_command": [
         "<tab>text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos_kickstart.cfg<enter>"
+      ],
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--cpus",
+          "2"
+        ]
       ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "config_vagrant.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": "9",
+      "output": "opendaylight-centos-7.1.box"
     }
   ]
 }
