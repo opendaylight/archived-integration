@@ -1,6 +1,8 @@
 # Vim tmp files
 .*sw?
 
-# Packer output dirs
+# Packer output
 output-virtualbox-iso/
 packer_cache/
+*.box
+Vagrantfile
