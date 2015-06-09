@@ -6,3 +6,5 @@ output-virtualbox-iso/
 packer_cache/
 *.box
 Vagrantfile
+roles/*
+!roles/.gitkeep

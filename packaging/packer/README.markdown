@@ -17,17 +17,36 @@ not packaged into a Vagrant box. Additional development is ongoing.
 
 ## Building an ODL Vagrant Base Box
 
-After [installing Packer][2], build our ODL Vagrant base box with:
+You'll need to [install Packer][2], of course.
+
+You'll also need to put a version of the [ODL Ansible role][4] in
+the directory expected by Packer:
+
+```
+[~/integration/packaging/packer]$ ansible-galaxy install -r requirements.yml --force
+- executing: git clone https://github.com/dfarrell07/ansible-opendaylight opendaylight
+- executing: git archive --prefix=opendaylight/ --output=/tmp/tmpKIgi21.tar HEAD
+- extracting opendaylight to roles/opendaylight
+- opendaylight was installed successfully
+```
+
+Note that the `ansible-galaxy` tool is provided by Ansible's package.
+
+You can now build our ODL Vagrant base box with:
 
 ```
 [~/integration/packaging/packer]$ packer build centos.json
 ```
 
-This will download and verify a fresh CentOS 7.1 Minimal ISO, use a
-Kickstart template to automate a minimal install against a VirtualBox
-host, run a post-install shell provisioner to configure the VM for use
-as a Vagrant base box and finally export, compress and package it as
-a Vagrant base box.
+This will:
+
+* Download and verify a fresh CentOS 7.1 Minimal ISO.
+* Use a Kickstart template to automate a minimal install against
+  a VirtualBox host.
+* Run a post-install shell provisioner to do VirtualBox, Vagrant
+  and Ansible-specific config.
+* Install OpenDaylight using its [Ansbile role][4].
+* Export, compress and package the VM as a Vagrant base box.
 
 ```
 <snip>
@@ -36,7 +55,7 @@ Build 'virtualbox-iso' finished.
 ==> Builds finished. The artifacts of successful builds are:
 --> virtualbox-iso: 'virtualbox' provider box: opendaylight-centos-7.1.box
 [~/integration/packaging/packer]$ ls -lh opendaylight-centos-7.1.box
--rw-rw-r--. 1 daniel daniel 532M Jun  5 00:32 opendaylight-centos-7.1.box
+-rw-rw-r--. 1 daniel daniel 1.1G Jun  9 01:13 opendaylight-centos-7.1.box
 ```
 
 Import the local box into Vagrant with:
@@ -61,7 +80,15 @@ end
 <snip>
 ```
 
+OpenDaylight will already be installed and running:
+
+```
+[vagrant@localhost ~]$ sudo systemctl is-active opendaylight
+active
+```
+
 
 [1]: https://www.packer.io/
 [2]: https://www.packer.io/intro/getting-started/setup.html
 [3]: https://trello.com/c/OoS1aKaN/150-packaging-create-odl-vagrant-base-box
+[4]: https://github.com/dfarrell07/ansible-opendaylight

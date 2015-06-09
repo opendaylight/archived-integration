@@ -43,7 +43,16 @@
       "scripts":
         [
           "config_vagrant.sh",
-          "config_virtualbox.sh"
+          "config_virtualbox.sh",
+          "config_ansible.sh"
+        ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "install_odl.yml",
+      "role_paths":
+        [
+          "roles/opendaylight"
         ]
     }
   ],
