@@ -1,10 +1,19 @@
 # OpenDaylight Packer
 
-[Packer][1] is a tool for automatically creating well-defined machine images of various types and optionally post-processing them into Vagrant base boxes, among other options.
+[Packer][1] is a tool for automatically creating well-defined machine
+images of various types and optionally post-processing them into
+Vagrant base boxes, among other options.
 
-OpenDaylight's current use-case for Packer is to build an ODL Vagrant base box, provisioned using upstream deployment/config tools. Reusing the logic of our configuration management tools nicely standardizes our deployment story, enabling good code reuse and separation of responsibilities. Providing an upstream Vagrant base box prevents all ODL consumers from duplicating ODL download, install and configuration logic, data transfer and computation in every Vagrantfile we create.
+OpenDaylight's current use-case for Packer is to build an ODL Vagrant
+base box, provisioned using upstream deployment/config tools. Reusing
+the logic of our configuration management tools nicely standardizes our
+deployment story, enabling good code reuse and separation of
+responsibilities. Providing an upstream Vagrant base box prevents all
+ODL consumers from duplicating ODL download, install and configuration
+logic, data transfer and computation in every Vagrantfile we create.
 
-We currently only support CentOS 7, output as a VirtualBox machine image, not packaged into a Vagrant box. Additional development is ongoing.
+We currently only support CentOS 7, output as a VirtualBox machine image,
+not packaged into a Vagrant box. Additional development is ongoing.
 
 ## Building an ODL Vagrant Base Box
 
@@ -14,7 +23,11 @@ After [installing Packer][2], build our ODL Vagrant base box with:
 [~/integration/packaging/packer]$ packer build centos.json
 ```
 
-This will download and verify a fresh CentOS 7.1 Minimal ISO, use a Kickstart template to automate a minimal install against a VirtualBox host, run a post-install shell provisioner to configure the VM for use as a Vagrant base box and finally export, compress and package it as a Vagrant base box.
+This will download and verify a fresh CentOS 7.1 Minimal ISO, use a
+Kickstart template to automate a minimal install against a VirtualBox
+host, run a post-install shell provisioner to configure the VM for use
+as a Vagrant base box and finally export, compress and package it as
+a Vagrant base box.
 
 ```
 <snip>
