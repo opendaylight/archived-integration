@@ -40,7 +40,11 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "config_vagrant.sh"
+      "scripts":
+        [
+          "config_vagrant.sh",
+          "config_virtualbox.sh"
+        ]
     }
   ],
   "post-processors": [
