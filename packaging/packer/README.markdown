@@ -13,34 +13,21 @@ ODL consumers from duplicating ODL download, install and configuration
 logic, data transfer and computation in every Vagrantfile we create.
 
 We currently only support CentOS 7, output as a VirtualBox machine image,
-not packaged into a Vagrant box. Additional development is ongoing.
+packaged into a Vagrant box. Additional development is ongoing.
 
 ## Building an ODL Vagrant Base Box
 
 You'll need to [install Packer][2], of course.
 
-You'll also need to put a version of the [ODL Ansible role][4] in
-the directory expected by Packer:
-
-```
-[~/integration/packaging/packer]$ ansible-galaxy install -r requirements.yml --force
-- executing: git clone https://github.com/dfarrell07/ansible-opendaylight opendaylight
-- executing: git archive --prefix=opendaylight/ --output=/tmp/tmpKIgi21.tar HEAD
-- extracting opendaylight to roles/opendaylight
-- opendaylight was installed successfully
-```
-
-Note that the `ansible-galaxy` tool is provided by Ansible's package.
-
 You can now build our ODL Vagrant base box with:
 
 ```
-[~/integration/packaging/packer]$ packer build centos.json
+[~/integration/packaging/packer]$ packer build -var-file=packer_vars.json centos.json
 ```
 
 This will:
 
-* Download and verify a fresh CentOS 7.1 Minimal ISO.
+* Download and verify a fresh CentOS 1503 Minimal ISO.
 * Use a Kickstart template to automate a minimal install against
   a VirtualBox host.
 * Run a post-install shell provisioner to do VirtualBox, Vagrant
@@ -53,17 +40,17 @@ This will:
 Build 'virtualbox-iso' finished.
 
 ==> Builds finished. The artifacts of successful builds are:
---> virtualbox-iso: 'virtualbox' provider box: opendaylight-centos-7.1.box
-[~/integration/packaging/packer]$ ls -lh opendaylight-centos-7.1.box
--rw-rw-r--. 1 daniel daniel 1.1G Jun  9 01:13 opendaylight-centos-7.1.box
+--> virtualbox-iso: 'virtualbox' provider box: opendaylight-2.3.0-centos-1503.box
+[~/integration/packaging/packer]$ ls -lh opendaylight-2.3.0-centos-1503.box
+-rw-rw-r--. 1 daniel daniel 1.1G Jun  9 01:13 opendaylight-2.3.0-centos-1503.box
 ```
 
 Import the local box into Vagrant with:
 
 ```
-[~/integration/packaging/packer]$ vagrant box add --name "opendaylight" opendaylight-centos-7.1.box --force
+[~/integration/packaging/packer]$ vagrant box add --name "opendaylight" opendaylight-2.3.0-centos-1503.box --force
 ==> box: Adding box 'opendaylight' (v0) for provider:
-    box: Downloading: file:///home/daniel/integration/packaging/packer/opendaylight-centos-7.1.box
+    box: Downloading: file:///home/daniel/integration/packaging/packer/opendaylight-2.3.0-centos-1503.box
 ==> box: Successfully added box 'opendaylight' (v0) for 'virtualbox'!
 ```
 
@@ -87,8 +74,36 @@ OpenDaylight will already be installed and running:
 active
 ```
 
+## Pre-Built ODL Base Box
+
+While we'd eventually like to provide more official places to host ODL's
+base boxes, all of this is new and under active development. For now,
+you can consume the product of this Packer build configuration via
+Atlas (previously called be VagrantCloud), the de facto box hosting
+service at the moment. It's at [dfarrell07/opendaylight][5] for now, but
+of course we'd like to transfer it to an official OpenDaylight account
+eventually (a Help Desk ticket has been submitted).
+
+```
+[~/sandbox]$ vagrant init -m dfarrell07/opendaylight
+[~/sandbox]$ cat Vagrantfile
+Vagrant.configure(2) do |config|
+  config.vm.box = "dfarrell07/opendaylight"
+end
+[~/sandbox]$ vagrant up
+# Downloads box from Atlas
+# Boots box
+[~/sandbox]$ vagrant ssh
+[vagrant@localhost ~]$ sudo systemctl is-active opendaylight
+active
+[vagrant@localhost ~]$ /opt/opendaylight/bin/client
+<snip>
+opendaylight-user@root>
+```
+
 
 [1]: https://www.packer.io/
 [2]: https://www.packer.io/intro/getting-started/setup.html
 [3]: https://trello.com/c/OoS1aKaN/150-packaging-create-odl-vagrant-base-box
 [4]: https://github.com/dfarrell07/ansible-opendaylight
+[5]: https://atlas.hashicorp.com/dfarrell07/boxes/opendaylight

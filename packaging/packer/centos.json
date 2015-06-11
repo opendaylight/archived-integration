@@ -1,4 +1,7 @@
 {
+  "variables": {
+    "box_version": null
+  },
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -49,18 +52,14 @@
     },
     {
       "type": "ansible-local",
-      "playbook_file": "install_odl.yml",
-      "role_paths":
-        [
-          "roles/opendaylight"
-        ]
+      "playbook_file": "install_odl.yml"
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
       "compression_level": "9",
-      "output": "opendaylight-centos-7.1.box"
+      "output": "opendaylight-{{ user `box_version` }}-centos-1503.box"
     }
   ]
 }
