@@ -15,7 +15,7 @@ sudo /mnt/VBoxLinuxAdditions.run
 # Clean up VirtualBox Guest Additions install media to save space
 sudo umount /mnt
 rm -rf /home/vagrant/VBoxGuestAdditions.iso
-rm -rf /usr/src/vboxguest*
+sudo rm -rf /usr/src/vboxguest*
 
 # Clean up utilities required by VB Guest Additions install to save space
 # Don't remove bzip2, it's only 87k. Removing gcc saves 37M, kernel-devel 32M.
