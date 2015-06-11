@@ -44,6 +44,7 @@
     <feature.reservation.version>1.0.0-SNAPSHOT</feature.reservation.version>
     <feature.sfc.version>0.1.0-SNAPSHOT</feature.sfc.version>
     <feature.snbi.version>1.1.0-SNAPSHOT</feature.snbi.version>
+    <feature.snmp4sdn.version>0.2.0-SNAPSHOT</feature.snmp4sdn.version>
     <feature.tcpmd5.version>1.1.0-SNAPSHOT</feature.tcpmd5.version>
     <feature.topoprocessing.version>0.0.1-SNAPSHOT</feature.topoprocessing.version>
     <feature.tsdr.version>1.0-SNAPSHOT</feature.tsdr.version>

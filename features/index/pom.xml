@@ -304,6 +304,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.snmp4sdn</groupId>
+      <artifactId>features-snmp4sdn</artifactId>
+      <version>${feature.snmp4sdn.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.tcpmd5</groupId>
       <artifactId>features-tcpmd5</artifactId>
       <version>${feature.tcpmd5.version}</version>
