@@ -85,8 +85,6 @@
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-flow-services-ui</feature>
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-nxm-extensions</feature>
         <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
-        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
-        <feature version='${feature.packetcable.version}'>odl-packetcable-policy-server-all</feature>
         <feature version='${feature.reservation.version}'>odl-reservation-models</feature>
         <feature version='1.2.0-SNAPSHOT'>odl-restconf</feature>
         <feature version="1.5.0-SNAPSHOT">odl-sdninterfaceapp-all</feature>
@@ -120,6 +118,8 @@
         <feature version='${feature.lacp.version}'>odl-lacp-ui</feature>
         <feature version='${feature.nic.version}'>odl-nic-core</feature>
         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
+        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
+        <feature version='${feature.packetcable.version}'>odl-packetcable-policy-server-all</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
         <feature version='${feature.tsdr.version}'>odl-tsdr-all</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-neutron</feature>
