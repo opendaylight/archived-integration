@@ -1,24 +1,49 @@
-### OpenDaylight Docker Images
-The `Dockerfile` in this directory can be used to construct a Docker image for the OpenDaylight SDN controller. The current OpenDaylight version is [Helium SR3](http://www.opendaylight.org/software/downloads/helium-sr3). Note that Helium uses Karaf to install features, and that the Docker image doesn't install any features by default. You'll need to choose which features to install based on your use-case.
+# OpenDaylight Docker Image
 
-### OpenDaylight on DockerHub
-A pre-built OpenDaylight Helium image is available on DockerHub. You can find it with `docker search opendaylight`:
+The `Dockerfile` in this directory can be used to construct a Docker
+image for the OpenDaylight SDN controller. The currently supported
+OpenDaylight version is [Helium SR3][1]. Note that Helium uses Karaf
+to install features, and that the Docker image doesn't install any
+features by default. You'll need to choose which features to install
+based on your use-case.
 
-TODO: Show example once ODL Helium image is on DockerHub
+## Pre-Built Docker Image
 
-You can then pull it to your local system with `docker pull opendaylight/helium`:
+A pre-built OpenDaylight Helium SR3 image is [available on DockerHub][2].
 
-TODO: Show example once ODL Helium image is on DockerHub
+```
+[~/sandbox]$ docker run -ti dfarrell07/odl:0.2.3 ./bin/karaf
+# ODL's Docker image will be downloaded if needed
+<snip>
+opendaylight-user@root>
+```
 
-### Using the Image
-To run commands against Dockerized OpenDaylight, use `docker run`. `WORKDIR` is set to the root of ODL's install directory, `/opt/opendaylight`. Commands passed to `docker run` should be relative to that path.
+## Building ODL's Docker Image
 
-Additional information about running Docker images can be found [here](https://docs.docker.com/reference/run/).
+To manually build a Docker image from the included `Dockerfile`:
+
+```
+[~/integration/packaging/docker]$ docker build -t dfarrell07/odl:0.2.3 .
+[~/integration/packaging/docker]$ docker images | grep odl
+dfarrell07/odl    0.2.3    af863ac2de74    3 days ago    523.5 MB
+```
+
+Replace the tag name with one of your own choosing.
+
+## Using the Image
+
+To run commands against Dockerized OpenDaylight, use `docker run`. `WORKDIR`
+is set to the root of ODL's install directory, `/opt/opendaylight`. Commands
+passed to `docker run` should be relative to that path.
+
+Additional information about running Docker images can be found [here][3].
 
 ### Ports
-OpenDaylight Helium will expose subsets of the following ports. The actual set of exposed ports for a given controller is determined by the features installed via Karaf.
 
-TODO: Verify that these are all of the ODL Helium ports and no extra
+The OpenDaylight Docker image opens the full set of ports known to be used
+by OpenDaylight generally. For most real-world sets of installed Karaf
+features, only a small subset of these ports will actually be used by
+ODL.
 
 * 162 - SNMP4SDN (only when started as root)
 * 179 - BGP
@@ -44,6 +69,16 @@ TODO: Verify that these are all of the ODL Helium ports and no extra
 * 8383 - Netconf
 * 12001 - ODL Clustering
 
-By default these ports will be mapped to random ports on the host system. The mappings can be discovered using the `docker ps` command. 
+By default ports will be mapped to random ports on the host system. The
+mappings can be discovered using the `docker ps` command.
 
-If you wish to map these ports to specific ports on the host system, use the `-p <host-port>:<container-port>` flag with `docker run`. Note that [container linking](https://docs.docker.com/userguide/dockerlinks/) is generally recommend over hard-wiring ports with `-p`.
+If you wish to map these ports to specific ports on the host system, use
+the `-p <host-port>:<container-port>` flag with `docker run`. Note that
+[container linking][4] is generally recommend over hard-wiring ports with
+`-p`.
+
+
+[1]: http://www.opendaylight.org/software/downloads/helium-sr3
+[2]: https://registry.hub.docker.com/u/dfarrell07/odl/
+[3]: https://docs.docker.com/reference/run/
+[4]: https://docs.docker.com/userguide/dockerlinks/
