@@ -311,6 +311,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.sxp</groupId>
+      <artifactId>features</artifactId>
+      <version>${feature.sxp.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.opendaylight.tcpmd5</groupId>
       <artifactId>features-tcpmd5</artifactId>
       <version>${feature.tcpmd5.version}</version>

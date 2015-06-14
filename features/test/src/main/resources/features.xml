@@ -96,6 +96,7 @@
         <feature version='${feature.sfc.version}'>odl-sfc-sb-rest</feature>
         <feature version='${feature.sfc.version}'>odl-sfc-ovs</feature>
         <feature version='${feature.sfc.version}'>odl-sfc-netconf</feature>
+        <feature version='${feature.sxp.version}'>odl-sxp-controller</feature>
         <feature version='${snmp.plugin.version}'>odl-snmp-plugin</feature>
         <feature version='${feature.snmp4sdn.version}'>odl-snmp4sdn-all</feature>
         <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
