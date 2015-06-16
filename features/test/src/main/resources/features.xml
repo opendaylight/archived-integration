@@ -63,7 +63,6 @@
         <feature version='0.2.0-SNAPSHOT'>odl-aaa-netconf-plugin</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-aaa-sssd-plugin</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
-        <feature version='${feature.alto.version}'>odl-alto-integration-test</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-bgp-all</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-pcep-all</feature>
         <feature version='${feature.capwap.version}'>odl-capwap-ac-rest</feature>
@@ -110,6 +109,7 @@
 
     <!-- Please use aphabetical order for non-compatible features -->
     <feature name='odl-integration-all' version='${project.version}'>
+        <feature version='${feature.alto.version}'>odl-alto-integration-test</feature>
         <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
         <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
         <feature version='0.2.0-SNAPSHOT'>odl-l2switch-switch</feature>
