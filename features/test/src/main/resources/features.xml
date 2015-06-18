@@ -120,6 +120,7 @@
         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-policy-server-all</feature>
+        <feature version='1.0.0-SNAPSHOT'>odl-persistence-api</feature>
         <feature version='${feature.sfc.version}'>odl-sfcofl2</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
         <feature version='${feature.tsdr.version}'>odl-tsdr-all</feature>
