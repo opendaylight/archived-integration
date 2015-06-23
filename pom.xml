@@ -3,13 +3,13 @@
   <parent>
     <groupId>org.opendaylight.odlparent</groupId>
     <artifactId>odlparent</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>1.5.0-Lithium</version>
     <relativePath/>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.opendaylight.integration</groupId>
   <artifactId>root</artifactId>
-  <version>0.3.0-SNAPSHOT</version>
+  <version>0.3.0-Lithium</version>
   <name>integration</name> <!-- Used by Sonar to set project name -->
   <packaging>pom</packaging>
   <url>https://wiki.opendaylight.org/view/CrossProject:Integration_Group</url>
@@ -21,44 +21,44 @@
   </scm>
   <properties>
     <!-- Keep this list sorted alphabetically please -->
-    <didm.version>0.1.0-SNAPSHOT</didm.version>
-    <feature.adsal.version>0.9.0-SNAPSHOT</feature.adsal.version>
-    <feature.alto.version>0.1.0-SNAPSHOT</feature.alto.version>
-    <feature.bgpcep.version>0.4.0-SNAPSHOT</feature.bgpcep.version>
-    <feature.capwap.version>0.1.0-SNAPSHOT</feature.capwap.version>
-    <feature.coretutorials.version>1.0.0-SNAPSHOT</feature.coretutorials.version>
-    <feature.dlux.version>0.2.0-SNAPSHOT</feature.dlux.version>
-    <feature.flow.version>1.2.0-SNAPSHOT</feature.flow.version>
-    <feature.groupbasedpolicy.version>0.2.0-SNAPSHOT</feature.groupbasedpolicy.version>
-    <feature.iotdm.version>0.0.1-SNAPSHOT</feature.iotdm.version>
-    <feature.lacp.version>1.0.0-SNAPSHOT</feature.lacp.version>
-    <feature.lispflowmapping.version>1.2.0-SNAPSHOT</feature.lispflowmapping.version>
-    <feature.mdsal.version>1.2.0-SNAPSHOT</feature.mdsal.version>
-    <feature.nic.version>1.0.0-SNAPSHOT</feature.nic.version>
-    <feature.nsf.version>0.5.0-SNAPSHOT</feature.nsf.version>
-    <feature.neutron.version>0.5.0-SNAPSHOT</feature.neutron.version>
-    <feature.openflowplugin.version>0.1.0-SNAPSHOT</feature.openflowplugin.version>
-    <feature.ovsdb.openstack.version>1.1.0-SNAPSHOT</feature.ovsdb.openstack.version>
-    <feature.ovsdb.version>1.1.0-SNAPSHOT</feature.ovsdb.version>
-    <feature.packetcable.version>1.2.0-SNAPSHOT</feature.packetcable.version>
-    <feature.reservation.version>1.0.0-SNAPSHOT</feature.reservation.version>
-    <feature.sfc.version>0.1.0-SNAPSHOT</feature.sfc.version>
-    <feature.snbi.version>1.1.0-SNAPSHOT</feature.snbi.version>
-    <feature.snmp4sdn.version>0.2.0-SNAPSHOT</feature.snmp4sdn.version>
-    <feature.sxp.version>1.1-SNAPSHOT</feature.sxp.version>
-    <feature.tcpmd5.version>1.1.0-SNAPSHOT</feature.tcpmd5.version>
-    <feature.topoprocessing.version>0.0.1-SNAPSHOT</feature.topoprocessing.version>
-    <feature.tsdr.version>1.0-SNAPSHOT</feature.tsdr.version>
-    <feature.ttp.version>0.1.0-SNAPSHOT</feature.ttp.version>
-    <feature.usc.version>1.0-SNAPSHOT</feature.usc.version>
-    <feature.vpnservice.version>0.1.0-SNAPSHOT</feature.vpnservice.version>
-    <feature.vtn-manager.version>0.3.0-SNAPSHOT</feature.vtn-manager.version>
-    <feature.yangtools.version>0.7.0-SNAPSHOT</feature.yangtools.version>
+    <didm.version>0.1.0-Lithium</didm.version>
+    <feature.adsal.version>0.9.0-Lithium</feature.adsal.version>
+    <feature.alto.version>0.1.0-Lithium</feature.alto.version>
+    <feature.bgpcep.version>0.4.0-Lithium</feature.bgpcep.version>
+    <feature.capwap.version>0.1.0-Lithium</feature.capwap.version>
+    <feature.coretutorials.version>1.0.0-Lithium</feature.coretutorials.version>
+    <feature.dlux.version>0.2.0-Lithium</feature.dlux.version>
+    <feature.flow.version>1.2.0-Lithium</feature.flow.version>
+    <feature.groupbasedpolicy.version>0.2.0-Lithium</feature.groupbasedpolicy.version>
+    <feature.iotdm.version>0.0.1-Lithium</feature.iotdm.version>
+    <feature.lacp.version>1.0.0-Lithium</feature.lacp.version>
+    <feature.lispflowmapping.version>1.2.0-Lithium</feature.lispflowmapping.version>
+    <feature.mdsal.version>1.2.0-Lithium</feature.mdsal.version>
+    <feature.nic.version>1.0.0-Lithium</feature.nic.version>
+    <feature.nsf.version>0.5.0-Lithium</feature.nsf.version>
+    <feature.neutron.version>0.5.0-Lithium</feature.neutron.version>
+    <feature.openflowplugin.version>0.1.0-Lithium</feature.openflowplugin.version>
+    <feature.ovsdb.openstack.version>1.1.0-Lithium</feature.ovsdb.openstack.version>
+    <feature.ovsdb.version>1.1.0-Lithium</feature.ovsdb.version>
+    <feature.packetcable.version>1.2.0-Lithium</feature.packetcable.version>
+    <feature.reservation.version>1.0.0-Lithium</feature.reservation.version>
+    <feature.sfc.version>0.1.0-Lithium</feature.sfc.version>
+    <feature.snbi.version>1.1.0-Lithium</feature.snbi.version>
+    <feature.snmp4sdn.version>0.2.0-Lithium</feature.snmp4sdn.version>
+    <feature.sxp.version>1.1-Lithium</feature.sxp.version>
+    <feature.tcpmd5.version>1.1.0-Lithium</feature.tcpmd5.version>
+    <feature.topoprocessing.version>0.0.1-Lithium</feature.topoprocessing.version>
+    <feature.tsdr.version>1.0-Lithium</feature.tsdr.version>
+    <feature.ttp.version>0.1.0-Lithium</feature.ttp.version>
+    <feature.usc.version>1.0-Lithium</feature.usc.version>
+    <feature.vpnservice.version>0.1.0-Lithium</feature.vpnservice.version>
+    <feature.vtn-manager.version>0.3.0-Lithium</feature.vtn-manager.version>
+    <feature.yangtools.version>0.7.0-Lithium</feature.yangtools.version>
     <junit.version>4.8.1</junit.version>
-    <karaf.branding.version>1.1.0-SNAPSHOT</karaf.branding.version>
+    <karaf.branding.version>1.1.0-Lithium</karaf.branding.version>
     <nexusproxy>http://nexus.opendaylight.org/content</nexusproxy>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <snmp.plugin.version>1.0-SNAPSHOT</snmp.plugin.version>
+    <snmp.plugin.version>1.0-Lithium</snmp.plugin.version>
     <!-- Keep this list sorted alphabetically please -->
   </properties>
   <modules>
