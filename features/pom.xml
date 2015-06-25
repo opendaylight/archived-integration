@@ -10,7 +10,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
   <parent>
     <groupId>org.opendaylight.integration</groupId>
     <artifactId>root</artifactId>
-    <version>0.3.0-Lithium</version>
+    <version>0.3.1-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
   <artifactId>features-integration-aggregator</artifactId>

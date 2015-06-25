@@ -30,9 +30,9 @@
 
 
     <!-- Please add new repository in an alphabetical order -->
-    <repository>mvn:org.opendaylight.aaa/features-aaa/0.2.0-Lithium/xml/features</repository>
-    <repository>mvn:org.opendaylight.aaa/features-aaa-authz/0.2.0-Lithium/xml/features</repository>
-    <repository>mvn:org.opendaylight.aaa/features-aaa-api/0.2.0-Lithium/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-aaa/0.2.1-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-aaa-authz/0.2.1-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-aaa-api/0.2.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.alto/features-alto/${feature.alto.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgpcep.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-extras/${feature.bgpcep.version}/xml/features</repository>
@@ -48,7 +48,7 @@
     <repository>mvn:org.opendaylight.dlux/features-dlux/${feature.dlux.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.groupbasedpolicy/features-groupbasedpolicy/${feature.groupbasedpolicy.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.iotdm/onem2m-features/${feature.iotdm.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.2.0-Lithium/xml/features</repository>
+    <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.2.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.lacp/features-lacp/${feature.lacp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.neutron/features-neutron/${feature.neutron.version}/xml/features</repository>
@@ -60,9 +60,9 @@
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.packetcable/features-packetcable-policy/${feature.packetcable.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.persistence/features-persistence/1.0.0-Lithium/xml/features</repository>
+    <repository>mvn:org.opendaylight.persistence/features-persistence/1.0.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.reservation/features-reservation/${feature.reservation.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.5.0-Lithium/xml/features</repository>
+    <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.5.1-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc/${feature.sfc.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc-netconf/${feature.sfc.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.sfc/features-sfc-ovs/${feature.sfc.version}/xml/features</repository>
