@@ -2,4 +2,4 @@
 - hosts: localhost
   sudo: yes
   roles:
-    - dfarrell07.opendaylight
+    - opendaylight

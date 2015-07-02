@@ -1,6 +1,8 @@
 {
   "variables": {
-    "box_version": null
+    "box_version": null,
+    "docker_version": null,
+    "docker_name": null
   },
   "builders": [
     {
@@ -19,6 +21,7 @@
       "headless": "false",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
+      "ssh_wait_timeout": "20m",
       "shutdown_command": "sudo shutdown -P now",
       "http_directory": ".",
       "boot_command": [
@@ -38,6 +41,12 @@
           "2"
         ]
       ]
+    },
+    {
+      "type": "docker",
+      "image": "centos:7.1.1503",
+      "pull": false,
+      "commit": true
     }
   ],
   "provisioners": [
@@ -45,9 +54,25 @@
       "type": "shell",
       "scripts":
         [
-          "config_vagrant.sh",
           "config_virtualbox.sh",
+          "config_vagrant.sh",
           "config_ansible.sh"
+        ],
+      "only":
+        [
+          "virtualbox-iso"
+        ]
+    },
+    {
+      "type": "shell",
+      "scripts":
+        [
+          "config_docker.sh",
+          "config_ansible.sh"
+        ],
+      "only":
+        [
+          "docker"
         ]
     },
     {
@@ -59,7 +84,15 @@
     {
       "type": "vagrant",
       "compression_level": "9",
-      "output": "opendaylight-{{ user `box_version` }}-centos-1503.box"
+      "output": "opendaylight-{{ user `box_version` }}-centos-1503.box",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "docker-tag",
+      "repository": "{{ user `docker_name` }}",
+      "tag": "{{ user `docker_version` }}",
+      "force": true,
+      "only": ["docker"]
     }
   ]
 }
