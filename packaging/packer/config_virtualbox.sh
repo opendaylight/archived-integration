@@ -6,7 +6,8 @@
 set -x
 
 # Install utilities required by VB Guest Additions install
-sudo yum install -y bzip2 gcc kernel-devel
+# TODO: Is all of @Base and @Core strictly required?
+sudo yum install -y @Base @Core bzip2 gcc kernel-devel
 
 # Install VirtualBox Guest Additions (downloaded by Packer)
 sudo mount -o loop /home/vagrant/VBoxGuestAdditions.iso /mnt

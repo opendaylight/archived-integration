@@ -1,19 +1,9 @@
 # OpenDaylight Packer
 
-[Packer][1] is a tool for automatically creating well-defined machine
-images of various types and optionally post-processing them into
-Vagrant base boxes, among other options.
+[Packer][1] is a tool for automatically creating VM and container images,
+configuring them and post-processing them into standard output formats.
 
-OpenDaylight's current use-case for Packer is to build an ODL Vagrant
-base box, provisioned using upstream deployment/config tools. Reusing
-the logic of our configuration management tools nicely standardizes our
-deployment story, enabling good code reuse and separation of
-responsibilities. Providing an upstream Vagrant base box prevents all
-ODL consumers from duplicating ODL download, install and configuration
-logic, data transfer and computation in every Vagrantfile we create.
-
-We currently only support CentOS 7, output as a VirtualBox machine image,
-packaged into a Vagrant box. Additional development is ongoing.
+We currently build OpenDaylight's Vagrant base box and Docker image via Packer.
 
 ## Building an ODL Vagrant Base Box
 
@@ -32,7 +22,7 @@ This will:
   a VirtualBox host.
 * Run a post-install shell provisioner to do VirtualBox, Vagrant
   and Ansible-specific config.
-* Install OpenDaylight using its [Ansbile role][4].
+* Install OpenDaylight using its [Ansible role][4].
 * Export, compress and package the VM as a Vagrant base box.
 
 ```
