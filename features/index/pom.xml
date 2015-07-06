@@ -62,6 +62,13 @@
     </dependency>
     <dependency>
        <groupId>org.opendaylight.bgpcep</groupId>
+       <artifactId>features-bmp</artifactId>
+       <classifier>features</classifier>
+       <version>${feature.bgpcep.version}</version>
+       <type>xml</type>
+    </dependency>
+    <dependency>
+       <groupId>org.opendaylight.bgpcep</groupId>
        <artifactId>features-extras</artifactId>
        <classifier>features</classifier>
        <version>${feature.bgpcep.version}</version>
