@@ -6,20 +6,24 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:       opendaylight
-Version:    0.2.3
-Release:    2%{?dist}
+# Shifting ODL's current versioning to make room for patch versions.
+#   The leading 0 is unused, so no info loss. ODL's TSC has had
+#   initial discussions about adopting this scheme for all artifacts,
+#   but the RPM needs it now to support deplying daily/weekly/etc builds.
+Version:    3.0.0
+Release:    1
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
 License:    EPL-1.0
 URL:        http://www.opendaylight.org
 BuildArch:  noarch
-Source0:    https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.3-Helium-SR3/distribution-karaf-0.2.3-Helium-SR3.tar.gz
+Source0:    https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.3.0-Lithium/distribution-karaf-0.3.0-Lithium.tar.gz
 Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/%{shortcommit}/opendaylight-systemd-%{shortcommit}.tar.gz
 Buildroot:  /tmp
 
 # Required for ODL at run time
-Requires:   java = 1:1.7.0
+Requires:   java >= 1:1.7.0
 # Required for creating odl group
 Requires(pre): shadow-utils
 # Required for configuring systemd
@@ -33,11 +37,11 @@ getent passwd odl > /dev/null || useradd odl -M -d $RPM_BUILD_ROOT/opt/%name
 getent group odl > /dev/null || groupadd odl
 
 %description
-OpenDaylight Helium SR3 (0.2.3)
+OpenDaylight Lithium
 
 %prep
 # Extract Source0 (ODL archive)
-%autosetup -n distribution-karaf-0.2.3-Helium-SR3
+%autosetup -n distribution-karaf-0.3.0-Lithium
 # Extract Source1 (systemd config)
 %autosetup -T -D -b 1 -n opendaylight-systemd-%{commit}
 
@@ -45,7 +49,7 @@ OpenDaylight Helium SR3 (0.2.3)
 # Create directory in build root for ODL
 mkdir -p $RPM_BUILD_ROOT/opt/%name
 # Move ODL from archive to its dir in build root
-cp -r ../distribution-karaf-0.2.3-Helium-SR3/* $RPM_BUILD_ROOT/opt/%name
+cp -r ../distribution-karaf-0.3.0-Lithium/* $RPM_BUILD_ROOT/opt/%name
 # Create directory in build root for systemd .service file
 mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 # Move ODL's systemd .service file to correct dir in build root
@@ -58,13 +62,15 @@ cp ../../BUILD/opendaylight-systemd-%{commit}/opendaylight.service $RPM_BUILD_RO
 rm -rf $RPM_BUILD_ROOT/opt/%name
 
 %files
-# ODL will run as odl:odl, set as user:group for ODL dir, dont override mode
+# ODL will run as odl:odl, set as user:group for ODL dir, don't override mode
 %attr(-,odl,odl) /opt/%name
 # Configure systemd unitfile user/group/mode
 %attr(0644,root,root) %{_unitdir}/%name.service
 
 
 %changelog
+* Tue Jul 14 2015 Daniel Farrell <dfarrell@redhat.com> - 3.0.0-1
+- Upgrade from Helium SR3 to Lithium
 * Thu Apr 16 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.3-2
 - Force Java version 1.7
 * Mon Mar 23 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.3-1

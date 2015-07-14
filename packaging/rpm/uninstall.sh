@@ -1,8 +1,12 @@
 #!/usr/bin/env sh
+# Simple helper script for uninstalling ODL
 
-# Update version if needed
-rpm_name="opendaylight-0.2.3"
+# Echo commands as they are run
+set -x
+
+# NB: These will need to be updated for version bumps
+rpm_version="3.0.0"
 
 # Uninstall ODL
-echo "Uninstalling $rpm_name"
-sudo rpm -e opendaylight-0.2.3
+echo "Uninstalling ODL"
+sudo rpm -e opendaylight-$rpm_version

@@ -1,15 +1,31 @@
 #!/usr/bin/env sh
+# Build the ODL SRPM and noarch RPM described in opendaylight.spec
+# This is designed to be run in the included Vagrant environment.
+
+# Echo commands as they are run
+set -x
+
+# NB: These will need to be updated for version bumps
+odl_version="0.3.0-Lithium"
+rpm_version="3.0.0"
+rpm_release=1
+sysd_commit="4a87227"
+
+# Common names used in this script
+odl_srpm="opendaylight-$rpm_version-$rpm_release.src.rpm"
+odl_rpm="opendaylight-$rpm_version-$rpm_release.noarch.rpm"
+odl_tarball="distribution-karaf-$odl_version.tar.gz"
+unitfile_tarball="opendaylight-systemd-$sysd_commit.tar.gz"
 
 # Common paths used in this script
-# NB: Name will need to be updated for both ODL and RMP version bumps
-version=2
-rpm_name="opendaylight-0.2.3-$version.noarch.rpm"
-rpm_out_path="$HOME/rpmbuild/RPMS/noarch/opendaylight-0.2.3-$version.fc20.noarch.rpm"
-srpm_name="opendaylight-0.2.3-$version.src.rpm"
-srpm_out_path="$HOME/rpmbuild/SRPMS/opendaylight-0.2.3-$version.fc20.src.rpm"
-src_name="distribution-karaf-0.2.3-Helium-SR3.tar.gz"
-src_cache_path="/vagrant/$src_name"
-sysd_commit=4a87227
+odl_tb_cache_path="/vagrant/$odl_tarball"
+unitfile_cache_path="/vagrant/$unitfile_tarball"
+srpm_out_path="$HOME/rpmbuild/SRPMS/$odl_srpm"
+rpm_out_path="$HOME/rpmbuild/RPMS/noarch/$odl_rpm"
+odl_tb_url="https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/$odl_version/$odl_tarball"
+unitfile_url="https://github.com/dfarrell07/opendaylight-systemd/archive/$sysd_commit/$unitfile_tarball"
+rpmbuild_src_dir="$HOME/rpmbuild/SOURCES/"
+rpmbuild_spec_dir="$HOME/rpmbuild/SPECS/"
 
 # Install required software, add user to mock group for rpmbuild
 sudo yum install -y @development-tools fedora-packager
@@ -19,25 +35,25 @@ sudo usermod -a -G mock $USER
 rpmdev-setuptree
 
 # Download ODL release tarball if it's not cached locally already
-if [ ! -f  $src_cache_path ]; then
+if [ ! -f  $odl_tb_cache_path ]; then
     echo "No cached ODL found, downloading from Nexus..."
-    curl -o $src_cache_path https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.3-Helium-SR3/$src_name
+    curl -o $odl_tb_cache_path $odl_tb_url
 else
-    echo "Using cached version of ODL at $src_cache_path"
+    echo "Using cached version of ODL at $odl_tb_cache_path"
 fi
 
 # Put ODL release tarball in the location required by rpmbuild
-cp $src_cache_path $HOME/rpmbuild/SOURCES/$src_name
+cp $odl_tb_cache_path $rpmbuild_src_dir
 
 # Put systemd unit file archive in rpmbuild's SOURCES dir
 # Need `-L` to follow redirects
-curl -L -o $HOME/rpmbuild/SOURCES/opendaylight-systemd-$sysd_commit.tar.gz https://github.com/dfarrell07/opendaylight-systemd/archive/$sysd_commit/opendaylight-systemd-$sysd_commit.tar.gz
+curl -L -o $rpmbuild_src_dir/$unitfile_tarball $unitfile_url
 
 # Put ODL RPM .spec file in location required by rpmbuild
-cp opendaylight.spec $HOME/rpmbuild/SPECS
+cp opendaylight.spec $rpmbuild_spec_dir
 
-# Build ODL RPM
-cd $HOME/rpmbuild/SPECS
+# Build ODL SRPM and noarch RPM
+cd $rpmbuild_spec_dir
 rpmbuild -ba opendaylight.spec
 
 # Confirm SRPM found in expected location
@@ -46,9 +62,7 @@ if [ -f  $srpm_out_path ]; then
     echo "Location: $srpm_out_path"
     if [ -d  /vagrant/ ]; then
         echo "Assuming you want to move RPM off Vagrant box"
-        echo "Also renaming RPM, not actually tagged as for FC20 target OS"
-        echo "cp $srpm_out_path /vagrant/$srpm_name"
-        cp $srpm_out_path /vagrant/$srpm_name
+        cp $srpm_out_path /vagrant/
     fi
 else
     echo "SRPM seems to have failed. :(" >&2
@@ -60,9 +74,7 @@ if [ -f  $rpm_out_path ]; then
     echo "Location: $rpm_out_path"
     if [ -d  /vagrant/ ]; then
         echo "Assuming you want to move RPM off Vagrant box"
-        echo "Also renaming RPM, not actually tagged as for FC20 target OS"
-        echo "cp $rpm_out_path /vagrant/$rpm_name"
-        cp $rpm_out_path /vagrant/$rpm_name
+        cp $rpm_out_path /vagrant/
     fi
 else
     echo "RPM seems to have failed. :(" >&2
