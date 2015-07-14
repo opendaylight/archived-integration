@@ -96,7 +96,6 @@
         <feature version='0.0.7-SNAPSHOT'>odl-openflowplugin-flow-services-rest</feature>
         <feature version='0.0.7-SNAPSHOT'>odl-openflowplugin-flow-services-ui</feature>
         <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
-        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version="1.4.6-SNAPSHOT">odl-sdninterfaceapp-all</feature>
         <feature version='1.1.4-SNAPSHOT'>odl-restconf</feature>
         <feature version='0.0.5-SNAPSHOT'>odl-sfc-all</feature>
@@ -117,6 +116,7 @@
         <feature version='0.1.4-SNAPSHOT'>odl-l2switch-switch-ui</feature>
         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
         <feature version='0.0.5-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
+        <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
     </feature>
 
