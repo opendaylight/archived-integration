@@ -8,7 +8,7 @@ set -x
 # NB: These will need to be updated for version bumps
 odl_version="0.3.0-Lithium"
 rpm_version="3.0.0"
-rpm_release=1
+rpm_release="2.el7.centos"
 sysd_commit="4a87227"
 
 # Common names used in this script
@@ -28,6 +28,7 @@ rpmbuild_src_dir="$HOME/rpmbuild/SOURCES/"
 rpmbuild_spec_dir="$HOME/rpmbuild/SPECS/"
 
 # Install required software, add user to mock group for rpmbuild
+sudo yum install -y epel-release
 sudo yum install -y @development-tools fedora-packager
 sudo usermod -a -G mock $USER
 

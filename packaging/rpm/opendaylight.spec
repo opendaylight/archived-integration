@@ -4,6 +4,7 @@
 # Update this commit if systemd unit file is updated
 %global commit 4a872270893f0daeebcbbcc0ff0014978e3c5f68
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global odl_version 0.3.0-Lithium
 
 Name:       opendaylight
 # Shifting ODL's current versioning to make room for patch versions.
@@ -11,14 +12,19 @@ Name:       opendaylight
 #   initial discussions about adopting this scheme for all artifacts,
 #   but the RPM needs it now to support deplying daily/weekly/etc builds.
 Version:    3.0.0
-Release:    1
+# The Fedora/CentOS packaging guidelines *require* the use of a disttag. ODL's
+#   RPM build doesn't do anything Fedora/CentOS spicific, so the disttag is
+#   unnecessary and unused in our case, but both the docs and the pros (apevec)
+#   agree that we should include it.
+# See: https://fedoraproject.org/wiki/Packaging:DistTag
+Release:    2%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
 License:    EPL-1.0
 URL:        http://www.opendaylight.org
 BuildArch:  noarch
-Source0:    https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.3.0-Lithium/distribution-karaf-0.3.0-Lithium.tar.gz
+Source0:    https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/%{odl_version}/distribution-karaf-%{odl_version}.tar.gz
 Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/%{shortcommit}/opendaylight-systemd-%{shortcommit}.tar.gz
 Buildroot:  /tmp
 
@@ -69,6 +75,8 @@ rm -rf $RPM_BUILD_ROOT/opt/%name
 
 
 %changelog
+* Fri Jul 17 2015 Daniel Farrell <dfarrell@redhat.com> - 3.0.0-2
+- Include required disttag in RPM release version
 * Tue Jul 14 2015 Daniel Farrell <dfarrell@redhat.com> - 3.0.0-1
 - Upgrade from Helium SR3 to Lithium
 * Thu Apr 16 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.3-2
