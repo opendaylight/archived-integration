@@ -388,7 +388,7 @@
       <plugin>
         <groupId>org.opendaylight.odlparent</groupId>
         <artifactId>karaf-plugin</artifactId>
-        <version>1.5.0-SNAPSHOT</version>
+        <version>1.6.0-SNAPSHOT</version>
         <executions>
           <execution>
             <id>populate-local-repo</id>
