@@ -50,60 +50,60 @@
 
     
     <!-- Please add new repository in an alphabetical order -->
-    <repository>mvn:org.opendaylight.aaa/features-aaa/0.1.4-Helium-SR4/xml/features</repository>
-    <repository>mvn:org.opendaylight.aaa/features-authz/0.1.4-Helium-SR4/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-aaa/0.1.5-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/features-authz/0.1.5-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.bgpcep/features-bgp/${feature.bgp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-adsal/${feature.adsal.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.controller/features-adsal-compatibility/1.4.6-Helium-SR4/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/features-adsal-compatibility/1.4.7-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-mdsal/${feature.mdsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-netconf-connector/${feature.mdsal.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-nsf/${feature.nsf.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.dlux/features-dlux/${feature.dlux.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.groupbasedpolicy/features-groupbasedpolicy/${feature.groupbasedpolicy.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.1.4-Helium-SR4/xml/features</repository>
+    <repository>mvn:org.opendaylight.l2switch/features-l2switch/0.1.5-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.lispflowmapping/features-lispflowmapping/${feature.lispflowmapping.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.0.7-Helium-SR4/xml/features</repository>
-    <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.0.7-Helium-SR4/xml/features</repository>
+    <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/0.0.8-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.ovsdb/features-openflow-nxm/0.0.8-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.ovsdb/features-ovsdb/${feature.ovsdb.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.0.5-Helium-SR4/xml/features</repository>
+    <repository>mvn:org.opendaylight.ovsdb/features-ovs-sfc/0.0.6-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.packetcable/features-packetcable/${feature.packetcable.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.controller/features-restconf/${feature.mdsal.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.4.6-Helium-SR4/xml/features</repository>
-    <repository>mvn:org.opendaylight.sfc/features-sfc/0.0.5-Helium-SR4/xml/features</repository>
-    <repository>mvn:org.opendaylight.sfc/features-sfclisp/0.0.5-Helium-SR4/xml/features</repository>
-    <repository>mvn:org.opendaylight.sfc/features-sfcofl2/0.0.5-Helium-SR4/xml/features</repository>
+    <repository>mvn:org.opendaylight.sdninterfaceapp/features-sdninterfaceapp/1.4.7-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfc/0.0.6-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfclisp/0.0.6-SNAPSHOT/xml/features</repository>
+    <repository>mvn:org.opendaylight.sfc/features-sfcofl2/0.0.6-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.snbi/features-snbi/${feature.snbi.version}/xml/features</repository>
-    <repository>mvn:org.opendaylight.snmp4sdn/features-snmp4sdn/0.1.7-Helium-SR4/xml/features</repository>
+    <repository>mvn:org.opendaylight.snmp4sdn/features-snmp4sdn/0.1.8-SNAPSHOT/xml/features</repository>
     <repository>mvn:org.opendaylight.tcpmd5/features-tcpmd5/${feature.tcpmd5.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.ttp/features-ttp/${feature.ttp.version}/xml/features</repository>
     <repository>mvn:org.opendaylight.vtn/features-vtn-manager/${feature.vtn-manager.version}/xml/features</repository>
 
     <!-- Please use alphabetical order to add a compbatible with all feature -->
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
-        <feature version='0.1.4-Helium-SR4'>odl-aaa-all</feature>
-        <feature version='0.1.4-Helium-SR4'>odl-aaa-authz</feature>
+        <feature version='0.1.5-SNAPSHOT'>odl-aaa-all</feature>
+        <feature version='0.1.5-SNAPSHOT'>odl-aaa-authz</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-compatibility</feature>
         <feature version='${feature.bgp.version}'>odl-bgpcep-all</feature>
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
-        <feature version='1.1.4-Helium-SR4'>odl-mdsal-broker</feature>
+        <feature version='1.1.5-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
         <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
-        <feature version='0.0.7-Helium-SR4'>odl-openflow-nxm-extensions</feature>
-        <feature version='0.5.4-Helium-SR4'>odl-openflowjava-protocol</feature>
-        <feature version='0.0.7-Helium-SR4'>odl-openflowplugin-flow-services</feature>
-        <feature version='0.0.7-Helium-SR4'>odl-openflowplugin-flow-services-rest</feature>
-        <feature version='0.0.7-Helium-SR4'>odl-openflowplugin-flow-services-ui</feature>
+        <feature version='0.0.8-SNAPSHOT'>odl-openflow-nxm-extensions</feature>
+        <feature version='0.5.5-SNAPSHOT'>odl-openflowjava-protocol</feature>
+        <feature version='0.0.8-SNAPSHOT'>odl-openflowplugin-flow-services</feature>
+        <feature version='0.0.8-SNAPSHOT'>odl-openflowplugin-flow-services-rest</feature>
+        <feature version='0.0.8-SNAPSHOT'>odl-openflowplugin-flow-services-ui</feature>
         <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
-        <feature version="1.4.6-Helium-SR4">odl-sdninterfaceapp-all</feature>
-        <feature version='1.1.4-Helium-SR4'>odl-restconf</feature>
-        <feature version='0.0.5-Helium-SR4'>odl-sfc-all</feature>
-        <feature version='0.0.5-Helium-SR4'>odl-sfclisp</feature>
-        <feature version='0.0.5-Helium-SR4'>odl-sfcofl2</feature>
+        <feature version="1.4.7-SNAPSHOT">odl-sdninterfaceapp-all</feature>
+        <feature version='1.1.5-SNAPSHOT'>odl-restconf</feature>
+        <feature version='0.0.6-SNAPSHOT'>odl-sfc-all</feature>
+        <feature version='0.0.6-SNAPSHOT'>odl-sfclisp</feature>
+        <feature version='0.0.6-SNAPSHOT'>odl-sfcofl2</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
         <feature version='${feature.ttp.version}'>odl-ttp-all</feature>
-        <feature version='0.1.7-Helium-SR4'>odl-snmp4sdn-all</feature>
+        <feature version='0.1.8-SNAPSHOT'>odl-snmp4sdn-all</feature>
         <feature version='${feature.tcpmd5.version}'>odl-tcpmd5-all</feature>
     </feature>
 
@@ -111,11 +111,11 @@
     <feature name='odl-integration-all' version='${project.version}'>
         <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
         <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-        <feature version='0.1.4-Helium-SR4'>odl-l2switch-switch</feature>
-        <feature version='0.1.4-Helium-SR4'>odl-l2switch-switch-rest</feature>
-        <feature version='0.1.4-Helium-SR4'>odl-l2switch-switch-ui</feature>
+        <feature version='0.1.5-SNAPSHOT'>odl-l2switch-switch</feature>
+        <feature version='0.1.5-SNAPSHOT'>odl-l2switch-switch-rest</feature>
+        <feature version='0.1.5-SNAPSHOT'>odl-l2switch-switch-ui</feature>
         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
-        <feature version='0.0.5-Helium-SR4'>odl-ovsdb-ovssfc</feature>
+        <feature version='0.0.6-SNAPSHOT'>odl-ovsdb-ovssfc</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version='${feature.vtn-manager.version}'>odl-vtn-manager-all</feature>
     </feature>
