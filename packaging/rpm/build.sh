@@ -19,7 +19,7 @@ fi
 # NB: These will need to be updated for version bumps
 odl_version="0.3.0-Lithium"
 rpm_version="3.0.0"
-rpm_release="2.el7.centos"
+rpm_release="2.el7"
 sysd_commit="4a87227"
 
 # Common names used in this script
@@ -75,8 +75,10 @@ cp $unitfile_cache_path $rpmbuild_src_dir
 cp opendaylight.spec $rpmbuild_spec_dir
 
 # Build ODL SRPM and noarch RPM
+# Override disttag from .el7.centos to .el7 per best-practices/expected norms
+#   See: https://bugs.centos.org/view.php?id=9098
 cd $rpmbuild_spec_dir
-rpmbuild -ba opendaylight.spec
+rpmbuild -ba --define "dist .el7" opendaylight.spec
 
 # Confirm SRPM found in expected location
 if [ -f  $srpm_out_path ]; then
