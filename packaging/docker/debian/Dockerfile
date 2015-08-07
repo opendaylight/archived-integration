@@ -1,5 +1,5 @@
-# Base the image on Debian 7
-# Picked Debian because it's small (85MB)
+# OpenDaylight Lithium 0.3.0 DockerFile
+# Based on Debian
 # https://registry.hub.docker.com/_/debian/
 FROM debian:7
 MAINTAINER OpenDaylight Project <info@opendaylight.org>
@@ -11,11 +11,11 @@ RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget
 WORKDIR /opt
 RUN mkdir opendaylight
 # Doing all of these in one step reduces the resulting image size by 229MB
-RUN wget -q "https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.3-Helium-SR3/distribution-karaf-0.2.3-Helium-SR3.tar.gz" && \
-    tar -xf distribution-karaf-0.2.3-Helium-SR3.tar.gz -C opendaylight --strip-components=1 && \
-    rm distribution-karaf-0.2.3-Helium-SR3.tar.gz
+RUN wget -q "https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.3.0-Lithium/distribution-karaf-0.3.0-Lithium.tar.gz" && \
+    tar -xf distribution-karaf-0.3.0-Lithium.tar.gz -C opendaylight --strip-components=1 && \
+    rm distribution-karaf-0.3.0-Lithium.tar.gz
 
-# TODO: Verify that these are all of the ODL Helium ports and no extra
+# TODO: Verify that these are all of the ODL Lithium ports
 # Ports
 # 162 - SNMP4SDN (only when started as root)
 # 179 - BGP

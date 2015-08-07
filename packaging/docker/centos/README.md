@@ -2,17 +2,17 @@
 
 The `Dockerfile` in this directory can be used to construct a Docker
 image for the OpenDaylight SDN controller. The currently supported
-OpenDaylight version is [Helium SR3][1]. Note that Helium uses Karaf
+OpenDaylight version is [Lithium][1]. Note that Lithium uses Karaf
 to install features, and that the Docker image doesn't install any
 features by default. You'll need to choose which features to install
 based on your use-case.
 
 ## Pre-Built Docker Image
 
-A pre-built OpenDaylight Helium SR3 image is [available on DockerHub][2].
+A pre-built OpenDaylight Lithium image is [available on DockerHub][2].
 
 ```
-[~/sandbox]$ docker run -ti dfarrell07/odl:0.2.3 ./bin/karaf
+[~/sandbox]$ docker run -ti mgkwill/odl:0.3.0-centos ./bin/karaf
 # ODL's Docker image will be downloaded if needed
 <snip>
 opendaylight-user@root>
@@ -23,9 +23,9 @@ opendaylight-user@root>
 To manually build a Docker image from the included `Dockerfile`:
 
 ```
-[~/integration/packaging/docker]$ docker build -t dfarrell07/odl:0.2.3 .
+[~/integration/packaging/docker]$ docker build -t mgkwill/odl:0.3.0-centos .
 [~/integration/packaging/docker]$ docker images | grep odl
-dfarrell07/odl    0.2.3    af863ac2de74    3 days ago    523.5 MB
+mgkwill/odl    0.3.0    8e0fbf836106    18 hours ago        578.3 MB
 ```
 
 Replace the tag name with one of your own choosing.
@@ -78,7 +78,7 @@ the `-p <host-port>:<container-port>` flag with `docker run`. Note that
 `-p`.
 
 
-[1]: http://www.opendaylight.org/software/downloads/helium-sr3
-[2]: https://registry.hub.docker.com/u/dfarrell07/odl/
+[1]: https://www.opendaylight.org/software/downloads/lithium
+[2]: https://registry.hub.docker.com/u/mgkwill/odl/
 [3]: https://docs.docker.com/reference/run/
 [4]: https://docs.docker.com/userguide/dockerlinks/
