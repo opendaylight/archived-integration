@@ -151,7 +151,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
-<!--
     <dependency>
       <groupId>org.opendaylight.iotdm</groupId>
       <artifactId>onem2m-features</artifactId>
@@ -159,7 +158,6 @@
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
--->
     <dependency>
       <groupId>org.opendaylight.l2switch</groupId>
       <artifactId>features-l2switch</artifactId>

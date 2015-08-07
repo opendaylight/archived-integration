@@ -75,9 +75,7 @@
         <feature version='${didm.version}'>odl-didm-drivers-api</feature>
         <feature version='${feature.dlux.version}'>odl-dlux-core</feature>
         <feature version='${feature.coretutorials.version}'>odl-dsbenchmark-impl</feature>
-<!--
         <feature version='${feature.iotdm.version}'>odl-iotdm-onem2m</feature>
--->
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
         <feature version='1.3.0-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
