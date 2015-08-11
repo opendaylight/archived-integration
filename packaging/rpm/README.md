@@ -42,9 +42,10 @@ The `build.sh` script is a helper for building the RPM.
 
 The familiar RPM-related commands apply to the OpenDaylight RPM.
 
-### Installing OpenDaylight via the RPM
+### Installing OpenDaylight via a local RPM
 
-The `install.sh` script is a helper for doing the install.
+The `install.sh` script is a helper for installing OpenDaylight from a
+local RPM. It's intended for quick sanity checks after a `build.sh` run.
 
 ```
 # After you've built the RPM via build.sh, still in the Vagrant enviroment
