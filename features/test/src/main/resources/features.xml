@@ -57,11 +57,11 @@
 
     <!-- Please use alphabetical order to add a compatible with all features -->
     <feature name='odl-integration-compatible-with-all' version='${project.version}'>
-        <feature version='0.2.1-Lithium-SR1'>odl-aaa-api</feature>
-        <feature version='0.2.1-Lithium-SR1'>odl-aaa-authn</feature>
-        <feature version='0.2.1-Lithium-SR1'>odl-aaa-authz</feature>
-        <feature version='0.2.1-Lithium-SR1'>odl-aaa-netconf-plugin</feature>
-        <feature version='0.2.1-Lithium-SR1'>odl-aaa-sssd-plugin</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-aaa-api</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-aaa-authn</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-aaa-authz</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-aaa-netconf-plugin</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-aaa-sssd-plugin</feature>
         <feature version='${feature.adsal.version}'>odl-adsal-all</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-bgp-all</feature>
         <feature version='${feature.bgpcep.version}'>odl-bgpcep-pcep-all</feature>
@@ -73,11 +73,11 @@
         <feature version='${feature.coretutorials.version}'>odl-dsbenchmark-impl</feature>
         <feature version='${feature.iotdm.version}'>odl-iotdm-onem2m</feature>
         <feature version='${feature.lispflowmapping.version}'>odl-lispflowmapping-all</feature>
-        <feature version='1.2.1-Lithium-SR1'>odl-mdsal-broker</feature>
+        <feature version='1.2.2-SNAPSHOT'>odl-mdsal-broker</feature>
         <feature version='${feature.mdsal.version}'>odl-netconf-connector-ssh</feature>
         <feature version='${feature.neutron.version}'>odl-neutron-service</feature>
         <feature version='${feature.nsf.version}'>odl-nsf-all</feature>
-        <feature version='0.6.1-Lithium-SR1'>odl-openflowjava-protocol</feature>
+        <feature version='0.6.2-SNAPSHOT'>odl-openflowjava-protocol</feature>
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-adsal-compatibility</feature>
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-flow-services</feature>
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-flow-services-rest</feature>
@@ -85,8 +85,8 @@
         <feature version='${feature.openflowplugin.version}'>odl-openflowplugin-nxm-extensions</feature>
         <feature version='${feature.ovsdb.version}'>odl-ovsdb-all</feature>
         <feature version='${feature.reservation.version}'>odl-reservation-models</feature>
-        <feature version='1.2.1-Lithium-SR1'>odl-restconf</feature>
-        <feature version="1.5.1-Lithium-SR1">odl-sdninterfaceapp-all</feature>
+        <feature version='1.2.2-SNAPSHOT'>odl-restconf</feature>
+        <feature version="1.5.2-SNAPSHOT">odl-sdninterfaceapp-all</feature>
         <feature version='${feature.sfc.version}'>odl-sfc-core</feature>
         <feature version='${feature.sfc.version}'>odl-sfc-test-consumer</feature>
         <feature version='${feature.sfc.version}'>odl-sfclisp</feature>
@@ -112,15 +112,15 @@
         <feature version='${feature.alto.version}'>odl-alto-integration-test</feature>
         <feature version='${feature.groupbasedpolicy.version}'>odl-groupbasedpolicy-ofoverlay</feature>
         <feature version='${project.version}'>odl-integration-compatible-with-all</feature>
-        <feature version='0.2.1-Lithium-SR1'>odl-l2switch-switch</feature>
-        <feature version='0.2.1-Lithium-SR1'>odl-l2switch-switch-rest</feature>
-        <feature version='0.2.1-Lithium-SR1'>odl-l2switch-switch-ui</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-l2switch-switch</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-l2switch-switch-rest</feature>
+        <feature version='0.2.2-SNAPSHOT'>odl-l2switch-switch-ui</feature>
         <feature version='${feature.lacp.version}'>odl-lacp-ui</feature>
         <feature version='${feature.nic.version}'>odl-nic-core</feature>
         <feature version='${feature.ovsdb.openstack.version}'>odl-ovsdb-openstack</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-all</feature>
         <feature version='${feature.packetcable.version}'>odl-packetcable-policy-server-all</feature>
-        <feature version='1.0.1-Lithium-SR1'>odl-persistence-api</feature>
+        <feature version='1.0.2-SNAPSHOT'>odl-persistence-api</feature>
         <feature version='${feature.sfc.version}'>odl-sfcofl2</feature>
         <feature version='${feature.snbi.version}'>odl-snbi-all</feature>
         <feature version='${feature.tsdr.version}'>odl-tsdr-all</feature>

@@ -13,7 +13,7 @@
    <parent>
       <groupId>org.opendaylight.integration</groupId>
       <artifactId>root</artifactId>
-      <version>0.3.1-Lithium-SR1</version>
+      <version>0.3.2-SNAPSHOT</version>
       <relativePath>../../</relativePath>
    </parent>
    <artifactId>features-integration-index</artifactId>
@@ -26,28 +26,28 @@
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
       <artifactId>features-aaa-api</artifactId>
-      <version>0.2.1-Lithium-SR1</version>
+      <version>0.2.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
       <artifactId>features-aaa</artifactId>
-      <version>0.2.1-Lithium-SR1</version>
+      <version>0.2.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
       <artifactId>features-aaa-authz</artifactId>
-      <version>0.2.1-Lithium-SR1</version>
+      <version>0.2.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.alto</groupId>
       <artifactId>features-alto</artifactId>
-      <version>0.1.1-Lithium-SR1</version>
+      <version>0.1.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -152,7 +152,7 @@
     <dependency>
       <groupId>org.opendaylight.l2switch</groupId>
       <artifactId>features-l2switch</artifactId>
-      <version>0.2.1-Lithium-SR1</version>
+      <version>0.2.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -236,7 +236,7 @@
     <dependency>
       <groupId>org.opendaylight.persistence</groupId>
       <artifactId>features-persistence</artifactId>
-      <version>1.0.1-Lithium-SR1</version>
+      <version>1.0.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -250,49 +250,49 @@
     <dependency>
       <groupId>org.opendaylight.sdninterfaceapp</groupId>
       <artifactId>features-sdninterfaceapp</artifactId>
-      <version>1.5.1-Lithium-SR1</version>
+      <version>1.5.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfc</artifactId>
-      <version>0.1.1-Lithium-SR1</version>
+      <version>0.1.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfc-sb-rest</artifactId>
-      <version>0.1.1-Lithium-SR1</version>
+      <version>0.1.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfclisp</artifactId>
-      <version>0.1.1-Lithium-SR1</version>
+      <version>0.1.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.sfc</groupId>
       <artifactId>features-sfcofl2</artifactId>
-      <version>0.1.1-Lithium-SR1</version>
+      <version>0.1.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
     <dependency>
        <groupId>org.opendaylight.sfc</groupId>
        <artifactId>features-sfc-ovs</artifactId>
-       <version>0.1.1-Lithium-SR1</version>
+       <version>0.1.2-SNAPSHOT</version>
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
     <dependency>
        <groupId>org.opendaylight.sfc</groupId>
        <artifactId>features-sfc-netconf</artifactId>
-       <version>0.1.1-Lithium-SR1</version>
+       <version>0.1.2-SNAPSHOT</version>
        <classifier>features</classifier>
        <type>xml</type>
     </dependency>
@@ -341,7 +341,7 @@
     <dependency>
       <groupId>org.opendaylight.tsdr</groupId>
       <artifactId>features-tsdr</artifactId>
-      <version>1.0.1-Lithium-SR1</version>
+      <version>1.0.2-SNAPSHOT</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -377,7 +377,7 @@
     <dependency>
       <groupId>org.opendaylight.odlparent</groupId>
       <artifactId>features-test</artifactId>
-      <version>1.5.1-Lithium-SR1</version>
+      <version>1.5.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -389,7 +389,7 @@
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>opendaylight-karaf-empty</artifactId>
-      <version>1.5.1-Lithium-SR1</version>
+      <version>1.5.2-SNAPSHOT</version>
       <type>zip</type>
     </dependency>
    </dependencies>
@@ -461,7 +461,7 @@
               <systemPropertyVariables>
                 <karaf.distro.groupId>org.opendaylight.controller</karaf.distro.groupId>
                 <karaf.distro.artifactId>opendaylight-karaf-empty</karaf.distro.artifactId>
-                <karaf.distro.version>1.5.1-Lithium-SR1</karaf.distro.version>
+                <karaf.distro.version>1.5.2-SNAPSHOT</karaf.distro.version>
               </systemPropertyVariables>
               <dependenciesToScan>
                <dependency>org.opendaylight.odlparent:features-test</dependency>
