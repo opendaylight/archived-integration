@@ -13,7 +13,7 @@
    <parent>
       <groupId>org.opendaylight.integration</groupId>
       <artifactId>root</artifactId>
-      <version>0.3.1-SNAPSHOT</version>
+      <version>0.3.1-Lithium-SR1</version>
       <relativePath>../../</relativePath>
    </parent>
    <artifactId>features-integration-test</artifactId>
@@ -35,7 +35,7 @@
     <dependency>
       <groupId>org.opendaylight.odlparent</groupId>
       <artifactId>features-test</artifactId>
-      <version>1.5.1-SNAPSHOT</version>
+      <version>1.5.1-Lithium-SR1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -47,7 +47,7 @@
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>opendaylight-karaf-empty</artifactId>
-      <version>1.5.1-SNAPSHOT</version>
+      <version>1.5.1-Lithium-SR1</version>
       <type>zip</type>
     </dependency>
    </dependencies>
@@ -119,7 +119,7 @@
               <systemPropertyVariables>
                 <karaf.distro.groupId>org.opendaylight.controller</karaf.distro.groupId>
                 <karaf.distro.artifactId>opendaylight-karaf-empty</karaf.distro.artifactId>
-                <karaf.distro.version>1.5.1-SNAPSHOT</karaf.distro.version>
+                <karaf.distro.version>1.5.1-Lithium-SR1</karaf.distro.version>
               </systemPropertyVariables>
               <dependenciesToScan>
                <dependency>org.opendaylight.odlparent:features-test</dependency>
