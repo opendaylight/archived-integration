@@ -1,8 +1,0 @@
-# Vim tmp files
-.*sw?
-
-# Packer output
-output-virtualbox-iso/
-packer_cache/
-*.box
-Vagrantfile
