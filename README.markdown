@@ -5,9 +5,9 @@ code in this repository was removed to prevent confusion. The three new
 projects contain up-to-date versions of the code that was hosted here. All
 previous versions of the code are available via version control.
 
-To checkout a brach with the old code:
+To checkout a branch with the old code:
 
- git checkout -b old_codebase HEAD~1
+    git checkout -b old_codebase HEAD~2
 
 For more details, see Integration's Archival Proposal:
 
